@@ -30,10 +30,11 @@ public class QuotationRequest {
     private Customer customer;
     private Vehicle vehicle;
     private Offer offer;
+    private int chatTopicId;
 
     public QuotationRequest(int id, String name, String details, String description, Vehicle vehicle, String mileage, String urgency,
             String amenities, double latitude, double longitude, String address, String photos, Timestamp requestedDate, String category, int noOfRejections,
-            int workshopId, Customer customer, Offer offer) {
+            int workshopId, Customer customer, Offer offer, int chatTopicId) {
         this.details = details;
         this.name = name;
         this.address = address;
@@ -52,6 +53,7 @@ public class QuotationRequest {
         this.offer = offer;
         this.category = category;
         this.noOfRejections = noOfRejections;
+        this.chatTopicId = chatTopicId;
     }
 
     public int getId() {
@@ -125,6 +127,10 @@ public class QuotationRequest {
     
     public int getNoOfRejections() {
         return noOfRejections;
+    }
+    
+    public int getChatTopicId() {
+        return chatTopicId;
     }
 }
 
