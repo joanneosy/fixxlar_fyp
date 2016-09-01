@@ -296,6 +296,7 @@
                                                                         String carPhoto = qr.getPhotos();
                                                                         int serviceStatus = qr.getOffer().getStatus();
                                                                         String serviceUrgency = qr.getUrgency();
+                                                                       
 
                                                                         Customer cust = qr.getCustomer();
                                                                         String custName = cust.getName();
