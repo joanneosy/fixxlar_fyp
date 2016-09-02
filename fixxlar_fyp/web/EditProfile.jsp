@@ -407,7 +407,7 @@
 
                                                 <%
                                                     }//end of for loop for operating days
-                                                %>
+%>
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-5 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -464,7 +464,7 @@
         <script src="js/bootstrap-colorpicker.min.js"></script>
 
         <script src="js/bootstrap-colorpalette.js"></script>
-
+        <script type="text/javascript" src="js/jquery.jgrowl.min.js"></script> 
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/intercom.js"></script> 
 

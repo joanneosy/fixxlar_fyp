@@ -381,6 +381,7 @@
         <!--End page wrap-->
         <%-- scripts --%>
         <jsp:include page="include/scripts.jsp"/>
+        <script type="text/javascript" src="js/jquery.jgrowl.min.js"></script> 
         <script type="text/javascript" src="js/intercom.js"></script> 
         <script>
             $(document).ready(function ()

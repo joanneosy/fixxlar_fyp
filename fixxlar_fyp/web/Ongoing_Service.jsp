@@ -241,6 +241,7 @@
                                                                         String carPhoto = qr.getPhotos();
                                                                         int serviceStatus = qr.getOffer().getStatus();
                                                                         String serviceUrgency = qr.getUrgency();
+                                                                        int topicId = qr.getChatTopicId();
 
                                                                         Customer cust = qr.getCustomer();
                                                                         String custName = cust.getName();
@@ -367,7 +368,7 @@
                                                                             <!-- tile header -->
                                                                             <div class="tile-header color bg-transparent-black-5 rounded-corners">
                                                                                 <h5>Chat</h5>
-                                                                                <div class="hidden ct" id=""></div>
+                                                                                <div class="hidden ct" id=""><div class="hidden chatTopic" id="<%=topicId%>"></div>
                                                                             </div>
                                                                             <!-- /tile header -->
                                                                             <!-- tile body -->
@@ -731,6 +732,7 @@
     <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
     <script type="text/javascript" src="js/classie.js"></script> 
     <script type="text/javascript" src="js/modalEffects.js"></script> 
+    <script type="text/javascript" src="js/jquery.jgrowl.min.js"></script> 
     <script data-require="realtime-framework@2.1.0" data-semver="2.1.0" src="//messaging-public.realtime.co/js/2.1.0/ortc.js"></script>
     <script type="text/javascript" src="js/chat.js"></script> 
     <script type="text/javascript" src="js/intercom.js"></script> 
