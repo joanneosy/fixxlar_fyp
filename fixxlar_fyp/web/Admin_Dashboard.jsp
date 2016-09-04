@@ -199,14 +199,54 @@
                                                             <td><center><button type="button" class="btn btn-block btn-danger disabled">Urgent</button></center></td>
 
                                                             <td>
+                                                                <%
+                                                                    String errMsg = (String) request.getAttribute("errMsg");
+                                                                    if (errMsg != null) {
+                                                                        out.print(errMsg);
+                                                                    }
+                                                                %>
                                                                 <form  action="AddNotification" method="GET" id="form1">
-                                                                    <input type="hidden" name="messageId" value="1">
-                                                                    <input type="hidden" name="customizedMessage" value="You have <%=newRequests%> new requests. Please respond asap.">
+                                                                    <input type="hidden" name="messageId" value="0">
+                                                                    <!--<input type="hidden" name="customizedMessage" value="You have <%=newRequests%> new requests. Please respond asap.">-->
                                                                     <input type="hidden" name="workshopId" value="<%=wsId%>">
 
-<!--                                                                    <center><input type="submit" value="Remind"class="btn btn-default"></center>-->
+                                                                    <!--<center><input type="submit" value="Remind"class="btn btn-default"></center>-->
+                                                                    <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">REMIND</button>
+                                                                    
+                                                                    <!--POPUP REMINDER DIALOG-->
+                                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                                                                    <h4 class="modal-title" id="exampleModalLabel">Reminder Message for Workshop</h4>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <form>
+<!--                                                                                        <div class="form-group col-sm-4 col-md-4">
+                                                                                            <label for="recipient-name" class="control-label">Recipient:</label>
+                                                                                            <input type="text" class="form-control" id="recipient-name">
+                                                                                        </div>-->
+                                                                                        <div class="form-group">
+                                                                                            <label for="message-text" class="control-label">Message:</label>
+                                                                                            <textarea class="form-control" id="message-text" name="customizedMessage"></textarea>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                                
+                                                                                
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                    <button type="submit" class="btn btn-primary">Send message</button>
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--/POPUP REMINDER DIALOG-->
                                                                 </form>
-                                                                <button onclick="remind()"type="submit" form="form1" value="Submit">Submit</button>
+                                                                <!--<button onclick="remind()" type="submit" form="form1" value="Submit">Submit</button>-->
+
                                                             </td>
 
                                                             </tr>
@@ -351,93 +391,93 @@
 
 
         <script>
-                                                                                $(function () {
-                                                                                    // Initialize card flip
-                                                                                    $('.card.hover').hover(function () {
-                                                                                        $(this).addClass('flip');
-                                                                                    }, function () {
-                                                                                        $(this).removeClass('flip');
-                                                                                    });
+            $(function () {
+                // Initialize card flip
+                $('.card.hover').hover(function () {
+                    $(this).addClass('flip');
+                }, function () {
+                    $(this).removeClass('flip');
+                });
 
-                                                                                    //         sortable table
-                                                                                    $('.table.table-sortable th.sortable').click(function () {
-                                                                                        var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                                                                                        $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                                                                                        $(this).addClass(o);
-                                                                                    });
+                //         sortable table
+                $('.table.table-sortable th.sortable').click(function () {
+                    var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                    $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                    $(this).addClass(o);
+                });
 
-                                                                                    //todo's
-                                                                                    $('#todolist li label').click(function () {
-                                                                                        $(this).toggleClass('done');
-                                                                                    });
+                //todo's
+                $('#todolist li label').click(function () {
+                    $(this).toggleClass('done');
+                });
 
 
-                                                                                });
+            });
 
-                                                                                $(function () {
+            $(function () {
 
-                                                                                    var contentHeight = $('#content').height();
-                                                                                    var chatInboxHeight = contentHeight - 178;
-                                                                                    var chatContentHeight = contentHeight - 178 - 200;
+                var contentHeight = $('#content').height();
+                var chatInboxHeight = contentHeight - 178;
+                var chatContentHeight = contentHeight - 178 - 200;
 
-                                                                                    var setChatHeight = function () {
-                                                                                        $('#chat-inbox').css('height', chatInboxHeight);
-                                                                                        $('#chat-content').css('height', chatContentHeight);
-                                                                                    };
+                var setChatHeight = function () {
+                    $('#chat-inbox').css('height', chatInboxHeight);
+                    $('#chat-content').css('height', chatContentHeight);
+                };
 
-                                                                                    setChatHeight();
+                setChatHeight();
 
-                                                                                    $(window).resize(function () {
-                                                                                        contentHeight = $('#content').height();
-                                                                                        chatInboxHeight = contentHeight - 178;
-                                                                                        chatContentHeight = contentHeight - 178 - 200;
+                $(window).resize(function () {
+                    contentHeight = $('#content').height();
+                    chatInboxHeight = contentHeight - 178;
+                    chatContentHeight = contentHeight - 178 - 200;
 
-                                                                                        setChatHeight();
-                                                                                    });
+                    setChatHeight();
+                });
 
-                                                                                    $("#chat-inbox").niceScroll({
-                                                                                        cursorcolor: '#000000',
-                                                                                        zindex: 999999,
-                                                                                        bouncescroll: true,
-                                                                                        cursoropacitymax: 0.4,
-                                                                                        cursorborder: '',
-                                                                                        cursorborderradius: 0,
-                                                                                        cursorwidth: '5px'
-                                                                                    });
+                $("#chat-inbox").niceScroll({
+                    cursorcolor: '#000000',
+                    zindex: 999999,
+                    bouncescroll: true,
+                    cursoropacitymax: 0.4,
+                    cursorborder: '',
+                    cursorborderradius: 0,
+                    cursorwidth: '5px'
+                });
 
-                                                                                    $("#chat-content").niceScroll({
-                                                                                        cursorcolor: '#000000',
-                                                                                        zindex: 999999,
-                                                                                        bouncescroll: true,
-                                                                                        cursoropacitymax: 0.4,
-                                                                                        cursorborder: '',
-                                                                                        cursorborderradius: 0,
-                                                                                        cursorwidth: '5px'
-                                                                                    });
+                $("#chat-content").niceScroll({
+                    cursorcolor: '#000000',
+                    zindex: 999999,
+                    bouncescroll: true,
+                    cursoropacitymax: 0.4,
+                    cursorborder: '',
+                    cursorborderradius: 0,
+                    cursorwidth: '5px'
+                });
 
-                                                                                    $('#chat-inbox .chat-actions > span').tooltip({
-                                                                                        placement: 'top',
-                                                                                        trigger: 'hover',
-                                                                                        html: true,
-                                                                                        container: 'body'
-                                                                                    });
+                $('#chat-inbox .chat-actions > span').tooltip({
+                    placement: 'top',
+                    trigger: 'hover',
+                    html: true,
+                    container: 'body'
+                });
 
-                                                                                    $('#initialize-search').click(function () {
-                                                                                        $('#chat-search').toggleClass('active').focus();
-                                                                                    });
+                $('#initialize-search').click(function () {
+                    $('#chat-search').toggleClass('active').focus();
+                });
 
-                                                                                    $(document).click(function (e) {
-                                                                                        if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
-                                                                                            $('#chat-search').removeClass('active');
-                                                                                        }
-                                                                                    });
+                $(document).click(function (e) {
+                    if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
+                        $('#chat-search').removeClass('active');
+                    }
+                });
 
-                                                                                    $(window).mouseover(function () {
-                                                                                        $("#chat-inbox").getNiceScroll().resize();
-                                                                                        $("#chat-content").getNiceScroll().resize();
-                                                                                    });
+                $(window).mouseover(function () {
+                    $("#chat-inbox").getNiceScroll().resize();
+                    $("#chat-content").getNiceScroll().resize();
+                });
 
-                                                                                });
+            });
 
 
         </script>
@@ -658,16 +698,7 @@
             });
         </script>
 
-        <script>
-            function remind() {
-                var person = prompt("Reminder message for workshop", "Hi Workshop, you have more than 10 outstanding quotation requests, please respond soon.");
 
-                if (person != null) {
-                    document.getElementById("demo").innerHTML =
-                            "Hello " + person + "! How are you today?";
-                }
-            }
-        </script>
     </body>
 
 </html>
