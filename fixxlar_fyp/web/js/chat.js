@@ -44,6 +44,7 @@ subscribeChat = function (requestID, wsID, userName, chatToken, log) {
                                 $("#" + log).html($("#" + log).html() + '<li class="message sent"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">You</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>');
                             } else {
                                 $("#" + log).html($("#" + log).html() + '<li class="message receive"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">' + userName + '</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>');
+                                displayNotification(requestID, message);
                                 
                             }
 //                    $("#log").html(message + '<li class="message sent"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">26.3.2014 18:38</span></p>' + $("#log").html() + '</div></div></li>');
@@ -112,4 +113,8 @@ clearElement = function (e) {
 
 flashDiv = function (e) {
     $(e).fadeOut(100).fadeIn(100);
+}
+
+function displayNotification(requestID, message) {
+   $.jGrowl(message, {header: "ID: " + requestID, life: 10000});
 }

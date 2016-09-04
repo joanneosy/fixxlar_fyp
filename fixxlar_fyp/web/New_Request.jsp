@@ -297,7 +297,7 @@
                                                                         int serviceStatus = qr.getOffer().getStatus();
                                                                         String serviceUrgency = qr.getUrgency();
                                                                        
-
+ 
                                                                         Customer cust = qr.getCustomer();
                                                                         String custName = cust.getName();
                                                                         String custEmail = cust.getEmail();
@@ -546,7 +546,8 @@
                                                                     String carPhoto = qr.getPhotos();
                                                                     int serviceStatus = qr.getOffer().getStatus();
                                                                     String serviceUrgency = qr.getUrgency();
-
+                                                                    int topicId = qr.getChatTopicId();
+                                                                    
                                                                     Customer cust = qr.getCustomer();
                                                                     String custName = cust.getName();
                                                                     String custEmail = cust.getEmail();
@@ -677,7 +678,7 @@
                                                                         <!-- tile header -->
                                                                         <div class="tile-header color bg-transparent-black-5 rounded-corners">
                                                                             <h5>Chat</h5>
-                                                                            <div class="hidden ct" id=""></div>
+                                                                            <div class="hidden ct" id=""><div class="hidden chatTopic" id="<%=topicId%>"></div></div>
                                                                         </div>
                                                                         <!-- /tile header -->
                                                                         <!-- tile body -->
@@ -872,6 +873,7 @@
     <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
     <script type="text/javascript" src="js/classie.js"></script> 
     <script type="text/javascript" src="js/modalEffects.js"></script> 
+    <script type="text/javascript" src="js/jquery.jgrowl.min.js"></script> 
     <script data-require="realtime-framework@2.1.0" data-semver="2.1.0" src="//messaging-public.realtime.co/js/2.1.0/ortc.js"></script>
     <script type="text/javascript" src="js/chat.js"></script> 
     <script type="text/javascript" src="js/intercom.js"></script> 
@@ -1061,6 +1063,47 @@
             $('#example5').DataTable();
         });</script>
     <script>
+        $(window).load(function () {
+//            if (<%//=justLoggedIn%> == true) {
+//                console.log("first");
+                //get all request to subscribe
+       <%//session.setAttribute("justLoggedIn", false);%>
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://119.81.43.85/erp/quotation_request/get_request_id_for_chat',
+                    crossDomain: true,
+                    data: {
+                        "token": "<%=token%>",
+                        "staff_id": "<%=staffID%>",
+                        "shop_id": "<%=shopID%>"
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+//                        $.each(data.items, function(i,item)){
+//                            console.log(i + ": " + item);
+//                        }
+                        console.log(data.payload.quotation_requests);
+                        $.each(data.payload.quotation_requests,function(){
+                            var requestID = $(this).attr('service_id');
+                            var customer_name = $(this).attr('customer_name');
+                            var driverID = $(this).attr('customer_id');
+                            var log = "log" + requestID;
+                            subscribe(requestID, <%=shopID%>, driverID, customer_name, "<%=chatToken%>", log);
+//                            subscribeChat(requestID, <%=shopID%>, customer_name, "<%=chatToken%>", log);
+                        });
+                    },
+                    error: function () {
+                        alert("fail");
+                    }
+                });
+
+//            } else {
+//                console.log("second");
+                //get only new request to subscribe
+//            }
+        });
+    </script>
+    <script>
         function subscribe(requestID, wsID, userID, custName, chatToken, log) {
 //                event.preventDefault();
             $("#" + log).html("");
@@ -1102,14 +1145,13 @@
                                 $("#" + log).html($("#" + log).html() + '<li class="message receive" id="' + msg[i].topic_id + '"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">' + custName + '</a> <span class="time">' + time + '</span></p>' + msg[i].message + '</div></div></li>');
                             }
                         }
-                        if (msg.length > 0 && msg[0].topic_id != 0) {
-                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="' + msg[0].topic_id + '"></div>');
-                        } else {
-                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="0"></div>');
-                        }
+//                        if (msg.length > 0 && msg[0].topic_id != 0) {
+//                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="' + msg[0].topic_id + '"></div>');
+//                        } else {
+//                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="0"></div>');
+//                        }
                     }
                     subscribeChat(requestID, wsID, custName, chatToken, log);
-//                    subscribeChat(requestID, wsID, custName, chatToken, log, <%=staffID%>, "<%=token%>");
                 },
                 error: function () {
                     alert("fail");
