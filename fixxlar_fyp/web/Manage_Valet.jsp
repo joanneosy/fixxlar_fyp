@@ -479,28 +479,8 @@
                                                                 <td><% out.print(custName);%></td>
                                                                 <td><% out.print(carPlate);%></td>
                                                                 <td><% out.print(carModel);%></td>
-                                                                <!--Picture Attachment-->
-                                                                <!--<td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>-->
+                                                            
 
-                                                                <!-- Modal -->
-                                                        <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog-img">
-                                                                <div class="modal-content">
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <img class="img-responsive"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                                    </div>
-                                                                </div> <!--/.modal-content--> 
-                                                            </div><!-- /.modal-dialog -->
-                                                        </div><!-- /.modal -->
-                                                        <% i++; %>
                                                         <!--Quote-->
                                                         <!--<td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>More Info</span></button></td>-->
                                                         <td class="text-center"><a data-modal="<% out.print("myModal" + i);%>" class="md-trigger"><img src="images/file.png"/></a></td>
@@ -567,9 +547,60 @@
 
                                                             </div> <!--/.modal-content -->
                                                         </div> <!--/.modal -->
-
+                                                        <% i++; %>
                                                         <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" type="button">Complete</button></td>
-                                                        
+                                                        <!-- Modal -->
+                                                        <div class="md-modal md-effect-13 md-slategray colorize-overlay" id="<% out.print("myModal" + i);%>">
+
+                                                            <div class="md-content">
+                                                                <!--<div>-->
+                                                                <!--                                                            <div class="col-xs-6">
+                                                                                                                                <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-xs-6 text-right">
+                                                                                                                                <h4 class="modal-title"><%=dateTime%></h4>
+                                                                                                                            </div>-->
+                                                                <!--</div>-->
+                                                                <!--<div>-->
+                                                                <div class='col-xs-12'>
+
+                                                                    <div class="col-xs-12">
+                                                                        <h3>Job Completion</h3><p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="col-xs-12">
+                                                                            <!--<p><b>Customer Name: </b><br><% out.print(custName);%></p>-->
+                                                                            <div class="text-center">Your next pickup time is on</div>
+                                                                            <p>
+                                                                        </div>
+                                                                        <div class="col-xs-12">
+                                                                            <h4 class="text-center">1400Hrs</h4>
+                                                                        </div>
+                                                                        <div class="col-xs-12">
+                                                                            <h4 class="text-center">31 Aug 2016</h4>
+                                                                            <p>
+                                                                            <!--<p><b>Color: </b><br><% out.print(carColor);%></p>-->
+                                                                        </div>      
+                                                                        <div class="col-xs-12">
+                                                                            <div class="text-center">Would you be available to continue with this job?</div>
+                                                                        </div>      
+                                                                    </div>
+                                                                    <!--</div>-->
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <div class="col-xs-6">
+                                                                        <button class="btn btn-blue">Accept</button>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <button class="btn btn-blue">Reject</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <button class="md-close btn btn-default">Close</button>
+                                                                </div>
+
+                                                            </div> <!--/.modal-content -->
+                                                        </div> <!--/.modal -->
                                                         </tr>
 
                                                         <%
