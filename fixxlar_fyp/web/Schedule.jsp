@@ -355,36 +355,40 @@
                         center: 'title',
                         right: 'month,agendaWeek,agendaDay'
                     },
-                    editable: true,
+//                    editable: true,
 //                    droppable: true,
-                    drop: function (date, allDay) {
-                        var copiedEventObject = {
-                            title: $(this).text(),
-                            start: date,
-                            allDay: allDay,
-                            color: $(this).css('border-left-color')
-                        };
-                        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-//                        // is the "remove after drop" checkbox checked?
-//                        if ($('#drop-remove').is(':checked')) {
-//                            // if so, remove the element from the "Draggable Events" list
-//                            $(this).remove();
-//                        }
-                    },
+//                    drop: function (date, allDay) {
+//                        var copiedEventObject = {
+//                            title: $(this).text(),
+//                            start: date,
+//                            allDay: allDay,
+//                            color: $(this).css('border-left-color')
+//                        };
+//                        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+////                        // is the "remove after drop" checkbox checked?
+////                        if ($('#drop-remove').is(':checked')) {
+////                            // if so, remove the element from the "Draggable Events" list
+////                            $(this).remove();
+////                        }
+//                    },
                     eventClick: function (calEvent, jsEvent, view) {
+                        console.log(calEvent);
                         var editModal = $('#edit-event'),
                                 eventTitle = calEvent.title;
                                 start = calEvent._start;
                                 end = calEvent._end;
+                                startT = start + "";
+                                endT = start + "";
                                 var start_time = start,
-                                start = [start_time.getFullYear(), start_time.getMonth() + 1, start_time.getDate()].join('-') +
-                                " 00:00:00";
-                        var end_time = end,
-                                end = [end_time.getFullYear(), end_time.getMonth() + 1, end_time.getDate()].join('-') +
-                                " 00:00:00";
+                                start = [start_time.getFullYear(), start_time.getMonth() + 1, start_time.getDate()].join('-') + " " + 
+                                startT.substring(startT.indexOf(":") - 2, startT.lastIndexOf(":") + 3);
+                                var end_time = end,
+                                end = [end_time.getFullYear(), end_time.getMonth() + 1, end_time.getDate()].join('-') + " " + 
+                                endT.substring(endT.indexOf(":") - 2, endT.lastIndexOf(":") + 3);
 ////                                eventColor = calEvent.color;
                         var status = calEvent.className[0];
-                        console.log(status);
+                        console.log(start_time);
+                        console.log(end_time);
                         if(status != 0){
                             $("#remove-event").hide();
                         }

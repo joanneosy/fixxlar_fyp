@@ -15,7 +15,7 @@
     <!-- Branding -->
     <div class="navbar-header col-md-2">
         <% if (userType.equals("Admin")) { %>
-        <a class="navbar-brand" href="Admin_New_Request.jsp">
+        <a class="navbar-brand" href="Admin_Dashboard.jsp">
             <!--<img src="images/Logo.ico"/>-->
         </a>
         <% } else { %>

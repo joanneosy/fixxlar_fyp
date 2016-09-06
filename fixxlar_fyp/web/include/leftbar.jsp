@@ -51,7 +51,7 @@
             </li>
             
             <li>
-                <a href="ManageValet.jsp">
+                <a href="Manage_Valet.jsp">
                     <i class="fa fa-pencil"></i> Valet
                 </a>
             </li>
