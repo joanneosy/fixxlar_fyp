@@ -26,7 +26,7 @@
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-usd"></i> Request <b class="fa fa-plus dropdown-plus"></b>
+                    <i class="fa fa-list"></i> Request <b class="fa fa-plus dropdown-plus"></b>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
@@ -63,8 +63,8 @@
             </li>
             
             <li>
-                <a href="ManageValet.jsp">
-                    <i class="fa fa-usd"></i> Valet
+                <a href="Manage_Valet.jsp">
+                    <i class="fa fa-map-marker"></i> Valet
                 </a>
             </li>
             

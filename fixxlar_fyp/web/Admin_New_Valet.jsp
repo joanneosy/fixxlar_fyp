@@ -66,7 +66,7 @@
                     <!-- page header -->
                     <div class="pageheader">
 
-                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Request</h2>
+                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>View Valet Requests</h2>
                     </div>
                     <!-- /page header -->
 
@@ -95,164 +95,6 @@
 
                                         <!-- cards -->
                                         <%@include file="include/admin_flipcard.jsp"%>
-                                        <!--                                        <div class="row cards">
-                                        
-                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                                                        <div class="card card-redbrown hover">
-                                                                                            <div class="front"> 
-                                        
-                                                                                                <div class="media">        
-                                                                                                                                                                <span class="pull-left">
-                                                                                                                                                                    <i class="fa fa-users media-object"></i>
-                                                                                                                                                                </span>
-                                        
-                                                                                                    <div class="media-body">
-                                                                                                        New Requests
-                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=newSize%>" data-animation-duration="1500">0</h2>
-                                                                                                    </div>
-                                                                                                </div> 
-                                        
-                                                                                            </div>
-                                                                                            <div class="back">
-                                                                                                <a href="New_Request.jsp">
-                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                    <span>More Information</span>
-                                                                                                </a>  
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                        
-                                        
-                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                                                        <div class="card card-redbrown hover">
-                                                                                            <div class="front">        
-                                        
-                                                                                                <div class="media">                  
-                                                                                                                                                                <span class="pull-left">
-                                                                                                                                                                    <i class="fa fa-shopping-cart media-object"></i>
-                                                                                                                                                                </span>
-                                        
-                                                                                                    <div class="media-body">
-                                                                                                        Send Final Quote
-                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=sendFinalSize%>" data-animation-duration="1500">0</h2>
-                                                                                                    </div>
-                                                                                                </div> 
-                                        
-                                                                                            </div>
-                                                                                            <div class="back">
-                                                                                                <a href="Send_Final_Quote.jsp">
-                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                    <span>More Information</span>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                        
-                                        
-                                        
-                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                                                        <div class="card card-redbrown hover">
-                                                                                            <div class="front">        
-                                        
-                                                                                                <div class="media">
-                                                                                                                                                                <span class="pull-left">
-                                                                                                                                                                    <i class="fa fa-usd media-object"></i>
-                                                                                                                                                                </span>
-                                        
-                                                                                                    <div class="media-body">
-                                                                                                        Final Quote Accepted
-                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=finalAcceptSize%>" data-animation-duration="1500">0</h2>
-                                                                                                    </div>
-                                                                                                </div>
-                                        
-                                        
-                                        
-                                                                                            </div>
-                                                                                            <div class="back">
-                                                                                                <a href="Final_Quote_Accepted.jsp">
-                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                    <span>More Information</span>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                                                        <div class="card card-greensea hover">
-                                                                                            <div class="front">        
-                                        
-                                                                                                <div class="media">
-                                                                                                                                                                <span class="pull-left">
-                                                                                                                                                                    <i class="fa fa-usd media-object"></i>
-                                                                                                                                                                </span>
-                                        
-                                                                                                    <div class="media-body">
-                                                                                                        New Service
-                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=finalAcceptSize%>" data-animation-duration="1500">0</h2>
-                                                                                                    </div>
-                                                                                                </div>
-                                        
-                                        
-                                        
-                                                                                            </div>
-                                                                                            <div class="back">
-                                                                                                <a href="New_Service.jsp">
-                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                    <span>More Information</span>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card-container col-lg-2 col-sm-6 col-sm-12">
-                                                                                        <div class="card card-greensea hover">
-                                                                                            <div class="front">        
-                                        
-                                                                                                <div class="media">
-                                                                                                                                                                <span class="pull-left">
-                                                                                                                                                                    <i class="fa fa-usd media-object"></i>
-                                                                                                                                                                </span>
-                                        
-                                                                                                    <div class="media-body">
-                                                                                                        Completed Service
-                                                                                                        <h2 class="media-heading animate-number" data-value="<%//=finalAcceptSize%>" data-animation-duration="1500">0</h2>
-                                                                                                    </div>
-                                                                                                </div>
-                                        
-                                        
-                                        
-                                                                                            </div>
-                                                                                            <div class="back">
-                                                                                                <a href="Ongoing_Service.jsp">
-                                                                                                    <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                    <span>More Information</span>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                        
-                                                                                    <div class="card-container col-lg-2 col-sm-6 col-xs-12">
-                                                                                        <div class="card1 card-slategray hover">
-                                                                                            <div class="front"> 
-                                        
-                                                                                                <div class="media">                   
-                                                                                                                                                                <span class="pull-left">
-                                                                                                                                                                    <i class="fa fa-eye media-object"></i>
-                                                                                                                                                                </span>
-                                        
-                                                                                                    <div class="media-body">
-                                                                                                        Average Rating
-                                                                                                        <h2 class="media-heading animate-number" data-value="4.2" data-animation-duration="1500">0</h2>
-                                                                                                    </div>
-                                                                                                </div> 
-                                                                                            </div>
-                                                                                                                                                <div class="back">
-                                                                                                                                                    <a href="#">
-                                                                                                                                                        <i class="fa fa-bar-chart-o fa-4x"></i>
-                                                                                                                                                        <span>Check Summary</span>
-                                                                                                                                                    </a>
-                                                                                                                                                </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>-->
                                         <!-- /cards -->
                                     </div>
                                     <!-- /tile body -->
@@ -286,7 +128,7 @@
 
                                         <!-- tile header -->
                                         <div class="tile-header">
-                                            <h1><strong>View Service</strong></h1>
+                                            <h1><strong>New Valet</strong></h1>
                                             <!--                                        <div class="search">
                                                                                         <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
                                                                                     </div>-->

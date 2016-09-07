@@ -131,7 +131,7 @@
                     <!-- page header -->
                     <div class="pageheader">
 
-                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Request</h2>
+                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Valet</h2>
                     </div>
                     <!-- /page header -->
 
@@ -156,12 +156,12 @@
                                     <!-- /tile header -->
                                     --%>
                                     <!-- tile body -->
-                                    <div class="tile-body color transparent-black rounded-corners">
+                                    <!--<div class="tile-body color transparent-black rounded-corners">-->
 
-                                        <!-- cards -->
-                                        <%@include file="include/flipcard.jsp"%>
-                                        <!-- /cards -->
-                                    </div>
+                                    <!-- cards -->
+                                    <%--<%@include file="include/flipcard.jsp"%>--%>
+                                    <!-- /cards -->
+                                    <!--</div>-->
                                     <!-- /tile body -->
                                 </section>
                                 <!-- /tile -->
@@ -169,7 +169,8 @@
                             <!-- /col 12 -->        
                         </div>
                         <!-- /row -->
-                        <%                            String success = (String) session.getAttribute("isSuccess");
+                        <%
+                            String success = (String) session.getAttribute("isSuccess");
                             String fail = (String) session.getAttribute("fail");
                             if (success != null && !(success.equals("null")) && success.length() > 0) {
                         %>
@@ -203,7 +204,7 @@
 
                                         <!-- tile header -->
                                         <div class="tile-header">
-                                            <h1><strong>View Request</strong></h1>
+                                            <h1><strong>New Valet</strong></h1>
                                         </div>
                                         <!-- /tile header -->
 
@@ -213,24 +214,10 @@
                                                 <div class="col-sm-12 col-xs-12 text-right">
                                                     <div class="btn-group btn-group-xs table-options desktopOnly">
                                                         <ul class="nav nav-pills tabpager">
-                                                            <li class="active"><a href="#New" data-toggle="pill">New Request</a></li>
-                                                            <li><a href="#Waiting_for_Response" data-toggle="pill">Waiting for Response</a></li>
+                                                            <li class="active"><a href="#New" data-toggle="pill">New</a></li>
+                                                            <li><a href="#Ongoing" data-toggle="pill">Ongoing</a></li>
                                                         </ul>
                                                     </div>
-                                                    <!--                                                <div class="btn-group mobileOnly" style="float:right">
-                                                                                                        <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown" id='select'>
-                                                                                                            Select <span class="caret"></span>
-                                                                                                        </button>
-                                                    
-                                                                                                        <ul class="dropdown-menu tabpager" id="requestDropdown" role="menu" >
-                                                                                                            <li class="active"><a href="#New" data-toggle="pill">New Request</a></li>
-                                                                                                            <li><a href="#Waiting_for_Response" data-toggle="pill">Waiting for Response</a></li>
-                                                                                                            <li><a href="#Send_Final_Quote" data-toggle="pill">Send Final Quote</a></li>
-                                                                                                            <li><a href="#Awaiting_Final_Confirmation" data-toggle="pill">Awaiting Final Confirmation</a></li>
-                                                                                                            <li><a href="#Final_Quote_Accepted" data-toggle="pill">Final Quote Accepted</a></li>
-                                                                                                            <li><a href="#All" data-toggle="pill">All</a></li>
-                                                                                                        </ul>
-                                                                                                    </div>-->
                                                 </div>
 
 
@@ -262,14 +249,14 @@
                                                         <table id="example" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
                                                             <thead>
                                                                 <tr>
-                                                                    <th class="sortable">ID</th>
-                                                                    <th class="sortable">DateTime</th>
-                                                                    <th class="sortable">Name</th>
-                                                                    <th class="sortable">No. Plate</th>
-                                                                    <th class="sortable">Car Model</th>
-                                                                    <th class="sortable">Services</th>
-                                                                    <!--<th>Attachment</th>-->
-                                                                    <th>Quote</th>
+                                                                    <th class="sortable">Date</th>
+                                                                    <th class="sortable">Time</th>
+                                                                    <th class="sortable">Service Type</th>
+                                                                    <th class="sortable">Pickup Location</th>
+                                                                    <th class="sortable">Dropoff Location</th>
+                                                                    <th class="sortable">Vehicle Transmission</th>
+                                                                    <th class="sortable">More Info</th>
+                                                                    <th></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -342,162 +329,71 @@
 
                                                     <% i++; %>
                                                     <!--Quote-->
-                                                    <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>Quote</span></button></td>
+                                                    <!--<td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>Quote</span></button></td>-->
+                                                    <td class="text-center"><a data-modal="<% out.print("myModal" + i);%>" class="md-trigger"><img src="images/file.png"/></a></td>
 
                                                     <!-- Modal -->
                                                     <div class="md-modal md-effect-13 md-slategray colorize-overlay " id="<% out.print("myModal" + i);%>">
 
                                                         <div class="md-content">
                                                             <!--<div>-->
-                                                            <div class="col-xs-6">
-                                                                <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
-                                                            </div>
-                                                            <div class="col-xs-6 text-right">
-                                                                <h4 class="modal-title"><%=dateTime%></h4>
-                                                            </div>
+                                                            <!--                                                            <div class="col-xs-6">
+                                                                                                                            <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
+                                                                                                                        </div>
+                                                                                                                        <div class="col-xs-6 text-right">
+                                                                                                                            <h4 class="modal-title"><%=dateTime%></h4>
+                                                                                                                        </div>-->
                                                             <!--</div>-->
                                                             <!--<div>-->
                                                             <div class='col-xs-12'>
 
                                                                 <div class="col-xs-12">
-                                                                    <h3>Service Details</h3>
+                                                                    <h3>Vehicle Details</h3>
                                                                 </div>
                                                                 <div>
                                                                     <div class="col-xs-6">
-                                                                        <p><b>Service Request: </b><br><% out.print(serviceName);%></p>
+                                                                        <p><b>Customer Name: </b><br><% out.print(custName);%></p>
                                                                     </div>
                                                                     <div class="col-xs-6">
-                                                                        <p><b>Urgency: </b><br><% out.print(serviceUrgency);%></p>
+                                                                        <p><b>Carplate Number: </b><br><% out.print(carPlate);%></p>
                                                                     </div>
-                                                                    <div class="col-xs-12">
-                                                                        <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Color: </b><br><% out.print(carColor);%></p>
+                                                                    </div>      
+                                                                    <div class="col-xs-6">
+                                                                        <p><b>Transmission: </b><br><% out.print(carControl);%></p>
                                                                     </div>      
                                                                 </div>
                                                                 <!--</div>-->
                                                                 <div>
                                                                     <div class="col-xs-12">
-                                                                        <h3>Car Details</h3>
+                                                                        <h3>Valet Details - Next Trip</h3>
                                                                     </div>
-                                                                    <div class="col-xs-6">
-                                                                        <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
+                                                                    <div class="col-xs-12">
+                                                                        <p><b>Service Type: </b><% out.print(carPlate);%></p>
                                                                     </div>
-                                                                    <div class="col-xs-6">
-                                                                        <p><b>Vehicle Model: </b><br><% out.print(carMake + " " + carModel);%></p>
+                                                                    <div class="col-xs-12">
+                                                                        <p><b>Pick Up Address: </b><% out.print(carMake + " " + carModel);%></p>
                                                                     </div>
                                                                     <p></p>
-                                                                    <div class="col-xs-6">
-                                                                        <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
+                                                                    <div class="col-xs-12">
+                                                                        <p><b>Drop Off Address: </b><% out.print(carYear);%></p>
                                                                     </div>
-                                                                    <div class="col-xs-6">
-                                                                        <p><b>Vehicle Type: </b><br><% out.print(carControl);%></p>
+                                                                    <div class="col-xs-12">
+                                                                        <p><b>Scheduled Date: </b>><% out.print(carControl);%></p>
                                                                     </div> 
-                                                                    <div class="col-xs-6">
-                                                                        <p><b>Vehicle Color: </b><br><% out.print(carColor);%></p>
+                                                                    <div class="col-xs-12">
+                                                                        <p><b>Scheduled Time: </b><% out.print(carColor);%></p>
                                                                     </div>
-                                                                    <div class="col-xs-6">
-                                                                        <p><b>Mileage: </b><br><% out.print(serviceMileage);%></p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xs-12">
-                                                                    <ul id="accordion">
-                                                                        <li><span><b>Quotation Amount</b></span>
-                                                                            <div class="panel">
-                                                                                <form action="AddInitialQuotation" method="post">
-                                                                                    <div class="col-xs-12">
-                                                                                        <div class="col-xs-3">
-                                                                                            Min Price:
-                                                                                        </div>
-                                                                                        <div class="col-xs-9">
-                                                                                            $<input type="number" name="minPrice" required/><p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-xs-12">
-                                                                                        <div class="col-xs-3">
-                                                                                           Max Price:
-                                                                                        </div>
-                                                                                        <div class="col-xs-9">
-                                                                                            $<input type="number" name="maxPrice" required/><p>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <input type="hidden" name="id" value="<%=id%>">
-                                                                                    <button type="submit" class="btn btn-primary">Submit Quote</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li><span><b>Diagnostic Price</b></span>
-                                                                            <div class="panel">
-                                                                                <form action = "AddDiagnosticPrice" method= "post">
-                                                                                    <div class="col-xs-12">Price: $<input type="number" name="price" required/><p></div>
-                                                                                    <input type="hidden" name="id" value="<%=id%>">
-                                                                                    <button type="submit" class="btn btn-primary">Add Diagnostic Price</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
                                                                 </div>
                                                             </div>
-                                                            <div class='col-xs-6'></div>
-                                                            <!--                                                            <div class="col-xs-6">
-                                                                                                                                                                                            <button type="button" class="btn btn-default">Chat</button>
-                                                            
-                                                                                                                            <section class="tile transparent">
-                                                            
-                                                            
-                                                                                                                                 tile header 
-                                                                                                                                <div class="tile-header color bg-transparent-black-5 rounded-corners">
-                                                                                                                                                                                                        <ul class="chat-nav side-nav inline" id="chatHead">
-                                                                                                                                                                                                        <li><h5><strong><%=custName%></strong></h5></li>
-                                                                                                                                                                                                        </ul>
-                                                                                                                                    <h5>Chat</h5>
-                                                                                                                                </div>
-                                                                                                                                 /tile header 
-                                                            
-                                                            
-                                                                                                                                 tile body 
-                                                                                                                                <div class="tile-body transparent nopadding">
-                                                            
-                                                                                                                                    <div class="chat-content" id="chat-content">
-                                                            
-                                                                                                                                        <ul class="chat-list" id="log<%=i%>"></ul> Chat Message Enters Here
-                                                            
-                                                            
-                                                                                                                                    </div>
-                                                                                                                                </div>
-                                                                                                                                 /tile body 
-                                                            
-                                                            
-                                                            
-                                                            
-                                                                                                                                 tile footer 
-                                                                                                                                <div class="tile-footer transparent nopadding">
-                                                            
-                                                                                                                                    <div class="chat-reply" id="chat-reply">
-                                                                                                                                        <textarea placeholder="Post a reply..." class="form-control"></textarea>
-                                                                                                                                        <textarea placeholder="Write a message..." class="form-control msgInput" id="msgInput<%=i%>" onfocus="clearElement('#msgInput')"></textarea>
-                                                                                                                                        <div class="btn-group btn-group-sm">
-                                                                                                                                            <button type="button" class="btn btn-transparent-white"><i class="fa fa-paperclip"></i> Add Files</button>
-                                                                                                                                            <button type="button" class="btn btn-transparent-white last-in-group"><i class="fa fa-camera"></i> Add Photos</button>
-                                                                                                                                            <button type="button" class="btn btn-transparent-white last pull-right sendMsg" id="<%=serviceId%>-<%=wsName%>-<%=shopID%>-<%=staffID%>-<%=token%>" onclick='prepareMsg()'>Send message</button>
-                                                                                                                                                                                            <div class="checkbox check-transparent pull-right">
-                                                                                                                                                                                                <input type="checkbox" value="1" id="send-by-enter">
-                                                                                                                                                                                                <label for="send-by-enter">Press Enter to send</label>
-                                                                                                                                                                                            </div>
-                                                                                                                                        </div>
-                                                                                                                                    </div>
-                                                            
-                                                                                                                                </div>
-                                                                                                                                 /tile footer 
-                                                            
-                                                            
-                                                                                                                            </section>
-                                                                                                                        </div>-->
                                                             <div class="col-xs-12">
                                                                 <button class="md-close btn btn-default">Close</button>
                                                             </div>
 
                                                         </div> <!--/.modal-content -->
                                                     </div> <!--/.modal -->
+                                                    <td><button class="btn btn-default btn-xs">Accept</button></td>
                                                     </tr>
 
                                                     <%
@@ -514,19 +410,17 @@
 
 
 
-                                            <div class="tab-pane fade " id="Waiting_for_Response" >
+                                            <div class="tab-pane fade " id="Ongoing" >
                                                 <div class="table-responsive">
                                                     <table id="example2" class="table table-custom1 table-sortable" cellspacing="0" width="100%">    
                                                         <thead>
                                                             <tr>
-                                                                <th class="sortable">ID</th>
-                                                                <th class="sortable">DateTime</th>
-                                                                <th class="sortable">Name</th>
-                                                                <th class="sortable">No. Plate</th>
-                                                                <th class="sortable">Car Model</th>
-                                                                <th class="sortable">Services</th>
-                                                                <!--<th>Attachment</th>-->
-                                                                <th>Details</th>
+                                                                <th class="sortable">Service Type</th>
+                                                                <th class="sortable">Current Pickup Location</th>
+                                                                <th class="sortable">Current Dropoff Location</th>
+                                                                <th class="sortable">Next Pickup Time</th>
+                                                                <th class="sortable">More Info</th>
+                                                                <th></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -581,155 +475,130 @@
 
                                                             %>
                                                             <tr>
-                                                                <td><% out.print(serviceId);%></td>
                                                                 <td><% out.print(dateTime);%></td>
                                                                 <td><% out.print(custName);%></td>
                                                                 <td><% out.print(carPlate);%></td>
                                                                 <td><% out.print(carModel);%></td>
-                                                                <td><% out.print(serviceName);%></td>
-                                                                <!--Picture Attachment-->
-                                                                <!--<td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>-->
+                                                            
 
-                                                                <!-- Modal -->
-                                                        <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog-img">
-                                                                <div class="modal-content">
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                    <div class="modal-header">
-                                                                        <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <img class="img-responsive"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                                    </div>
-                                                                </div> <!--/.modal-content--> 
-                                                            </div><!-- /.modal-dialog -->
-                                                        </div><!-- /.modal -->
-                                                        <% i++; %>
                                                         <!--Quote-->
-                                                        <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>More Info</span></button></td>
+                                                        <!--<td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>More Info</span></button></td>-->
+                                                        <td class="text-center"><a data-modal="<% out.print("myModal" + i);%>" class="md-trigger"><img src="images/file.png"/></a></td>
 
 
                                                         <!-- Modal -->
-                                                        <div class="md-modal md-effect-13 md-slategray colorize-overlay md-chat" id="<% out.print("myModal" + i);%>">
+                                                        <div class="md-modal md-effect-13 md-slategray colorize-overlay" id="<% out.print("myModal" + i);%>">
 
                                                             <div class="md-content">
                                                                 <!--<div>-->
-                                                                <div class="col-xs-6">
-                                                                    <h4 class="modal-title">Waiting For Response - <% out.print(custName);%></h4>
-                                                                </div>
-                                                                <div class="col-xs-6 text-right">
-                                                                    <h4 class="modal-title"><%=dateTime%></h4>
-                                                                </div>
+                                                                <!--                                                            <div class="col-xs-6">
+                                                                                                                                <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-xs-6 text-right">
+                                                                                                                                <h4 class="modal-title"><%=dateTime%></h4>
+                                                                                                                            </div>-->
                                                                 <!--</div>-->
                                                                 <!--<div>-->
-                                                                <div class='col-xs-6'>
+                                                                <div class='col-xs-12'>
 
                                                                     <div class="col-xs-12">
-                                                                        <h3>Service Details</h3>
+                                                                        <h3>Vehicle Details</h3>
                                                                     </div>
                                                                     <div>
                                                                         <div class="col-xs-6">
-                                                                            <p><b>Service Request: </b><br><% out.print(serviceName);%></p>
+                                                                            <p><b>Customer Name: </b><br><% out.print(custName);%></p>
                                                                         </div>
                                                                         <div class="col-xs-6">
-                                                                            <p><b>Urgency: </b><br><% out.print(serviceUrgency);%></p>
+                                                                            <p><b>Carplate Number: </b><br><% out.print(carPlate);%></p>
                                                                         </div>
-                                                                        <div class="col-xs-12">
-                                                                            <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Color: </b><br><% out.print(carColor);%></p>
+                                                                        </div>      
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Transmission: </b><br><% out.print(carControl);%></p>
                                                                         </div>      
                                                                     </div>
                                                                     <!--</div>-->
                                                                     <div>
                                                                         <div class="col-xs-12">
-                                                                            <h3>Car Details</h3>
+                                                                            <h3>Valet Details - Next Trip</h3>
                                                                         </div>
-                                                                        <div class="col-xs-6">
-                                                                            <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
+                                                                        <div class="col-xs-12">
+                                                                            <p><b>Service Type: </b><% out.print(carPlate);%></p>
                                                                         </div>
-                                                                        <div class="col-xs-6">
-                                                                            <p><b>Vehicle Model: </b><br><% out.print(carMake + " " + carModel);%></p>
+                                                                        <div class="col-xs-12">
+                                                                            <p><b>Pick Up Address: </b><% out.print(carMake + " " + carModel);%></p>
                                                                         </div>
                                                                         <p></p>
-                                                                        <div class="col-xs-6">
-                                                                            <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
+                                                                        <div class="col-xs-12">
+                                                                            <p><b>Drop Off Address: </b><% out.print(carYear);%></p>
                                                                         </div>
-                                                                        <div class="col-xs-6">
-                                                                            <p><b>Vehicle Type: </b><br><% out.print(carControl);%></p>
+                                                                        <div class="col-xs-12">
+                                                                            <p><b>Scheduled Date: </b>><% out.print(carControl);%></p>
                                                                         </div> 
-                                                                        <div class="col-xs-6">
-                                                                            <p><b>Vehicle Color: </b><br><% out.print(carColor);%></p>
-                                                                        </div>
-                                                                        <div class="col-xs-6">
-                                                                            <p><b>Mileage: </b><br><% out.print(serviceMileage);%></p>
+                                                                        <div class="col-xs-12">
+                                                                            <p><b>Scheduled Time: </b><% out.print(carColor);%></p>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-xs-6">
-                                                                        <%
-                                                                            if (diagnosticPrice > 0) {
-                                                                        %>
-                                                                        <div class="text-left">Diagnostic Amount: $<%=diagnostic%></div>
-                                                                        <%
-                                                                        } else {
-                                                                        %>
-                                                                        <div class="text-left">Quoted Amount: $<%=min%> - $<%=max%></div>
-                                                                        <%
-                                                                            }
-                                                                        %>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xs-6">
-                                                                    <section class="tile transparent">
-                                                                        <!-- tile header -->
-                                                                        <div class="tile-header color bg-transparent-black-5 rounded-corners">
-                                                                            <h5>Chat</h5>
-                                                                            <div class="hidden ct" id=""><div class="hidden chatTopic" id="<%=topicId%>"></div></div>
-                                                                        </div>
-                                                                        <!-- /tile header -->
-                                                                        <!-- tile body -->
-                                                                        <div class="tile-body transparent nopadding">
-
-                                                                            <div class="chat-content" id="chat-content">
-
-                                                                                <ul class="chat-list" id="log<%=serviceId%>"></ul><!-- Chat Message Enters Here-->
-
-
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- /tile body -->
-
-
-
-
-                                                                        <!-- tile footer -->
-                                                                        <div class="tile-footer transparent nopadding">
-
-                                                                            <div class="chat-reply" id="chat-reply">
-                                                                                <!--<textarea placeholder="Post a reply..." class="form-control"></textarea>-->
-                                                                                <textarea placeholder="Write a message..." class="form-control msgInput" id="msgInput<%=i%>" onfocus="clearElement('#msgInput')"></textarea>
-                                                                                <div class="btn-group btn-group-sm">
-                                                                                    <!--<button type="button" class="btn btn-transparent-white"><i class="fa fa-paperclip"></i> Add Files</button>-->
-                                                                                    <!--<button type="button" class="btn btn-transparent-white last-in-group"><i class="fa fa-camera"></i> Add Photos</button>-->
-                                                                                    <button type="button" class="btn btn-transparent-white last pull-right sendMsg" id="<%=serviceId%>-<%=wsName%>-<%=shopID%>-<%=staffID%>-<%=token%>" onclick='prepareMsg()'>Send message</button>
-                                                                                    <!--                                                <div class="checkbox check-transparent pull-right">
-                                                                                                                                        <input type="checkbox" value="1" id="send-by-enter">
-                                                                                                                                        <label for="send-by-enter">Press Enter to send</label>
-                                                                                                                                    </div>-->
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <!-- /tile footer -->
-
-
-                                                                    </section>
                                                                 </div>
                                                                 <div class="col-xs-12">
                                                                     <button class="md-close btn btn-default">Close</button>
                                                                 </div>
+
+                                                            </div> <!--/.modal-content -->
+                                                        </div> <!--/.modal -->
+                                                        <% i++; %>
+                                                        <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" type="button">Complete</button></td>
+                                                        <!-- Modal -->
+                                                        <div class="md-modal md-effect-13 md-slategray colorize-overlay" id="<% out.print("myModal" + i);%>">
+
+                                                            <div class="md-content">
+                                                                <!--<div>-->
+                                                                <!--                                                            <div class="col-xs-6">
+                                                                                                                                <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-xs-6 text-right">
+                                                                                                                                <h4 class="modal-title"><%=dateTime%></h4>
+                                                                                                                            </div>-->
+                                                                <!--</div>-->
+                                                                <!--<div>-->
+                                                                <div class='col-xs-12'>
+
+                                                                    <div class="col-xs-12">
+                                                                        <h3>Job Completion</h3><p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="col-xs-12">
+                                                                            <!--<p><b>Customer Name: </b><br><% out.print(custName);%></p>-->
+                                                                            <div class="text-center">Your next pickup time is on</div>
+                                                                            <p>
+                                                                        </div>
+                                                                        <div class="col-xs-12">
+                                                                            <h4 class="text-center">1400Hrs</h4>
+                                                                        </div>
+                                                                        <div class="col-xs-12">
+                                                                            <h4 class="text-center">31 Aug 2016</h4>
+                                                                            <p>
+                                                                            <!--<p><b>Color: </b><br><% out.print(carColor);%></p>-->
+                                                                        </div>      
+                                                                        <div class="col-xs-12">
+                                                                            <div class="text-center">Would you be available to continue with this job?</div>
+                                                                        </div>      
+                                                                    </div>
+                                                                    <!--</div>-->
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <div class="col-xs-6">
+                                                                        <button class="btn btn-blue">Accept</button>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
+                                                                        <button class="btn btn-blue">Reject</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <button class="md-close btn btn-default">Close</button>
+                                                                </div>
+
                                                             </div> <!--/.modal-content -->
                                                         </div> <!--/.modal -->
                                                         </tr>
@@ -894,77 +763,77 @@
 
 
     <script>
-                                                                                        $(function () {
-                                                                                            // Initialize card flip
-                                                                                            $('.card.hover').hover(function () {
-                                                                                                $(this).addClass('flip');
-                                                                                            }, function () {
-                                                                                                $(this).removeClass('flip');
-                                                                                            });
-                                                                                            //         sortable table
-                                                                                            $('.table.table-sortable th.sortable').click(function () {
-                                                                                                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                                                                                                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                                                                                                $(this).addClass(o);
-                                                                                            });
-                                                                                            //todo's
-                                                                                            $('#todolist li label').click(function () {
-                                                                                                $(this).toggleClass('done');
-                                                                                            });
-                                                                                        });
-                                                                                        $(function () {
+        $(function () {
+            // Initialize card flip
+            $('.card.hover').hover(function () {
+                $(this).addClass('flip');
+            }, function () {
+                $(this).removeClass('flip');
+            });
+            //         sortable table
+            $('.table.table-sortable th.sortable').click(function () {
+                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                $(this).addClass(o);
+            });
+            //todo's
+            $('#todolist li label').click(function () {
+                $(this).toggleClass('done');
+            });
+        });
+        $(function () {
 
-                                                                                            var contentHeight = $('#content').height();
-                                                                                            var chatInboxHeight = contentHeight - 178;
-                                                                                            var chatContentHeight = contentHeight - 178 - 200;
-                                                                                            var setChatHeight = function () {
-                                                                                                $('#chat-inbox').css('height', chatInboxHeight);
-                                                                                                $('#chat-content').css('height', chatContentHeight);
-                                                                                            };
-                                                                                            setChatHeight();
-                                                                                            $(window).resize(function () {
-                                                                                                contentHeight = $('#content').height();
-                                                                                                chatInboxHeight = contentHeight - 178;
-                                                                                                chatContentHeight = contentHeight - 178 - 200;
-                                                                                                setChatHeight();
-                                                                                            });
-                                                                                            $("#chat-inbox").niceScroll({
-                                                                                                cursorcolor: '#000000',
-                                                                                                zindex: 999999,
-                                                                                                bouncescroll: true,
-                                                                                                cursoropacitymax: 0.4,
-                                                                                                cursorborder: '',
-                                                                                                cursorborderradius: 0,
-                                                                                                cursorwidth: '5px'
-                                                                                            });
-                                                                                            $("#chat-content").niceScroll({
-                                                                                                cursorcolor: '#000000',
-                                                                                                zindex: 999999,
-                                                                                                bouncescroll: true,
-                                                                                                cursoropacitymax: 0.4,
-                                                                                                cursorborder: '',
-                                                                                                cursorborderradius: 0,
-                                                                                                cursorwidth: '5px'
-                                                                                            });
-                                                                                            $('#chat-inbox .chat-actions > span').tooltip({
-                                                                                                placement: 'top',
-                                                                                                trigger: 'hover',
-                                                                                                html: true,
-                                                                                                container: 'body'
-                                                                                            });
-                                                                                            $('#initialize-search').click(function () {
-                                                                                                $('#chat-search').toggleClass('active').focus();
-                                                                                            });
-                                                                                            $(document).click(function (e) {
-                                                                                                if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
-                                                                                                    $('#chat-search').removeClass('active');
-                                                                                                }
-                                                                                            });
-                                                                                            $(window).mouseover(function () {
-                                                                                                $("#chat-inbox").getNiceScroll().resize();
-                                                                                                $("#chat-content").getNiceScroll().resize();
-                                                                                            });
-                                                                                        });</script>
+            var contentHeight = $('#content').height();
+            var chatInboxHeight = contentHeight - 178;
+            var chatContentHeight = contentHeight - 178 - 200;
+            var setChatHeight = function () {
+                $('#chat-inbox').css('height', chatInboxHeight);
+                $('#chat-content').css('height', chatContentHeight);
+            };
+            setChatHeight();
+            $(window).resize(function () {
+                contentHeight = $('#content').height();
+                chatInboxHeight = contentHeight - 178;
+                chatContentHeight = contentHeight - 178 - 200;
+                setChatHeight();
+            });
+            $("#chat-inbox").niceScroll({
+                cursorcolor: '#000000',
+                zindex: 999999,
+                bouncescroll: true,
+                cursoropacitymax: 0.4,
+                cursorborder: '',
+                cursorborderradius: 0,
+                cursorwidth: '5px'
+            });
+            $("#chat-content").niceScroll({
+                cursorcolor: '#000000',
+                zindex: 999999,
+                bouncescroll: true,
+                cursoropacitymax: 0.4,
+                cursorborder: '',
+                cursorborderradius: 0,
+                cursorwidth: '5px'
+            });
+            $('#chat-inbox .chat-actions > span').tooltip({
+                placement: 'top',
+                trigger: 'hover',
+                html: true,
+                container: 'body'
+            });
+            $('#initialize-search').click(function () {
+                $('#chat-search').toggleClass('active').focus();
+            });
+            $(document).click(function (e) {
+                if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
+                    $('#chat-search').removeClass('active');
+                }
+            });
+            $(window).mouseover(function () {
+                $("#chat-inbox").getNiceScroll().resize();
+                $("#chat-content").getNiceScroll().resize();
+            });
+        });</script>
     <script>
         //Script to load tab and data based on the href #
         $(window).load(function () {

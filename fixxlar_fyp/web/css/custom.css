@@ -90,9 +90,6 @@ body {
 }
 /*DateTimeForm*/
 
-
-
-
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -333,6 +330,13 @@ button.accordion.active:after {
         overflow: scroll;*/
 }
 /*Chat*/
+
+/*Schedule*/
+.fc .fc-content .fc-event{
+    cursor: pointer;
+}
+/*Schedule*/
+
 
 /*@media screen and (max-width: 1190px){
     .desktopOnly {
