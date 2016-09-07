@@ -30,7 +30,7 @@
             </li>
             
             <li>
-                <a href="PageOffline.jsp">
+                <a href="ViewCustomers.jsp">
                     <i class="fa fa-users"></i> Fixir App Customers
                 </a>
             </li>

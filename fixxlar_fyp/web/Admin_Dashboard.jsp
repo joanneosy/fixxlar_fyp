@@ -190,6 +190,7 @@
                                                                         //get workshop user
                                                                         int wsId = workshop.getId();
                                                                         int newRequests = newRequestCount.get(wsId);
+                                                                        if (newRequests > 0) {
 
                                                                 %>
                                                                 <tr>
@@ -253,6 +254,7 @@
                                                             <%
 
                                                                 }
+                                                            }
                                                             %>
 
                                                             </tbody>

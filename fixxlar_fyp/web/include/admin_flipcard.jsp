@@ -40,7 +40,7 @@
 
             </div>
             <div class="back">
-                <a href="Admin_New_Request.jsp">
+                <a href="Admin_Dashboard.jsp">
                     <!--                                        <span class="pull-left">
                                                             </span>-->
                     <!--<i class="fa fa-info-circle"></i>-->
