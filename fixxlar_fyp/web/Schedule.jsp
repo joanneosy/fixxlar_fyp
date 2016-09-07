@@ -121,9 +121,9 @@
                                         <div class="margin-top-15"></div>
                                         <div><b>Start Date & Time</b></div>
                                         <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker'>
+                                            <div class='input-group date' id='startdatetimepicker'>
                                                 <!--<form id='' action="" role="form">-->
-                                                <input type='text' name="startTime" class="form-control dt" />
+                                                <input type='text' name="startTime" class="form-control dt" readonly/>
                                                 <!--</form>-->
 
                                                 <span class="input-group-addon">
@@ -133,9 +133,9 @@
                                         </div>
                                         <div><b>End Date & Time</b></div>
                                         <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker'>
+                                            <div class='input-group date' id='enddatetimepicker'>
                                                 <!--<form id='' action="" role="form">-->
-                                                <input type='text' name="endTime" class="form-control dt" />
+                                                <input type='text' name="endTime" class="form-control dt" readonly/>
                                                 <!--</form>-->
 
                                                 <span class="input-group-addon">
@@ -257,7 +257,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label">End (YYYY-MM-DD HH:MM:SS)</label>
-                                                    <input type="text" class="form-control" id="edit-event-end" name="event-color" readonly="">
+                                                <input type="text" class="form-control" id="edit-event-end" name="event-color" readonly="">
                                             </div>
 
                                         </div>
@@ -375,21 +375,21 @@
                         console.log(calEvent);
                         var editModal = $('#edit-event'),
                                 eventTitle = calEvent.title;
-                                start = calEvent._start;
-                                end = calEvent._end;
-                                startT = start + "";
-                                endT = start + "";
-                                var start_time = start,
-                                start = [start_time.getFullYear(), start_time.getMonth() + 1, start_time.getDate()].join('-') + " " + 
+                        start = calEvent._start;
+                        end = calEvent._end;
+                        startT = start + "";
+                        endT = start + "";
+                        var start_time = start,
+                                start = [start_time.getFullYear(), start_time.getMonth() + 1, start_time.getDate()].join('-') + " " +
                                 startT.substring(startT.indexOf(":") - 2, startT.lastIndexOf(":") + 3);
-                                var end_time = end,
-                                end = [end_time.getFullYear(), end_time.getMonth() + 1, end_time.getDate()].join('-') + " " + 
+                        var end_time = end,
+                                end = [end_time.getFullYear(), end_time.getMonth() + 1, end_time.getDate()].join('-') + " " +
                                 endT.substring(endT.indexOf(":") - 2, endT.lastIndexOf(":") + 3);
 ////                                eventColor = calEvent.color;
                         var status = calEvent.className[0];
                         console.log(start_time);
                         console.log(end_time);
-                        if(status != 0){
+                        if (status != 0) {
                             $("#remove-event").hide();
                         }
                         editModal.find('.modal-title small').text(eventTitle);
@@ -479,7 +479,7 @@
                                         allDay = true;
                                     }
                                     var service_id = $(this).attr('service_id');
-                                    if(service_id == null){
+                                    if (service_id == null) {
                                         service_id = "0";
                                     }
                                     events.push({
@@ -490,7 +490,7 @@
                                         end: $(this).attr('end_time'), // will be parsed
                                         allDay: allDay,
                                         className: service_id
-                                        
+
                                     });
                                 });
                                 callback(events);
@@ -624,7 +624,8 @@
                 $(this).datetimepicker({
                     format: 'YYYY-MM-DD HH:mm',
                     minDate: new Date(),
-                    sideBySide: true
+                    sideBySide: true,
+                    ignoreReadonly: true
                 });
             });</script>
         <script>
