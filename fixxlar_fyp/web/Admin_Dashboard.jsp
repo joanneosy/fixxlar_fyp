@@ -197,7 +197,7 @@
                                                                         int wsId = workshop.getId();
                                                                         int newRequests = newRequestCount.get(wsId);
                                                                         String workshopName = workshop.getName();
-
+                                                                        if (newRequests > 0) {
                                                                 %>
                                                                 <tr>
                                                                     <td><center><%=workshop.getName()%></center></td>
@@ -248,6 +248,7 @@
                                                             </tr>
                                                             <%
 
+                                                                    }
                                                                 }
                                                             %>
 
