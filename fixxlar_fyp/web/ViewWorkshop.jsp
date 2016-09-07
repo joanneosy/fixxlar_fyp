@@ -102,10 +102,10 @@
                                                         <td><%=name%></td>
                                                         <td><%=address%></td>
                                                         <td><%=postal%></td>
-                                                        <td>
+                                                        <td><%=openingHr%>
 
                                                             <%
-                                                                ArrayList<String> compiled = new ArrayList<String>();
+                                                           /*     ArrayList<String> compiled = new ArrayList<String>();
                                                                 //Monday-0900-1800
                                                                 String[] daysAndTime = openingHr.split(",");
                                                                 //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
@@ -175,7 +175,7 @@
                                                                 }
                                                                 for (String x : compiled) {
                                                                     out.println(x + "<br/>");
-                                                                }
+                                                                }*/ 
                                                             %>
 
                                                         </td>

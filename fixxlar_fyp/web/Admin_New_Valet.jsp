@@ -173,7 +173,7 @@
 
                                                     <div class="btn-group btn-group-xs table-options desktopOnly">
                                                         <ul class="nav nav-pills tabpager">
-                                                            <li class="active"><a href="#New_Service" data-toggle="pill">New Service</a></li>
+                                                            <li class="active"><a href="#New_Valet" data-toggle="pill">New Valet</a></li>
                                                             <!--<li><a href="#Ongoing_Service" data-toggle="pill">Ongoing Service</a></li>-->
                                                             <!--<li><a href="#Completed_Service" data-toggle="pill">Completed Service</a></li>-->
                                                         </ul>
@@ -209,7 +209,7 @@
 
 
 
-                                                <div class="tab-pane fade active in" id="New_Service" >
+                                                <div class="tab-pane fade active in" id="New_Valet" >
                                                     <div class="table-responsive">
                                                         <table id="example" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
                                                             <thead>

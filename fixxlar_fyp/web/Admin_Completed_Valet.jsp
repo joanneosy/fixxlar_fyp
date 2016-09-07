@@ -63,7 +63,7 @@
                     <!-- page header -->
                     <div class="pageheader">
 
-                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Request</h2>
+                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>View Valet Requests</h2>
                     </div>
                     <!-- /page header -->
 
@@ -124,7 +124,7 @@
 
                                         <!-- tile header -->
                                         <div class="tile-header">
-                                            <h1><strong>View Service</strong></h1>
+                                            <h1><strong>Completed Valet</strong></h1>
                                             <!--                                        <div class="search">
                                                                                         <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
                                                                                     </div>-->
@@ -172,7 +172,7 @@
                                                         <ul class="nav nav-pills tabpager">
                                                             <!--<li class="active"><a href="#New_Service" data-toggle="pill">New Service</a></li>-->
                                                             <!--<li class="active"><a href="#Ongoing_Service" data-toggle="pill">Ongoing Service</a></li>-->
-                                                            <li class="active"><a href="#Completed_Service" data-toggle="pill">Completed Service</a></li>
+                                                            <li class="active"><a href="#Completed_Valet" data-toggle="pill">Completed Valet</a></li>
                                                         </ul>
                                                     </div>
                                                     <!--                                                    
@@ -396,7 +396,7 @@
                                                     </div>
                                                 </div><!--Ongoing Service-->
                                                 --%>
-                                                <div class="tab-pane active in" id="Completed_Service" >
+                                                <div class="tab-pane active in" id="Completed_Valet" >
                                                     
                                             
                                                     <div class="table-responsive">

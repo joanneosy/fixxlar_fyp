@@ -413,7 +413,7 @@
                                                                                     </div>
                                                                                     <div class="col-xs-12">
                                                                                         <div class="col-xs-3">
-                                                                                           Max Price:
+                                                                                            Max Price:
                                                                                         </div>
                                                                                         <div class="col-xs-9">
                                                                                             $<input type="number" name="maxPrice" required/><p>
@@ -1098,6 +1098,43 @@
                         var log = "log" + requestID;
                         subscribe(requestID, <%=shopID%>, driverID, customer_name, "<%=chatToken%>", log);
 //                            subscribeChat(requestID, <%=shopID%>, customer_name, "<%=chatToken%>", log);
+                    });
+                },
+                error: function () {
+                    alert("fail");
+                }
+            });
+
+//            } else {
+//                console.log("second");
+            //get only new request to subscribe
+//            }
+        });
+    </script>
+    <script>
+        $(window).load(function () {
+//            if (<%//=justLoggedIn%> == true) {
+//                console.log("first");
+            //get all request to subscribe
+        <%//session.setAttribute("justLoggedIn", false);%>
+            $.ajax({
+                type: 'POST',
+                url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
+                crossDomain: true,
+                data: {
+                    "token": "<%=token%>",
+                    "staff_id": "<%=staffID%>",
+                    "shop_id": "<%=shopID%>"
+                },
+                dataType: 'json',
+                success: function (data) {
+//                        $.each(data.items, function(i,item)){
+//                            console.log(i + ": " + item);
+//                        }
+                    console.log(data);
+                    $.each(data.payload.notifications, function () {
+                        var notification = $(this).attr('message');
+                        $.jGrowl(notification, {sticky: true});
                     });
                 },
                 error: function () {

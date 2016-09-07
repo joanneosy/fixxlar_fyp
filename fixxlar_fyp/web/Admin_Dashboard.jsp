@@ -171,6 +171,12 @@
 
                                                     HashMap<Integer, Integer> newRequestCount = qDAO.retrieveNumberOfNewRequests(staffId, token);
                                                 %>
+                                                <%
+                                                    String errMsg = (String) request.getAttribute("errMsg");
+                                                    if (errMsg != null) {
+                                                        out.print(errMsg);
+                                                    }
+                                                %>
                                                 <div class="tab-pane fade active in" id="New" >
                                                     <div class="table-responsive">
                                                         <table id="example" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
@@ -190,6 +196,7 @@
                                                                         //get workshop user
                                                                         int wsId = workshop.getId();
                                                                         int newRequests = newRequestCount.get(wsId);
+                                                                        String workshopName = workshop.getName();
 
                                                                 %>
                                                                 <tr>
@@ -197,57 +204,46 @@
                                                             <!--<td><center><button type="button" class="btn btn-block btn-primary">5</button></center></td>-->
                                                             <td><a class="btn btn-block btn-primary" href="Admin_View_Individual_Request.jsp?wsId=<%=wsId%>" name="wsId" ><%=newRequests%></a></td>
                                                             <td><center><button type="button" class="btn btn-block btn-danger disabled">Urgent</button></center></td>
+                                                            <!--<center><input type="submit" value="Remind"class="btn btn-default"></center>-->
 
-                                                            <td>
-                                                                <%
-                                                                    String errMsg = (String) request.getAttribute("errMsg");
-                                                                    if (errMsg != null) {
-                                                                        out.print(errMsg);
-                                                                    }
-                                                                %>
-                                                                <form  action="AddNotification" method="GET" id="form1">
-                                                                    <input type="hidden" name="messageId" value="0">
-                                                                    <!--<input type="hidden" name="customizedMessage" value="You have <%=newRequests%> new requests. Please respond asap.">-->
-                                                                    <input type="hidden" name="workshopId" value="<%=wsId%>">
+                                                            <td><button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#exampleModal<%=wsId%>" data-whatever="@mdo">REMIND</button></td>
 
-                                                                    <!--<center><input type="submit" value="Remind"class="btn btn-default"></center>-->
-                                                                    <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">REMIND</button>
-                                                                    
-                                                                    <!--POPUP REMINDER DIALOG-->
-                                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                                                                        <div class="modal-dialog" role="document">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                                                                                    <h4 class="modal-title" id="exampleModalLabel">Reminder Message for Workshop</h4>
-                                                                                </div>
-                                                                                <div class="modal-body">
-                                                                                    <form>
-<!--                                                                                        <div class="form-group col-sm-4 col-md-4">
-                                                                                            <label for="recipient-name" class="control-label">Recipient:</label>
-                                                                                            <input type="text" class="form-control" id="recipient-name">
-                                                                                        </div>-->
-                                                                                        <div class="form-group">
-                                                                                            <label for="message-text" class="control-label">Message:</label>
-                                                                                            <textarea class="form-control" id="message-text" name="customizedMessage"></textarea>
-                                                                                        </div>
-                                                                                    </form>
-                                                                                </div>
-                                                                                
-                                                                                
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                    <button type="submit" class="btn btn-primary">Send message</button>
-                                                                                </div>
-                                                                                
-                                                                            </div>
+                                                            <!--POPUP REMINDER DIALOG-->
+                                                            <div class="modal fade" id="exampleModal<%=wsId%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                                <!--<input type="hidden" name="customizedMessage" value="You have <%=newRequests%> new requests. Please respond asap.">-->
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                                                            <h4 class="modal-title" id="exampleModalLabel">Reminder Message for <%=workshopName%></h4>
                                                                         </div>
-                                                                    </div>
-                                                                    <!--/POPUP REMINDER DIALOG-->
-                                                                </form>
-                                                                <!--<button onclick="remind()" type="submit" form="form1" value="Submit">Submit</button>-->
+                                                                        <form  action="AddNotification" method="GET" id="form1">
+                                                                            <div class="modal-body">
+                                                                                <input type="hidden" name="messageId" value="1">
+                                                                                <input type="hidden" name="workshopId" value="<%=wsId%>">
+                                                                                <!--                                                                                        <div class="form-group col-sm-4 col-md-4">
+                                                                                                                                                                            <label for="recipient-name" class="control-label">Recipient:</label>
+                                                                                                                                                                            <input type="text" class="form-control" id="recipient-name">
+                                                                                                                                                                        </div>-->
+                                                                                <div class="form-group">
+                                                                                    <label for="message-text" class="control-label">Message:</label>
+                                                                                    <textarea class="form-control" id="message-text" name="customizedMessage"></textarea>
+                                                                                </div>
+                                                                            </div>
 
-                                                            </td>
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                <button type="submit" class="btn btn-primary">Send message</button>
+                                                                            </div>
+                                                                        </form>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--/POPUP REMINDER DIALOG-->
+                                                            <!--<button onclick="remind()" type="submit" form="form1" value="Submit">Submit</button>-->
+
 
                                                             </tr>
                                                             <%
