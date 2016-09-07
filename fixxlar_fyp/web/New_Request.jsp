@@ -169,20 +169,19 @@
                             <!-- /col 12 -->        
                         </div>
                         <!-- /row -->
-                        <%                            
-                            String success = (String) session.getAttribute("isSuccess");
+                        <%                            String success = (String) session.getAttribute("isSuccess");
                             String fail = (String) session.getAttribute("fail");
                             if (success != null && !(success.equals("null")) && success.length() > 0) {
                         %>
-                            <div class="alert alert-success"><%=success%></div>
+                        <div class="alert alert-success"><%=success%></div>
                         <%
-                                session.setAttribute("isSuccess", "");
-                            } else if(fail != null && !(fail.equals("null")) && fail.length() > 0) {
+                            session.setAttribute("isSuccess", "");
+                        } else if (fail != null && !(fail.equals("null")) && fail.length() > 0) {
                         %>
-                            <div class="alert alert-danger"><%=fail%></div>
-                            <%
+                        <div class="alert alert-danger"><%=fail%></div>
+                        <%
                                 session.setAttribute("fail", "");
-                        }
+                            }
                         %>
 
 
@@ -296,8 +295,7 @@
                                                                         String carPhoto = qr.getPhotos();
                                                                         int serviceStatus = qr.getOffer().getStatus();
                                                                         String serviceUrgency = qr.getUrgency();
-                                                                       
- 
+
                                                                         Customer cust = qr.getCustomer();
                                                                         String custName = cust.getName();
                                                                         String custEmail = cust.getEmail();
@@ -406,10 +404,20 @@
                                                                             <div class="panel">
                                                                                 <form action="AddInitialQuotation" method="post">
                                                                                     <div class="col-xs-12">
-                                                                                        Min Price: $ <input type="number" name="minPrice" required/>
+                                                                                        <div class="col-xs-3">
+                                                                                            Min Price:
+                                                                                        </div>
+                                                                                        <div class="col-xs-9">
+                                                                                            $<input type="number" name="minPrice" required/><p>
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div class="col-xs-12">
-                                                                                        Max Price: $ <input type="number" name="maxPrice" required/>
+                                                                                        <div class="col-xs-3">
+                                                                                           Max Price:
+                                                                                        </div>
+                                                                                        <div class="col-xs-9">
+                                                                                            $<input type="number" name="maxPrice" required/><p>
+                                                                                        </div>
                                                                                     </div>
 
                                                                                     <input type="hidden" name="id" value="<%=id%>">
@@ -420,7 +428,7 @@
                                                                         <li><span><b>Diagnostic Price</b></span>
                                                                             <div class="panel">
                                                                                 <form action = "AddDiagnosticPrice" method= "post">
-                                                                                    <div class="col-xs-12">Price: <input type="number" name="price" required/></div>
+                                                                                    <div class="col-xs-12">Price: $<input type="number" name="price" required/><p></div>
                                                                                     <input type="hidden" name="id" value="<%=id%>">
                                                                                     <button type="submit" class="btn btn-primary">Add Diagnostic Price</button>
                                                                                 </form>
@@ -547,7 +555,7 @@
                                                                     int serviceStatus = qr.getOffer().getStatus();
                                                                     String serviceUrgency = qr.getUrgency();
                                                                     int topicId = qr.getChatTopicId();
-                                                                    
+
                                                                     Customer cust = qr.getCustomer();
                                                                     String custName = cust.getName();
                                                                     String custEmail = cust.getEmail();
@@ -1066,40 +1074,40 @@
         $(window).load(function () {
 //            if (<%//=justLoggedIn%> == true) {
 //                console.log("first");
-                //get all request to subscribe
-       <%//session.setAttribute("justLoggedIn", false);%>
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://119.81.43.85/erp/quotation_request/get_request_id_for_chat',
-                    crossDomain: true,
-                    data: {
-                        "token": "<%=token%>",
-                        "staff_id": "<%=staffID%>",
-                        "shop_id": "<%=shopID%>"
-                    },
-                    dataType: 'json',
-                    success: function (data) {
+            //get all request to subscribe
+        <%//session.setAttribute("justLoggedIn", false);%>
+            $.ajax({
+                type: 'POST',
+                url: 'http://119.81.43.85/erp/quotation_request/get_request_id_for_chat',
+                crossDomain: true,
+                data: {
+                    "token": "<%=token%>",
+                    "staff_id": "<%=staffID%>",
+                    "shop_id": "<%=shopID%>"
+                },
+                dataType: 'json',
+                success: function (data) {
 //                        $.each(data.items, function(i,item)){
 //                            console.log(i + ": " + item);
 //                        }
-                        console.log(data.payload.quotation_requests);
-                        $.each(data.payload.quotation_requests,function(){
-                            var requestID = $(this).attr('service_id');
-                            var customer_name = $(this).attr('customer_name');
-                            var driverID = $(this).attr('customer_id');
-                            var log = "log" + requestID;
-                            subscribe(requestID, <%=shopID%>, driverID, customer_name, "<%=chatToken%>", log);
+                    console.log(data.payload.quotation_requests);
+                    $.each(data.payload.quotation_requests, function () {
+                        var requestID = $(this).attr('service_id');
+                        var customer_name = $(this).attr('customer_name');
+                        var driverID = $(this).attr('customer_id');
+                        var log = "log" + requestID;
+                        subscribe(requestID, <%=shopID%>, driverID, customer_name, "<%=chatToken%>", log);
 //                            subscribeChat(requestID, <%=shopID%>, customer_name, "<%=chatToken%>", log);
-                        });
-                    },
-                    error: function () {
-                        alert("fail");
-                    }
-                });
+                    });
+                },
+                error: function () {
+                    alert("fail");
+                }
+            });
 
 //            } else {
 //                console.log("second");
-                //get only new request to subscribe
+            //get only new request to subscribe
 //            }
         });
     </script>
