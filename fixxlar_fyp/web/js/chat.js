@@ -26,8 +26,8 @@ subscribeChat = function (requestID, wsID, userName, chatToken, log) {
                             var sender = message.substring(0, message.indexOf(":"));
                             var amessage = message.substring(message.indexOf(":") + 1);
                             message = amessage.substring(amessage.indexOf(":") + 1);
-                            console.log(sender);
-                            console.log(message);
+//                            console.log(sender);
+//                            console.log(message);
                             var monthNames = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
                             var date = new Date();
                             var day = date.getDate();
@@ -90,7 +90,7 @@ sendMsg = function (requestID, wsName, shopID, staffID, token, topicID, firstMsg
         },
         dataType: 'json',
         success: function (data) {
-            console.log(data);
+//            console.log(data);
             if (data.is_success == true) {
                 var topicID = data.payload.topic_id;
                 var ele = $(".md-show").find(".sent");
@@ -101,7 +101,7 @@ sendMsg = function (requestID, wsName, shopID, staffID, token, topicID, firstMsg
             }
         },
         error: function (data) {
-            console.log(data);
+            console.log("Error:" + data);
         }
     });
 

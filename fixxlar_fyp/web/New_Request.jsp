@@ -892,105 +892,105 @@
         <script type="text/javascript" src="js/css-filters-polyfill.js"></script> -->
 
 
-
+    
     <script>
-                                                                                        $(function () {
-                                                                                            // Initialize card flip
-                                                                                            $('.card.hover').hover(function () {
-                                                                                                $(this).addClass('flip');
-                                                                                            }, function () {
-                                                                                                $(this).removeClass('flip');
-                                                                                            });
-                                                                                            //         sortable table
-                                                                                            $('.table.table-sortable th.sortable').click(function () {
-                                                                                                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                                                                                                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                                                                                                $(this).addClass(o);
-                                                                                            });
-                                                                                            //todo's
-                                                                                            $('#todolist li label').click(function () {
-                                                                                                $(this).toggleClass('done');
-                                                                                            });
-                                                                                        });
-                                                                                        $(function () {
+        $(function () {
+            // Initialize card flip
+            $('.card.hover').hover(function () {
+                $(this).addClass('flip');
+            }, function () {
+                $(this).removeClass('flip');
+            });
+            //         sortable table
+            $('.table.table-sortable th.sortable').click(function () {
+                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                $(this).addClass(o);
+            });
+            //todo's
+            $('#todolist li label').click(function () {
+                $(this).toggleClass('done');
+            });
+        });
+        $(function () {
 
-                                                                                            var contentHeight = $('#content').height();
-                                                                                            var chatInboxHeight = contentHeight - 178;
-                                                                                            var chatContentHeight = contentHeight - 178 - 200;
-                                                                                            var setChatHeight = function () {
-                                                                                                $('#chat-inbox').css('height', chatInboxHeight);
-                                                                                                $('#chat-content').css('height', chatContentHeight);
-                                                                                            };
-                                                                                            setChatHeight();
-                                                                                            $(window).resize(function () {
-                                                                                                contentHeight = $('#content').height();
-                                                                                                chatInboxHeight = contentHeight - 178;
-                                                                                                chatContentHeight = contentHeight - 178 - 200;
-                                                                                                setChatHeight();
-                                                                                            });
-                                                                                            $("#chat-inbox").niceScroll({
-                                                                                                cursorcolor: '#000000',
-                                                                                                zindex: 999999,
-                                                                                                bouncescroll: true,
-                                                                                                cursoropacitymax: 0.4,
-                                                                                                cursorborder: '',
-                                                                                                cursorborderradius: 0,
-                                                                                                cursorwidth: '5px'
-                                                                                            });
-                                                                                            $("#chat-content").niceScroll({
-                                                                                                cursorcolor: '#000000',
-                                                                                                zindex: 999999,
-                                                                                                bouncescroll: true,
-                                                                                                cursoropacitymax: 0.4,
-                                                                                                cursorborder: '',
-                                                                                                cursorborderradius: 0,
-                                                                                                cursorwidth: '5px'
-                                                                                            });
-                                                                                            $('#chat-inbox .chat-actions > span').tooltip({
-                                                                                                placement: 'top',
-                                                                                                trigger: 'hover',
-                                                                                                html: true,
-                                                                                                container: 'body'
-                                                                                            });
-                                                                                            $('#initialize-search').click(function () {
-                                                                                                $('#chat-search').toggleClass('active').focus();
-                                                                                            });
-                                                                                            $(document).click(function (e) {
-                                                                                                if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
-                                                                                                    $('#chat-search').removeClass('active');
-                                                                                                }
-                                                                                            });
-                                                                                            $(window).mouseover(function () {
-                                                                                                $("#chat-inbox").getNiceScroll().resize();
-                                                                                                $("#chat-content").getNiceScroll().resize();
-                                                                                            });
-                                                                                        });</script>
-    <script>
-        //Script to load tab and data based on the href #
-        $(window).load(function () {
-            var url = document.URL;
-            if (url.includes('#')) {
-                url = url.substring(url.indexOf('#'));
-                console.log(url);
-            }
-            $('.nav-pills li a').each(function () {
-                var link = $(this).attr("href");
-                console.log(link);
-                if (link === url) {
-                    $(this).parent().siblings().removeClass('active');
-                    $(this).parent().addClass('active');
+            var contentHeight = $('#content').height();
+            var chatInboxHeight = contentHeight - 178;
+            var chatContentHeight = contentHeight - 178 - 200;
+            var setChatHeight = function () {
+                $('#chat-inbox').css('height', chatInboxHeight);
+                $('#chat-content').css('height', chatContentHeight);
+            };
+            setChatHeight();
+            $(window).resize(function () {
+                contentHeight = $('#content').height();
+                chatInboxHeight = contentHeight - 178;
+                chatContentHeight = contentHeight - 178 - 200;
+                setChatHeight();
+            });
+            $("#chat-inbox").niceScroll({
+                cursorcolor: '#000000',
+                zindex: 999999,
+                bouncescroll: true,
+                cursoropacitymax: 0.4,
+                cursorborder: '',
+                cursorborderradius: 0,
+                cursorwidth: '5px'
+            });
+            $("#chat-content").niceScroll({
+                cursorcolor: '#000000',
+                zindex: 999999,
+                bouncescroll: true,
+                cursoropacitymax: 0.4,
+                cursorborder: '',
+                cursorborderradius: 0,
+                cursorwidth: '5px'
+            });
+            $('#chat-inbox .chat-actions > span').tooltip({
+                placement: 'top',
+                trigger: 'hover',
+                html: true,
+                container: 'body'
+            });
+            $('#initialize-search').click(function () {
+                $('#chat-search').toggleClass('active').focus();
+            });
+            $(document).click(function (e) {
+                if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
+                    $('#chat-search').removeClass('active');
                 }
             });
-            url = url.substring(1);
-            console.log(url);
-            $(".tab-pane").each(function () {
-                var tab = $(this).attr('id');
-                if (tab === url) {
-                    $(this).siblings().removeClass('active in');
-                    $(this).addClass('active in');
-                }
+            $(window).mouseover(function () {
+                $("#chat-inbox").getNiceScroll().resize();
+                $("#chat-content").getNiceScroll().resize();
             });
         });</script>
+    <!--    <script>
+            //Script to load tab and data based on the href #
+            $(window).load(function () {
+                var url = document.URL;
+                if (url.includes('#')) {
+                    url = url.substring(url.indexOf('#'));
+    //                console.log(url);
+                }
+                $('.nav-pills li a').each(function () {
+                    var link = $(this).attr("href");
+    //                console.log(link);
+                    if (link === url) {
+                        $(this).parent().siblings().removeClass('active');
+                        $(this).parent().addClass('active');
+                    }
+                });
+                url = url.substring(1);
+    //            console.log(url);
+                $(".tab-pane").each(function () {
+                    var tab = $(this).attr('id');
+                    if (tab === url) {
+                        $(this).siblings().removeClass('active in');
+                        $(this).addClass('active in');
+                    }
+                });
+            });</script>-->
     <script>
         $('.dropdown-menu li').on('click', function () {
             $(this).siblings().removeClass('active');
@@ -1090,7 +1090,7 @@
 //                        $.each(data.items, function(i,item)){
 //                            console.log(i + ": " + item);
 //                        }
-                    console.log(data.payload.quotation_requests);
+//                    console.log(data.payload.quotation_requests);
                     $.each(data.payload.quotation_requests, function () {
                         var requestID = $(this).attr('service_id');
                         var customer_name = $(this).attr('customer_name');
@@ -1113,10 +1113,6 @@
     </script>
     <script>
         $(window).load(function () {
-//            if (<%//=justLoggedIn%> == true) {
-//                console.log("first");
-            //get all request to subscribe
-        <%//session.setAttribute("justLoggedIn", false);%>
             $.ajax({
                 type: 'POST',
                 url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
@@ -1128,9 +1124,6 @@
                 },
                 dataType: 'json',
                 success: function (data) {
-//                        $.each(data.items, function(i,item)){
-//                            console.log(i + ": " + item);
-//                        }
                     console.log(data);
                     $.each(data.payload.notifications, function () {
                         var notification = $(this).attr('actual_message');
@@ -1141,11 +1134,6 @@
                     alert("fail");
                 }
             });
-
-//            } else {
-//                console.log("second");
-            //get only new request to subscribe
-//            }
         });
     </script>
     <script>
@@ -1178,11 +1166,11 @@
 //                        $.each(data.items, function(i,item)){
 //                            console.log(i + ": " + item);
 //                        }
-                    console.log(data);
+//                    console.log(data);
                     if (data.is_success == true) {
                         var msg = data.payload.chat_message;
                         for (i = msg.length - 1; i >= 0; i--) {
-                            console.log(msg[i].message);
+//                            console.log(msg[i].message);
                             if (msg[i].type == "0") {
                                 var time = msg[i].modified.substring(0, msg[i].modified.lastIndexOf(":"));
                                 $("#" + log).html($("#" + log).html() + '<li class="message sent" id="' + msg[i].topic_id + '"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">You</a> <span class="time">' + time + '</span></p>' + msg[i].message + '</div></div></li>');
@@ -1240,7 +1228,7 @@
             var topicID = 0;
             var chatTopic = $(".md-show").find(".chatTopic");
             topicID = chatTopic[0].id;
-            console.log(topicID);
+//            console.log(topicID);
             var chat = $(".md-show").find(".chat-list > li");
             var msg = $(".md-show").find(".msgInput");
             var msgInput = msg[0].id;
@@ -1256,4 +1244,5 @@
     <script>
         intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=categories%>", "<%=brands_carried%>");
     </script>
+
 </html>
