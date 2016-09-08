@@ -31,60 +31,6 @@
         <meta charset="UTF-8" />
         <title>Request</title>
         <jsp:include page="include/head.jsp"/>
-        <style>
-            #accordion {
-                list-style: none;
-                padding: 2px;
-            }
-            #accordion > li {
-                display: block;
-                list-style: none;
-            }
-            #accordion > li > span {
-                display: block;
-                color: #fff;
-                margin: 4px 0;
-                padding: 6px;
-                background: url(images/expand_arrow.png) no-repeat 99.5% 6px #525252;
-                background-size: 20px;
-                font-weight: normal;
-                cursor: pointer; font-size:16px
-            }
-            #accordion > li > div {
-                list-style: none;
-                padding: 6px;
-                display: none; overflow:auto
-            }
-            #accordion > ul li {
-                font-weight: normal;
-                cursor: auto;
-                padding: 0 0 0 7px;
-            }
-            #accordion a {
-                text-decoration: none;
-            }
-            #accordion li > span:hover {
-            }
-            #accordion li > span.active {
-                background: url(images/collapse-arrow.png) no-repeat 99.5% 6px #000;
-                background-size: 20px
-            }
-            #accordion li > span:after {
-                content: '\02795'; /* Unicode character for "plus" sign (+) */
-                font-size: 13px;
-                color: #fff;
-                float: right;
-                margin-left: 5px;
-
-            }
-
-            #accordion li > span.active:after {
-                content: "\2796"; /* Unicode character for "minus" sign (-) */
-            }
-
-
-
-        </style>
     </head>
 
     <body class="bg-3">
@@ -479,26 +425,16 @@
                                                                 <td><% out.print(custName);%></td>
                                                                 <td><% out.print(carPlate);%></td>
                                                                 <td><% out.print(carModel);%></td>
-                                                            
-
-                                                        <!--Quote-->
-                                                        <!--<td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>More Info</span></button></td>-->
-                                                        <td class="text-center"><a data-modal="<% out.print("myModal" + i);%>" class="md-trigger"><img src="images/file.png"/></a></td>
 
 
-                                                        <!-- Modal -->
+                                                                <!--Quote-->
+                                                                <td class="text-center"><a data-modal="<% out.print("myModal" + i);%>" class="md-trigger"><img src="images/file.png"/></a></td>
+
+
+                                                                <!-- Modal -->
                                                         <div class="md-modal md-effect-13 md-slategray colorize-overlay" id="<% out.print("myModal" + i);%>">
 
                                                             <div class="md-content">
-                                                                <!--<div>-->
-                                                                <!--                                                            <div class="col-xs-6">
-                                                                                                                                <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
-                                                                                                                            </div>
-                                                                                                                            <div class="col-xs-6 text-right">
-                                                                                                                                <h4 class="modal-title"><%=dateTime%></h4>
-                                                                                                                            </div>-->
-                                                                <!--</div>-->
-                                                                <!--<div>-->
                                                                 <div class='col-xs-12'>
 
                                                                     <div class="col-xs-12">
@@ -539,6 +475,9 @@
                                                                         <div class="col-xs-12">
                                                                             <p><b>Scheduled Time: </b><% out.print(carColor);%></p>
                                                                         </div>
+                                                                        <div class="col-xs-12">
+                                                                            <p><b>ID: </b><% out.print(id);%></p>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xs-12">
@@ -551,17 +490,10 @@
                                                         <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" type="button">Complete</button></td>
                                                         <!-- Modal -->
                                                         <div class="md-modal md-effect-13 md-slategray colorize-overlay" id="<% out.print("myModal" + i);%>">
-
+                                                            <%
+                                                                if (true) { //2 WAY
+                                                            %>
                                                             <div class="md-content">
-                                                                <!--<div>-->
-                                                                <!--                                                            <div class="col-xs-6">
-                                                                                                                                <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
-                                                                                                                            </div>
-                                                                                                                            <div class="col-xs-6 text-right">
-                                                                                                                                <h4 class="modal-title"><%=dateTime%></h4>
-                                                                                                                            </div>-->
-                                                                <!--</div>-->
-                                                                <!--<div>-->
                                                                 <div class='col-xs-12'>
 
                                                                     <div class="col-xs-12">
@@ -600,6 +532,41 @@
                                                                 </div>
 
                                                             </div> <!--/.modal-content -->
+                                                            <%
+                                                            } else {//1 WAY
+                                                            %>
+                                                            <div class="md-content">
+                                                                <div class='col-xs-12'>
+
+                                                                    <div class="col-xs-12">
+                                                                        <h3>Job Completion</h3><p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div class="col-xs-12">
+                                                                            <!--<p><b>Customer Name: </b><br><% out.print(custName);%></p>-->
+                                                                            <div class="text-center"><h4>Do you want to complete your job?</h4></div>
+                                                                            <p>
+                                                                        </div>
+                                                                        <div class="col-xs-12">
+                                                                            <div class="text-center">Your job confirmation will be sent to the user once you complete the job.</div>
+                                                                        </div>   
+                                                                    </div>
+                                                                    <!--</div>-->
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <div class="col-xs-12">
+                                                                        <button class="btn btn-blue">Complete</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <button class="md-close btn btn-default">Close</button>
+                                                                </div>
+
+                                                            </div> <!--/.modal-content -->
+
+                                                            <%
+                                                                }
+                                                            %>
                                                         </div> <!--/.modal -->
                                                         </tr>
 

@@ -17,9 +17,6 @@
         <meta charset="UTF-8" />
         <title>Profile</title>
         <jsp:include page="include/head.jsp"/>
-        <link rel="stylesheet" href="js/dataTables.bootstrap.css">
-        <link rel="stylesheet" href="js/ColVis.css">
-        <link rel="stylesheet" href="js/TableTools.css">
     </head>
 
     <body class="bg-3">
@@ -147,7 +144,7 @@
                                             <div class="row">
                                                 <div class="form-group col-sm-offset-1 col-sm-10">
                                                     <label for="postalCode">Description</label>
-                                                    <input type="text" class="form-control" value="<%=wsDescription%>" readonly>
+                                                    <textarea rows="5" class="form-control" value="" readonly><%=wsDescription%></textarea>
                                                 </div>
                                             </div>
                                         </div>
