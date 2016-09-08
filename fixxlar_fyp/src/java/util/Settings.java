@@ -35,7 +35,7 @@ import org.apache.http.message.BasicNameValuePair;
 public class Settings {
 
     private static final String USER_AGENT = "Mozilla/5.0";
-
+    
     public JsonObject retrieveSettingById(int staffId, String token, int settingId) throws UnsupportedEncodingException, IOException, ParseException {
         JsonObject value = null;
         String url = "http://119.81.43.85/erp/settings/retrieve_settings";
@@ -202,6 +202,84 @@ public class Settings {
         urlParameters.add(new BasicNameValuePair("token", token));
         urlParameters.add(new BasicNameValuePair("name", name + ""));
         urlParameters.add(new BasicNameValuePair("value", value + ""));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement errMsgEle = jobj.get("error_message");
+        String errMsg = "";
+        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+            errMsg = errMsgEle.getAsString();
+        }
+        return errMsg;
+    }
+    
+    public int retrieveServiceCapacity(int staffId, String token, int shopId) throws UnsupportedEncodingException, IOException, ParseException {
+        HashMap<String, JsonObject> settings = new HashMap<String, JsonObject>();
+        String url = "http://119.81.43.85/erp/workshop/get_service_capacity";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("shop_id", shopId + ""));
+
+        post.setEntity(new UrlEncodedFormEntity(urlParameters));
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+//        JsonArray arr = jobj.getAsJsonObject("payload").getAsJsonArray("settings");
+        JsonObject obj = jobj.getAsJsonObject("payload");
+        JsonElement el = obj.get("service_capacity");
+        int capacity = el.getAsInt();
+        
+        
+        return capacity;
+    }
+
+    public String editServiceCapacity(int staffId, String token, int workshopId, int service_capacity) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/erp/workshop/update_service_capacity";
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+
+        List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+        urlParameters.add(new BasicNameValuePair("staff_id", staffId + ""));
+        urlParameters.add(new BasicNameValuePair("token", token));
+        urlParameters.add(new BasicNameValuePair("shop_id", workshopId + ""));
+        urlParameters.add(new BasicNameValuePair("service_capacity", service_capacity + ""));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 

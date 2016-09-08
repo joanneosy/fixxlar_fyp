@@ -155,7 +155,7 @@
                                                 <h4>USERS PER SLOT</h4>
                                             </div>
                                             <input type='text' class='form-control' value='2' readonly/>
-                                            <a href=''><span>Edit</span></a>
+                                            <a href='Settings.jsp'><span>Edit</span></a>
 
                                         </div>
 

@@ -95,6 +95,11 @@
                     <i class="fa fa-calendar"></i> Schedule
                 </a>
             </li>
+            <li>
+                <a href="Settings.jsp">
+                    <i class="fa fa-gear"></i> Settings
+                </a>
+            </li>
 
 
 
