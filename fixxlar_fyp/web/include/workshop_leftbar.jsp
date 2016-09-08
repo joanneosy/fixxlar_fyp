@@ -3,7 +3,7 @@
 
     <li class="collapsed-content"> 
         <ul>
-            <li class="search"> Collapsed search pasting here at 768px </li>
+            <li class="search"></li>
         </ul>
     </li>
 

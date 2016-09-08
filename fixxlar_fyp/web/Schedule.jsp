@@ -1,3 +1,4 @@
+<%@page import="util.Settings"%>
 <%@page import="entity.Offer"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
@@ -91,7 +92,11 @@
                         session.setAttribute("success", "");
                         session.setAttribute("fail", "");
                     %>
+                    <%
+                        Settings setting = new Settings();
+                        int capacity = setting.retrieveServiceCapacity(user.getStaffId(), user.getToken(), user.getShopId());
 
+                    %>
 
 
 
@@ -154,7 +159,7 @@
                                             <div>
                                                 <h4>USERS PER SLOT</h4>
                                             </div>
-                                            <input type='text' class='form-control' value='2' readonly/>
+                                            <input type='text' class='form-control' value='<%=capacity%>' readonly/>
                                             <a href='Settings.jsp'><span>Edit</span></a>
 
                                         </div>
