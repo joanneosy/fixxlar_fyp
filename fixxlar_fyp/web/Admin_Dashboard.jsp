@@ -4,6 +4,7 @@
     Author     : joshua
 --%>
 
+<%@page import="dao.NotificationDAO"%>
 <%@page import="entity.Offer"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
@@ -192,6 +193,9 @@
                                                                 <!--Loop every workshop-->
                                                                 <%
                                                                     ArrayList<Workshop> wsList = wsDAO.retrieveAllWorkshops(staffId, token);
+                                                                    NotificationDAO nDAO = new NotificationDAO();
+                                                                    HashMap<Integer, String> messages = nDAO.retrieveNotificationMessages(staffId, token);
+                                                                    Iterator it = messages.entrySet().iterator();
                                                                     for (Workshop workshop : wsList) {
                                                                         //get workshop user
                                                                         int wsId = workshop.getId();
@@ -219,12 +223,24 @@
                                                                         </div>
                                                                         <form  action="AddNotification" method="GET" id="form1">
                                                                             <div class="modal-body">
-                                                                                <input type="hidden" name="messageId" value="1">
+                                                                                <!--<input type="hidden" name="messageId" value="0">-->
                                                                                 <input type="hidden" name="workshopId" value="<%=wsId%>">
                                                                                 <!--                                                                                        <div class="form-group col-sm-4 col-md-4">
-                                                                                                                                                                            <label for="recipient-name" class="control-label">Recipient:</label>
-                                                                                                                                                                            <input type="text" class="form-control" id="recipient-name">
-                                                                                                                                                                        </div>-->
+                                                                                <label for="recipient-name" class="control-label">Recipient:</label>
+                                                                                                                                                  <input type="text" class="form-control" id="recipient-name">
+                                                                                                                                              </div>-->
+                                                                                <select name="messageId">
+                                                                                    <option value="0">Customise Message</option>
+                                                                                    <%
+                                                                                        while (it.hasNext()) {
+                                                                                            Map.Entry pair = (Map.Entry) it.next();
+                                                                                            int messageId = (Integer) pair.getKey();
+                                                                                            String message = (String) pair.getValue();
+
+                                                                                            out.println("<option value=\"" + messageId + "\">" + message + "</option>");
+                                                                                        }
+                                                                                    %>    
+                                                                                </select>
                                                                                 <div class="form-group">
                                                                                     <label for="message-text" class="control-label">Message:</label>
                                                                                     <textarea class="form-control" id="message-text" name="customizedMessage"></textarea>
@@ -247,7 +263,6 @@
 
                                                             </tr>
                                                             <%
-
                                                                     }
                                                                 }
                                                             %>

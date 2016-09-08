@@ -337,6 +337,11 @@ button.accordion.active:after {
 }
 /*Schedule*/
 
+/*Textarea Form control*/
+textarea.form-control{
+    resize: vertical;
+}
+/*Textarea Form control*/
 
 /*@media screen and (max-width: 1190px){
     .desktopOnly {

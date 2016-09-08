@@ -1133,7 +1133,7 @@
 //                        }
                     console.log(data);
                     $.each(data.payload.notifications, function () {
-                        var notification = $(this).attr('message');
+                        var notification = $(this).attr('actual_message');
                         $.jGrowl(notification, {sticky: true});
                     });
                 },
