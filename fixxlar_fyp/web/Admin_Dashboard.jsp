@@ -390,16 +390,11 @@
         <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
         <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
-        <script type="text/javascript" src="js/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-        <!--<script type="text/javascript" src="js/sorttable.js"></script>-->
-        <script src="js/minimal.min.js"></script>
-        <!--<script type="text/javascript" src="js/jquery-latest.js"></script>--> 
-        <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
-        <script type="text/javascript" src="js/jquery.tabpager.min.js"></script> 
         <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
         <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
 
+        <script src="js/minimal.min.js"></script>
 
 
         <script>

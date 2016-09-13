@@ -451,19 +451,12 @@
         <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
         <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
-        <script type="text/javascript" src="js/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
         <script src="js/summernote.min.js"></script>
 
         <script src="js/chosen.jquery.min.js"></script>
 
-        <script src="js/moment-with-langs.min.js"></script>
-        <script src="js/bootstrap-datetimepicker.js"></script>
-
-        <script src="js/bootstrap-colorpicker.min.js"></script>
-
-        <script src="js/bootstrap-colorpalette.js"></script>
         <script type="text/javascript" src="js/jquery.jgrowl.min.js"></script> 
         <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/intercom.js"></script> 

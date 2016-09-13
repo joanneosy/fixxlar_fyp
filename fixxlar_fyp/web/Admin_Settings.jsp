@@ -110,26 +110,12 @@
         <script src="js/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
-        <script src="js/bootstrap-dropdown-multilevel.js"></script>
         <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
         <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
         <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
         <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
-        <script type="text/javascript" src="js/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-
-        <script src="js/summernote.min.js"></script>
-
-        <script src="js/chosen.jquery.min.js"></script>
-
-        <script src="js/moment-with-langs.min.js"></script>
-        <script src="js/bootstrap-datetimepicker.js"></script>
-
-        <script src="js/bootstrap-colorpicker.min.js"></script>
-
-        <script src="js/bootstrap-colorpalette.js"></script>
-
         <script src="js/minimal.min.js"></script>
 
 

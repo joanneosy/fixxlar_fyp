@@ -55,7 +55,6 @@ public class AuthenticateServlet extends HttpServlet {
             session.setAttribute("loggedInUser", user);
             int userType = user.getUserType();
             if (userType == 1) {
-                subscribeChats(user);
                 session.setAttribute("loggedInUserType", "Workshop");
                 response.sendRedirect("New_Request.jsp");
             } else if (userType == 2) {
@@ -74,21 +73,6 @@ public class AuthenticateServlet extends HttpServlet {
             return;
         }
     }
-
-    protected void subscribeChats(WebUser user) throws ServletException, IOException, Exception {
-        String chatToken = user.getChatToken();
-        String token = user.getToken();
-        int staffID = user.getStaffId();
-        ChatDAO chatDAO = new ChatDAO();
-        HashMap<Integer, Chat> chatMap = chatDAO.getChatList(staffID, token);
-        Iterator it = chatMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            Chat chat = (Chat) pair.getValue();
-            
-        }
-
-        }
 
         // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
         /**
