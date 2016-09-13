@@ -708,11 +708,6 @@
     <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
     <script type="text/javascript" src="js/jquery.videobackground.js"></script>
     <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-    <!--<script type="text/javascript" src="js/sorttable.js"></script>-->
-    <script src="js/minimal.min.js"></script>
-    <!--<script type="text/javascript" src="js/jquery-latest.js"></script>--> 
-    <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
-    <script type="text/javascript" src="js/jquery.tabpager.min.js"></script> 
     <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
     <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
     <script type="text/javascript" src="js/classie.js"></script> 
@@ -722,10 +717,7 @@
     <script type="text/javascript" src="js/chat.js"></script> 
     <script type="text/javascript" src="js/intercom.js"></script> 
 
-
-    <!--<script type="text/javascript" src="js/modalEffects.js"></script>--> 
-    <!--    <script type="text/javascript" src="js/cssParser.js"></script> 
-        <script type="text/javascript" src="js/css-filters-polyfill.js"></script> -->
+    <script src="js/minimal.min.js"></script>
 
 
 
@@ -748,156 +740,15 @@
                 $(this).toggleClass('done');
             });
         });
-        $(function () {
-
-            var contentHeight = $('#content').height();
-            var chatInboxHeight = contentHeight - 178;
-            var chatContentHeight = contentHeight - 178 - 200;
-            var setChatHeight = function () {
-                $('#chat-inbox').css('height', chatInboxHeight);
-                $('#chat-content').css('height', chatContentHeight);
-            };
-            setChatHeight();
-            $(window).resize(function () {
-                contentHeight = $('#content').height();
-                chatInboxHeight = contentHeight - 178;
-                chatContentHeight = contentHeight - 178 - 200;
-                setChatHeight();
-            });
-            $("#chat-inbox").niceScroll({
-                cursorcolor: '#000000',
-                zindex: 999999,
-                bouncescroll: true,
-                cursoropacitymax: 0.4,
-                cursorborder: '',
-                cursorborderradius: 0,
-                cursorwidth: '5px'
-            });
-            $("#chat-content").niceScroll({
-                cursorcolor: '#000000',
-                zindex: 999999,
-                bouncescroll: true,
-                cursoropacitymax: 0.4,
-                cursorborder: '',
-                cursorborderradius: 0,
-                cursorwidth: '5px'
-            });
-            $('#chat-inbox .chat-actions > span').tooltip({
-                placement: 'top',
-                trigger: 'hover',
-                html: true,
-                container: 'body'
-            });
-            $('#initialize-search').click(function () {
-                $('#chat-search').toggleClass('active').focus();
-            });
-            $(document).click(function (e) {
-                if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
-                    $('#chat-search').removeClass('active');
-                }
-            });
-            $(window).mouseover(function () {
-                $("#chat-inbox").getNiceScroll().resize();
-                $("#chat-content").getNiceScroll().resize();
-            });
-        });</script>
-    <script>
-        //Script to load tab and data based on the href #
-        $(window).load(function () {
-            var url = document.URL;
-            if (url.includes('#')) {
-                url = url.substring(url.indexOf('#'));
-                console.log(url);
-            }
-            $('.nav-pills li a').each(function () {
-                var link = $(this).attr("href");
-                console.log(link);
-                if (link === url) {
-                    $(this).parent().siblings().removeClass('active');
-                    $(this).parent().addClass('active');
-                }
-            });
-            url = url.substring(1);
-            console.log(url);
-            $(".tab-pane").each(function () {
-                var tab = $(this).attr('id');
-                if (tab === url) {
-                    $(this).siblings().removeClass('active in');
-                    $(this).addClass('active in');
-                }
-            });
-        });</script>
-    <script>
-        $('.dropdown-menu li').on('click', function () {
-            $(this).siblings().removeClass('active');
-            var link = $(this).text();
-            document.getElementById("select").innerHTML = link + " <span class='caret'></span>";
-        });</script>
-    <script>
-        (function (document) {
-            'use strict';
-            var LightTableFilter = (function (Arr) {
-
-                var _input;
-                function _onInputEvent(e) {
-                    _input = e.target;
-                    var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                    Arr.forEach.call(tables, function (table) {
-                        Arr.forEach.call(table.tBodies, function (tbody) {
-                            Arr.forEach.call(tbody.rows, _filter);
-                        });
-                    });
-                }
-
-                function _filter(row) {
-                    var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                    row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-                }
-
-                return {
-                    init: function () {
-                        var inputs = document.getElementsByClassName('light-table-filter');
-                        Arr.forEach.call(inputs, function (input) {
-                            input.oninput = _onInputEvent;
-                        });
-                    }
-                };
-            })(Array.prototype);
-            document.addEventListener('readystatechange', function () {
-                if (document.readyState === 'complete') {
-                    LightTableFilter.init();
-                }
-            });
-        })(document);</script>
-    <script type="text/javascript">
-//        function displaymsg() {
-//            var msg = '<%=session.getAttribute("isSuccess")%>';
-//            if (msg != "null") {
-//                //                function alertName(msg) {
-//                alert(msg);
-//                //                }
-//            }
-//        <%session.setAttribute("isSuccess", "null");%>
-//        }
-    </script> 
-    <!--<script type="text/javascript"> window.onload = alertName;</script>-->
-    <script type="text/JavaScript">
-        function timedRefresh(timeoutPeriod) {
-        setTimeout("location.reload(true);",timeoutPeriod);
-        } 
-        //    window.onload = timedRefresh(300000);
     </script>
+    
     <script>
         function start() {
             timedRefresh(300000);
             displaymsg();
         }
         window.onload = start;</script>
-    <script>
-        $("#accordion > li > span").click(function () {
-            $(this).toggleClass("active").next('div').slideToggle(250)
-                    .closest('li').siblings().find('span').removeClass('active').next('div').slideUp(250);
-        });</script>
+
     <script>
         $(document).ready(function () {
             $('#example').DataTable();
@@ -906,152 +757,6 @@
             $('#example4').DataTable();
             $('#example5').DataTable();
         });</script>
-    <script>
-        $(window).load(function () {
-//            if (<%//=justLoggedIn%> == true) {
-//                console.log("first");
-            //get all request to subscribe
-        <%//session.setAttribute("justLoggedIn", false);%>
-            $.ajax({
-                type: 'POST',
-                url: 'http://119.81.43.85/erp/quotation_request/get_request_id_for_chat',
-                crossDomain: true,
-                data: {
-                    "token": "<%=token%>",
-                    "staff_id": "<%=staffID%>",
-                    "shop_id": "<%=shopID%>"
-                },
-                dataType: 'json',
-                success: function (data) {
-//                        $.each(data.items, function(i,item)){
-//                            console.log(i + ": " + item);
-//                        }
-                    console.log(data.payload.quotation_requests);
-                    $.each(data.payload.quotation_requests, function () {
-                        var requestID = $(this).attr('service_id');
-                        var customer_name = $(this).attr('customer_name');
-                        var driverID = $(this).attr('customer_id');
-                        var log = "log" + requestID;
-                        subscribe(requestID, <%=shopID%>, driverID, customer_name, "<%=chatToken%>", log);
-//                            subscribeChat(requestID, <%=shopID%>, customer_name, "<%=chatToken%>", log);
-                    });
-                },
-                error: function () {
-                    alert("fail");
-                }
-            });
-
-//            } else {
-//                console.log("second");
-            //get only new request to subscribe
-//            }
-        });
-    </script>
-    <script>
-        function subscribe(requestID, wsID, userID, custName, chatToken, log) {
-//                event.preventDefault();
-            $("#" + log).html("");
-//                $(this).parent().siblings().children().removeClass("active").remove;
-//                $(this).addClass("active").removeClass("unread");
-//                var uid = this.id;
-//                var arr = uid.split("-");
-//                var topicId = arr[0];
-//                var userId = arr[1];
-//                var userName = arr[2];
-//                var shopID = arr[3];
-//                $("#chatHead li h3").html(userName);
-            $.ajax({
-                type: 'POST',
-                url: 'http://119.81.43.85/chat/retrive_chat_history',
-                crossDomain: true,
-                data: {
-                    "type_of_message": "2",
-                    "no_of_message_display": "20",
-                    "driver_id": userID,
-                    "token": "<%=token%>",
-                    "staff_id": "<%=staffID%>",
-                    "service_id": requestID
-                },
-                dataType: 'json',
-                success: function (data) {
-//                        $.each(data.items, function(i,item)){
-//                            console.log(i + ": " + item);
-//                        }
-                    console.log(data);
-                    if (data.is_success == true) {
-                        var msg = data.payload.chat_message;
-                        for (i = msg.length - 1; i >= 0; i--) {
-                            console.log(msg[i].message);
-                            if (msg[i].type == "0") {
-                                var time = msg[i].modified.substring(0, msg[i].modified.lastIndexOf(":"));
-                                $("#" + log).html($("#" + log).html() + '<li class="message sent" id="' + msg[i].topic_id + '"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">You</a> <span class="time">' + time + '</span></p>' + msg[i].message + '</div></div></li>');
-                            } else {
-                                $("#" + log).html($("#" + log).html() + '<li class="message receive" id="' + msg[i].topic_id + '"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">' + custName + '</a> <span class="time">' + time + '</span></p>' + msg[i].message + '</div></div></li>');
-                            }
-                        }
-//                        if (msg.length > 0 && msg[0].topic_id != 0) {
-//                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="' + msg[0].topic_id + '"></div>');
-//                        } else {
-//                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="0"></div>');
-//                        }
-                    }
-                    subscribeChat(requestID, wsID, custName, chatToken, log);
-                },
-                error: function () {
-                    alert("fail");
-                }
-            });
-        }
-//            if (sender != "Web") {
-//                $("#log").html('<li class="message sent"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
-//            } else {
-//                $("#log").html('<li class="message receive"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
-//
-//            }
-    </script>
-    <script>
-        $(function () {
-            $(".msgInput").keypress(function (e) {
-                if (e.which == 13) {
-                    prepareMsg();
-                    e.preventDefault();
-                }
-            });
-        });</script>
-    <script>
-//        $(".sendMsg").click(function () {
-//            prepareMsg();
-//        });
-    </script>
-    <script>
-        function prepareMsg() {
-            var ele = $(".md-show").find(".sendMsg");
-            var msgDetails = ele[0].id;
-//            var elem = ele.prevObject[0].context;
-//            var msgDetails = ele[0].id;
-            var detailsArr = msgDetails.split("-");
-            var serviceId = detailsArr[0];
-            var wsName = detailsArr[1];
-            var wsId = detailsArr[2];
-            var staffId = detailsArr[3];
-            var token = detailsArr[4];
-            var firstMsg = true;
-            var topicID = 0;
-            var chatTopic = $(".md-show").find(".chatTopic");
-            topicID = chatTopic[0].id;
-            console.log(topicID);
-            var chat = $(".md-show").find(".chat-list > li");
-            var msg = $(".md-show").find(".msgInput");
-            var msgInput = msg[0].id;
-            if (chat.length > 0) {
-                firstMsg = false;
-//                var topic = chat[0];
-//                topicID = topic.id;
-            }
-            sendMsg(serviceId, wsName, wsId, staffId, token, topicID, firstMsg, msgInput);
-        }
-    </script>
-
     <script>
         intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=categories%>", "<%=brands_carried%>");
     </script>

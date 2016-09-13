@@ -83,9 +83,11 @@
         <%//if admin, include admin_leftbar
             if (userType.equals("Workshop")) { %>
                 <%@include file="workshop_leftbar.jsp"%>
-        <% } else { %>
+        <% } else if (userType.equals("Admin")) { %>
                 <%@include file="admin_leftbar.jsp"%>
-        <% }%>
+        <% } else {%>
+            <%@include file="valet_leftbar.jsp"%>
+        <%}%>
         <!--End Leftbar-->
 
 

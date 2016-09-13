@@ -106,20 +106,19 @@
                             <!-- /col 12 -->        
                         </div>
                         <!-- /row -->
-                        <%                            
-                            String success = (String) session.getAttribute("isSuccess");
+                        <%                            String success = (String) session.getAttribute("isSuccess");
                             String fail = (String) session.getAttribute("fail");
                             if (success != null && !(success.equals("null")) && success.length() > 0) {
                         %>
-                            <div class="alert alert-success"><%=success%></div>
+                        <div class="alert alert-success"><%=success%></div>
                         <%
-                                session.setAttribute("isSuccess", "");
-                            } else if(fail != null && !(fail.equals("null")) && fail.length() > 0) {
+                            session.setAttribute("isSuccess", "");
+                        } else if (fail != null && !(fail.equals("null")) && fail.length() > 0) {
                         %>
-                            <div class="alert alert-danger"><%=fail%></div>
-                            <%
+                        <div class="alert alert-danger"><%=fail%></div>
+                        <%
                                 session.setAttribute("fail", "");
-                        }
+                            }
                         %>
 
 
@@ -369,42 +368,42 @@
                                                                             <div class="tile-header color bg-transparent-black-5 rounded-corners">
                                                                                 <h5>Chat</h5>
                                                                                 <div class="hidden ct" id=""><div class="hidden chatTopic" id="<%=topicId%>"></div>
-                                                                            </div>
-                                                                            <!-- /tile header -->
-                                                                            <!-- tile body -->
-                                                                            <div class="tile-body transparent nopadding">
-
-                                                                                <div class="chat-content" id="chat-content">
-
-                                                                                    <ul class="chat-list" id="log<%=serviceId%>"></ul><!-- Chat Message Enters Here-->
-
-
                                                                                 </div>
-                                                                            </div>
-                                                                            <!-- /tile body -->
+                                                                                <!-- /tile header -->
+                                                                                <!-- tile body -->
+                                                                                <div class="tile-body transparent nopadding">
+
+                                                                                    <div class="chat-content" id="chat-content">
+
+                                                                                        <ul class="chat-list" id="log<%=serviceId%>"></ul><!-- Chat Message Enters Here-->
 
 
-
-
-                                                                            <!-- tile footer -->
-                                                                            <div class="tile-footer transparent nopadding">
-
-                                                                                <div class="chat-reply" id="chat-reply">
-                                                                                    <!--<textarea placeholder="Post a reply..." class="form-control"></textarea>-->
-                                                                                    <textarea placeholder="Write a message..." class="form-control msgInput" id="msgInput<%=i%>" onfocus="clearElement('#msgInput')"></textarea>
-                                                                                    <div class="btn-group btn-group-sm">
-                                                                                        <!--<button type="button" class="btn btn-transparent-white"><i class="fa fa-paperclip"></i> Add Files</button>-->
-                                                                                        <!--<button type="button" class="btn btn-transparent-white last-in-group"><i class="fa fa-camera"></i> Add Photos</button>-->
-                                                                                        <button type="button" class="btn btn-transparent-white last pull-right sendMsg" id="<%=serviceId%>-<%=wsName%>-<%=shopID%>-<%=staffID%>-<%=token%>" onclick='prepareMsg()'>Send message</button>
-                                                                                        <!--                                                <div class="checkbox check-transparent pull-right">
-                                                                                                                                            <input type="checkbox" value="1" id="send-by-enter">
-                                                                                                                                            <label for="send-by-enter">Press Enter to send</label>
-                                                                                                                                        </div>-->
                                                                                     </div>
                                                                                 </div>
+                                                                                <!-- /tile body -->
 
-                                                                            </div>
-                                                                            <!-- /tile footer -->
+
+
+
+                                                                                <!-- tile footer -->
+                                                                                <div class="tile-footer transparent nopadding">
+
+                                                                                    <div class="chat-reply" id="chat-reply">
+                                                                                        <!--<textarea placeholder="Post a reply..." class="form-control"></textarea>-->
+                                                                                        <textarea placeholder="Write a message..." class="form-control msgInput" id="msgInput<%=i%>" onfocus="clearElement('#msgInput')"></textarea>
+                                                                                        <div class="btn-group btn-group-sm">
+                                                                                            <!--<button type="button" class="btn btn-transparent-white"><i class="fa fa-paperclip"></i> Add Files</button>-->
+                                                                                            <!--<button type="button" class="btn btn-transparent-white last-in-group"><i class="fa fa-camera"></i> Add Photos</button>-->
+                                                                                            <button type="button" class="btn btn-transparent-white last pull-right sendMsg" id="<%=serviceId%>-<%=wsName%>-<%=shopID%>-<%=staffID%>-<%=token%>" onclick='prepareMsg()'>Send message</button>
+                                                                                            <!--                                                <div class="checkbox check-transparent pull-right">
+                                                                                                                                                <input type="checkbox" value="1" id="send-by-enter">
+                                                                                                                                                <label for="send-by-enter">Press Enter to send</label>
+                                                                                                                                            </div>-->
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <!-- /tile footer -->
 
 
                                                                         </section>
@@ -721,7 +720,6 @@
     <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
     <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
     <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
-    <script type="text/javascript" src="js/jquery.videobackground.js"></script>
     <script type="text/javascript" src="js/jquery.blockUI.js"></script>
     <!--<script type="text/javascript" src="js/sorttable.js"></script>-->
     <script src="js/minimal.min.js"></script>
@@ -753,220 +751,7 @@
                                                                         $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
                                                                         $(this).addClass(o);
                                                                     });
-                                                                    //todo's
-                                                                    $('#todolist li label').click(function () {
-                                                                        $(this).toggleClass('done');
-                                                                    });
                                                                 });
-                                                                $(function () {
-
-                                                                    var contentHeight = $('#content').height();
-                                                                    var chatInboxHeight = contentHeight - 178;
-                                                                    var chatContentHeight = contentHeight - 178 - 200;
-                                                                    var setChatHeight = function () {
-                                                                        $('#chat-inbox').css('height', chatInboxHeight);
-                                                                        $('#chat-content').css('height', chatContentHeight);
-                                                                    };
-                                                                    setChatHeight();
-                                                                    $(window).resize(function () {
-                                                                        contentHeight = $('#content').height();
-                                                                        chatInboxHeight = contentHeight - 178;
-                                                                        chatContentHeight = contentHeight - 178 - 200;
-                                                                        setChatHeight();
-                                                                    });
-                                                                    $("#chat-inbox").niceScroll({
-                                                                        cursorcolor: '#000000',
-                                                                        zindex: 999999,
-                                                                        bouncescroll: true,
-                                                                        cursoropacitymax: 0.4,
-                                                                        cursorborder: '',
-                                                                        cursorborderradius: 0,
-                                                                        cursorwidth: '5px'
-                                                                    });
-                                                                    $("#chat-content").niceScroll({
-                                                                        cursorcolor: '#000000',
-                                                                        zindex: 999999,
-                                                                        bouncescroll: true,
-                                                                        cursoropacitymax: 0.4,
-                                                                        cursorborder: '',
-                                                                        cursorborderradius: 0,
-                                                                        cursorwidth: '5px'
-                                                                    });
-                                                                    $('#chat-inbox .chat-actions > span').tooltip({
-                                                                        placement: 'top',
-                                                                        trigger: 'hover',
-                                                                        html: true,
-                                                                        container: 'body'
-                                                                    });
-                                                                    $('#initialize-search').click(function () {
-                                                                        $('#chat-search').toggleClass('active').focus();
-                                                                    });
-                                                                    $(document).click(function (e) {
-                                                                        if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
-                                                                            $('#chat-search').removeClass('active');
-                                                                        }
-                                                                    });
-                                                                    $(window).mouseover(function () {
-                                                                        $("#chat-inbox").getNiceScroll().resize();
-                                                                        $("#chat-content").getNiceScroll().resize();
-                                                                    });
-                                                                });</script>
-    <!--        <script>
-                $(function () {
-    
-                    //check all checkboxes
-                    $('table thead input[type="checkbox"]').change(function () {
-                        $(this).parents('table').find('tbody input[type="checkbox"]').prop('checked', $(this).prop('checked'));
-                    });
-    
-                    // sortable table
-                    $('.table.table-sortable1 th.sortable').click(function () {
-                        var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                        $(this).parents('table').find('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                        $(this).addClass(o);
-                    });
-    
-                    //chosen select input
-                    $(".chosen-select").chosen({disable_search_threshold: 10});
-    
-                    //check toggling
-                    $('.check-toggler').on('click', function () {
-                        $(this).toggleClass('checked');
-                    });
-                });
-    
-            </script>-->
-    <script>
-        //        $(function(){
-        //            $('.table.table-sortable1 th.sortable').click(function () {
-        //                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-        //                $(this).parents('table').find('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-        //                $(this).addClass(o);
-        //            });
-        //        });
-
-
-    </script>
-    <script>
-        $(document).ready(function ()
-        {
-            //        $("#myTable1").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable2").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable3").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable4").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable5").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable1").tablesorter();
-            //        $("#myTable2").tablesorter();
-            //        $("#myTable3").tablesorter();
-            //        $("#myTable4").tablesorter();
-            //        $("#myTable5").tablesorter();
-        }
-        );</script>
-    <script>         //Script to load tab and data based on the href #
-        $(window).load(function () {
-            var url = document.URL;
-            if (url.includes('#')) {
-                url = url.substring(url.indexOf('#'));
-                console.log(url);
-            }
-            $('.nav-pills li a').each(function () {
-                var link = $(this).attr("href");
-                console.log(link);
-                if (link === url) {
-                    $(this).parent().siblings().removeClass('active');
-                    $(this).parent().addClass('active');
-                }
-            });
-            url = url.substring(1);
-            console.log(url);
-            $(".tab-pane").each(function () {
-                var tab = $(this).attr('id');
-                if (tab === url) {
-                    $(this).siblings().removeClass('active in');
-                    $(this).addClass('active in');
-                }
-            });
-        });</script>
-    <script>
-        $('.dropdown-menu li').on('click', function () {
-            $(this).siblings().removeClass('active');
-            var link = $(this).text();
-            document.getElementById("select").innerHTML = link + " <span class='caret'></span>";
-        });</script>
-    <script>
-        (function (document) {
-            'use strict';
-            var LightTableFilter = (function (Arr) {
-
-                var _input;
-                function _onInputEvent(e) {
-                    _input = e.target;
-                    var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                    Arr.forEach.call(tables, function (table) {
-                        Arr.forEach.call(table.tBodies, function (tbody) {
-                            Arr.forEach.call(tbody.rows, _filter);
-                        });
-                    });
-                }
-
-                function _filter(row) {
-                    var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                    row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-                }
-
-                return {
-                    init: function () {
-                        var inputs = document.getElementsByClassName('light-table-filter');
-                        Arr.forEach.call(inputs, function (input) {
-                            input.oninput = _onInputEvent;
-                        });
-                    }
-                };
-            })(Array.prototype);
-            document.addEventListener('readystatechange', function () {
-                if (document.readyState === 'complete') {
-                    LightTableFilter.init();
-                }
-            });
-        })(document);</script>
-    <script>
-        //    var acc = document.getElementsByClassName("accordion");
-        //    var i;
-        //
-        //    for (i = 0; i < acc.length; i++) {
-        //        acc[i].onclick = function () {
-        //            this.classList.toggle("active");
-        //        this.nextElementSibling.classList.toggle("show");
-        //        }
-        //    }
-    </script>
-    <script type="text/javascript">
-//        function displaymsg() {
-//            var msg = '<%=session.getAttribute("isSuccess")%>';
-//            if (msg != "null") {
-//                //                function alertName(msg) {
-//                alert(msg);
-//                //            }
-//            }
-//        <%session.setAttribute("isSuccess", "null");%>
-//        }
-    </script> 
-    <!--<script type="text/javascript"> window.onload = alertName;</script>-->
-    <script type="text/JavaScript">
-        function timedRefresh(timeoutPeriod) {
-        setTimeout("location.reload(true);",timeoutPeriod);
-        } 
-        //    window.onload = timedRefresh(300000);
     </script>
     <script>
         function start() {
@@ -974,34 +759,6 @@
             displaymsg();
         }
         window.onload = start;</script>
-    <script>
-        $("#accordion > li > span").click(function () {
-            $(this).toggleClass("active").next('div').slideToggle(250)
-                    .closest('li').siblings().find('span').removeClass('active').next('div').slideUp(250);
-        });</script>
-    <script>
-        //    $(document).ready(function () {
-        //        $(".tabpager").tabpager({
-        ////  maximum visible items
-        //            items: 5,
-        //// CSS class for tabbed content
-        //            contents: 'contents',
-        //// transition speed
-        //            time: 300,
-        //// text for previous button
-        //            previous: '&laquo;Prev',
-        //// text for next button
-        //            next: 'Next&raquo;',
-        //// initial tab
-        //            start: 1,
-        //// top or bottom
-        //            position: 'bottom',
-        //// scrollable
-        //            scroll: true
-        //        });
-        //    });
-
-    </script>
     <script>
         $(document).ready(function () {
             $('#example').DataTable();

@@ -453,13 +453,12 @@
         <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
-        <script src="js/summernote.min.js"></script>
 
         <script src="js/chosen.jquery.min.js"></script>
 
         <script type="text/javascript" src="js/jquery.jgrowl.min.js"></script> 
-        <script src="js/minimal.min.js"></script>
         <script type="text/javascript" src="js/intercom.js"></script> 
+        <script src="js/minimal.min.js"></script>
 
 
         <script>

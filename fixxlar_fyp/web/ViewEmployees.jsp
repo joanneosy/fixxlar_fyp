@@ -283,21 +283,13 @@
     <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
     <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
     <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
-    <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
-    <script type="text/javascript" src="js/jquery.videobackground.js"></script>
     <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-    <script src="js/summernote.min.js"></script>
-    <script src="js/chosen.jquery.min.js"></script>
-    <script src="js/moment-with-langs.min.js"></script>
-    <script src="js/bootstrap-colorpalette.js"></script>
-    <script src="js/minimal.min.js"></script>
-    <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
-    <script type="text/javascript" src="js/jquery.tabpager.min.js"></script> 
     <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
     <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="js/classie.js"></script> 
     <script type="text/javascript" src="js/modalEffects.js"></script>
     <script type="text/javascript" src="js/intercom.js"></script> 
+    <script src="js/minimal.min.js"></script>
 
     <script>
         $(document).ready(function () {

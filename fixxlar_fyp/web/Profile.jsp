@@ -41,7 +41,7 @@
                     %>
                     <div class="alert alert-success"><%=msg%></div>
                     <%
-                        session.setAttribute("success","");
+                            session.setAttribute("success", "");
                         }
                     %>
 
@@ -178,7 +178,7 @@
 
                                         <div class="row">
                                             <div class="col-sm-offset-5">
-                                                <!--<a href="RegisterStripe.jsp" type="button" class="btn btn-primary btn-sm">Register</a>-->
+                                                <a href="RegisterStripe.jsp" type="button" class="btn btn-primary btn-sm">Register</a>
 
                                             </div>
                                         </div>
@@ -377,166 +377,22 @@
         </div>
         <!--End page wrap-->
         <%-- scripts --%>
-        <jsp:include page="include/scripts.jsp"/>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap-dropdown-multilevel.js"></script>
+        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
+        <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
+        <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
+        <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+        <script type="text/javascript" src="js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="js/jquery.jgrowl.min.js"></script> 
         <script type="text/javascript" src="js/intercom.js"></script> 
-        <script>
-            $(document).ready(function ()
-            {
-                $("#myTable1").tablesorter();
-                $("#myTable2").tablesorter();
-                $("#myTable3").tablesorter();
-                $("#myTable4").tablesorter();
-                $("#myTable5").tablesorter();
+        <script src="js/minimal.min.js"></script>
 
-            }
-            );
-        </script>
-        <script>
-            //Script to load tab and data based on the href #
-            $(window).load(function () {
-                var url = document.URL;
-                if (url.includes('#')) {
-                    url = url.substring(url.indexOf('#'));
-                    console.log(url);
-                }
-                $('.nav-pills li a').each(function () {
-                    var link = $(this).attr("href");
-                    console.log(link);
-                    if (link === url) {
-                        $(this).parent().siblings().removeClass('active');
-                        $(this).parent().addClass('active');
-                    }
-                });
-                url = url.substring(1);
-                console.log(url);
-
-                $(".tab-pane").each(function () {
-                    var tab = $(this).attr('id');
-                    if (tab === url) {
-                        $(this).siblings().removeClass('active in');
-                        $(this).addClass('active in');
-                    }
-                });
-            });
-
-
-        </script>
-        <script>
-            $('.dropdown-menu li').on('click', function () {
-                $(this).siblings().removeClass('active');
-                var link = $(this).text();
-                document.getElementById("select").innerHTML = link + " <span class='caret'></span>";
-            });
-
-        </script>
-        <script>
-            (function (document) {
-                'use strict';
-
-                var LightTableFilter = (function (Arr) {
-
-                    var _input;
-
-                    function _onInputEvent(e) {
-                        _input = e.target;
-                        var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                        Arr.forEach.call(tables, function (table) {
-                            Arr.forEach.call(table.tBodies, function (tbody) {
-                                Arr.forEach.call(tbody.rows, _filter);
-                            });
-                        });
-                    }
-
-                    function _filter(row) {
-                        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                        row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-                    }
-
-                    return {
-                        init: function () {
-                            var inputs = document.getElementsByClassName('light-table-filter');
-                            Arr.forEach.call(inputs, function (input) {
-                                input.oninput = _onInputEvent;
-                            });
-                        }
-                    };
-                })(Array.prototype);
-
-                document.addEventListener('readystatechange', function () {
-                    if (document.readyState === 'complete') {
-                        LightTableFilter.init();
-                    }
-                });
-
-            })(document);
-        </script>
-        <script>
-            //    var acc = document.getElementsByClassName("accordion");
-            //    var i;
-            //
-            //    for (i = 0; i < acc.length; i++) {
-            //        acc[i].onclick = function () {
-            //            this.classList.toggle("active");
-            //            this.nextElementSibling.classList.toggle("show");
-            //        }
-            //    }
-        </script>
-        <script type="text/javascript">
-            function displaymsg() {
-                var msg = '<%=session.getAttribute("isSuccess")%>';
-                if (msg != "null") {
-                    //                function alertName(msg) {
-                    alert(msg);
-                    //                }
-                }
-            <%session.setAttribute("isSuccess", "null");%>
-            }
-        </script> 
-        <!--<script type="text/javascript"> window.onload = alertName;</script>-->
-        <script type="text/JavaScript">
-            function timedRefresh(timeoutPeriod) {
-            setTimeout("location.reload(true);",timeoutPeriod);
-            } 
-            //    window.onload = timedRefresh(300000);
-        </script>
-        <script>
-            function start() {
-                timedRefresh(300000);
-                displaymsg();
-            }
-            window.onload = start;
-        </script>
-        <script>
-            $("#accordion > li > span").click(function () {
-                $(this).toggleClass("active").next('div').slideToggle(250)
-                        .closest('li').siblings().find('span').removeClass('active').next('div').slideUp(250);
-            });
-
-        </script>
-        <script>
-            $(document).ready(function () {
-                $(".tabpager").tabpager({
-                    //  maximum visible items
-                    items: 5,
-                    // CSS class for tabbed content
-                    contents: 'contents',
-                    // transition speed
-                    time: 300,
-                    // text for previous button
-                    previous: '&laquo;Prev',
-                    // text for next button
-                    next: 'Next&raquo;',
-                    // initial tab
-                    start: 1,
-                    // top or bottom
-                    position: 'bottom',
-                    // scrollable
-                    scroll: true
-                });
-            });
-
-        </script>
         <script>
             intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=wsCategory%>", "<%=wsBrands%>");
         </script>

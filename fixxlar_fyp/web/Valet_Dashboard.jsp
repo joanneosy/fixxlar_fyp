@@ -746,18 +746,13 @@
     <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
     <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
     <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
-    <script type="text/javascript" src="js/jquery.videobackground.js"></script>
     <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-    <!--<script type="text/javascript" src="js/sorttable.js"></script>-->
-    <script src="js/minimal.min.js"></script>
-    <!--<script type="text/javascript" src="js/jquery-latest.js"></script>--> 
-    <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
-    <script type="text/javascript" src="js/jquery.tabpager.min.js"></script> 
     <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
     <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
     <script type="text/javascript" src="js/moment.js"></script> 
     <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
 
+    <script src="js/minimal.min.js"></script>
 
 
     <script>
@@ -776,250 +771,11 @@
                 $(this).addClass(o);
             });
 
-            //todo's
-            $('#todolist li label').click(function () {
-                $(this).toggleClass('done');
-            });
-
-
-        });
-
-        $(function () {
-
-            var contentHeight = $('#content').height();
-            var chatInboxHeight = contentHeight - 178;
-            var chatContentHeight = contentHeight - 178 - 200;
-
-            var setChatHeight = function () {
-                $('#chat-inbox').css('height', chatInboxHeight);
-                $('#chat-content').css('height', chatContentHeight);
-            };
-
-            setChatHeight();
-
-            $(window).resize(function () {
-                contentHeight = $('#content').height();
-                chatInboxHeight = contentHeight - 178;
-                chatContentHeight = contentHeight - 178 - 200;
-
-                setChatHeight();
-            });
-
-            $("#chat-inbox").niceScroll({
-                cursorcolor: '#000000',
-                zindex: 999999,
-                bouncescroll: true,
-                cursoropacitymax: 0.4,
-                cursorborder: '',
-                cursorborderradius: 0,
-                cursorwidth: '5px'
-            });
-
-            $("#chat-content").niceScroll({
-                cursorcolor: '#000000',
-                zindex: 999999,
-                bouncescroll: true,
-                cursoropacitymax: 0.4,
-                cursorborder: '',
-                cursorborderradius: 0,
-                cursorwidth: '5px'
-            });
-
-            $('#chat-inbox .chat-actions > span').tooltip({
-                placement: 'top',
-                trigger: 'hover',
-                html: true,
-                container: 'body'
-            });
-
-            $('#initialize-search').click(function () {
-                $('#chat-search').toggleClass('active').focus();
-            });
-
-            $(document).click(function (e) {
-                if (($(e.target).closest("#initialize-search").attr("id") != "initialize-search") && $(e.target).closest("#chat-search").attr("id") != "chat-search") {
-                    $('#chat-search').removeClass('active');
-                }
-            });
-
-            $(window).mouseover(function () {
-                $("#chat-inbox").getNiceScroll().resize();
-                $("#chat-content").getNiceScroll().resize();
-            });
 
         });
 
 
-    </script>
-    <!--        <script>
-                $(function () {
-    
-                    //check all checkboxes
-                    $('table thead input[type="checkbox"]').change(function () {
-                        $(this).parents('table').find('tbody input[type="checkbox"]').prop('checked', $(this).prop('checked'));
-                    });
-    
-                    // sortable table
-                    $('.table.table-sortable1 th.sortable').click(function () {
-                        var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                        $(this).parents('table').find('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                        $(this).addClass(o);
-                    });
-    
-                    //chosen select input
-                    $(".chosen-select").chosen({disable_search_threshold: 10});
-    
-                    //check toggling
-                    $('.check-toggler').on('click', function () {
-                        $(this).toggleClass('checked');
-                    });
-                });
-    
-            </script>-->
-    <script>
-        //        $(function(){
-        //            $('.table.table-sortable1 th.sortable').click(function () {
-        //                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-        //                $(this).parents('table').find('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-        //                $(this).addClass(o);
-        //            });
-        //        });
 
-
-    </script>
-    <script>
-        $(document).ready(function ()
-        {
-            //        $("#myTable1").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable2").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable3").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable4").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable5").tablesorter({
-            //            sortList: [[0,0],[1,0]]
-            //        });
-            //        $("#myTable1").tablesorter();
-            //        $("#myTable2").tablesorter();
-            //        $("#myTable3").tablesorter();
-            //        $("#myTable4").tablesorter();
-            //        $("#myTable5").tablesorter();
-        }
-        );
-    </script>
-    <script>
-        //Script to load tab and data based on the href #
-        $(window).load(function () {
-            var url = document.URL;
-            if (url.includes('#')) {
-                url = url.substring(url.indexOf('#'));
-                console.log(url);
-            }
-            $('.nav-pills li a').each(function () {
-                var link = $(this).attr("href");
-                console.log(link);
-                if (link === url) {
-                    $(this).parent().siblings().removeClass('active');
-                    $(this).parent().addClass('active');
-                }
-            });
-            url = url.substring(1);
-            console.log(url);
-
-            $(".tab-pane").each(function () {
-                var tab = $(this).attr('id');
-                if (tab === url) {
-                    $(this).siblings().removeClass('active in');
-                    $(this).addClass('active in');
-                }
-            });
-        });
-
-
-    </script>
-    <script>
-        $('.dropdown-menu li').on('click', function () {
-            $(this).siblings().removeClass('active');
-            var link = $(this).text();
-            document.getElementById("select").innerHTML = link + " <span class='caret'></span>";
-        });
-
-    </script>
-    <script>
-        (function (document) {
-            'use strict';
-
-            var LightTableFilter = (function (Arr) {
-
-                var _input;
-
-                function _onInputEvent(e) {
-                    _input = e.target;
-                    var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-                    Arr.forEach.call(tables, function (table) {
-                        Arr.forEach.call(table.tBodies, function (tbody) {
-                            Arr.forEach.call(tbody.rows, _filter);
-                        });
-                    });
-                }
-
-                function _filter(row) {
-                    var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-                    row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-                }
-
-                return {
-                    init: function () {
-                        var inputs = document.getElementsByClassName('light-table-filter');
-                        Arr.forEach.call(inputs, function (input) {
-                            input.oninput = _onInputEvent;
-                        });
-                    }
-                };
-            })(Array.prototype);
-
-            document.addEventListener('readystatechange', function () {
-                if (document.readyState === 'complete') {
-                    LightTableFilter.init();
-                }
-            });
-
-        })(document);
-    </script>
-    <script>
-        //    var acc = document.getElementsByClassName("accordion");
-        //    var i;
-        //
-        //    for (i = 0; i < acc.length; i++) {
-        //        acc[i].onclick = function () {
-        //            this.classList.toggle("active");
-        //            this.nextElementSibling.classList.toggle("show");
-        //        }
-        //    }
-    </script>
-    <script type="text/javascript">
-        function displaymsg() {
-            var msg = '<%=session.getAttribute("isSuccess")%>';
-            if (msg != "null") {
-                //                function alertName(msg) {
-                alert(msg);
-                //                }
-            }
-        <%session.setAttribute("isSuccess", "null");%>
-        }
-    </script> 
-    <!--<script type="text/javascript"> window.onload = alertName;</script>-->
-    <script type="text/JavaScript">
-        function timedRefresh(timeoutPeriod) {
-        setTimeout("location.reload(true);",timeoutPeriod);
-        } 
-        //    window.onload = timedRefresh(300000);
     </script>
     <script>
         function start() {
@@ -1028,36 +784,7 @@
         }
         window.onload = start;
     </script>
-    <script>
-        $("#accordion > li > span").click(function () {
-            $(this).toggleClass("active").next('div').slideToggle(250)
-                    .closest('li').siblings().find('span').removeClass('active').next('div').slideUp(250);
-        });
-
-    </script>
-    <script>
-        //    $(document).ready(function () {
-        //        $(".tabpager").tabpager({
-        ////  maximum visible items
-        //            items: 5,
-        //// CSS class for tabbed content
-        //            contents: 'contents',
-        //// transition speed
-        //            time: 300,
-        //// text for previous button
-        //            previous: '&laquo;Prev',
-        //// text for next button
-        //            next: 'Next&raquo;',
-        //// initial tab
-        //            start: 1,
-        //// top or bottom
-        //            position: 'bottom',
-        //// scrollable
-        //            scroll: true
-        //        });
-        //    });
-
-    </script>
+    
     <script>
         $(document).ready(function () {
             $('#example').DataTable();
@@ -1076,17 +803,6 @@
                 minDate: new Date()
             });
         });
-    </script>
-    <script>
-        function submitdt(btnId, offerId) {
-
-            var formId = btnId.substring(6);
-            var hidden = "hidden" + offerId;
-            document.getElementById(hidden).value = offerId;
-            document.getElementById(formId).submit();
-            console.log(formId);
-            //        $(id).submit();
-        }
     </script>
     <!--DATETIME-->
 </html>
