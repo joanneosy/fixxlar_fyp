@@ -82,12 +82,12 @@ public class EditSettingsServlet extends HttpServlet {
             session.setAttribute("success", "Settings Updated!");
 //            RequestDispatcher view = request.getRequestDispatcher("ManageService.jsp");
 //            view.forward(request, response);
-            response.sendRedirect("EditSettings_Form.jsp");
+            response.sendRedirect("Admin_Settings.jsp");
         } else {
             session.setAttribute("fail", errorMessages);
 //            RequestDispatcher view = request.getRequestDispatcher("ManageService.jsp");
 //            view.forward(request, response);
-            response.sendRedirect("EditSettings_Form.jsp");
+            response.sendRedirect("Admin_Settings.jsp");
         }
     }
 

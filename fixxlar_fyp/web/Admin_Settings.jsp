@@ -3,7 +3,16 @@
     Created on : 3 Aug, 2016, 12:26:26 PM
     Author     : Joshymantou
 --%>
-
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.Map.Entry"%>
+<%@page import="com.google.gson.JsonElement"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="com.google.gson.JsonObject"%>
+<%@page import="com.google.gson.JsonObject"%>
+<%@page import="util.Settings"%>
 <%@page import="dao.WebUserDAO"%>
 <%@page import="entity.WebUser"%>
 <%@page import="entity.Workshop"%>
@@ -51,34 +60,74 @@
 
                                         <!-- /tile body -->
                                         <div class="tile-body">
-                                            <form class="form-horizontal" role="form">
+                                            <%
+                                                ArrayList<String> msg = (ArrayList<String>) session.getAttribute("fail");
+                                                if (msg != null && msg.size() > 0) {
+                                                    for (String s : msg) {
+                                                        out.println(s + "<br>");
+                                                    }
+                                                    session.removeAttribute("fail");
+                                                }
+
+                                                String success = (String) session.getAttribute("success");
+                                                if (success != null && success.length() != 0) {
+                                                    out.println(success);
+                                                    session.removeAttribute("success");
+                                                }
+                                            %>
+                                            <form class="form-horizontal" role="form" action="EditSettings" method="post">
+                                                <%
+                                                    String token = user.getToken();
+                                                    int staffId = user.getStaffId();
+                                                    Settings settings = new Settings();
+                                                    HashMap<String, JsonObject> messages = settings.retrieveAllSettings(staffId, token);
+                                                    Iterator it = messages.entrySet().iterator();
+                                                    while (it.hasNext()) {
+                                                        Map.Entry pair = (Map.Entry) it.next();
+                                                        String setting = (String) pair.getKey();
+                                                        String[] arr = setting.split(",");
+                                                        int settingId = Integer.parseInt(arr[0]);
+                                                        String settingName = arr[1];
+                                                        JsonObject value = (JsonObject) pair.getValue();
+                                                        //out.println(settingName + "<br>");
+                                                        Set<Entry<String, JsonElement>> entrySet = value.entrySet();
+                                                        for (Map.Entry<String, JsonElement> entry : entrySet) {
+                                                           
+
+                                                %>
                                                 <div class="form-group">
-                                                    <label for="input01" class="col-sm-4 control-label">Urgent Count</label>         
-                                                  
+                                                    <label for="input01" class="col-sm-4 control-label" 
+                                                           title="Urgency count" ><%=entry.getKey() %></label>         
+
                                                     <div class="col-sm-8">
-                                                        <input type="number" min="1" class="form-control" id="input01">
+                                                        <input type="number" min="1" class="form-control" id="input01" name="<%=settingName + "," + entry.getKey() %>" value="<%=entry.getValue().getAsInt()%>">
                                                     </div>                                       
                                                 </div>
                                                 
+                                               <% 
+                                                    }//for
+                                                    }//while
+                                                        
+                                               %>
 
-                                                <div class="form-group">
+<!--                                                <div class="form-group">
                                                     <label for="input02" class="col-sm-4 control-label">Moderate Count</label>
                                                     <div class="col-sm-8">
                                                         <input type="number" min="1" class="form-control" id="input02">
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-4 control-label">Low Count</label>
                                                     <div class="col-sm-8">
                                                         <input type="number" min="1" class="form-control" id="input02">
                                                     </div>
-                                                </div>
-                                                
+                                                </div>-->
+
                                                 <!--form footer for submit-->
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-4 col-sm-8">
-                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                        <button type="submit" class="btn btn-primary" value="Edit">Submit</button>
                                                         <button type="reset" class="btn btn-default">Reset</button>
                                                     </div>
                                                 </div>
@@ -105,7 +154,7 @@
         </div>
         <!--End page wrap-->
         <%-- scripts --%>
-    
+
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="js/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -216,5 +265,7 @@
 
 
         </script>
+
+        
     </body>
 </html>

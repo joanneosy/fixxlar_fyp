@@ -4,6 +4,11 @@
     Author     : joshua
 --%>
 
+<%@page import="java.util.Map.Entry"%>
+<%@page import="java.util.Set"%>
+<%@page import="com.google.gson.JsonElement"%>
+<%@page import="com.google.gson.JsonObject"%>
+<%@page import="util.Settings"%>
 <%@page import="dao.NotificationDAO"%>
 <%@page import="entity.Offer"%>
 <%@page import="java.util.Map"%>
@@ -202,14 +207,46 @@
                                                                         int newRequests = newRequestCount.get(wsId);
                                                                         String workshopName = workshop.getName();
                                                                         if (newRequests > 0) {
+
+                                                                            //get JSON Object to retrieve the urgency settings value 
+                                                                            Settings settings = new Settings();
+                                                                            JsonObject urgencySettings = settings.retrieveSettingById(staffId, token, 1);
+                                                                            Set<Entry<String, JsonElement>> entrySet = urgencySettings.entrySet();
+                                                                            int urgent = 0;
+                                                                            int moderate = 0;
+                                                                            int low = 0;
+                                                                            for (Map.Entry<String, JsonElement> entry : entrySet) {
+                                                                                String s = entry.getKey();
+                                                                                if (s.equals("high")) {
+                                                                                    urgent = entry.getValue().getAsInt();
+                                                                                }
+                                                                                if (s.equals("medium")) {
+                                                                                    moderate = entry.getValue().getAsInt();
+                                                                                }
+                                                                                if (s.equals("low")) {
+                                                                                    low = entry.getValue().getAsInt();
+                                                                                }
+
+                                                                            }
+
                                                                 %>
                                                                 <tr>
                                                                     <td><center><%=workshop.getName()%></center></td>
                                                             <!--<td><center><button type="button" class="btn btn-block btn-primary">5</button></center></td>-->
                                                             <td><a class="btn btn-block btn-primary" href="Admin_View_Individual_Request.jsp?wsId=<%=wsId%>" name="wsId" ><%=newRequests%></a></td>
-                                                            <td><center><button type="button" class="btn btn-block btn-danger disabled">Urgent</button></center></td>
+                                                            
+                                                            <% 
+                                                            if (newRequests <= low) {
+                                                            %>
+                                                            
+                                                                <td><center><button type="button" class="btn btn-block btn-greensea disabled">Low</button></center></td>
                                                             <!--<center><input type="submit" value="Remind"class="btn btn-default"></center>-->
-
+                                                            <% } else if (newRequests > low && newRequests <= moderate) { %>
+                                                                <td><center><button type="button" class="btn btn-block btn-warning disabled">Moderate</button></center></td>
+                                                            <% } else { %> 
+                                                                <td><center><button type="button" class="btn btn-block btn-danger disabled">Urgent</button></center></td>
+                                                            
+                                                            <% } %>
                                                             <td><button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#exampleModal<%=wsId%>" data-whatever="@mdo">REMIND</button></td>
 
                                                             <!--POPUP REMINDER DIALOG-->
