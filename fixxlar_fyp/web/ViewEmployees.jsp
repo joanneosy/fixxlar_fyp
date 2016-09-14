@@ -294,15 +294,10 @@
     <script>
         $(document).ready(function () {
             $('#example').DataTable();
-        });
-    </script>
+        });</script>
     <script>
 
         $(function () {
-
-            //chosen select input
-            $(".chosen-select").chosen({disable_search_threshold: 10});
-
             //         sortable table
             $('.table.table-sortable th.sortable').click(function () {
                 var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
@@ -310,7 +305,7 @@
                 $(this).addClass(o);
             });
 
-        })
+        });
     </script>
     <script>
         function remove(staffId) {

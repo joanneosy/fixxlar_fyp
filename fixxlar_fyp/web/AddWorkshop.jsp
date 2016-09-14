@@ -201,8 +201,7 @@
                                                 String[] openCloseTimings = {mondayOpen, mondayClose, tuesdayOpen, tuesdayClose, wednesdayOpen, wednesdayClose, thursdayOpen, thursdayClose, fridayOpen, fridayClose, saturdayOpen, saturdayClose, sundayOpen, sundayClose, phOpen, phClose, phEveOpen, phEveClose};
 
                                             %>
-                                            <%                                                
-                                                ArrayList<String> msg = (ArrayList<String>) request.getAttribute("errMsg");
+                                            <%                                                ArrayList<String> msg = (ArrayList<String>) request.getAttribute("errMsg");
                                                 if (msg != null && msg.size() > 0) {
                                             %>
                                             <div class="alert alert-danger">
@@ -531,7 +530,7 @@
                                                 </div>  
 
                                                 <%                                                    }//end of for loop for operating days
-                                                %>
+%>
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-5 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -566,15 +565,19 @@
         <!-- Wrap all page content end -->
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="js/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/bootstrap-dropdown-multilevel.js"></script>
         <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
         <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
+        <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
         <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-        <script src="js/chosen.jquery.min.js"></script>
+
+        <script type="text/javascript" src="js/ColReorderWithResize.js"></script>
+        <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
         <script src="js/minimal.min.js"></script>
 
 

@@ -128,7 +128,7 @@
                                         <div class="form-group">
                                             <div class='input-group date' id='startdatetimepicker'>
                                                 <!--<form id='' action="" role="form">-->
-                                                <input type='text' name="startTime" class="form-control dt readonly"/>
+                                                <input type='text' name="startTime" class="form-control dt" readonly/>
                                                 <!--</form>-->
 
                                                 <span class="input-group-addon">

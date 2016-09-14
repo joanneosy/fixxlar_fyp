@@ -69,7 +69,6 @@
                                         </div>
                                         <div class="table-responsive">
                                             <table id="example" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
-
                                                 <thead>
                                                     <tr>
                                                         <th class="sortable">ID</th>
@@ -90,8 +89,12 @@
                                                             int idToDelete = ws.getId();
                                                             String name = ws.getName();
                                                             String wsAddress = ws.getAddress();
-                                                            String address = wsAddress.substring(0, wsAddress.lastIndexOf(" "));
-                                                            String postal = wsAddress.substring(wsAddress.lastIndexOf(" ") + 1);
+                                                            String address = "";
+                                                            String postal = "";
+                                                            if(wsAddress != null && !(wsAddress.equals(""))) {
+                                                                address = wsAddress.substring(0, wsAddress.lastIndexOf(" "));
+                                                                postal = wsAddress.substring(wsAddress.lastIndexOf(" ") + 1);
+                                                            }
                                                             String openingHr = ws.getOpeningHour();
                                                             String contact = ws.getContact();
                                                             String contact2 = ws.getContact2();
@@ -239,7 +242,7 @@
     </body>
     <%-- scripts --%>
     <jsp:include page="include/scripts.jsp"/>
-    <script src="assets/js/vendor/chosen/chosen.jquery.min.js"></script>
+    <script src="js/chosen.jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
     <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="js/classie.js"></script> 

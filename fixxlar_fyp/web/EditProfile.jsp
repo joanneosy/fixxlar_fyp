@@ -88,7 +88,7 @@
                                             String wsBrands = ws.getBrandsCarried();
                                             String wsDescription = ws.getDescription();
                                             String wsSpecialize = ws.getSpecialize();
-                                            String wsOpenHr = ws.getOpeningHour();
+                                            String wsOpenHr = ws.getOpeningHourFormat();
                                             String[] daysAndTime = wsOpenHr.split(",");
                                             String wsCategory = ws.getCategory();
                                             String wsRemark = ws.getRemark();
@@ -407,7 +407,7 @@
 
                                                 <%
                                                     }//end of for loop for operating days
-%>
+                                                %>
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-5 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -442,117 +442,30 @@
         <!-- Wrap all page content end -->
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="js/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/bootstrap-dropdown-multilevel.js"></script>
         <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
         <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
         <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
         <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
-        <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
 
-
-        <script src="js/chosen.jquery.min.js"></script>
-
+        <script type="text/javascript" src="js/ColReorderWithResize.js"></script>
+        <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.jgrowl.min.js"></script> 
         <script type="text/javascript" src="js/intercom.js"></script> 
         <script src="js/minimal.min.js"></script>
-
-
+        
         <script>
-
-            //initialize file upload button function
-            $(document)
-                    .on('change', '.btn-file :file', function () {
-                        var input = $(this),
-                                numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                        input.trigger('fileselect', [numFiles, label]);
-                    });
 
 
             $(function () {
 
-                //load wysiwyg editor
-                $('#input06').summernote({
-                    toolbar: [
-                        //['style', ['style']], // no style button
-                        ['style', ['bold', 'italic', 'underline', 'clear']],
-                        ['fontsize', ['fontsize']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['height', ['height']],
-                                //['insert', ['picture', 'link']], // no insert buttons
-                                //['table', ['table']], // no table button
-                                //['help', ['help']] //no help button
-                    ],
-                    height: 137   //set editable area's height
-                });
-
                 //chosen select input
                 $(".chosen-select").chosen({disable_search_threshold: 10});
-
-                //initialize datepicker
-                $('#datepicker').datetimepicker({
-                    icons: {
-                        time: "fa fa-clock-o",
-                        date: "fa fa-calendar",
-                        up: "fa fa-arrow-up",
-                        down: "fa fa-arrow-down"
-                    }
-                });
-
-                $("#datepicker").on("dp.show", function (e) {
-                    var newtop = $('.bootstrap-datetimepicker-widget').position().top - 45;
-                    $('.bootstrap-datetimepicker-widget').css('top', newtop + 'px');
-                });
-
-                //initialize colorpicker
-                $('#colorpicker').colorpicker();
-
-                $('#colorpicker').colorpicker().on('showPicker', function (e) {
-                    var newtop = $('.dropdown-menu.colorpicker.colorpicker-visible').position().top - 45;
-                    $('.dropdown-menu.colorpicker.colorpicker-visible').css('top', newtop + 'px');
-                });
-
-                //initialize colorpicker RGB
-                $('#colorpicker-rgb').colorpicker({
-                    format: 'rgb'
-                });
-
-                $('#colorpicker-rgb').colorpicker().on('showPicker', function (e) {
-                    var newtop = $('.dropdown-menu.colorpicker.colorpicker-visible').position().top - 45;
-                    $('.dropdown-menu.colorpicker.colorpicker-visible').css('top', newtop + 'px');
-                });
-
-                //initialize file upload button
-                $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
-
-                    var input = $(this).parents('.input-group').find(':text'),
-                            log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-                    console.log(log);
-
-                    if (input.length) {
-                        input.val(log);
-                    } else {
-                        if (log)
-                            alert(log);
-                    }
-
-                });
-
-                // Initialize colorpalette
-                $('#event-colorpalette').colorPalette({
-                    colors: [['#428bca', '#5cb85c', '#5bc0de', '#f0ad4e', '#d9534f', '#ff4a43', '#22beef', '#a2d200', '#ffc100', '#cd97eb', '#16a085', '#FF0066', '#A40778', '#1693A5']]
-                }).on('selectColor', function (e) {
-                    var data = $(this).data();
-
-                    $(data.returnColor).val(e.color);
-                    $(this).parents(".input-group").css("border-bottom-color", e.color);
-                });
 
             })
 

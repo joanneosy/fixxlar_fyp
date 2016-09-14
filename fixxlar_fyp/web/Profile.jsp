@@ -63,7 +63,7 @@
                         String wsBrands = ws.getBrandsCarried();
                         String wsDescription = ws.getDescription();
                         String wsSpecialize = ws.getSpecialize();
-                        String wsOpenHr = ws.getOpeningHour();
+                        String wsOpenHr = ws.getOpeningHourFormat();
                         //String[] wsOpeningHr = wsOpenHr.split(",");
                         String wsCategory = ws.getCategory();
 
@@ -378,9 +378,8 @@
         <!--End page wrap-->
         <%-- scripts --%>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="js/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/bootstrap-dropdown-multilevel.js"></script>
@@ -388,7 +387,21 @@
         <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
         <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
         <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+        <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
+        <script type="text/javascript" src="js/jquery.videobackground.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
+        <script type="text/javascript" src="js/jquery.bootpag.js"></script>
+        <script type="text/javascript" src="js/jquery.tablesorter.js"></script>
+
+        <script type="text/javascript" src="js/summernote.js"></script>
+        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/ColReorderWithResize.js"></script>
+        <script type="text/javascript" src="js/dataTables.colVis.min.js"></script>
+        <script type="text/javascript" src="js/ZeroClipboard.js"></script>
+        <script type="text/javascript" src="js/dataTables.tableTools.min.js"></script>
+        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
+        <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
+        <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.jgrowl.min.js"></script> 
         <script type="text/javascript" src="js/intercom.js"></script> 
         <script src="js/minimal.min.js"></script>

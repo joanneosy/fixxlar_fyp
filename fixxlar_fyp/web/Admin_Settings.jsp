@@ -92,12 +92,13 @@
                                                         //out.println(settingName + "<br>");
                                                         Set<Entry<String, JsonElement>> entrySet = value.entrySet();
                                                         for (Map.Entry<String, JsonElement> entry : entrySet) {
-                                                           
+                                                           String status = entry.getKey();
+                                                           status = status.substring(0, 1).toUpperCase() + status.substring(1);
 
                                                 %>
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-4 control-label" 
-                                                           title="Urgency count" ><%=entry.getKey() %></label>         
+                                                           title="Urgency count" ><%=status%></label>         
 
                                                     <div class="col-sm-8">
                                                         <input type="number" min="1" class="form-control" id="input01" name="<%=settingName + "," + entry.getKey() %>" value="<%=entry.getValue().getAsInt()%>">

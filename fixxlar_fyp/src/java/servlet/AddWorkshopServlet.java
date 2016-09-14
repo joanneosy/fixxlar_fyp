@@ -75,7 +75,98 @@ public class AddWorkshopServlet extends HttpServlet {
         String phEveOpen = request.getParameter("phEveOpen");
         String phEveClose = request.getParameter("phEveClose");
 
-        String openingHourFormat = request.getParameter("openingHourFormat");
+        String amondayOpen = convertTime(mondayOpen);
+        String amondayClose = convertTime(mondayClose);
+        String atuesdayOpen = convertTime(tuesdayOpen);
+        String atuesdayClose = convertTime(tuesdayClose);
+        String awednesdayOpen = convertTime(wednesdayOpen);
+        String awednesdayClose = convertTime(wednesdayClose);
+        String athursdayOpen = convertTime(thursdayOpen);
+        String athursdayClose = convertTime(thursdayClose);
+        String afridayOpen = convertTime(fridayOpen);
+        String afridayClose = convertTime(fridayClose);
+        String asaturdayOpen = convertTime(saturdayOpen);
+        String asaturdayClose = convertTime(saturdayClose);
+        String asundayOpen = convertTime(sundayOpen);
+        String asundayClose = convertTime(sundayClose);
+        String aphOpen = convertTime(phOpen);
+        String aphClose = convertTime(phClose);
+        String aphEveOpen = convertTime(phEveOpen);
+        String aphEveClose = convertTime(phEveClose);
+
+        ArrayList<String> days = new ArrayList<String>();
+        days.add("Mon");
+        days.add("Tues");
+        days.add("Wed");
+        days.add("Thurs");
+        days.add("Fri");
+        days.add("Sat");
+        days.add("Sun");
+        days.add("PHs");
+        days.add("PH eve");
+        ArrayList<String> open = new ArrayList<String>();
+        open.add(amondayOpen);
+        open.add(atuesdayOpen);
+        open.add(awednesdayOpen);
+        open.add(athursdayOpen);
+        open.add(afridayOpen);
+        open.add(asaturdayOpen);
+        open.add(asundayOpen);
+        open.add(aphOpen);
+        open.add(aphEveOpen);
+        ArrayList<String> close = new ArrayList<String>();
+        close.add(amondayClose);
+        close.add(atuesdayClose);
+        close.add(awednesdayClose);
+        close.add(athursdayClose);
+        close.add(afridayClose);
+        close.add(asaturdayClose);
+        close.add(asundayClose);
+        close.add(aphClose);
+        close.add(aphEveClose);
+
+        String startDay = "Mon";
+        String endDay = "";
+        String startOpen = open.get(0);
+        String endOpen = "";
+        String startClose = close.get(0);
+        String endClose = "";
+        String openingHourFull = "";
+        String toAppend = "";
+
+        for (int i = 1; i < days.size(); i++) {
+            endOpen = open.get(i);
+            endClose = close.get(i);
+            if (i == days.size() - 1) {
+                System.out.println("IN");
+                endDay = days.get(i);
+                if (startOpen.equals(endOpen) && startClose.equals(endClose)) {
+                    toAppend = startOpen + " - " + startClose + " (" + startDay + " - " + endDay + ") ";
+                } else {
+                    toAppend = startOpen + " - " + startClose + " (" + startDay + ") ";
+                    toAppend = toAppend + endOpen + " - " + endClose + " (" + endDay + ") ";
+                }
+                openingHourFull = openingHourFull + toAppend;
+            } else if (startOpen.equals(endOpen) && startClose.equals(endClose)) {
+                //Same start and end time
+                endDay = days.get(i);
+            } else {
+                //New Record
+                toAppend = startOpen + " - " + startClose + " (" + startDay + " - " + endDay + ") ";
+                openingHourFull = openingHourFull + toAppend;
+                startDay = days.get(i);
+                startOpen = endOpen;
+                startClose = endClose;
+                endDay = "";
+                endOpen = "";
+                endClose = "";
+            }
+        }
+        openingHourFull = openingHourFull.replace("Closed - Closed", "Closed");
+        openingHourFull = openingHourFull.replace(" - )", ")");
+        System.out.println(openingHourFull);
+
+//        String openingHourFormat = request.getParameter("openingHourFormat");
         double latitude = 0.0;
         double longitude = 0.0;
         String contact = request.getParameter("contact").trim();
@@ -85,8 +176,8 @@ public class AddWorkshopServlet extends HttpServlet {
         String[] categoryArr = request.getParameterValues("category");
         String remark = request.getParameter("remark").trim();
 
-        String openingHour = "";
-        openingHour = "Monday-" + mondayOpen + "-" + mondayClose + ","
+        String openingHourFormat = "";
+        openingHourFormat = "Monday-" + mondayOpen + "-" + mondayClose + ","
                 + "Tuesday-" + tuesdayOpen + "-" + tuesdayClose + ","
                 + "Wednesday-" + wednesdayOpen + "-" + wednesdayClose + ","
                 + "Thursday-" + thursdayOpen + "-" + thursdayClose + ","
@@ -97,8 +188,9 @@ public class AddWorkshopServlet extends HttpServlet {
                 + "PhEve-" + phEveOpen + "-" + phEveClose;
 
         Validation validation = new Validation();
-        ArrayList<String> errMsg = validation.validateWorkshop(contact, contact2, postalCode, openingHour);
-        
+        ArrayList<String> errMsg = validation.validateWorkshop(contact, contact2, postalCode, openingHourFormat);
+
+        String openingHour = openingHourFull;
         String specialize = "";
         if (specializeArr == null) {
             errMsg.add("Please select at least one specilized car brand.");
@@ -219,6 +311,38 @@ public class AddWorkshopServlet extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
             view.forward(request, response);
         }
+    }
+
+    public String convertTime(String time) {
+        if (time.equals("Closed")) {
+            return time;
+        }
+        int iTime = Integer.parseInt(time);
+        String newTime = "";
+        if (iTime > 1200) {
+            //afternoon
+            newTime = iTime - 1200 + "";
+            int index = newTime.lastIndexOf("00");
+            if (index > 0) {
+                newTime = newTime.substring(0, index) + "pm";
+            } else {
+                newTime = newTime.substring(0, newTime.length() - 2) + "." + newTime.substring(newTime.length() - 2) + "pm";
+            }
+        } else {
+            //morning
+            newTime = iTime + "";
+            if (time.substring(0, 2).equals("00")) {
+                newTime = "12" + time.substring(2);
+            }
+            int index = newTime.lastIndexOf("00");
+            if (index > 0) {
+                newTime = newTime.substring(0, index) + "am";
+            } else {
+                newTime = newTime.substring(0, newTime.length() - 2) + "." + newTime.substring(newTime.length() - 2) + "am";
+            }
+
+        }
+        return newTime;
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

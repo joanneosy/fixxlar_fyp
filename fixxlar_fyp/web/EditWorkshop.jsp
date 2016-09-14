@@ -89,7 +89,7 @@
                             if (description.equals("null")) {
                                 description = "";
                             }
-                            String openingHour = ws.getOpeningHour();
+                            String openingHour = ws.getOpeningHourFormat();
                             String[] daysAndTime = null;
 
                             if (openingHour.equals("null")) {
