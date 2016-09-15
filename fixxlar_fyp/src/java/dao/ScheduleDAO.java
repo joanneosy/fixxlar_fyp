@@ -80,7 +80,6 @@ public class ScheduleDAO {
         if (errMsgEle != null && !errMsgEle.isJsonNull()) {
             errMsg = errMsgEle.getAsString();
         }
-        System.out.println(errMsg);
         return errMsg;
     }
     

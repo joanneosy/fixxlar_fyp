@@ -64,6 +64,9 @@ public class AuthenticateServlet extends HttpServlet {
             } else if (userType == 3) {
                 session.setAttribute("loggedInUserType", "Groomer");
                 response.sendRedirect("Groomer.jsp");
+            } else if (userType == 4) {
+                session.setAttribute("loggedInUserType", "Valet");
+                response.sendRedirect("Valet.jsp");
             }
 
         } else {

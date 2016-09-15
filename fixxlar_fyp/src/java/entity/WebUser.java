@@ -22,6 +22,7 @@ public class WebUser {
     private String name;
     private int staffType;
     private String chatToken;
+    private ValetStaff valetStaff;
 
     public WebUser(int staffId, String email, int userType, int refStaffId, String token, int shopId, String name, String handphone, int staffType) {
         this.staffId = staffId;
@@ -34,6 +35,7 @@ public class WebUser {
         this.name = name;
         this.staffType = staffType;
     }
+    
     public WebUser(int staffId, String email, int userType, int refStaffId, String token, int shopId, String name, String handphone, int staffType, String chatToken) {
         this.staffId = staffId;
         this.email = email;
@@ -45,6 +47,19 @@ public class WebUser {
         this.name = name;
         this.staffType = staffType;
         this.chatToken = chatToken;
+    }
+    
+    public WebUser(int staffId, String email, int userType, int refStaffId, String token, int shopId, String name, String handphone, int staffType, ValetStaff valetStaff) {
+        this.staffId = staffId;
+        this.email = email;
+        this.userType = userType;
+        this.refStaffId = refStaffId;
+        this.token = token;
+        this.shopId = shopId;
+        this.handphone = handphone;
+        this.name = name;
+        this.staffType = staffType;
+        this.valetStaff = valetStaff;
     }
 
     //getter methods
@@ -102,5 +117,9 @@ public class WebUser {
     
     public String getChatToken(){
         return chatToken;
+    }
+    
+    public ValetStaff getValetStaff() {
+        return valetStaff;
     }
 }
