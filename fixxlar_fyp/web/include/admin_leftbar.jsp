@@ -24,6 +24,12 @@
             </li>
             
             <li>
+                <a href="ViewValet.jsp">
+                    <i class="fa fa-map-marker"></i> Valet
+                </a>
+            </li>
+            
+            <li>
                 <a href="ViewEmployees.jsp">
                     <i class="fa fa-user"></i> Fixir Staff
                 </a>

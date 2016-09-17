@@ -36,6 +36,20 @@ public class Validation {
         }
         return errMsg;
     }
+    
+    public ArrayList<String> validateValet(String postalCode, String openingHours) {
+        ArrayList<String> errMsg = new ArrayList<String>();
+        String err = isValidPostalCode(postalCode);
+        if (err != null) {
+            errMsg.add(err);
+        }
+
+        err = isValidOpeningHours(openingHours);
+        if (err != null) {
+            errMsg.add(err);
+        }
+        return errMsg;
+    }
 
     public ArrayList<String> validateNewEmployee(String contact, String password, String confirmPassword) {
         ArrayList<String> errMsg = new ArrayList<String>();
