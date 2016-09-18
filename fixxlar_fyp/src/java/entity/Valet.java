@@ -12,6 +12,7 @@ package entity;
 public class Valet {
 
     private int id;
+    private String email;
     private String name;
     private String address;
     private double latitude;
@@ -19,9 +20,11 @@ public class Valet {
     private int no_of_employees;
     private double revenue_share;
     private String opening_hours;
+    private String opening_hours_display;
 
-    public Valet(int id, String name, String address, double latitude, double longitude, int no_of_employees, double revenue_share, String opening_hours) {
+    public Valet(int id, String email, String name, String address, double latitude, double longitude, int no_of_employees, double revenue_share, String opening_hours, String opening_hours_display) {
         this.id = id;
+        this.email = email;
         this.name = name;
         this.address = address;
         this.latitude = latitude;
@@ -29,6 +32,7 @@ public class Valet {
         this.no_of_employees = no_of_employees;
         this.revenue_share = revenue_share;
         this.opening_hours = opening_hours;
+        this.opening_hours_display = opening_hours_display;
     }
 
     public int getId() {
@@ -37,6 +41,14 @@ public class Valet {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
@@ -93,6 +105,14 @@ public class Valet {
 
     public void setOpening_hours(String opening_hours) {
         this.opening_hours = opening_hours;
+    }
+    
+    public String getOpening_hours_display() {
+        return opening_hours_display;
+    }
+
+    public void setOpening_hours_display(String opening_hours_display) {
+        this.opening_hours_display = opening_hours_display;
     }
 
 }

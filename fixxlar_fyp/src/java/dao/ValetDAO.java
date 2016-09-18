@@ -81,6 +81,11 @@ public class ValetDAO {
             if (!attElement.isJsonNull()) {
                 id = attElement.getAsInt();
             }
+            attElement = shop.get("email");
+            String email = "";
+            if (!attElement.isJsonNull()) {
+                email = attElement.getAsString();
+            }
             attElement = shop.get("name");
             String name = "";
             if (!attElement.isJsonNull()) {
@@ -95,6 +100,12 @@ public class ValetDAO {
             String openingHour = "";
             if (!attElement.isJsonNull()) {
                 openingHour = attElement.getAsString();
+            }
+            
+            attElement = shop.get("opening_hours_display");
+            String openingHourDisplay = "";
+            if (!attElement.isJsonNull()) {
+                openingHourDisplay = attElement.getAsString();
             }
             attElement = shop.get("latitude");
             double latitude = 0.0;
@@ -118,7 +129,7 @@ public class ValetDAO {
             }
 
             //int status = attElement.getAsInt();
-            Valet ws = new Valet(id, name, address, latitude, longitude, no_of_employee, revenue_share, openingHour);
+            Valet ws = new Valet(id, email, name, address, latitude, longitude, no_of_employee, revenue_share, openingHour, openingHourDisplay);
 
             allValet.add(ws);
         }
@@ -126,7 +137,7 @@ public class ValetDAO {
     }
 
     public ArrayList<String> addValet(int staffId, String token, String name, String address,
-            double latitude, double longitude, String no_of_employees, String revenue_share, String opening_hours) throws UnsupportedEncodingException, IOException {
+            double latitude, double longitude, String no_of_employees, String revenue_share, String opening_hours/*, String opening_hours_display*/) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/erp/valet_shop/add_shop";
 
         HttpClient client = new DefaultHttpClient();
@@ -145,6 +156,7 @@ public class ValetDAO {
         urlParameters.add(new BasicNameValuePair("no_of_employees", no_of_employees + ""));
         urlParameters.add(new BasicNameValuePair("revenue_share", revenue_share + ""));
         urlParameters.add(new BasicNameValuePair("opening_hours", opening_hours));
+//        urlParameters.add(new BasicNameValuePair("opening_hours_display", opening_hours_display));
         urlParameters.add(new BasicNameValuePair("status", 1 + ""));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
@@ -224,6 +236,11 @@ public class ValetDAO {
             if (!attElement.isJsonNull()) {
                 id = attElement.getAsInt();
             }
+            attElement = shop.get("email");
+            String email = "";
+            if (!attElement.isJsonNull()) {
+                email = attElement.getAsString();
+            }
             attElement = shop.get("name");
             String name = "";
             if (!attElement.isJsonNull()) {
@@ -238,6 +255,11 @@ public class ValetDAO {
             String opening_hours = "";
             if (!attElement.isJsonNull()) {
                 opening_hours = attElement.getAsString();
+            }
+            attElement = shop.get("opening_hours_display");
+            String opening_hours_display = "";
+            if (!attElement.isJsonNull()) {
+                opening_hours_display = attElement.getAsString();
             }
             attElement = shop.get("latitude");
             double latitude = 0.0;
@@ -259,7 +281,7 @@ public class ValetDAO {
             if (!attElement.isJsonNull()) {
                 revenue_share = attElement.getAsDouble();
             }
-            valet = new Valet(id, name, address, latitude, longitude, no_of_employee, revenue_share, opening_hours);
+            valet = new Valet(id, email, name, address, latitude, longitude, no_of_employee, revenue_share, opening_hours, opening_hours_display);
         }
         return valet;
     }

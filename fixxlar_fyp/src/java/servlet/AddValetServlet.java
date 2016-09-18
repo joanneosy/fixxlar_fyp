@@ -195,7 +195,7 @@ public class AddValetServlet extends HttpServlet {
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
             int staffId = user.getStaffId();
             String token = user.getToken();
-            ArrayList<String> addErrMsg = vDAO.addValet(staffId, token, name, address + " " + postalCode, latitude, longitude, noEmployees, revenueShare, openingHour);
+            ArrayList<String> addErrMsg = vDAO.addValet(staffId, token, name, address + " " + postalCode, latitude, longitude, noEmployees, revenueShare, /*openingHourFormat,*/ openingHour);
             if (addErrMsg.size() == 0) {
 //                Workshop ws = wDAO.retrieveWorkshop(id, user.getStaffId(), user.getToken());
 //                int wsId = ws.getId();
