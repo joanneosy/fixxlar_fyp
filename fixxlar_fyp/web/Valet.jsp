@@ -288,8 +288,7 @@
                                                             </div> <!--/.modal -->
                                                             <td>
                                                                 <form action="AcceptValetRequestServlet" method="POST">
-                                                                    <input type="hidden" name="id" value="id">
-                                                                    <button type="submit" class="btn btn-default btn-xs">Accept</button>
+                                                                    <button type="submit" name="id" value="<%=id%>" class="btn btn-default btn-xs">Accept</button>
                                                                 </form>
                                                             </td>
                                                             </tr>

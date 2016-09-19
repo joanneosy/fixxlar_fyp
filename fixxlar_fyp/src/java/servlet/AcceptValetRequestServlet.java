@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import dao.ValetRequestDAO;
 import entity.WebUser;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,6 +41,19 @@ public class AcceptValetRequestServlet extends HttpServlet {
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();
+        ValetRequestDAO vrDAO = new ValetRequestDAO();
+        String isSuccess = vrDAO.acceptRequest(staffId, token, request_id);
+        if (isSuccess.length() == 0) {
+            session.setAttribute("isSuccess", "Accepted request for ID: " + request_id);
+//            RequestDispatcher view = request.getRequestDispatcher("ViewRequest.jsp");
+//            view.forward(request, response);
+            response.sendRedirect("Valet.jsp");
+        } else {
+            session.setAttribute("fail", isSuccess + "(ID: " + request_id + ")");
+//            RequestDispatcher view = request.getRequestDispatcher("ViewRequest.jsp");
+//            view.forward(request, response);
+            response.sendRedirect("Valet.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
