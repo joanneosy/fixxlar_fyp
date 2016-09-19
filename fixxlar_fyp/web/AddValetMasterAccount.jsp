@@ -6,7 +6,7 @@
     Author     : Joshymantou
 --%>
 
-
+<%@page import="dao.ValetShopDAO"%>
 <%@page import="entity.WebUser"%>
 <%@page import="entity.ValetShop"%>
 <%@page import="dao.ValetShopDAO"%>

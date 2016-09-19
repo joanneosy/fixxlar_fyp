@@ -3,7 +3,7 @@
     Created on : May 5, 2016, 10:00:14 AM
     Author     : joanne.ong.2014
 --%>
-
+<%@page import="dao.ValetShopDAO"%>
 <%@page import="entity.Offer"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>

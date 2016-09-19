@@ -4,6 +4,7 @@
     Author     : joanne.ong.2014
 --%>
 
+<%@page import="dao.ValetShopDAO"%>
 <%@page import="entity.Offer"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>

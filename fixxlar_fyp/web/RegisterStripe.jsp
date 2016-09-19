@@ -4,6 +4,7 @@
     Author     : Joshymantou
 --%>
 
+<%@page import="dao.ValetShopDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.stripe.model.Charge"%>
 <%@page import="com.stripe.net.RequestOptions"%>

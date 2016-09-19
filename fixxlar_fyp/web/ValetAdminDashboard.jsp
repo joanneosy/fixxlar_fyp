@@ -4,7 +4,9 @@
     Author     : joanne.ong.2014
 --%>
 
+<%@page import="dao.ValetRequestDAO"%>
 <%@page import="dao.ValetShopDAO"%>
+<%@page import="entity.ValetShop"%>
 <%@page import="entity.Offer"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
@@ -24,7 +26,7 @@
 <%@page import="dao.QuotationRequestDAO"%>
 <%@page import="entity.WebUser"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="ProtectAdmin.jsp"%>
+<%@include file="ProtectValetAdmin.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,13 +41,14 @@
             if (successChangePasswordMsg != null) {
                 out.println(successChangePasswordMsg + "<br/><br/>");
             }
-            QuotationRequestDAO qDAO = new QuotationRequestDAO();
-//            HashMap<Integer, Integer> statusSize = qDAO.retrieveStatusSize(user.getStaffId(), user.getToken(), 0, 0, "", "requested_datetime", "desc");
-//            int newSize = statusSize.get(0);
-//            int sendFinalSize = statusSize.get(1);
-//            int finalAcceptSize = statusSize.get(2);
-
-
+            ValetRequestDAO vrDAO = new ValetRequestDAO();
+            int shopID = user.getShopId();
+            String token = user.getToken();
+            int staffID = user.getStaffId();
+            String chatToken = user.getChatToken();
+            String phone_number = user.getHandphone();
+            String user_name = user.getName();
+            String user_email = user.getEmail();
         %>
 
         <!-- Preloader -->
@@ -57,7 +60,6 @@
             <!-- Make page fluid -->
             <div class="row">
                 <!-- Top and leftbar -->
-                <%--<jsp:include page="include/topbar.jsp"/>--%>
                 <%@include file="include/topbar.jsp"%>
                 <!-- Top and leftbar end -->
 
@@ -129,15 +131,7 @@
 
                                         <!-- tile header -->
                                         <div class="tile-header">
-                                            <h1><strong>New Valet</strong></h1>
-                                            <!--                                        <div class="search">
-                                                                                        <input type="search" class="light-table-filter" data-table="order-table" placeholder="Filter">
-                                                                                    </div>-->
-                                            <!--                                            <div class="controls">
-                                                                                            <a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
-                                                                                            <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
-                                                                                            <a href="#" class="remove"><i class="fa fa-times"></i></a>
-                                                                                        </div>-->
+                                            <h1><strong>Dashboard</strong></h1>
                                         </div>
                                         <!-- /tile header -->
 
@@ -175,22 +169,8 @@
                                                     <div class="btn-group btn-group-xs table-options desktopOnly">
                                                         <ul class="nav nav-pills tabpager">
                                                             <li class="active"><a href="#Status" data-toggle="pill">Status</a></li>
-                                                            <!--<li><a href="#New" data-toggle="pill">New</a></li>-->
-                                                            <!--<li><a href="#Ongoing_Service" data-toggle="pill">Ongoing Service</a></li>-->
-                                                            <!--<li><a href="#Completed_Service" data-toggle="pill">Completed Service</a></li>-->
                                                         </ul>
                                                     </div>
-                                                    <!--                                                    <div class="btn-group mobileOnly" style="float:right">
-                                                                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id='select'>
-                                                                                                            Select <span class="caret"></span>
-                                                                                                        </button>
-                                                    
-                                                                                                        <ul class="dropdown-menu" role="menu" >
-                                                                                                            <li class="active"><a href="#New_Service" data-toggle="pill">New Service</a></li>
-                                                                                                            <li><a href="#Ongoing_Service" data-toggle="pill">Ongoing Service</a></li>
-                                                                                                            <li><a href="#Completed_Service" data-toggle="pill">Completed Service</a></li>
-                                                                                                        </ul>
-                                                                                                    </div>-->
                                                 </div>
 
 
@@ -203,10 +183,7 @@
                                         <div class="tile-body no-vpadding">
                                             <div class="tab-content">
                                                 <%
-                                                    int i = 1;
-                                                    qDAO = new QuotationRequestDAO();
-                                                    HashMap<Integer, QuotationRequest> qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 5, "requested_datetime", "desc");
-
+                                                    
                                                 %>
 
 
@@ -228,46 +205,11 @@
                                                                 <%                                                                Iterator it = qList.entrySet().iterator();
                                                                     while (it.hasNext()) {
                                                                         Map.Entry pair = (Map.Entry) it.next();
-                                                                        QuotationRequest qr = (QuotationRequest) pair.getValue();
-                                                                        int id = qr.getId();
-                                                                        Timestamp timeStamp = qr.getRequestedDate();
-                                                                        String dateTime = "01-01-1990 00:00:00";
-                                                                        if (timeStamp != null) {
-                                                                            dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
-                                                                        }
-                                                                        String serviceName = qr.getName();
-                                                                        String address = qr.getAddress();
-                                                                        String serviceAmenities = qr.getAmenities();
-                                                                        String serviceDescription = qr.getDescription();
-                                                                        String serviceDetails = qr.getDetails();
-                                                                        int serviceId = qr.getId();
-                                                                        String serviceMileage = qr.getMileage();
-                                                                        String carPhoto = qr.getPhotos();
-                                                                        String serviceUrgency = qr.getUrgency();
-
-                                                                        Customer cust = qr.getCustomer();
-                                                                        String custName = cust.getName();
-                                                                        String custEmail = cust.getEmail();
-                                                                        String custPhone = cust.getHandphone();
-
-                                                                        Vehicle vehicle = qr.getVehicle();
-                                                                        String carPlate = vehicle.getPlateNumber();
-                                                                        String carModel = vehicle.getModel();
-                                                                        String carMake = vehicle.getMake();
-                                                                        int carYear = vehicle.getYear();
-                                                                        String carColor = vehicle.getColour();
-                                                                        String carControl = vehicle.getControl();
-
-                                                                        Offer offer = qr.getOffer();
-                                                                        double finalPrice = offer.getFinalPrice();
-                                                                        int serviceStatus = offer.getStatus();
-                                                                        int offerId = offer.getId();
-                                                                        int status = offer.getStatus();
-                                                                        if (status == 5) { //Final quotation accepted with valet
+                                                                        
                                                                 %>
                                                                 <tr>
-                                                                    <td><% out.print(serviceId);%></td>
-                                                                    <td><% out.print(dateTime);%></td>
+                                                                    <td><% out.print();%></td>
+                                                                    <td><% out.print();%></td>
                                                                     <td><% out.print(custName);%></td>
                                                                     <!--Picture Attachment-->
                                                                     <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>

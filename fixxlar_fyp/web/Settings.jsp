@@ -4,6 +4,7 @@
     Author     : Joshymantou
 --%>
 
+<%@page import="dao.ValetShopDAO"%>
 <%@page import="util.Settings"%>
 <%@page import="dao.WebUserDAO"%>
 <%@page import="entity.WebUser"%>

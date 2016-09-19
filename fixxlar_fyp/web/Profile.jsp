@@ -4,6 +4,7 @@
     Author     : Joshymantou
 --%>
 
+<%@page import="dao.ValetShopDAO"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="entity.Workshop"%>
 <%@page import="java.util.ArrayList"%>

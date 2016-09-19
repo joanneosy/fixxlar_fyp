@@ -10,9 +10,9 @@
 <%
     // check if user is authenticated
     WebUser user = (WebUser) session.getAttribute("loggedInUser");
-
+    int staffType = user.getStaffType();
     if (user == null) {
         response.sendRedirect("Login.jsp");
         return;
-    } 
+    }
 %>

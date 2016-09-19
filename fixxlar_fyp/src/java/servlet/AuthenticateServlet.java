@@ -51,6 +51,7 @@ public class AuthenticateServlet extends HttpServlet {
 
         WebUserDAO dao = new WebUserDAO();
         WebUser user = dao.authenticateUser(email, passwordEntered);
+        int staffType = user.getStaffType();
         if (user != null) {
             session.setAttribute("loggedInUser", user);
             int userType = user.getUserType();
@@ -64,9 +65,14 @@ public class AuthenticateServlet extends HttpServlet {
             } else if (userType == 3) {
                 session.setAttribute("loggedInUserType", "Groomer");
                 response.sendRedirect("Groomer.jsp");
-            } else if (userType == 4) {
+            } else if (userType == 4 && staffType == 2) {
                 session.setAttribute("loggedInUserType", "Valet");
+                session.setAttribute("staffType", "Staff");
                 response.sendRedirect("Valet.jsp");
+            } else if (userType == 4 && staffType == 1) {
+                session.setAttribute("loggedInUserType", "Valet");
+                session.setAttribute("staffType", "Admin");
+                response.sendRedirect("ValetAdminRequest.jsp");
             }
 
         } else {

@@ -11,6 +11,7 @@
     // check if user is authenticated
     WebUser user = (WebUser) session.getAttribute("loggedInUser");
     String userType = (String) session.getAttribute("loggedInUserType");
+    int staffType = user.getStaffType();
     if (user == null) {
         response.sendRedirect("Login.jsp");
         return;

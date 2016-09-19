@@ -4,7 +4,7 @@
     Author     : Joshymantou
 --%>
 
-
+<%@page import="dao.ValetShopDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
@@ -29,6 +29,8 @@
 
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
             String userType = (String) session.getAttribute("loggedInUserType");
+            // Retrieve the master work shop staffs + Fixir staff
+            int staffType = user.getStaffType();
             int workshopStaffType = user.getStaffType();
             int staffID = user.getStaffId();
             String phone_number = user.getHandphone();
@@ -36,8 +38,7 @@
             String user_email = user.getEmail();
 
             if (userType.equals("Admin")) {
-                // Retrieve the master work shop staffs + Fixir staff
-                int staffType = user.getStaffType();
+                staffType = user.getStaffType();
                 //only super user and master user can view admin and master staff
                 if (staffType == 1 || staffType == 2) {
                     webUserMap = webUserDAO.retrieveAllMasterWorkshopStaff(user.getStaffId(), user.getToken());
@@ -211,7 +212,7 @@
                                                     <td><%=hp%></td>
 
                                                     <%
-                                                        int staffType = user.getStaffType();
+                                                        staffType = user.getStaffType();
                                                         //super and master admin can edit/delete normal admin
                                                         if ((staffType == 1 || staffType == 2) && currentStaffType == 3) {
 

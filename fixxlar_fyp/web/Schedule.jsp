@@ -1,3 +1,4 @@
+<%@page import="dao.ValetShopDAO"%>
 <%@page import="util.Settings"%>
 <%@page import="entity.Offer"%>
 <%@page import="java.util.Map"%>

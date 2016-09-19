@@ -4,6 +4,7 @@
     Author     : Joanne
 --%>
 
+<%@page import="dao.ValetShopDAO"%>
 <%@page import="entity.CarBrand"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.ArrayList"%>
