@@ -4,8 +4,8 @@
     Author     : Joshymantou
 --%>
 
-<%@page import="dao.ValetDAO"%>
-<%@page import="entity.Valet"%>
+<%@page import="dao.ValetShopDAO"%>
+<%@page import="entity.ValetShop"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entity.Workshop"%>
 <%@page import="dao.WorkshopDAO"%>
@@ -51,10 +51,10 @@
                         %>
                     </div>
                     <!-- /page header -->
-                    <%                        ArrayList<Valet> allValet = (ArrayList<Valet>) request.getAttribute("valet");
+                    <%                        ArrayList<ValetShop> allValet = (ArrayList<ValetShop>) request.getAttribute("valet");
                         if (allValet == null) {
-                            ValetDAO vDAO = new ValetDAO();
-                            allValet = vDAO.retrieveAllValet(user.getStaffId(), user.getToken());
+                            ValetShopDAO vDAO = new ValetShopDAO();
+                            allValet = vDAO.retrieveAllValetShops(user.getStaffId(), user.getToken());
                         }
                         if (allValet.size() == 0) {
                             out.println("No Valet found. Try again.<br/>");
@@ -73,7 +73,7 @@
 
                                     <div class="tile-body color transparent-black rounded-corners">
                                         <div class="col-md-12 col-md-offset-10" style="z-index: 2;">
-                                            <a href="AddValet.jsp" class="btn btn-primary btn-sm" role="button">Add Valet</a>
+                                            <a href="AddValetShop.jsp" class="btn btn-primary btn-sm" role="button">Add Valet Shop</a>
                                         </div>
                                         <div class="table-responsive">
                                             <table id="example" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
@@ -91,7 +91,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <%
-                                                        for (Valet valet : allValet) {
+                                                        for (ValetShop valet : allValet) {
                                                             int idToDelete = valet.getId();
                                                             String name = valet.getName();
                                                             String vAddress = valet.getAddress();
@@ -101,9 +101,9 @@
                                                                 address = vAddress.substring(0, vAddress.lastIndexOf(" "));
                                                                 postal = vAddress.substring(vAddress.lastIndexOf(" ") + 1);
                                                             }
-                                                            String openingHr = valet.getOpening_hours();
-                                                            int noEmployees = valet.getNo_of_employees();
-                                                            double revShare = valet.getRevenue_share();
+                                                            String openingHr = valet.getOpeningHours();
+                                                            int noEmployees = valet.getNoOfEmployees();
+                                                            double revShare = valet.getRevenueShare();
                                                     %>
                                                     <tr>
                                                         <td><%=idToDelete%></td>
@@ -113,7 +113,7 @@
                                                         <td><%=noEmployees%></td>
                                                         <td><%=revShare%></td>
                                                         <td>
-                                                            <a href="EditValet.jsp?id=<%=idToDelete%>" class="btn btn-primary btn-xs" role="button">Edit</a>
+                                                            <a href="EditValetShop.jsp?id=<%=idToDelete%>" class="btn btn-primary btn-xs" role="button">Edit</a>
                                                             <button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + idToDelete);%>" type="button">Delete</button>
                                                             <!-- Modal -->
                                                             <div class="md-modal md-effect-13 md-slategray colorize-overlay" id="<% out.print("myModal" + idToDelete);%>">

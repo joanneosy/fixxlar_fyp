@@ -5,8 +5,8 @@
 --%>
 
 
-<%@page import="entity.Valet"%>
-<%@page import="dao.ValetDAO"%>
+<%@page import="entity.ValetShop"%>
+<%@page import="dao.ValetShopDAO"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="entity.Workshop"%>
 <%@page import="java.util.ArrayList"%>
@@ -54,9 +54,9 @@
                                         <!-- /tile header -->
                                         <div class="tile-body">
                                             <%
-                                                ValetDAO vDAO = new ValetDAO();
+                                                ValetShopDAO vDAO = new ValetShopDAO();
                                                 int valetId = Integer.parseInt(request.getParameter("id"));
-                                                Valet valet = vDAO.retrieveValet(valetId, user.getStaffId(), user.getToken());
+                                                ValetShop valet = vDAO.retrieveValetShop(user.getStaffId(), user.getToken(), valetId);
 
                                                 String name = valet.getName();
                                                 if (name == null || name.equals("null")) {
@@ -71,9 +71,9 @@
                                                     postalCode = vAddress.substring(vAddress.lastIndexOf(" ") + 1);
                                                 }
 
-                                                double revenueShare = valet.getRevenue_share();
+                                                double revenueShare = valet.getRevenueShare();
 
-                                                int noEmployees = valet.getNo_of_employees();
+                                                int noEmployees = valet.getNoOfEmployees();
 
                                                 String mondayOpen = (String) request.getAttribute("mondayOpen");
                                                 if (mondayOpen == null || mondayOpen.equals("null")) {

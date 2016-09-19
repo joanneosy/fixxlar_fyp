@@ -5,7 +5,7 @@
  */
 package servlet;
 
-import dao.ValetDAO;
+import dao.ValetShopDAO;
 import dao.WebUserDAO;
 import dao.WorkshopDAO;
 import entity.WebUser;
@@ -46,9 +46,16 @@ public class AddValetServlet extends HttpServlet {
         String name = request.getParameter("name").trim();
         String address = request.getParameter("address").trim();
         String postalCode = request.getParameter("postalCode").trim();
-        String noEmployees = request.getParameter("noEmployees").trim();
-        String revenueShare = request.getParameter("revenueShare").trim();
-
+        String employees = request.getParameter("noEmployees").trim();
+        int noEmployees = 0;
+        if (!(employees.equals("")) && employees.length() > 0) {
+            noEmployees = Integer.parseInt(employees);
+        }
+        String revenue = request.getParameter("revenueShare").trim();
+        double revenueShare = 0.0;
+        if (!(revenue.equals("")) && revenue.length() > 0) {
+            revenueShare = Double.parseDouble(revenue);
+        }
         String mondayOpen = request.getParameter("mondayOpen");
         String mondayClose = request.getParameter("mondayClose");
         String tuesdayOpen = request.getParameter("tuesdayOpen");
@@ -178,7 +185,7 @@ public class AddValetServlet extends HttpServlet {
         String openingHour = openingHourFull;
 
         WebUserDAO uDAO = new WebUserDAO();
-        ValetDAO vDAO = new ValetDAO();
+        ValetShopDAO vDAO = new ValetShopDAO();
         String[] latLong = vDAO.retrieveLatLong(address);
         if (latLong == null) {
             latLong = vDAO.retrieveLatLong("Singapore " + postalCode);
@@ -195,17 +202,19 @@ public class AddValetServlet extends HttpServlet {
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
             int staffId = user.getStaffId();
             String token = user.getToken();
-            ArrayList<String> addErrMsg = vDAO.addValet(staffId, token, name, address + " " + postalCode, latitude, longitude, noEmployees, revenueShare, /*openingHourFormat,*/ openingHour);
-            if (addErrMsg.size() == 0) {
-//                Workshop ws = wDAO.retrieveWorkshop(id, user.getStaffId(), user.getToken());
-//                int wsId = ws.getId();
-//                session.setAttribute("workshopId", wsId);
+            String err = vDAO.addShop(staffId, token, name, address + " " + postalCode, latitude, longitude, noEmployees, revenueShare, openingHour);
+//            ArrayList<String> addErrMsg = vDAO.addValet(staffId, token, name, address + " " + postalCode, latitude, longitude, noEmployees, revenueShare, /*openingHourFormat,*/ openingHour);
+            //            if (addErrMsg.size() == 0) {
+            //                Workshop ws = wDAO.retrieveWorkshop(id, user.getStaffId(), user.getToken());
+            //                int wsId = ws.getId();
+            //                session.setAttribute("workshopId", wsId);
+            if (err.length() == 0) {
                 session.setAttribute("success", name + " has been created!");
 //                RequestDispatcher view = request.getRequestDispatcher("AddWorkshopMasterAccount.jsp");
 //                view.forward(request, response);
                 response.sendRedirect("ViewValet.jsp");
             } else {
-                request.setAttribute("errMsg", addErrMsg);
+                request.setAttribute("errMsg", err);
                 request.setAttribute("name", name);
                 request.setAttribute("address", address);
                 request.setAttribute("postalCode", postalCode);

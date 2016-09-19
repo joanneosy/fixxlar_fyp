@@ -5,12 +5,9 @@
  */
 package servlet;
 
-import dao.ValetShopDAO;
-import dao.WorkshopDAO;
 import entity.WebUser;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author User
  */
-@WebServlet(name = "DeleteValetServlet", urlPatterns = {"/DeleteValetServlet"})
-public class DeleteValetServlet extends HttpServlet {
+@WebServlet(name = "AcceptValetRequestServlet", urlPatterns = {"/AcceptValetRequestServlet"})
+public class AcceptValetRequestServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,28 +34,12 @@ public class DeleteValetServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        int id = Integer.parseInt(request.getParameter("idToDelete"));
-        
         HttpSession session = request.getSession(true);
+
+        int request_id = Integer.parseInt(request.getParameter("id"));
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();
-        
-        ValetShopDAO vDAO = new ValetShopDAO(); 
-        String errMsg = vDAO.deleteValetShop(staffId, token, id);
-        
-        if (errMsg.equals("")) {
-            session.setAttribute("success", "Workshop successfully deleted!");
-//            RequestDispatcher view = request.getRequestDispatcher("ViewWorkshop.jsp");
-//            view.forward(request, response);
-            response.sendRedirect("ViewValet.jsp");
-            
-        } else {
-            request.setAttribute("fail", errMsg);
-            RequestDispatcher view = request.getRequestDispatcher("ViewValet.jsp");
-            view.forward(request, response);
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

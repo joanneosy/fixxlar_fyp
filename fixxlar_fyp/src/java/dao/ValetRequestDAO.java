@@ -75,11 +75,6 @@ public class ValetRequestDAO {
             return vrs;
         }
         JsonArray arr = jobj.getAsJsonObject("payload").getAsJsonArray("valet_requests");
-//        int arrSize = arr.size();
-//        if (arrSize > 20) {
-//            arrSize = 20;
-//        }
-//        for (int i = 0; i < arrSize; i++) {
         for (int i = 0; i < arr.size(); i++) {
             JsonElement qrElement = arr.get(i);
             JsonObject qrObj = qrElement.getAsJsonObject();

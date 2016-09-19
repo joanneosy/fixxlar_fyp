@@ -26,6 +26,7 @@
         <%
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
             String userType = (String) session.getAttribute("loggedInUserType");
+            int staffType = user.getStaffType();
         %>
 
         <!-- Wrap all page content here -->
@@ -55,10 +56,20 @@
                             %>
                             <a href="Admin_New_Request.jsp" class="btn btn-greensea"><i class="fa fa-home"></i> Return to home</a>
                             <%
-                            } else {
+                            } else if (userType.equals("Workshop")) {
                             %>
                             <a href="New_Request.jsp" class="btn btn-greensea"><i class="fa fa-home"></i> Return to home</a>
                             <%
+                            } else {
+                                if (staffType == 1) {
+                            %>
+                            <a href="Valet_Dashboard.jsp" class="btn btn-greensea"><i class="fa fa-home"></i> Return to home</a>
+                            <%
+                            } else {
+                            %>
+                            <a href="Valet.jsp" class="btn btn-greensea"><i class="fa fa-home"></i> Return to home</a>
+                            <%
+                                    }
                                 }
                             %>
                             <!--<button class="btn btn-red"><i class="fa fa-envelope"></i> Contact Support</button>-->

@@ -35,6 +35,7 @@ public class ValetRequest {
             double dropOffLatitude, double dropOffLongitude, Timestamp scheduledPickUpTime, Timestamp actualPickUpTime, Timestamp completedTime, double price, int offerId, int status) {
         this.id = id;
         this.vehicle = vehicle;
+        this.customer = customer;
         this.serviceType = serviceType;
         this.valetDriver = valetDriver;
         this.pickUpAddress = pickUpAddress;

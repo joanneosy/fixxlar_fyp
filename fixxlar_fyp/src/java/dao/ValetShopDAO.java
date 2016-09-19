@@ -14,8 +14,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -23,12 +32,14 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.w3c.dom.Document;
 
 /**
  *
  * @author Joanne
  */
 public class ValetShopDAO {
+
     private final String USER_AGENT = "Mozilla/5.0";
 
     public String addShop(int staffId, String token, String name, String address, double latitude, double longitude, int noOfEmployees, double revenueShare, String openingHours) throws UnsupportedEncodingException, IOException {
@@ -74,7 +85,7 @@ public class ValetShopDAO {
         }
         return errMsg;
     }
-    
+
     public ValetShop retrieveValetShop(int staffId, String token, int givenID) throws IOException {
         ValetShop vs = null;
         String url = "http://119.81.43.85/erp/valet_shop/get_shop_by_id";
@@ -156,7 +167,7 @@ public class ValetShopDAO {
         }
         return vs;
     }
-    
+
     public ArrayList<ValetShop> retrieveAllValetShops(int staffId, String token) throws IOException {
         ArrayList<ValetShop> shops = new ArrayList<ValetShop>();
         String url = "http://119.81.43.85/erp/valet_shop/get_all_shops";
@@ -236,7 +247,7 @@ public class ValetShopDAO {
         }
         return shops;
     }
-    
+
     public ArrayList<String> updateValetShop(int staffId, String token, int id, String name, String address, double latitude, double longitude, int noOfEmployees, double revenueShare, String openingHours) throws UnsupportedEncodingException, IOException {
 
         String url = "http://119.81.43.85/erp/valet_shop/edit_shop";
@@ -258,7 +269,6 @@ public class ValetShopDAO {
         urlParameters.add(new BasicNameValuePair("longitude", longitude + ""));
         urlParameters.add(new BasicNameValuePair("no_of_employees", noOfEmployees + ""));
         urlParameters.add(new BasicNameValuePair("revenue_share", revenueShare + ""));
-
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
@@ -333,6 +343,33 @@ public class ValetShopDAO {
             errMsg = errMsgEle.getAsString();
         }
         return errMsg;
+    }
+
+    public String[] retrieveLatLong(String address) throws Exception {
+        int responseCode = 0;
+        String api = "http://maps.googleapis.com/maps/api/geocode/xml?address=" + URLEncoder.encode(address, "UTF-8") + "&sensor=true";
+        URL url = new URL(api);
+        HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+        httpConnection.connect();
+        responseCode = httpConnection.getResponseCode();
+        if (responseCode == 200) {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();;
+            Document document = builder.parse(httpConnection.getInputStream());
+            XPathFactory xPathfactory = XPathFactory.newInstance();
+            XPath xpath = xPathfactory.newXPath();
+            XPathExpression expr = xpath.compile("/GeocodeResponse/status");
+            String status = (String) expr.evaluate(document, XPathConstants.STRING);
+            if (status.equals("OK")) {
+                expr = xpath.compile("//geometry/location/lat");
+                String latitude = (String) expr.evaluate(document, XPathConstants.STRING);
+                expr = xpath.compile("//geometry/location/lng");
+                String longitude = (String) expr.evaluate(document, XPathConstants.STRING);
+                return new String[]{latitude, longitude};
+            } else {
+                return null;
+            }
+        }
+        return null;
     }
 
 //    public static void main (String[] args) throws IOException {

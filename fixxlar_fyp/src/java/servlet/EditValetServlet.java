@@ -5,7 +5,7 @@
  */
 package servlet;
 
-import dao.ValetDAO;
+import dao.ValetShopDAO;
 import dao.WorkshopDAO;
 import entity.WebUser;
 import java.io.IOException;
@@ -45,9 +45,16 @@ public class EditValetServlet extends HttpServlet {
         String name = request.getParameter("name").trim();
         String address = request.getParameter("address").trim();
         String postalCode = request.getParameter("postalCode").trim();
-        String noEmployees = request.getParameter("noEmployees").trim();
-        String revenueShare = request.getParameter("revenueShare").trim();
-
+        String employees = request.getParameter("noEmployees").trim();
+        int noEmployees = 0;
+        if (!(employees.equals(""))&& employees.length() > 0 ) {
+            noEmployees = Integer.parseInt(employees);
+        }
+        String revenue = request.getParameter("revenueShare").trim();
+        double revenueShare = 0.0;
+        if (!(revenue.equals(""))&& revenue.length() > 0 ) {
+            revenueShare = Double.parseDouble(revenue);
+        }
         String mondayOpen = request.getParameter("mondayOpen");
         String mondayClose = request.getParameter("mondayClose");
         String tuesdayOpen = request.getParameter("tuesdayOpen");
@@ -182,7 +189,7 @@ public class EditValetServlet extends HttpServlet {
         ArrayList<String> errMsg = validation.validateValet(postalCode, openingHourFormat);
 
 
-        ValetDAO vDAO = new ValetDAO();
+        ValetShopDAO vDAO = new ValetShopDAO();
         String[] latLong = vDAO.retrieveLatLong(address);
         if (latLong == null) {
             latLong = vDAO.retrieveLatLong("Singapore " + postalCode);
@@ -202,8 +209,9 @@ public class EditValetServlet extends HttpServlet {
 
             int staffId = user.getStaffId();
             String token = user.getToken();
-            ArrayList<String> addErrMsg = vDAO.updateValet(id, name,address + " " + postalCode, openingHour,
-                    latitude, longitude, noEmployees, revenueShare, staffId, token);
+            ArrayList<String> addErrMsg = vDAO.updateValetShop(staffId, token, id, name, address + " " + postalCode, latitude, longitude, noEmployees, revenueShare, openingHour);
+//            ArrayList<String> addErrMsg = vDAO.updateValet(id, name,address + " " + postalCode, openingHour,
+//                    latitude, longitude, noEmployees, revenueShare, staffId, token);
             if (addErrMsg.size() == 0) {
                 session.setAttribute("success", name + " successfully edited!");
                 String url = "ViewValet.jsp";
