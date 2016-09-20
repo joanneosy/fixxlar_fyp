@@ -23,7 +23,7 @@ public class WebUser {
     private int staffType;
     private String chatToken;
     private ValetStaff valetStaff;
-
+    
     public WebUser(int staffId, String email, int userType, int refStaffId, String token, int shopId, String name, String handphone, int staffType) {
         this.staffId = staffId;
         this.email = email;

@@ -175,7 +175,19 @@ public class ValetShopDAO {
             if (!attElement.isJsonNull()) {
                 openingHoursDisplay = attElement.getAsString();
             }
-            vs = new ValetShop(id, name, address, email, latitude, longitude, noOfEmployees, revenueShare, openingHours,openingHoursDisplay);
+            
+            attElement = shop.get("contact_person");
+            String contactPerson = "";
+            if (!attElement.isJsonNull()) {
+                contactPerson = attElement.getAsString();
+            }
+            
+            attElement = shop.get("contact_number");
+            String contactNumber = "";
+            if (!attElement.isJsonNull()) {
+                contactNumber = attElement.getAsString();
+            }
+            vs = new ValetShop(id, name, address, email, latitude, longitude, noOfEmployees, revenueShare, openingHours,openingHoursDisplay, contactPerson, contactNumber);
         }
         return vs;
     }
@@ -264,7 +276,19 @@ public class ValetShopDAO {
             if (!attElement.isJsonNull()) {
                 openingHoursDisplay = attElement.getAsString();
             }
-            ValetShop vs = new ValetShop(id, name, address, email, latitude, longitude, noOfEmployees, revenueShare, openingHours,openingHoursDisplay);
+            
+            attElement = shop.get("contact_person");
+            String contactPerson = "";
+            if (!attElement.isJsonNull()) {
+                contactPerson = attElement.getAsString();
+            }
+            
+            attElement = shop.get("contact_number");
+            String contactNumber = "";
+            if (!attElement.isJsonNull()) {
+                contactNumber = attElement.getAsString();
+            }
+            ValetShop vs = new ValetShop(id, name, address, email, latitude, longitude, noOfEmployees, revenueShare, openingHours,openingHoursDisplay, contactPerson, contactNumber);
             shops.add(vs);
         }
         return shops;

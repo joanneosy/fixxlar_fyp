@@ -52,7 +52,6 @@ public class WorkshopDAO {
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
-
         // add header
         post.setHeader("User-Agent", USER_AGENT);
 

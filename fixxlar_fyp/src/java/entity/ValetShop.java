@@ -20,7 +20,8 @@ public class ValetShop {
     private String openingHours;
     private String openingHoursDisplay;
     private String email;
-    
+    private String contactPerson;
+    private String contactNumber;
     
     public ValetShop(int id, String name, String address, String email, double latitude, double longitude, int noOfEmployees, double revenueShare, String openingHours, String openingHoursDisplay) {
         this.id = id; 
@@ -33,6 +34,21 @@ public class ValetShop {
         this.revenueShare = revenueShare; 
         this.openingHours = openingHours; 
         this.openingHoursDisplay = openingHoursDisplay;
+    }
+    
+    public ValetShop(int id, String name, String address, String email, double latitude, double longitude, int noOfEmployees, double revenueShare, String openingHours, String openingHoursDisplay, String contactPerson, String contactNumber) {
+        this.id = id; 
+        this.name = name; 
+        this.address = address; 
+        this.email = email;
+        this.latitude = latitude; 
+        this.longitude = longitude; 
+        this.noOfEmployees = noOfEmployees; 
+        this.revenueShare = revenueShare; 
+        this.openingHours = openingHours; 
+        this.openingHoursDisplay = openingHoursDisplay;
+        this.contactPerson = contactPerson;
+        this.contactNumber = contactNumber;
     }
 
     public String getOpeningHoursDisplay() {
@@ -81,6 +97,14 @@ public class ValetShop {
     
     public String getOpeningHours() {
         return openingHours; 
+    }
+    
+    public String getContactPerson() {
+        return contactPerson; 
+    }
+    
+    public String getContactNumber() {
+        return contactNumber; 
     }
 }
 
