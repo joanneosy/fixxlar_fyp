@@ -52,7 +52,7 @@
                                         </div>
                                         <!-- /tile header -->
                                         <div class="tile-body">
-                                            <%                                                
+                                            <%
                                                 String name = (String) request.getAttribute("name");
                                                 if (name == null || name.equals("null")) {
                                                     name = "";
@@ -65,6 +65,11 @@
                                                 String postalCode = (String) request.getAttribute("postalCode");
                                                 if (postalCode == null || postalCode.equals("null")) {
                                                     postalCode = "";
+                                                }
+
+                                                String email = (String) request.getAttribute("email");
+                                                if (email == null || email.equals("null")) {
+                                                    email = "";
                                                 }
 
                                                 String revenueShare = (String) request.getAttribute("revenueShare");
@@ -188,20 +193,24 @@
                                                     <div class="col-sm-4">
                                                         <input type="number" class="form-control" id="input03" name="postalCode" value="<%=postalCode%>">
                                                     </div>
-
-                                                    <label for="input04" class="col-sm-2 control-label">No Employees</label>
+                                                    <label for="input04" class="col-sm-2 control-label">Email</label>
                                                     <div class="col-sm-4">
-                                                        <input type="number" class="form-control" id="input04" name="noEmployees" value="<%=noEmployees%>">
+                                                        <input type="text" class="form-control" id="input04" name="email" value="<%=email%>">
                                                     </div>
+
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input05" class="col-sm-2 control-label">Revenue Share</label>
+                                                    <label for="input05" class="col-sm-2 control-label">No Employees</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="input05" name="revenueShare" value="<%=revenueShare%>">
+                                                        <input type="number" class="form-control" id="input05" name="noEmployees" value="<%=noEmployees%>">
+                                                    </div>
+                                                    <label for="input06" class="col-sm-2 control-label">Revenue Share</label>
+                                                    <div class="col-sm-4">
+                                                        <input type="text" class="form-control" id="input06" name="revenueShare" value="<%=revenueShare%>">
                                                     </div>
                                                 </div>
-                                                    
+
                                                 <div class="form-group">
                                                     <h3><label class="col-sm-6">Operating Hours (Open - Close)</label></h3>
                                                 </div>   
@@ -344,7 +353,7 @@
                                                 </div>  
 
                                                 <%                                                    }//end of for loop for operating days
-%>
+                                                %>
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-5 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>

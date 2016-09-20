@@ -19,7 +19,7 @@
             </li>-->
             
             <li>
-                <a href="Valet_Dashboard.jsp">
+                <a href="ValetAdminDashboard.jsp">
                     <i class="fa fa-tachometer"></i> Dashboard
                 </a>
             </li>
@@ -31,7 +31,7 @@
             </li>
             
             <li>
-                <a href="Manage_Valet.jsp">
+                <a href="ValetAdminRequest.jsp">
                     <i class="fa fa-map-marker"></i> Valet Requests
                 </a>
             </li>

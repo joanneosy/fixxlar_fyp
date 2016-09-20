@@ -70,87 +70,26 @@
                                                     address = vAddress.substring(0, vAddress.lastIndexOf(" "));
                                                     postalCode = vAddress.substring(vAddress.lastIndexOf(" ") + 1);
                                                 }
-
+                                                String email = valet.getEmail();
+                                                if (email == null || email.equals("null")) {
+                                                    email = "";
+                                                }
                                                 double revenueShare = valet.getRevenueShare();
 
                                                 int noEmployees = valet.getNoOfEmployees();
 
-                                                String mondayOpen = (String) request.getAttribute("mondayOpen");
-                                                if (mondayOpen == null || mondayOpen.equals("null")) {
-                                                    mondayOpen = "";
-                                                }
-                                                String mondayClose = (String) request.getAttribute("mondayClose");
-                                                if (mondayClose == null || mondayClose.equals("null")) {
-                                                    mondayClose = "";
-                                                }
-                                                String tuesdayOpen = (String) request.getAttribute("tuesdayOpen");
-                                                if (tuesdayOpen == null || tuesdayOpen.equals("null")) {
-                                                    tuesdayOpen = "";
-                                                }
-                                                String tuesdayClose = (String) request.getAttribute("tuesdayClose");
-                                                if (tuesdayClose == null || tuesdayClose.equals("null")) {
-                                                    tuesdayClose = "";
-                                                }
-                                                String wednesdayOpen = (String) request.getAttribute("wednesdayOpen");
-                                                if (wednesdayOpen == null || wednesdayOpen.equals("null")) {
-                                                    wednesdayOpen = "";
-                                                }
-                                                String wednesdayClose = (String) request.getAttribute("wednesdayClose");
-                                                if (wednesdayClose == null || wednesdayClose.equals("null")) {
-                                                    wednesdayClose = "";
-                                                }
-                                                String thursdayOpen = (String) request.getAttribute("thursdayOpen");
-                                                if (thursdayOpen == null || thursdayOpen.equals("null")) {
-                                                    thursdayOpen = "";
-                                                }
-                                                String thursdayClose = (String) request.getAttribute("thursdayClose");
-                                                if (thursdayClose == null || thursdayClose.equals("null")) {
-                                                    thursdayClose = "";
-                                                }
-                                                String fridayOpen = (String) request.getAttribute("fridayOpen");
-                                                if (fridayOpen == null || fridayOpen.equals("null")) {
-                                                    fridayOpen = "";
-                                                }
-                                                String fridayClose = (String) request.getAttribute("fridayClose");
-                                                if (fridayClose == null || fridayClose.equals("null")) {
-                                                    fridayClose = "";
-                                                }
-                                                String saturdayOpen = (String) request.getAttribute("saturdayOpen");
-                                                if (saturdayOpen == null || saturdayOpen.equals("null")) {
-                                                    saturdayOpen = "";
-                                                }
-                                                String saturdayClose = (String) request.getAttribute("saturdayClose");
-                                                if (saturdayClose == null || saturdayClose.equals("null")) {
-                                                    saturdayClose = "";
-                                                }
-                                                String sundayOpen = (String) request.getAttribute("sundayOpen");
-                                                if (sundayOpen == null || sundayOpen.equals("null")) {
-                                                    sundayOpen = "";
-                                                }
-                                                String sundayClose = (String) request.getAttribute("sundayClose");
-                                                if (sundayClose == null || sundayClose.equals("null")) {
-                                                    sundayClose = "";
-                                                }
-                                                String phOpen = (String) request.getAttribute("phOpen");
-                                                if (phOpen == null || phOpen.equals("null")) {
-                                                    phOpen = "";
-                                                }
-                                                String phClose = (String) request.getAttribute("phClose");
-                                                if (phClose == null || phClose.equals("null")) {
-                                                    phClose = "";
-                                                }
-                                                String phEveOpen = (String) request.getAttribute("phEveOpen");
-                                                if (phEveOpen == null || phEveOpen.equals("null")) {
-                                                    phEveOpen = "";
-                                                }
-                                                String phEveClose = (String) request.getAttribute("phEveClose");
-                                                if (phEveClose == null || phEveClose.equals("null")) {
-                                                    phEveClose = "";
-                                                }
-                                                String[] openCloseTimings = {mondayOpen, mondayClose, tuesdayOpen, tuesdayClose, wednesdayOpen, wednesdayClose, thursdayOpen, thursdayClose, fridayOpen, fridayClose, saturdayOpen, saturdayClose, sundayOpen, sundayClose, phOpen, phClose, phEveOpen, phEveClose};
+                                                String openingHour = valet.getOpeningHours();
+                                                String[] daysAndTime = null;
 
+                                                if (openingHour == null || openingHour.equals("null")) {
+                                                    openingHour = "";
+                                                } else {
+                                                    //Each string in this format: Monday-0900-1800
+                                                    daysAndTime = openingHour.split(",");
+                                                }
                                             %>
-                                            <%                                                ArrayList<String> msg = (ArrayList<String>) request.getAttribute("fail");
+                                            <%
+                                                ArrayList<String> msg = (ArrayList<String>) request.getAttribute("fail");
                                                 if (msg != null && msg.size() > 0) {
                                             %>
                                             <div class="alert alert-danger">
@@ -187,16 +126,23 @@
                                                         <input type="number" class="form-control" id="input03" name="postalCode" value="<%=postalCode%>">
                                                     </div>
 
-                                                    <label for="input04" class="col-sm-2 control-label">No Employees</label>
+                                                    <label for="input04" class="col-sm-2 control-label">Email</label>
                                                     <div class="col-sm-4">
-                                                        <input type="number" class="form-control" id="input04" name="noEmployees" value="<%=noEmployees%>">
+                                                        <input type="text" class="form-control" id="input04" name="email" value="<%=email%>">
                                                     </div>
+
+
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input05" class="col-sm-2 control-label">Revenue Share</label>
+                                                    <label for="input05" class="col-sm-2 control-label">No Employees</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="input05" name="revenueShare" value="<%=revenueShare%>">
+                                                        <input type="number" class="form-control" id="input05" name="noEmployees" value="<%=noEmployees%>">
+                                                    </div>
+
+                                                    <label for="input06" class="col-sm-2 control-label">Revenue Share</label>
+                                                    <div class="col-sm-4">
+                                                        <input type="text" class="form-control" id="input06" name="revenueShare" value="<%=revenueShare%>">
                                                     </div>
                                                 </div>
 
@@ -238,13 +184,14 @@
                                                     int label = 11;
                                                 %>
                                                 <div class="form-group">
-                                                    <label for="input11" class="col-sm-2 control-label">Monday</label>
+                                                    <label for="input03" class="col-sm-2 control-label">Monday</label>
                                                     <div class="col-sm-2">
-                                                        <select class="chosen-select chosen-transparent form-control" id="input11" name="mondayOpen">
-                                                            <%
+                                                        <select class="chosen-select chosen-transparent form-control" id="input07" name="mondayOpen">
+                                                            <%                                                                //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
+                                                                String[] openCloseTimings = daysAndTime[0].split("-");
                                                                 for (int i = 0; i < hours.size(); i++) {
                                                                     String hour = hours.get(i);
-                                                                    if (openCloseTimings[0].equals(hour)) {
+                                                                    if (openCloseTimings[1].equals(hour)) {
                                                                         out.println("<option selected>" + hour + "</option>");
                                                                     } else {
                                                                         out.println("<option>" + hour + "</option>");
@@ -259,13 +206,15 @@
                                                             <%
                                                                 for (int i = 0; i < hours.size(); i++) {
                                                                     String hour = hours.get(i);
-                                                                    if (openCloseTimings[1].equals(hour)) {
+                                                                    if (openCloseTimings[2].equals(hour)) {
                                                                         out.println("<option selected>" + hour + "</option>");
                                                                     } else {
                                                                         out.println("<option>" + hour + "</option>");
                                                                     }
                                                                 }
                                                             %>
+
+
                                                         </select>
                                                     </div>
                                                 </div>  
@@ -305,14 +254,16 @@
                                                     for (int i = 1; i < days.size(); i++) {
                                                 %>
                                                 <div class="form-group">
-                                                    <label for="input03" class="col-sm-2 control-label"><%=days.get(i)%></label>
+                                                    <label class="col-sm-2 control-label"><%=days.get(i)%></label>
                                                     <div class="col-sm-2">
-                                                        <select class="chosen-select chosen-transparent form-control" id="" name="<%=paramList.get(z)%>">
+                                                        <select class="chosen-select chosen-transparent form-control" name="<%=paramList.get(z)%>">
                                                             <%
                                                                 z++;
+                                                                //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
+                                                                openCloseTimings = daysAndTime[i].split("-");
                                                                 for (int j = 0; j < hours.size(); j++) {
                                                                     String hour = hours.get(j);
-                                                                    if (openCloseTimings[i * 2].equals(hour)) {
+                                                                    if (openCloseTimings[1].equals(hour)) {
                                                                         out.println("<option selected>" + hour + "</option>");
                                                                     } else {
                                                                         out.println("<option>" + hour + "</option>");
@@ -322,29 +273,24 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <select class="chosen-select chosen-transparent form-control" id="" name="<%=paramList.get(z)%>">
+                                                        <select class="chosen-select chosen-transparent form-control" name="<%=paramList.get(z)%>">
                                                             <%
                                                                 z++;
                                                                 for (int j = 0; j < hours.size(); j++) {
                                                                     String hour = hours.get(j);
-                                                                    if (openCloseTimings[i * 2 + 1].equals(hour)) {
+                                                                    if (openCloseTimings[2].equals(hour)) {
                                                                         out.println("<option selected>" + hour + "</option>");
                                                                     } else {
                                                                         out.println("<option>" + hour + "</option>");
                                                                     }
                                                                 }
-
                                                             %>
                                                         </select>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                    </div>
-                                                    <div class="col-sm-3">
                                                     </div>
                                                 </div>  
 
                                                 <%                                                    }//end of for loop for operating days
-%>
+                                                %>
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-5 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>

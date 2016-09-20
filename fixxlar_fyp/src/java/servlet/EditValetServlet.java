@@ -45,6 +45,7 @@ public class EditValetServlet extends HttpServlet {
         String name = request.getParameter("name").trim();
         String address = request.getParameter("address").trim();
         String postalCode = request.getParameter("postalCode").trim();
+        String email = request.getParameter("email").trim();
         String employees = request.getParameter("noEmployees").trim();
         int noEmployees = 0;
         if (!(employees.equals(""))&& employees.length() > 0 ) {
@@ -209,7 +210,7 @@ public class EditValetServlet extends HttpServlet {
 
             int staffId = user.getStaffId();
             String token = user.getToken();
-            ArrayList<String> addErrMsg = vDAO.updateValetShop(staffId, token, id, name, address + " " + postalCode, latitude, longitude, noEmployees, revenueShare, openingHour);
+            ArrayList<String> addErrMsg = vDAO.updateValetShop(staffId, token, id, name, address + " " + postalCode, email, latitude, longitude, noEmployees, revenueShare, openingHour,openingHourFormat);
 //            ArrayList<String> addErrMsg = vDAO.updateValet(id, name,address + " " + postalCode, openingHour,
 //                    latitude, longitude, noEmployees, revenueShare, staffId, token);
             if (addErrMsg.size() == 0) {

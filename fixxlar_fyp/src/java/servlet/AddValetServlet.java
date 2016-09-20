@@ -45,6 +45,7 @@ public class AddValetServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String name = request.getParameter("name").trim();
         String address = request.getParameter("address").trim();
+        String email = request.getParameter("email").trim();
         String postalCode = request.getParameter("postalCode").trim();
         String employees = request.getParameter("noEmployees").trim();
         int noEmployees = 0;
@@ -202,13 +203,14 @@ public class AddValetServlet extends HttpServlet {
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
             int staffId = user.getStaffId();
             String token = user.getToken();
-            String err = vDAO.addShop(staffId, token, name, address + " " + postalCode, latitude, longitude, noEmployees, revenueShare, openingHour);
+            String err = vDAO.addShop(staffId, token, name, address + " " + postalCode, email, latitude, longitude, noEmployees, revenueShare, openingHour,openingHourFormat);
 //            ArrayList<String> addErrMsg = vDAO.addValet(staffId, token, name, address + " " + postalCode, latitude, longitude, noEmployees, revenueShare, /*openingHourFormat,*/ openingHour);
-            //            if (addErrMsg.size() == 0) {
+//                        if (addErrMsg.size() == 0) {
             //                Workshop ws = wDAO.retrieveWorkshop(id, user.getStaffId(), user.getToken());
             //                int wsId = ws.getId();
             //                session.setAttribute("workshopId", wsId);
             if (err.length() == 0) {
+//                ValetShop valet = vDAO.retrieveValet(user.getStaffId(), user.getToken(), email);
                 session.setAttribute("success", name + " has been created!");
 //                RequestDispatcher view = request.getRequestDispatcher("AddWorkshopMasterAccount.jsp");
 //                view.forward(request, response);
@@ -217,6 +219,7 @@ public class AddValetServlet extends HttpServlet {
                 request.setAttribute("errMsg", err);
                 request.setAttribute("name", name);
                 request.setAttribute("address", address);
+                request.setAttribute("email", email);
                 request.setAttribute("postalCode", postalCode);
                 request.setAttribute("revenueShare", revenueShare);
                 request.setAttribute("noEmployees", noEmployees);
@@ -246,6 +249,7 @@ public class AddValetServlet extends HttpServlet {
             request.setAttribute("name", name);
             request.setAttribute("address", address);
             request.setAttribute("postalCode", postalCode);
+            request.setAttribute("email", email);
             request.setAttribute("revenueShare", revenueShare);
             request.setAttribute("noEmployees", noEmployees);
             request.setAttribute("mondayOpen", mondayOpen);

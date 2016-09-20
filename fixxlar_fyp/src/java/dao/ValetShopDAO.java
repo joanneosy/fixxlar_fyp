@@ -42,7 +42,7 @@ public class ValetShopDAO {
 
     private final String USER_AGENT = "Mozilla/5.0";
 
-    public String addShop(int staffId, String token, String name, String address, double latitude, double longitude, int noOfEmployees, double revenueShare, String openingHours) throws UnsupportedEncodingException, IOException {
+    public String addShop(int staffId, String token, String name, String address, String email, double latitude, double longitude, int noOfEmployees, double revenueShare, String openingHours,String openingHourFormat) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/erp/valet_shop/add_shop";
 
         HttpClient client = new DefaultHttpClient();
@@ -56,11 +56,13 @@ public class ValetShopDAO {
         urlParameters.add(new BasicNameValuePair("token", token));
         urlParameters.add(new BasicNameValuePair("name", name));
         urlParameters.add(new BasicNameValuePair("address", address));
+        urlParameters.add(new BasicNameValuePair("email", email));
         urlParameters.add(new BasicNameValuePair("latitude", latitude + ""));
         urlParameters.add(new BasicNameValuePair("longitude", longitude + ""));
         urlParameters.add(new BasicNameValuePair("no_of_employees", noOfEmployees + ""));
         urlParameters.add(new BasicNameValuePair("revenue_share", revenueShare + ""));
-        urlParameters.add(new BasicNameValuePair("opening_hours", openingHours));
+        urlParameters.add(new BasicNameValuePair("opening_hours", openingHourFormat));
+        urlParameters.add(new BasicNameValuePair("opening_hours_display", openingHours));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
@@ -138,6 +140,11 @@ public class ValetShopDAO {
             if (!attElement.isJsonNull()) {
                 address = attElement.getAsString();
             }
+            attElement = shop.get("email");
+            String email = "";
+            if (!attElement.isJsonNull()) {
+                email = attElement.getAsString();
+            }
             attElement = shop.get("latitude");
             double latitude = 0.0;
             if (!attElement.isJsonNull()) {
@@ -163,7 +170,12 @@ public class ValetShopDAO {
             if (!attElement.isJsonNull()) {
                 openingHours = attElement.getAsString();
             }
-            vs = new ValetShop(id, name, address, latitude, longitude, noOfEmployees, revenueShare, openingHours);
+            attElement = shop.get("opening_hours_display");
+            String openingHoursDisplay = "";
+            if (!attElement.isJsonNull()) {
+                openingHoursDisplay = attElement.getAsString();
+            }
+            vs = new ValetShop(id, name, address, email, latitude, longitude, noOfEmployees, revenueShare, openingHours,openingHoursDisplay);
         }
         return vs;
     }
@@ -217,6 +229,11 @@ public class ValetShopDAO {
             if (!attElement.isJsonNull()) {
                 address = attElement.getAsString();
             }
+            attElement = shop.get("email");
+            String email = "";
+            if (!attElement.isJsonNull()) {
+                email = attElement.getAsString();
+            }
             attElement = shop.get("latitude");
             double latitude = 0.0;
             if (!attElement.isJsonNull()) {
@@ -242,13 +259,18 @@ public class ValetShopDAO {
             if (!attElement.isJsonNull()) {
                 openingHours = attElement.getAsString();
             }
-            ValetShop vs = new ValetShop(id, name, address, latitude, longitude, noOfEmployees, revenueShare, openingHours);
+            attElement = shop.get("opening_hours_display");
+            String openingHoursDisplay = "";
+            if (!attElement.isJsonNull()) {
+                openingHoursDisplay = attElement.getAsString();
+            }
+            ValetShop vs = new ValetShop(id, name, address, email, latitude, longitude, noOfEmployees, revenueShare, openingHours,openingHoursDisplay);
             shops.add(vs);
         }
         return shops;
     }
 
-    public ArrayList<String> updateValetShop(int staffId, String token, int id, String name, String address, double latitude, double longitude, int noOfEmployees, double revenueShare, String openingHours) throws UnsupportedEncodingException, IOException {
+    public ArrayList<String> updateValetShop(int staffId, String token, int id, String name, String address, String email, double latitude, double longitude, int noOfEmployees, double revenueShare, String openingHours, String openingHourFormat) throws UnsupportedEncodingException, IOException {
 
         String url = "http://119.81.43.85/erp/valet_shop/edit_shop";
 
@@ -264,7 +286,9 @@ public class ValetShopDAO {
         urlParameters.add(new BasicNameValuePair("shop_id", id + ""));
         urlParameters.add(new BasicNameValuePair("name", name));
         urlParameters.add(new BasicNameValuePair("address", address));
-        urlParameters.add(new BasicNameValuePair("opening_hour", openingHours));
+        urlParameters.add(new BasicNameValuePair("email", email));
+        urlParameters.add(new BasicNameValuePair("opening_hours", openingHourFormat));
+        urlParameters.add(new BasicNameValuePair("opening_hours_display", openingHours));
         urlParameters.add(new BasicNameValuePair("latitude", latitude + ""));
         urlParameters.add(new BasicNameValuePair("longitude", longitude + ""));
         urlParameters.add(new BasicNameValuePair("no_of_employees", noOfEmployees + ""));

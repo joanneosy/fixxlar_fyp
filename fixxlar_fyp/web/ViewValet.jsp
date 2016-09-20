@@ -102,7 +102,7 @@
                                                                 address = vAddress.substring(0, vAddress.lastIndexOf(" "));
                                                                 postal = vAddress.substring(vAddress.lastIndexOf(" ") + 1);
                                                             }
-                                                            String openingHr = valet.getOpeningHours();
+                                                            String openingHr = valet.getOpeningHoursDisplay();
                                                             int noEmployees = valet.getNoOfEmployees();
                                                             double revShare = valet.getRevenueShare();
                                                     %>
