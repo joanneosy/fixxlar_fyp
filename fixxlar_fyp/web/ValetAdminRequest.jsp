@@ -171,8 +171,8 @@
                                                                     <th class="sortable">Pickup Location</th>
                                                                     <th class="sortable">Dropoff Location</th>
                                                                     <th class="sortable">Vehicle Transmission</th>
-                                                                    <th class="sortable">More Info</th>
-                                                                    <th></th>
+                                                                    <th>More Info</th>
+                                                                    <!--<th></th>-->
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -264,7 +264,7 @@
 
                                                                 </div> <!--/.modal-content -->
                                                             </div> <!--/.modal -->
-                                                            <td><button class="btn btn-default btn-xs">Accept</button></td>
+                                                            <!--<td><button class="btn btn-default btn-xs">Accept</button></td>-->
                                                             </tr>
 
                                                             <%
@@ -290,8 +290,8 @@
                                                                     <th class="sortable">Current Pickup Location</th>
                                                                     <th class="sortable">Current Dropoff Location</th>
                                                                     <th class="sortable">Next Pickup Time</th>
-                                                                    <th class="sortable">More Info</th>
-                                                                    <th></th>
+                                                                    <th>More Info</th>
+                                                                    <!--<th></th>-->
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -379,7 +379,7 @@
                                                                 </div> <!--/.modal-content -->
                                                             </div> <!--/.modal -->
 
-                                                            <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" type="button">Reached</button></td>
+                                                            <!--<td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" type="button">Reached</button></td>-->
 
                                                             </tr>
 
@@ -407,7 +407,7 @@
                                                                     <th class="sortable">Dropoff Location</th>
                                                                     <th>More Info</th>
                                                                     <th>Completed By</th>
-                                                                    <th></th>
+                                                                    <!--<th></th>-->
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
