@@ -8,6 +8,7 @@ package servlet;
 import dao.ValetShopDAO;
 import dao.WebUserDAO;
 import dao.WorkshopDAO;
+import entity.ValetShop;
 import entity.WebUser;
 import entity.Workshop;
 import java.io.IOException;
@@ -203,18 +204,20 @@ public class AddValetServlet extends HttpServlet {
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
             int staffId = user.getStaffId();
             String token = user.getToken();
-            String err = vDAO.addShop(staffId, token, name, address + " " + postalCode, email, latitude, longitude, noEmployees, revenueShare, openingHour,openingHourFormat);
+            String err = vDAO.addShop(staffId, token, name, address + " " + postalCode, email, latitude, longitude, noEmployees, revenueShare, openingHour, openingHourFormat);
 //            ArrayList<String> addErrMsg = vDAO.addValet(staffId, token, name, address + " " + postalCode, latitude, longitude, noEmployees, revenueShare, /*openingHourFormat,*/ openingHour);
 //                        if (addErrMsg.size() == 0) {
             //                Workshop ws = wDAO.retrieveWorkshop(id, user.getStaffId(), user.getToken());
             //                int wsId = ws.getId();
             //                session.setAttribute("workshopId", wsId);
             if (err.length() == 0) {
-//                ValetShop valet = vDAO.retrieveValet(user.getStaffId(), user.getToken(), email);
+                ValetShop valet = vDAO.retrieveValetShop(user.getStaffId(), user.getToken(), email);
+                int valetId = valet.getId();
+                session.setAttribute("valetId", valetId);
                 session.setAttribute("success", name + " has been created!");
 //                RequestDispatcher view = request.getRequestDispatcher("AddWorkshopMasterAccount.jsp");
 //                view.forward(request, response);
-                response.sendRedirect("ViewValet.jsp");
+                response.sendRedirect("AddValetMasterAccount.jsp");
             } else {
                 request.setAttribute("errMsg", err);
                 request.setAttribute("name", name);
@@ -241,7 +244,7 @@ public class AddValetServlet extends HttpServlet {
                 request.setAttribute("phClose", phClose);
                 request.setAttribute("phEveOpen", phEveOpen);
                 request.setAttribute("phEveClose", phEveClose);
-                RequestDispatcher view = request.getRequestDispatcher("AddValet.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("AddValetShop.jsp");
                 view.forward(request, response);
             }
         } else {
@@ -270,7 +273,7 @@ public class AddValetServlet extends HttpServlet {
             request.setAttribute("phClose", phClose);
             request.setAttribute("phEveOpen", phEveOpen);
             request.setAttribute("phEveClose", phEveClose);
-            RequestDispatcher view = request.getRequestDispatcher("AddValet.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("AddValetShop.jsp");
             view.forward(request, response);
         }
     }

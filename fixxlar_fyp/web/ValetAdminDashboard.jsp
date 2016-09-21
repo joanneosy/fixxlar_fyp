@@ -4,6 +4,7 @@
     Author     : joanne.ong.2014
 --%>
 
+<%@page import="entity.ValetStaff"%>
 <%@page import="dao.ValetRequestDAO"%>
 <%@page import="dao.ValetShopDAO"%>
 <%@page import="entity.ValetShop"%>
@@ -42,13 +43,15 @@
                 out.println(successChangePasswordMsg + "<br/><br/>");
             }
             ValetRequestDAO vrDAO = new ValetRequestDAO();
-            int shopID = user.getShopId();
+            int shopId = user.getShopId();
             String token = user.getToken();
-            int staffID = user.getStaffId();
+            int staffId = user.getStaffId();
             String chatToken = user.getChatToken();
             String phone_number = user.getHandphone();
             String user_name = user.getName();
             String user_email = user.getEmail();
+
+
         %>
 
         <!-- Preloader -->
@@ -183,7 +186,8 @@
                                         <div class="tile-body no-vpadding">
                                             <div class="tab-content">
                                                 <%
-                                                    
+                                                    WebUserDAO wuDAO = new WebUserDAO();
+                                                    HashMap<Integer, WebUser> dList = wuDAO.retrieveAllValetStaffByShop(staffId, token, shopId);
                                                 %>
 
 
@@ -202,113 +206,37 @@
                                                             </thead>
                                                             <tbody class="contents">
                                                                 <!--Loop per new request-->
-                                                                <%                                                                Iterator it = qList.entrySet().iterator();
+                                                                <%
+                                                                    Iterator it = dList.entrySet().iterator();
                                                                     while (it.hasNext()) {
                                                                         Map.Entry pair = (Map.Entry) it.next();
-                                                                        
+                                                                        WebUser driver = (WebUser) pair.getValue();
+
+                                                                        String name = driver.getName();
+                                                                        String handphone = driver.getHandphone();
+
+                                                                        ValetStaff aDriver = driver.getValetStaff();
+                                                                        Date licenseIssueDate = aDriver.getLicenseIssueDate();
+                                                                        String licenseNumber = aDriver.getLicenseNumber();
+                                                                        int statusNumber = aDriver.getStatus();
+                                                                        String status = "";
+                                                                        if (statusNumber == 1) {
+                                                                            status = "Available";
+                                                                        } else {
+                                                                            status = "In Progress";
+                                                                            
+                                                                        }
                                                                 %>
                                                                 <tr>
-                                                                    <td><% out.print();%></td>
-                                                                    <td><% out.print();%></td>
-                                                                    <td><% out.print(custName);%></td>
-                                                                    <!--Picture Attachment-->
-                                                                    <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
-
+                                                                    <td><% out.print(name);%></td>
+                                                                    <td><% out.print(status);%></td>
+                                                                    <td><% out.print(handphone);%></td>
+                                                                    <!--Quote-->
+                                                                    <td class="text-center"><a data-modal="<% out.print("myModal" + i);%>" class="md-trigger"><img src="images/file.png"/></a></td>
                                                                     <!-- Modal -->
-                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <h4 class="modal-title">New Service - <% out.print(custName);%></h4>
-                                                                                </div>
-                                                                                <div class="col-xs-6 text-right">
-                                                                                    <h4 class="modal-title"><%=dateTime%></h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <!--                                                                            <div class="text-center">
-                                                                                                                                                            <img class="img-thumbnail-small"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                                                                                                        </div>-->
-                                                                            <div class="line-across"></div>
-                                                                            <div class="row">
-                                                                                <h4>Service Details</h4>
-                                                                            </div>
-                                                                            <div class="line-across"></div> 
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <b>Service Request: </b><br><% out.print(serviceName);%>
-                                                                                </div>
-
-                                                                                <div class="col-xs-6">
-                                                                                    <b>Urgency: </b><br><% out.print(serviceUrgency);%>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p></p>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-12">
-                                                                                    <b>Service Description: </b><br><% out.print(serviceDescription);%>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="line-across"></div>
-                                                                            <div class="row">
-                                                                                <h4>Car Details</h4>
-                                                                            </div>
-                                                                            <div class="line-across"></div> 
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
-                                                                                </div> 
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
-                                                                                </div>
-                                                                                <div class="col-xs-6">
-                                                                                    <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="text-left">Agreed Amount: $<%=finalPrice%></div>
-                                                                            <div>
-                                                                                <button type="button" class="btn btn-default">Chat</button>
-                                                                            </div>
-                                                                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                                                        </div>
-                                                                    </div>
-                                                                </div><!-- /.modal-content -->
-                                                            </div><!-- /.modal -->
-                                                            <% i++; %>
-                                                            <!--Quote-->
-                                                            <td class="text-center"><a data-modal="<% out.print("myModal" + i);%>" class="md-trigger"><img src="images/file.png"/></a></td>
-                                                            <!-- Modal -->
                                                             <div class="md-modal md-effect-13 md-slategray colorize-overlay " id="<% out.print("myModal" + i);%>">
 
                                                                 <div class="md-content">
-                                                                    <!--<div>-->
-                                                                    <!--                                                            <div class="col-xs-6">
-                                                                                                                                    <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
-                                                                                                                                </div>
-                                                                                                                                <div class="col-xs-6 text-right">
-                                                                                                                                    <h4 class="modal-title"><%=dateTime%></h4>
-                                                                                                                                </div>-->
-                                                                    <!--</div>-->
-                                                                    <!--<div>-->
                                                                     <div class='col-xs-12'>
 
                                                                         <div class="col-xs-12">
@@ -316,7 +244,7 @@
                                                                         </div>
                                                                         <div>
                                                                             <div class="col-xs-6">
-                                                                                <p><b>Customer Name: </b><br><% out.print(custName);%></p>
+                                                                                <p><b>Customer Name: </b><br><% out.print(customerName);%></p>
                                                                             </div>
                                                                             <div class="col-xs-6">
                                                                                 <p><b>Carplate Number: </b><br><% out.print(carPlate);%></p>
@@ -334,21 +262,21 @@
                                                                                 <h3>Valet Details - Next Trip</h3>
                                                                             </div>
                                                                             <div class="col-xs-12">
-                                                                                <p><b>Service Type: </b><% out.print(carPlate);%></p>
+                                                                                <p><b>Service Type: </b><% out.print(serviceType);%></p>
                                                                             </div>
                                                                             <div class="col-xs-12">
-                                                                                <p><b>Pick Up Address: </b><% out.print(carMake + " " + carModel);%></p>
+                                                                                <p><b>Pick Up Address: </b><% out.print(pickUpAddress);%></p>
                                                                             </div>
                                                                             <p></p>
                                                                             <div class="col-xs-12">
-                                                                                <p><b>Drop Off Address: </b><% out.print(carYear);%></p>
+                                                                                <p><b>Drop Off Address: </b><% out.print(dropOffAddress);%></p>
                                                                             </div>
                                                                             <div class="col-xs-12">
-                                                                                <p><b>Scheduled Date: </b>><% out.print(carControl);%></p>
+                                                                                <p><b>Scheduled Date: </b>><% out.print(dateTime);%></p>
                                                                             </div> 
-                                                                            <div class="col-xs-12">
-                                                                                <p><b>Scheduled Time: </b><% out.print(carColor);%></p>
-                                                                            </div>
+                                                                            <!--                                                                    <div class="col-xs-12">
+                                                                                                                                                    <p><b>Scheduled Time: </b><% out.print(carColor);%></p>
+                                                                                                                                                </div>-->
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-xs-12">
@@ -370,197 +298,6 @@
                                                         </table>
                                                     </div>
                                                 </div><!--New-->
-
-
-
-                                                <div class="tab-pane fade" id="Ongoing_Service" >
-                                                    <div class="table-responsive">
-                                                        <table id="example2" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="sortable">ID</th>
-                                                                    <th class="sortable">DateTime</th>
-                                                                    <th class="sortable">Name</th>
-                                                                    <th class="sortable">No. Plate</th>
-                                                                    <th class="sortable">Car Model</th>
-                                                                    <th class="sortable">Services</th>
-                                                                    <th>Attachment</th>
-                                                                    <th>Complete Service</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="contents">
-                                                                <!--Loop per new request-->
-                                                                <%
-                                                                    qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 6, "requested_datetime", "desc");
-                                                                    it = qList.entrySet().iterator();
-                                                                    while (it.hasNext()) {
-                                                                        Map.Entry pair = (Map.Entry) it.next();
-                                                                        QuotationRequest qr = (QuotationRequest) pair.getValue();
-                                                                        int id = qr.getId();
-                                                                        Timestamp timeStamp = qr.getRequestedDate();
-                                                                        String dateTime = "01-01-1990 00:00:00";
-                                                                        if (timeStamp != null) {
-                                                                            dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
-                                                                        }
-                                                                        String serviceName = qr.getName();
-                                                                        String address = qr.getAddress();
-                                                                        String serviceAmenities = qr.getAmenities();
-                                                                        String serviceDescription = qr.getDescription();
-                                                                        String serviceDetails = qr.getDetails();
-                                                                        int serviceId = qr.getId();
-                                                                        String serviceMileage = qr.getMileage();
-                                                                        String carPhoto = qr.getPhotos();
-                                                                        int serviceStatus = qr.getOffer().getStatus();
-                                                                        String serviceUrgency = qr.getUrgency();
-
-                                                                        Customer cust = qr.getCustomer();
-                                                                        String custName = cust.getName();
-                                                                        String custEmail = cust.getEmail();
-                                                                        String custPhone = cust.getHandphone();
-
-                                                                        Vehicle vehicle = qr.getVehicle();
-                                                                        String carPlate = vehicle.getPlateNumber();
-                                                                        String carModel = vehicle.getModel();
-                                                                        String carMake = vehicle.getMake();
-                                                                        int carYear = vehicle.getYear();
-                                                                        String carColor = vehicle.getColour();
-                                                                        String carControl = vehicle.getControl();
-
-                                                                        Offer offer = qr.getOffer();
-                                                                        double finalPrice = offer.getFinalPrice();
-                                                                        Timestamp dt = offer.getEstCompletionTime();
-                                                                        String estTime = "01-01-1990 00:00:00";
-                                                                        if (timeStamp != null) {
-                                                                            estTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(dt);
-                                                                        }
-                                                                        int offerId = offer.getId();
-
-                                                                %>
-                                                                <tr>
-                                                                    <td><% out.print(serviceId);%></td>
-                                                                    <td><% out.print(dateTime);%></td>
-                                                                    <td><% out.print(custName);%></td>
-                                                                    <td><% out.print(carPlate);%></td>
-                                                                    <td><% out.print(carModel);%></td>
-                                                                    <td><% out.print(serviceName);%></td>
-                                                                    <!--Picture Attachment-->
-                                                                    <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
-
-                                                                    <!-- Modal -->
-                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog-img">
-                                                                    <div class="modal-content">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                        <div class="modal-header">
-                                                                            <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <img class="img-responsive"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                                        </div>
-                                                                    </div> <!--/.modal-content--> 
-                                                                </div><!-- /.modal-dialog -->
-                                                            </div><!-- /.modal -->
-                                                            <% i++; %>
-                                                            <!--Quote-->
-                                                            <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Complete</span></button></td>
-
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                            <h4 class="modal-title">New Request - <% out.print(custName);%></h4>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="text-center">
-                                                                                <img class="img-thumbnail-small"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                            </div>
-                                                                            <div class="line-across"></div>
-
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Name: </b><% out.print(custName);%></p>
-                                                                            </div>
-
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Date & Time: </b><% out.print(dateTime);%></p>
-                                                                            </div>
-
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Email: </b><% out.print(custEmail);%></p>
-                                                                            </div>
-
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Contact No: </b><% out.print(custPhone);%></p>
-                                                                            </div>
-
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
-                                                                            </div>
-
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
-                                                                            </div>
-
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>License Plate: </b><% out.print(carPlate);%></p>
-                                                                            </div>
-
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
-                                                                            </div>
-
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
-                                                                            </div>
-
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
-                                                                            </div>
-
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Service Request: </b><% out.print(serviceName);%></p>
-                                                                            </div>
-
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Urgency: </b><% out.print(serviceUrgency);%></p>
-                                                                            </div>
-
-                                                                            <div>
-                                                                                <p><b>Service Description: </b><% out.print(serviceDescription);%></p>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <div class="text-left">Quoted Amount: $<%=finalPrice%></div>
-                                                                            <div class="text-left">Est. Completion Time: <%=estTime%></div>
-                                                                            <div>
-                                                                                <form action="CompleteService">
-                                                                                    <input type="hidden" name="id" value="<%=offerId%>"/>
-                                                                                    <input type="submit" class="btn btn-primary" value="Complete Service"></button>
-                                                                                </form>
-                                                                                <button type="button" class="btn btn-default">Chat</button>
-                                                                            </div>
-                                                                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                                                        </div>
-                                                                    </div><!-- /.modal-content -->
-                                                                </div><!-- /.modal-dialog -->
-                                                            </div><!-- /.modal -->
-                                                            </tr>
-
-                                                            <%
-                                                                    i++;
-                                                                }
-                                                            %>
-
-                                                            </tbody>
-
-                                                        </table>
-                                                    </div>
-                                                </div><!--Ongoing Service-->
 
 
 
@@ -727,7 +464,7 @@
         }
         window.onload = start;
     </script>
-    
+
     <script>
         $(document).ready(function () {
             $('#example').DataTable();

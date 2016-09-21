@@ -11,6 +11,7 @@
 <%@page import="entity.Workshop"%>
 <%@page import="dao.WorkshopDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="ProtectAdmin.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,8 +23,6 @@
         <!-- Wrap all page content here -->
         <div id="wrap">
             <%
-                WebUser user = (WebUser) session.getAttribute("loggedInUser");
-                String userType = (String) session.getAttribute("loggedInUserType");
                 int wsId = (Integer) session.getAttribute("workshopId");
 
                 String wsStaffName = (String)request.getAttribute("wsStaffName");
