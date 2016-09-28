@@ -682,60 +682,85 @@
 
 
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://code.jquery.com/jquery.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap-dropdown-multilevel.js"></script>
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
-<script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
-<script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
-<script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
-<script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
-<script type="text/javascript" src="js/jquery.videobackground.js"></script>
-<script type="text/javascript" src="js/jquery.blockUI.js"></script>
-<!--<script type="text/javascript" src="js/sorttable.js"></script>-->
-<script src="js/minimal.min.js"></script>
-<!--<script type="text/javascript" src="js/jquery-latest.js"></script>--> 
-<script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
-<script type="text/javascript" src="js/jquery.tabpager.min.js"></script> 
-<script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
-<script type="text/javascript" src="js/classie.js"></script> 
-<script type="text/javascript" src="js/modalEffects.js"></script> 
-<script type="text/javascript" src="js/intercom.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-dropdown-multilevel.js"></script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
+    <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
+    <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
+    <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
+    <script type="text/javascript" src="js/jquery.videobackground.js"></script>
+    <script type="text/javascript" src="js/jquery.blockUI.js"></script>
+    <!--<script type="text/javascript" src="js/sorttable.js"></script>-->
+    <script src="js/minimal.min.js"></script>
+    <!--<script type="text/javascript" src="js/jquery-latest.js"></script>--> 
+    <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
+    <script type="text/javascript" src="js/jquery.tabpager.min.js"></script> 
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
+    <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
+    <script type="text/javascript" src="js/classie.js"></script> 
+    <script type="text/javascript" src="js/modalEffects.js"></script> 
+    <script type="text/javascript" src="js/intercom.js"></script>
 
 
-<script>
-    $(function () {
-        // Initialize card flip
-        $('.card.hover').hover(function () {
-            $(this).addClass('flip');
-        }, function () {
-            $(this).removeClass('flip');
+    <script>
+        $(function () {
+            // Initialize card flip
+            $('.card.hover').hover(function () {
+                $(this).addClass('flip');
+            }, function () {
+                $(this).removeClass('flip');
+            });
+
+            //         sortable table
+            $('.table.table-sortable th.sortable').click(function () {
+                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                $(this).addClass(o);
+            });
         });
 
-        //         sortable table
-        $('.table.table-sortable th.sortable').click(function () {
-            var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-            $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-            $(this).addClass(o);
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+            $('#example2').DataTable();
+            $('#example3').DataTable();
+            $('#example4').DataTable();
+            $('#example5').DataTable();
         });
-    });
-
-</script>
-<script>
-    $(document).ready(function () {
-        $('#example').DataTable();
-        $('#example2').DataTable();
-        $('#example3').DataTable();
-        $('#example4').DataTable();
-        $('#example5').DataTable();
-    });
-</script>
-<script>
-    intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=categories%>", "<%=brands_carried%>");
-</script>
+    </script>
+    <script>
+        intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=categories%>", "<%=brands_carried%>");
+    </script>
+    <script>
+        $(window).load(function () {
+            $.ajax({
+                type: 'POST',
+                url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
+                crossDomain: true,
+                data: {
+                    "token": "<%=user.getToken()%>",
+                    "staff_id": "<%=user.getStaffId()%>",
+                    "shop_id": "<%=user.getShopId()%>"
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $.each(data.payload.notifications, function () {
+                        var notification = $(this).attr('actual_message');
+                        $.jGrowl(notification, {sticky: true});
+                    });
+                },
+                error: function () {
+                }
+            });
+        });
+    </script>
 </html>

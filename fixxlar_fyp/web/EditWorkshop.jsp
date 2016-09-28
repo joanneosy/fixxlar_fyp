@@ -98,6 +98,12 @@
                             } else {
                                 //Each string in this format: Monday-0900-1800
                                 daysAndTime = openingHour.split(",");
+                                if (daysAndTime.length < 9) {
+                                    daysAndTime = new String[9];
+                                    for (int i = 0; i < 9; i++) {
+                                        daysAndTime[i] = "0-0-0";
+                                    }
+                                }
                             }
                             String openingHourFormat = ws.getOpeningHourFormat();
                             if (openingHourFormat.equals("null")) {
@@ -128,7 +134,11 @@
                                 remark = "";
                             }
                             int status = ws.getStatus();
-                            String[] carBrandsID = ws.getSpecialize().split(",");
+                            String[] acarBrandsID = ws.getSpecialize().split(",");
+                            String[] carBrandsID = new String[acarBrandsID.length];
+                            for (int i = 0; i < acarBrandsID.length; i++) {
+                                carBrandsID[i] = acarBrandsID[i].trim();
+                            }
                             ArrayList<String> carBrands = wsDAO.retrieveAllCarBrands(user.getStaffId(), user.getToken());
 
                         %>
@@ -292,6 +302,9 @@
                                                         <select class="chosen-select chosen-transparent form-control" id="input07" name="mondayOpen">
                                                             <%                                                                //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
                                                                 String[] openCloseTimings = daysAndTime[0].split("-");
+                                                                //                                    if(openCloseTimings.length < 3) {
+//                                                                    openCloseTimings = new String[] {"0","0","0"};
+//                                                                }
                                                                 for (int i = 0; i < hours.size(); i++) {
                                                                     String hour = hours.get(i);
                                                                     if (openCloseTimings[1].equals(hour)) {
@@ -340,10 +353,13 @@
                                                         <select multiple class="chosen-select chosen-transparent form-control" id="input08" name="category">
 
                                                             <%
-                                                                String[] categories = category.split(",");
+                                                                String[] acategories = category.split(",");
+                                                                String[] categories = new String[acategories.length];
+                                                                for (int i = 0; i < acategories.length; i++) {
+                                                                    categories[i] = acategories[i].trim();
+                                                                }
 
-                                                                if (Arrays.asList(categories)
-                                                                        .contains("Maintenance")) {
+                                                                if (Arrays.asList(categories).contains("Maintenance")) {
                                                                     out.println("<option selected>Maintenance</option>");
                                                                 } else {
                                                                     out.println("<option>Maintenance</option>");
@@ -447,9 +463,7 @@
                                                     paramList.add(
                                                             "phEveClose");
                                                     int z = 0;
-                                                    for (int i = 1;
-                                                            i < days.size();
-                                                            i++) {
+                                                    for (int i = 1; i < days.size(); i++) {
                                                 %>
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label"><%=days.get(i)%></label>
@@ -459,6 +473,9 @@
                                                                 z++;
                                                                 //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
                                                                 openCloseTimings = daysAndTime[i].split("-");
+                                                                // if(openCloseTimings.length < 3) {
+                                                                //   openCloseTimings = new String[] {"0","0","0"};
+                                                                //}
                                                                 for (int j = 0; j < hours.size(); j++) {
                                                                     String hour = hours.get(j);
                                                                     if (openCloseTimings[1].equals(hour)) {
@@ -547,99 +564,13 @@
 
         <script src="js/minimal.min.js"></script>
 
-
         <script>
-
-            //initialize file upload button function
-            $(document)
-                    .on('change', '.btn-file :file', function () {
-                        var input = $(this),
-                                numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                        input.trigger('fileselect', [numFiles, label]);
-                    });
 
 
             $(function () {
 
-                //load wysiwyg editor
-                $('#input06').summernote({
-                    toolbar: [
-                        //['style', ['style']], // no style button
-                        ['style', ['bold', 'italic', 'underline', 'clear']],
-                        ['fontsize', ['fontsize']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['height', ['height']],
-                                //['insert', ['picture', 'link']], // no insert buttons
-                                //['table', ['table']], // no table button
-                                //['help', ['help']] //no help button
-                    ],
-                    height: 137   //set editable area's height
-                });
-
                 //chosen select input
                 $(".chosen-select").chosen({disable_search_threshold: 10});
-
-                //initialize datepicker
-                $('#datepicker').datetimepicker({
-                    icons: {
-                        time: "fa fa-clock-o",
-                        date: "fa fa-calendar",
-                        up: "fa fa-arrow-up",
-                        down: "fa fa-arrow-down"
-                    }
-                });
-
-                $("#datepicker").on("dp.show", function (e) {
-                    var newtop = $('.bootstrap-datetimepicker-widget').position().top - 45;
-                    $('.bootstrap-datetimepicker-widget').css('top', newtop + 'px');
-                });
-
-                //initialize colorpicker
-                $('#colorpicker').colorpicker();
-
-                $('#colorpicker').colorpicker().on('showPicker', function (e) {
-                    var newtop = $('.dropdown-menu.colorpicker.colorpicker-visible').position().top - 45;
-                    $('.dropdown-menu.colorpicker.colorpicker-visible').css('top', newtop + 'px');
-                });
-
-                //initialize colorpicker RGB
-                $('#colorpicker-rgb').colorpicker({
-                    format: 'rgb'
-                });
-
-                $('#colorpicker-rgb').colorpicker().on('showPicker', function (e) {
-                    var newtop = $('.dropdown-menu.colorpicker.colorpicker-visible').position().top - 45;
-                    $('.dropdown-menu.colorpicker.colorpicker-visible').css('top', newtop + 'px');
-                });
-
-                //initialize file upload button
-                $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
-
-                    var input = $(this).parents('.input-group').find(':text'),
-                            log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-                    console.log(log);
-
-                    if (input.length) {
-                        input.val(log);
-                    } else {
-                        if (log)
-                            alert(log);
-                    }
-
-                });
-
-                // Initialize colorpalette
-                $('#event-colorpalette').colorPalette({
-                    colors: [['#428bca', '#5cb85c', '#5bc0de', '#f0ad4e', '#d9534f', '#ff4a43', '#22beef', '#a2d200', '#ffc100', '#cd97eb', '#16a085', '#FF0066', '#A40778', '#1693A5']]
-                }).on('selectColor', function (e) {
-                    var data = $(this).data();
-
-                    $(data.returnColor).val(e.color);
-                    $(this).parents(".input-group").css("border-bottom-color", e.color);
-                });
 
             })
 

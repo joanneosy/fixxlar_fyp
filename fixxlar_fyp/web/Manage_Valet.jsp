@@ -761,4 +761,28 @@
     <script>
         intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=categories%>", "<%=brands_carried%>");
     </script>
+    <script>
+            $(window).load(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
+                    crossDomain: true,
+                    data: {
+                        "token": "<%=user.getToken()%>",
+                        "staff_id": "<%=user.getStaffId()%>",
+                        "shop_id": "<%=user.getShopId()%>"
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        $.each(data.payload.notifications, function () {
+                            var notification = $(this).attr('actual_message');
+                            $.jGrowl(notification, {sticky: true});
+                        });
+                    },
+                    error: function () {
+                    }
+                });
+            });
+        </script>
 </html>

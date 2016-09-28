@@ -84,37 +84,37 @@
 
                                             <form class="form-horizontal" role="form" action="AddEmployee" method="POST">
                                                 <div class="form-group">
-                                                    <label for="input01" class="col-sm-4 control-label">Name</label>
+                                                    <label for="input01" class="col-sm-4 control-label">Name*</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input01" name="staffName">
+                                                        <input type="text" class="form-control" id="input01" name="staffName" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input02" class="col-sm-4 control-label">Email</label>
+                                                    <label for="input02" class="col-sm-4 control-label">Email*</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input02" name="staffEmail">
+                                                        <input type="text" class="form-control" id="input02" name="staffEmail" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input03" class="col-sm-4 control-label">Phone Number</label>
+                                                    <label for="input03" class="col-sm-4 control-label">Phone Number*</label>
                                                     <div class="col-sm-8">
-                                                        <input type="tel" class="form-control" id="input03" name="staffHpNo">
+                                                        <input type="tel" class="form-control" id="input03" name="staffHpNo" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input04" class="col-sm-4 control-label">Password</label>
+                                                    <label for="input04" class="col-sm-4 control-label">Password*</label>
                                                     <div class="col-sm-8">
-                                                        <input type="password" class="form-control" id="input04" name="password">
+                                                        <input type="password" class="form-control" id="input04" name="password" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input05" class="col-sm-4 control-label">Confirm Password</label>
+                                                    <label for="input05" class="col-sm-4 control-label">Confirm Password*</label>
                                                     <div class="col-sm-8">
-                                                        <input type="password" class="form-control" id="input05" name="confirmPassword">
+                                                        <input type="password" class="form-control" id="input05" name="confirmPassword" required>
                                                     </div>
                                                 </div>
 
@@ -122,10 +122,10 @@
                                                     if (userType.equals("Admin") && user.getStaffType() == 1) {
                                                 %>
                                                 <div class="form-group">
-                                                    <label for="input05" class="col-sm-4 control-label">Type of Employee</label>
+                                                    <label for="input05" class="col-sm-4 control-label">Type of Employee*</label>
                                                     <div class="col-sm-8">
                                                         <input type="radio" name="type" value="2"> Master 
-                                                        <input type="radio" name="type" value="3"> Normal
+                                                        <input type="radio" name="type" value="3" checked> Normal
                                                     </div>
                                                 </div>
                                                 <%}%>
@@ -176,101 +176,27 @@
 
 
         <script>
-
-            //initialize file upload button function
-            $(document)
-                    .on('change', '.btn-file :file', function () {
-                        var input = $(this),
-                                numFiles = input.get(0).files ? input.get(0).files.length : 1,
-                                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                        input.trigger('fileselect', [numFiles, label]);
-                    });
-
-
-            $(function () {
-
-                //load wysiwyg editor
-                $('#input06').summernote({
-                    toolbar: [
-                        //['style', ['style']], // no style button
-                        ['style', ['bold', 'italic', 'underline', 'clear']],
-                        ['fontsize', ['fontsize']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['height', ['height']],
-                                //['insert', ['picture', 'link']], // no insert buttons
-                                //['table', ['table']], // no table button
-                                //['help', ['help']] //no help button
-                    ],
-                    height: 137   //set editable area's height
-                });
-
-                //chosen select input
-                $(".chosen-select").chosen({disable_search_threshold: 10});
-
-                //initialize datepicker
-                $('#datepicker').datetimepicker({
-                    icons: {
-                        time: "fa fa-clock-o",
-                        date: "fa fa-calendar",
-                        up: "fa fa-arrow-up",
-                        down: "fa fa-arrow-down"
+            $(window).load(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
+                    crossDomain: true,
+                    data: {
+                        "token": "<%=user.getToken()%>",
+                        "staff_id": "<%=user.getStaffId()%>",
+                        "shop_id": "<%=user.getShopId()%>"
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data.payload.notifications, function () {
+                            var notification = $(this).attr('actual_message');
+                            $.jGrowl(notification, {sticky: true});
+                        });
+                    },
+                    error: function () {
                     }
                 });
-
-                $("#datepicker").on("dp.show", function (e) {
-                    var newtop = $('.bootstrap-datetimepicker-widget').position().top - 45;
-                    $('.bootstrap-datetimepicker-widget').css('top', newtop + 'px');
-                });
-
-                //initialize colorpicker
-                $('#colorpicker').colorpicker();
-
-                $('#colorpicker').colorpicker().on('showPicker', function (e) {
-                    var newtop = $('.dropdown-menu.colorpicker.colorpicker-visible').position().top - 45;
-                    $('.dropdown-menu.colorpicker.colorpicker-visible').css('top', newtop + 'px');
-                });
-
-                //initialize colorpicker RGB
-                $('#colorpicker-rgb').colorpicker({
-                    format: 'rgb'
-                });
-
-                $('#colorpicker-rgb').colorpicker().on('showPicker', function (e) {
-                    var newtop = $('.dropdown-menu.colorpicker.colorpicker-visible').position().top - 45;
-                    $('.dropdown-menu.colorpicker.colorpicker-visible').css('top', newtop + 'px');
-                });
-
-                //initialize file upload button
-                $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
-
-                    var input = $(this).parents('.input-group').find(':text'),
-                            log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-                    console.log(log);
-
-                    if (input.length) {
-                        input.val(log);
-                    } else {
-                        if (log)
-                            alert(log);
-                    }
-
-                });
-
-                // Initialize colorpalette
-                $('#event-colorpalette').colorPalette({
-                    colors: [['#428bca', '#5cb85c', '#5bc0de', '#f0ad4e', '#d9534f', '#ff4a43', '#22beef', '#a2d200', '#ffc100', '#cd97eb', '#16a085', '#FF0066', '#A40778', '#1693A5']]
-                }).on('selectColor', function (e) {
-                    var data = $(this).data();
-
-                    $(data.returnColor).val(e.color);
-                    $(this).parents(".input-group").css("border-bottom-color", e.color);
-                });
-
-            })
-
-
+            });
         </script>
     </body>
 </html>

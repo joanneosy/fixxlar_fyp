@@ -96,14 +96,6 @@
                                                     </div>
                                                 </div>
 
-                                                <!--                                                <div class="input-group date">
-                                                                                                    <div class="col-sm-8">
-                                                                                                        <input type="text" class="form-control" id="input03" name="licenseIssue">
-                                                                                                    </div>
-                                                                                                    <span class="input-group-addon">
-                                                                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                                                                    </span>
-                                                                                                </div>-->
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-4 control-label">License Issue Date</label>
                                                     <div class="col-sm-8">
@@ -118,19 +110,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-<!--                                                <div class='input-group date' id='<%//="datetimepicker" + i%>'>
-                                                    <form id='<%//="dt" + offerId%>' action="AddEstimatedCompletionTime" role="form">
-                                                        <input type='text' name="dateTime" class="form-control dt" />
-                                                        <input type="hidden" id="<%//="hidden" + offerId%>" name="id" value="">
-                                                    </form>
-
-                                                    <span class="input-group-addon">
-                                                        <span class="glyphicon glyphicon-calendar"></span>
-                                                    </span>
-                                                </div>-->
-
-
 
                                                 <div class="form-group">
                                                     <label for="input04" class="col-sm-4 control-label">Phone Number</label>

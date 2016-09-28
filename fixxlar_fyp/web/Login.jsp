@@ -36,11 +36,11 @@
                         <form id="form-signin" class="form-signin" action = "Authenticate" method= "post">
                             <section>
                                 <div class="input-group">
-                                    <input type="email" class="form-control" name="email" placeholder="abc@email.com">
+                                    <input type="email" class="form-control" name="email" placeholder="abc@email.com" required>
                                     <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                 </div>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" placeholder="Password" required>
                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                 </div>
                             </section>

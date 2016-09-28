@@ -218,20 +218,6 @@
                                                             <li><a href="#Waiting_for_Response" data-toggle="pill">Waiting for Response</a></li>
                                                         </ul>
                                                     </div>
-                                                    <!--                                                <div class="btn-group mobileOnly" style="float:right">
-                                                                                                        <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown" id='select'>
-                                                                                                            Select <span class="caret"></span>
-                                                                                                        </button>
-                                                    
-                                                                                                        <ul class="dropdown-menu tabpager" id="requestDropdown" role="menu" >
-                                                                                                            <li class="active"><a href="#New" data-toggle="pill">New Request</a></li>
-                                                                                                            <li><a href="#Waiting_for_Response" data-toggle="pill">Waiting for Response</a></li>
-                                                                                                            <li><a href="#Send_Final_Quote" data-toggle="pill">Send Final Quote</a></li>
-                                                                                                            <li><a href="#Awaiting_Final_Confirmation" data-toggle="pill">Awaiting Final Confirmation</a></li>
-                                                                                                            <li><a href="#Final_Quote_Accepted" data-toggle="pill">Final Quote Accepted</a></li>
-                                                                                                            <li><a href="#All" data-toggle="pill">All</a></li>
-                                                                                                        </ul>
-                                                                                                    </div>-->
                                                 </div>
 
 
@@ -989,24 +975,13 @@
                     });
                 },
                 error: function () {
-                    alert("fail");
                 }
             });
         });
     </script>
     <script>
         function subscribe(requestID, wsID, userID, custName, chatToken, log) {
-//                event.preventDefault();
             $("#" + log).html("");
-//                $(this).parent().siblings().children().removeClass("active").remove;
-//                $(this).addClass("active").removeClass("unread");
-//                var uid = this.id;
-//                var arr = uid.split("-");
-//                var topicId = arr[0];
-//                var userId = arr[1];
-//                var userName = arr[2];
-//                var shopID = arr[3];
-//                $("#chatHead li h3").html(userName);
             $.ajax({
                 type: 'POST',
                 url: 'http://119.81.43.85/chat/retrive_chat_history',
