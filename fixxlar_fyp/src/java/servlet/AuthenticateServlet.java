@@ -51,8 +51,8 @@ public class AuthenticateServlet extends HttpServlet {
 
         WebUserDAO dao = new WebUserDAO();
         WebUser user = dao.authenticateUser(email, passwordEntered);
-        int staffType = user.getStaffType();
         if (user != null) {
+            int staffType = user.getStaffType();
             session.setAttribute("loggedInUser", user);
             int userType = user.getUserType();
             if (userType == 1) {

@@ -49,6 +49,11 @@ public class AddWorkshopServlet extends HttpServlet {
         String email = request.getParameter("email").trim();
         String[] specializeArr = request.getParameterValues("specialize");
         String description = request.getParameter("description").trim();
+        String wsStaffName = request.getParameter("staffName").trim();
+        String wsStaffHpNo = request.getParameter("staffHpNo").trim();
+        String wsStaffEmail = request.getParameter("staffEmail").trim();
+        String password = request.getParameter("password").trim();
+        String confirmPassword = request.getParameter("confirmPassword").trim();
 
         String website = request.getParameter("website").trim();
         if (website.length() != 0) {
@@ -190,6 +195,15 @@ public class AddWorkshopServlet extends HttpServlet {
         Validation validation = new Validation();
         ArrayList<String> errMsg = validation.validateWorkshop(contact, contact2, postalCode, openingHourFormat);
 
+        String hpValid = validation.isValidMobileContact(wsStaffHpNo);
+        String pwValid = validation.isValidPassword(password, confirmPassword);
+        if (hpValid != null && hpValid.length() > 0) {
+            errMsg.add(hpValid);
+        }
+        if (pwValid != null && pwValid.length() > 0) {
+            errMsg.add(pwValid);
+        }
+
         String openingHour = openingHourFull;
         String specialize = "";
         if (specializeArr == null) {
@@ -230,7 +244,9 @@ public class AddWorkshopServlet extends HttpServlet {
             int staffId = user.getStaffId();
             String token = user.getToken();
             ArrayList<String> addErrMsg = wDAO.addWorkshop(email, name, description, website, address + " " + postalCode, openingHour, openingHourFormat,
-                    latitude, longitude, contact, contact2, location, specialize, category, brandsCarried, remark, staffId, token);
+                    latitude, longitude, contact, contact2, location, specialize, category, brandsCarried, remark, staffId, token,
+                    wsStaffName, wsStaffEmail, wsStaffHpNo, password);
+
             if (addErrMsg.size() == 0) {
                 Workshop ws = wDAO.retrieveWorkshop(email, user.getStaffId(), user.getToken());
                 int wsId = ws.getId();
@@ -238,7 +254,7 @@ public class AddWorkshopServlet extends HttpServlet {
                 session.setAttribute("success", name + " has been created!");
 //                RequestDispatcher view = request.getRequestDispatcher("AddWorkshopMasterAccount.jsp");
 //                view.forward(request, response);
-                response.sendRedirect("AddWorkshopMasterAccount.jsp");
+                response.sendRedirect("ViewWorkshop.jsp");
             } else {
                 request.setAttribute("errMsg", addErrMsg);
                 request.setAttribute("name", name);
@@ -272,6 +288,9 @@ public class AddWorkshopServlet extends HttpServlet {
                 request.setAttribute("brandsCarried", brandsCarried);
                 request.setAttribute("categoryArr", categoryArr);
                 request.setAttribute("remark", remark);
+                request.setAttribute("wsStaffName", wsStaffName);
+                request.setAttribute("wsStaffHpNo", wsStaffHpNo);
+                request.setAttribute("wsStaffEmail", wsStaffEmail);
                 RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
                 view.forward(request, response);
             }
@@ -308,6 +327,9 @@ public class AddWorkshopServlet extends HttpServlet {
             request.setAttribute("brandsCarried", brandsCarried);
             request.setAttribute("categoryArr", categoryArr);
             request.setAttribute("remark", remark);
+            request.setAttribute("wsStaffName", wsStaffName);
+            request.setAttribute("wsStaffHpNo", wsStaffHpNo);
+            request.setAttribute("wsStaffEmail", wsStaffEmail);
             RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
             view.forward(request, response);
         }

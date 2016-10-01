@@ -103,7 +103,7 @@
                                                            title="Urgency count" ><%=status%></label>         
 
                                                     <div class="col-sm-8">
-                                                        <input type="number" min="1" class="form-control" id="input01" name="<%=settingName + "," + entry.getKey() %>" value="<%=entry.getValue().getAsInt()%>">
+                                                        <input type="text" min="1" class="form-control" id="input01" name="<%=settingName + "," + entry.getKey() %>" value="<%=entry.getValue().getAsString()%>">
                                                     </div>                                       
                                                 </div>
                                                 

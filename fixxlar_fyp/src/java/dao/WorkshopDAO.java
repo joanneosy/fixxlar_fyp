@@ -313,7 +313,7 @@ public class WorkshopDAO {
 
     public ArrayList<String> addWorkshop(String email, String name, String description, String website, String address, String openingHour, String openingHourFormat, double latitude,
             double longitude, String contact, String contact2, String location, String specialize, String category, String brandsCarried,
-            String remark, int staffId, String token) throws UnsupportedEncodingException, IOException {
+            String remark, int staffId, String token, String staffName, String staffEmail, String hpNo, String password) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/erp/workshop/add_shop";
 
         HttpClient client = new DefaultHttpClient();
@@ -342,7 +342,11 @@ public class WorkshopDAO {
         urlParameters.add(new BasicNameValuePair("remark", remark));
         urlParameters.add(new BasicNameValuePair("email", email));
         urlParameters.add(new BasicNameValuePair("status", 1 + ""));
-
+        urlParameters.add(new BasicNameValuePair("staff_name", staffName));
+        urlParameters.add(new BasicNameValuePair("staff_email", staffEmail));
+        urlParameters.add(new BasicNameValuePair("handphone", hpNo));
+        urlParameters.add(new BasicNameValuePair("password", password));
+        
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 
         HttpResponse response = client.execute(post);

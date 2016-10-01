@@ -200,6 +200,26 @@
                                                 }
                                                 String[] openCloseTimings = {mondayOpen, mondayClose, tuesdayOpen, tuesdayClose, wednesdayOpen, wednesdayClose, thursdayOpen, thursdayClose, fridayOpen, fridayClose, saturdayOpen, saturdayClose, sundayOpen, sundayClose, phOpen, phClose, phEveOpen, phEveClose};
 
+                                                String wsStaffName = (String) request.getAttribute("wsStaffName");
+                                                if (wsStaffName == null || wsStaffName.equals("null")) {
+                                                    wsStaffName = "";
+                                                }
+                                                String wsStaffHpNo = (String) request.getAttribute("wsStaffHpNo");
+                                                if (wsStaffHpNo == null || wsStaffHpNo.equals("null")) {
+                                                    wsStaffHpNo = "";
+                                                }
+                                                String wsStaffEmail = (String) request.getAttribute("wsStaffEmail");
+                                                if (wsStaffEmail == null || wsStaffEmail.equals("null")) {
+                                                    wsStaffEmail = "";
+                                                }
+                                                String password = (String) request.getAttribute("password");
+                                                if (password == null || password.equals("null")) {
+                                                    password = "";
+                                                }
+                                                String confirmPassword = (String) request.getAttribute("confirmPassword");
+                                                if (confirmPassword == null || confirmPassword.equals("null")) {
+                                                    confirmPassword = "";
+                                                }
                                             %>
                                             <%                                                ArrayList<String> msg = (ArrayList<String>) request.getAttribute("errMsg");
                                                 if (msg != null && msg.size() > 0) {
@@ -320,11 +340,11 @@
 
                                                 </div>
 
-                                                <div class="form-group">
-                                                    <h3><label class="col-sm-6">Operating Hours (Open - Close)</label></h3>
-                                                    <h3><label class="col-sm-3">Specialize</label></h3>
-                                                    <h3><label class="col-sm-3">Category</label></h3>
-                                                </div>   
+                                                    <div class="form-group">
+                                                        <h3><label class="col-sm-6">Operating Hours (Open - Close)</label></h3>
+                                                        <h3><label class="col-sm-3">Specialize</label></h3>
+                                                        <h3><label class="col-sm-3">Category</label></h3>
+                                                    </div>   
 
                                                 <%                                                    //create hours arraylist
                                                     //iterate through every day for operating hours fields
@@ -530,14 +550,53 @@
                                                 </div>  
 
                                                 <%                                                    }//end of for loop for operating days
-                                                %>
+%>
+                                                <div class="form-group">
+                                                    <h3><label class="col-sm-6">Add Workshop Master Account</label></h3>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="input01" class="col-sm-2 control-label">Name</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="input01" name="staffName" value="<%=wsStaffName%>" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="input02" class="col-sm-2 control-label">Email</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="input02" name="staffEmail" value="<%=wsStaffEmail%>" required>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="input03" class="col-sm-2 control-label">Password</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="password" class="form-control" id="input03" name="password" value="<%=password%>" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="input04" class="col-sm-2 control-label">Confirm Password</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="password" class="form-control" id="input04" name="confirmPassword" value="<%=confirmPassword%>" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="input05" class="col-sm-2 control-label">Handphone Number</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="input05" name="staffHpNo" value="<%=wsStaffHpNo%>" required>
+                                                    </div>
+                                                </div>
+                                                    
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-5 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                         <button type="reset" class="btn btn-default">Reset</button>
                                                     </div>
                                                 </div>
-
+                                                    
                                             </form>
                                         </div>
                                         <!--End of Tile Body-->
