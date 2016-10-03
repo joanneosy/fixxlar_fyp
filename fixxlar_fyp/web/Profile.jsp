@@ -64,7 +64,8 @@
                         String wsBrands = ws.getBrandsCarried();
                         String wsDescription = ws.getDescription();
                         String wsSpecialize = ws.getSpecialize();
-                        String wsOpenHr = ws.getOpeningHourFormat();
+                        String wsOpenHr = ws.getOpeningHour();
+                        String wsOpenHrFormat = ws.getOpeningHourFormat();
                         //String[] wsOpeningHr = wsOpenHr.split(",");
                         String wsCategory = ws.getCategory();
 
@@ -192,141 +193,7 @@
 
 
                                         <div class="tile-widget">
-                                            <%
-                                                /*
-                                                 HashMap<String, String> openingMap = new HashMap<String, String>();
-                                                 for(int x = 1; x < wsOpeningHr.length; x++) {
-                                                 String openHr = wsOpeningHr[x];
-                                                 String day = openHr.substring(0, openHr.indexOf("-"));
-                                                 String startEnd = openHr.substring(openHr.indexOf("-") + 1);
-                                                 if(openingMap.get(startEnd) == null){
-                                                 openingMap.put(startEnd, day);
-                                                 }
-                                                 }*/
-                                                ArrayList<String> compiled = new ArrayList<String>();
-                                                //Monday-0900-1800
-                                                String[] daysAndTime = wsOpenHr.split(",");
-                                                //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
-                                                String[] openCloseTimings = daysAndTime[0].split("-");
-                                                String dayToCompare = openCloseTimings[0];
-                                                String openToCompare = openCloseTimings[1];
-                                                String closeToCompare = openCloseTimings[2];
-                                                String toAdd = dayToCompare + "-" + dayToCompare + "-" + openToCompare + "-" + closeToCompare;
-
-                                                for (int i = 1; i < daysAndTime.length - 2; i++) {
-                                                    openCloseTimings = daysAndTime[i].split("-");
-                                                    if (openCloseTimings[1].equals(openToCompare) && openCloseTimings[2].equals(closeToCompare)) {
-                                                        String[] toAddArr = toAdd.split("-");
-                                                        toAdd = toAddArr[0] + "-" + openCloseTimings[0] + "-" + openToCompare + "-" + closeToCompare;
-                                                    } else {
-                                                        String[] toAddArr = toAdd.split("-");
-                                                        //Closed-Closed
-                                                        if (toAddArr[2].equals("Closed")) {
-                                                            //Saturday-Saturday
-                                                            if (toAddArr[0].equals(toAddArr[1])) {
-                                                                toAdd = toAddArr[0] + ": Closed";
-                                                            } else {
-                                                                toAdd = toAddArr[0] + " to " + toAddArr[1] + ": Closed";
-                                                            }
-                                                        } else //Saturday-Saturday
-                                                        if (toAddArr[0].equals(toAddArr[1])) {
-                                                            toAdd = toAddArr[0] + ": " + toAddArr[2] + " - " + toAddArr[3];
-                                                        } else {
-                                                            toAdd = toAddArr[0] + " to " + toAddArr[1] + ": " + toAddArr[2] + " - " + toAddArr[3];
-                                                        }
-                                                        compiled.add(toAdd);
-                                                        dayToCompare = openCloseTimings[0];
-                                                        openToCompare = openCloseTimings[1];
-                                                        closeToCompare = openCloseTimings[2];
-                                                        toAdd = dayToCompare + "-" + dayToCompare + "-" + openToCompare + "-" + closeToCompare;
-                                                    }
-
-                                                    if (i == daysAndTime.length - 3) {
-                                                        String[] toAddArr = toAdd.split("-");
-                                                        //Closed-Closed
-                                                        if (toAddArr[2].equals("Closed")) {
-                                                            //Saturday-Saturday
-                                                            if (toAddArr[0].equals(toAddArr[1])) {
-                                                                toAdd = toAddArr[0] + ": Closed";
-                                                            } else {
-                                                                toAdd = toAddArr[0] + " to " + toAddArr[1] + ": Closed";
-                                                            }
-                                                        } else //Saturday-Saturday
-                                                        if (toAddArr[0].equals(toAddArr[1])) {
-                                                            toAdd = toAddArr[0] + ": " + toAddArr[2] + " - " + toAddArr[3];
-                                                        } else {
-                                                            toAdd = toAddArr[0] + " to " + toAddArr[1] + ": " + toAddArr[2] + " - " + toAddArr[3];
-                                                        }
-                                                        compiled.add(toAdd);
-                                                    }
-                                                }
-
-                                                for (int i = 7; i < 9; i++) {
-                                                    openCloseTimings = daysAndTime[i].split("-");
-                                                    //Closed-Closed
-                                                    if (openCloseTimings[2].equals("Closed")) {
-                                                        toAdd = openCloseTimings[0] + ": Closed";
-                                                    } else {
-                                                        toAdd = openCloseTimings[0] + ": " + openCloseTimings[1] + " - " + openCloseTimings[2];
-                                                    }
-                                                    compiled.add(toAdd);
-                                                }
-
-                                                for (String x : compiled) {
-                                                    out.println(x + "<br/>");
-                                                }
-//                                                ArrayList<String> hourList = new ArrayList<String>();
-//                                                String day = wsOpeningHr[0].substring(0, wsOpeningHr[0].indexOf("-"));
-//                                                String startEnd = wsOpeningHr[0].substring(wsOpeningHr[0].indexOf("-") + 1);
-//                                                for (int x = 1; x < wsOpeningHr.length; x++) {
-//                                                    String openHr = wsOpeningHr[x];
-//                                                    String day2 = openHr.substring(0, openHr.indexOf("-"));
-//                                                    String startEnd2 = openHr.substring(openHr.indexOf("-") + 1);
-//                                                    if (startEnd.equals(startEnd2)) {
-//                                                        day = day + "-" + day2;
-//                                                    } else {
-//                                                        day = day + ":" + startEnd;
-//                                                        hourList.add(day);
-//                                                        day = day2;
-//                                                        startEnd = startEnd2;
-//                                                    }
-//                                                    if (x == wsOpeningHr.length - 1) {
-//                                                        day = day + ":" + startEnd2;
-//                                                        hourList.add(day);
-//                                                    }
-//                                                }
-//                                                for (String x : hourList) {
-//                                                    out.println(x);
-//                                                }
-                                            %>
-                                            <!--                                            <div class="row">
-                                                                                            <div class="col-md-12">
-                                                                                                <div class="form-group col-sm-6">
-                                                                                                    <label for="postalCode">Mon - Fri </label>
-                                                                                                    <input type="text" class="form-control" value="<%//=wsOpeningHr%>" readonly>
-                                                                                                </div>
-                                            
-                                                                                                <div class="form-group col-sm-6">
-                                                                                                    <label for="postalCode">Sat & Sun </label>
-                                                                                                    <input type="text" class="form-control" value="0900hrs to 1600hrs" readonly>
-                                                                                                </div>
-                                            
-                                                                                            </div>
-                                                                                        </div>-->
-
-                                            <!--                                            <div class="row">
-                                                                                            <div class="col-md-12">
-                                                                                                <div class="form-group col-sm-6">
-                                                                                                    <label for="postalCode">Public Holidays & Eve </label>
-                                                                                                    <input type="text" class="form-control" value="0900hrs to 1400hrs" readonly>
-                                                                                                </div>
-                                            
-                                                                                                <div class="form-group col-sm-6">
-                                                                                                    <label for="postalCode">Closed On</label>
-                                                                                                    <input type="text" class="form-control" value="Wednesdays" readonly>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>-->
+                                            <%=wsOpenHr%>
                                         </div>
                                     </section>
 

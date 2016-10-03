@@ -248,13 +248,14 @@ public class AddWorkshopServlet extends HttpServlet {
                     wsStaffName, wsStaffEmail, wsStaffHpNo, password);
 
             if (addErrMsg.size() == 0) {
-                Workshop ws = wDAO.retrieveWorkshop(email, user.getStaffId(), user.getToken());
-                int wsId = ws.getId();
-                session.setAttribute("workshopId", wsId);
+//                Workshop ws = wDAO.retrieveWorkshop(email, user.getStaffId(), user.getToken());
+//                int wsId = ws.getId();
+//                session.setAttribute("workshopId", wsId);
                 session.setAttribute("success", name + " has been created!");
 //                RequestDispatcher view = request.getRequestDispatcher("AddWorkshopMasterAccount.jsp");
 //                view.forward(request, response);
                 response.sendRedirect("ViewWorkshop.jsp");
+                return;
             } else {
                 request.setAttribute("errMsg", addErrMsg);
                 request.setAttribute("name", name);
@@ -293,6 +294,7 @@ public class AddWorkshopServlet extends HttpServlet {
                 request.setAttribute("wsStaffEmail", wsStaffEmail);
                 RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
                 view.forward(request, response);
+                return;
             }
         } else {
             request.setAttribute("errMsg", errMsg);
@@ -332,6 +334,7 @@ public class AddWorkshopServlet extends HttpServlet {
             request.setAttribute("wsStaffEmail", wsStaffEmail);
             RequestDispatcher view = request.getRequestDispatcher("AddWorkshop.jsp");
             view.forward(request, response);
+            return;
         }
     }
 

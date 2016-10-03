@@ -128,32 +128,32 @@ public class WebUserDAO {
                 staffType = attElement.getAsInt();
             }
 
-            attElement = userObj.get("license_issue_date");
-            Date issueDate = null;
-            String dateString = "1990-01-01";
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date parsed = dateFormat.parse(dateString);
-            issueDate = new java.sql.Date(parsed.getTime());
-            if (!attElement.isJsonNull()) {
-                dateString = attElement.getAsString();
-                dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                parsed = dateFormat.parse(dateString);
-                issueDate = new java.sql.Date(parsed.getTime());
-            }
-
-            String licenseNumber = "";
-            attElement = userObj.get("license_number");
-            if (attElement != null && !attElement.isJsonNull()) {
-                licenseNumber = attElement.getAsString();
-            }
-
-            int status = 0;
-            attElement = userObj.get("status");
-            if (attElement != null && !attElement.isJsonNull()) {
-                status = attElement.getAsInt();
-            }
-            ValetStaff vs = null;
             if (userType == 4) {
+                attElement = userObj.get("license_issue_date");
+                Date issueDate = null;
+                String dateString = "1990-01-01";
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date parsed = dateFormat.parse(dateString);
+                issueDate = new java.sql.Date(parsed.getTime());
+                if (!attElement.isJsonNull()) {
+                    dateString = attElement.getAsString();
+                    dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    parsed = dateFormat.parse(dateString);
+                    issueDate = new java.sql.Date(parsed.getTime());
+                }
+
+                String licenseNumber = "";
+                attElement = userObj.get("license_number");
+                if (attElement != null && !attElement.isJsonNull()) {
+                    licenseNumber = attElement.getAsString();
+                }
+
+                int status = 0;
+                attElement = userObj.get("status");
+                if (attElement != null && !attElement.isJsonNull()) {
+                    status = attElement.getAsInt();
+                }
+                ValetStaff vs = null;
                 vs = new ValetStaff(id, staffType, licenseNumber, issueDate, shopId, status);
                 user = new WebUser(id, email, userType, refStaffId, "", shopId, name, handphone, staffType, vs);
             } else {

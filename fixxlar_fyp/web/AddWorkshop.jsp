@@ -36,7 +36,7 @@
                         <!--<a href="AddWorshop.jsp" class="btn btn-primary btn-lg pull-right margin-top-15"  role="button">Submit</a>-->
                     </div>
                     <!-- /page header -->
-
+                    
                     <!-- content main container -->
                     <div class="main">
                         <div class="row">
@@ -340,11 +340,11 @@
 
                                                 </div>
 
-                                                    <div class="form-group">
-                                                        <h3><label class="col-sm-6">Operating Hours (Open - Close)</label></h3>
-                                                        <h3><label class="col-sm-3">Specialize</label></h3>
-                                                        <h3><label class="col-sm-3">Category</label></h3>
-                                                    </div>   
+                                                <div class="form-group">
+                                                    <h3><label class="col-sm-6">Operating Hours (Open - Close)</label></h3>
+                                                    <h3><label class="col-sm-3">Specialize</label></h3>
+                                                    <h3><label class="col-sm-3">Category</label></h3>
+                                                </div>   
 
                                                 <%                                                    //create hours arraylist
                                                     //iterate through every day for operating hours fields
@@ -589,14 +589,14 @@
                                                         <input type="text" class="form-control" id="input05" name="staffHpNo" value="<%=wsStaffHpNo%>" required>
                                                     </div>
                                                 </div>
-                                                    
+
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-5 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                         <button type="reset" class="btn btn-default">Reset</button>
                                                     </div>
                                                 </div>
-                                                    
+
                                             </form>
                                         </div>
                                         <!--End of Tile Body-->
