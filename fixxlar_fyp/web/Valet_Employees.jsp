@@ -4,6 +4,8 @@
     Author     : Joshymantou
 --%>
 
+<%@page import="java.util.Date"%>
+<%@page import="entity.ValetStaff"%>
 <%@page import="dao.ValetShopDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
@@ -78,8 +80,15 @@
                                     </div>
                                     <!-- /tile header -->
                                     <%
-                                        Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
-                                       Valet
+                                        int shopId = user.getShopId();
+                                        String token = user.getToken();
+                                        int staffId = user.getStaffId();
+                                        String chatToken = user.getChatToken();
+                                        String phone_number = user.getHandphone();
+                                        String user_name = user.getName();
+                                        String user_email = user.getEmail();
+                                        WebUserDAO wuDAO = new WebUserDAO();
+                                        HashMap<Integer, WebUser> dList = wuDAO.retrieveAllValetStaffByShop(staffId, token, shopId);
 
                                     %>
                                     <!-- tile body -->
@@ -98,40 +107,36 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <%                                                        Iterator it = webUserMap.entrySet().iterator();
+                                                    <%                                                        Iterator it = dList.entrySet().iterator();
                                                         //counter for delete id
                                                         int deleteCounter = 0;
                                                         while (it.hasNext()) {
                                                             Map.Entry pair = (Map.Entry) it.next();
-                                                            WebUser staff = (WebUser) pair.getValue();
-                                                            String email = staff.getEmail();
-                                                            int idToDelete = staff.getStaffId();
-                                                            String name = staff.getName();
-                                                            String hp = staff.getHandphone();
+                                                            WebUser driver = (WebUser) pair.getValue();
+                                                            String email = driver.getEmail();
+                                                            int idToDelete = driver.getStaffId();
+                                                            String name = driver.getName();
+                                                            String hp = driver.getHandphone();
 
+                                                            ValetStaff valet = driver.getValetStaff();
+                                                            String licenceNo = valet.getLicenseNumber();
+                                                            Date licenceDate = valet.getLicenseIssueDate();
 
                                                     %>
                                                     <tr>
                                                         <td><%=idToDelete%></td>
                                                         <td><%=name%></td>
                                                         <td><%=hp%></td>                                                
-                                                        <td>License Number</td>                                                
+                                                        <td><%=email%></td>                                                
+                                                        <td><%=licenceNo%></td>                                                
+                                                        <td><%=licenceDate%></td>                                                
                                                         <!--<td id="01"> <a href="#" class="btn btn-p1rimary btn-xs" role="button">Delete</a></td>-->
 
                                                         <!--<td><button onclick="remove(staffId)" class="btn btn-primary btn-xs" role="button">Delete</button></td>-->
                                                         <td>
-                                                            <%
-                                                                //check only master workshop can edit/delete staff
-
-                                                                if (user.getStaffId() != idToDelete && workshopStaffType == 1) {
-                                                                    //if (userType.equals("Admin")) { 
-                                                            %>
-
                                                             <a href="EditEmployee.jsp?id=<%=idToDelete%>" name="idToDelete" class="btn btn-xs btn-primary" role="button">Edit</a>
                                                             <button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + idToDelete);%>" type="button">Delete</button>
 
-
-                                                            <% }  %>
 
                                                         </td>
                                                         <!-- Modal -->
@@ -152,71 +157,8 @@
                                                 </div> <!--/.modal -->
 
                                                 </tr>
+                                                <% }  %>
 
-
-                                                <%
-                                                        deleteCounter++;
-                                                    }
-
-                                                    //print admin staff if webUser is admin
-                                                    if (userType.equals("Admin")) {
-                                                        Iterator it2 = adminUserMap.entrySet().iterator();
-                                                        while (it2.hasNext()) {
-                                                            Map.Entry pair = (Map.Entry) it2.next();
-                                                            WebUser adminStaff = (WebUser) pair.getValue();
-                                                            String email = adminStaff.getEmail();
-                                                            int idToDelete = adminStaff.getStaffId();
-                                                            String name = adminStaff.getName();
-                                                            String hp = adminStaff.getHandphone();
-
-                                                            int currentStaffType = adminStaff.getStaffType();
-                                                %>
-                                                <tr>
-                                                    <td><%=idToDelete%></td>
-                                                    <td><%=name%></td>
-                                                    <td><%=hp%></td>
-                                                    <td>License Plate</td>
-
-                                                    <%
-                                                        int staffType = user.getStaffType();
-                                                        //super and master admin can edit/delete normal admin
-                                                        if ((staffType == 1 || staffType == 2) && currentStaffType == 3) {
-
-
-                                                    %>
-                                                    <td>
-                                                        <a href="EditEmployee.jsp?id=<%=idToDelete%>" name="idToDelete" class="btn btn-xs btn-primary" role="button">Edit</a>
-                                                        <button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + idToDelete);%>" type="button">Delete</button>
-                                                    </td>
-                                                    <!-- Modal -->
-                                                <div class="md-modal md-effect-13 md-slategray colorize-overlay" id="<% out.print("myModal" + idToDelete);%>">
-
-                                                    <div class="md-content">
-
-                                                        <div class="col-xs-12">
-                                                            <h4>Are you sure you want to delete <%=name%>?</h4>
-                                                            <form class="form-horizontal" role="form" action="DeleteEmployee" method="POST">
-                                                                <button type="submit" name="idToDelete" value="<%=idToDelete%>" class="btn btn-primary btn-sm">Delete</button>
-                                                            </form>
-                                                        </div>
-                                                        <div class="col-xs-12">
-                                                            <button class="md-close btn btn-default">Close</button>
-                                                        </div>
-                                                    </div> <!--/.modal-content -->
-                                                </div> <!--/.modal -->
-                                                <% } else { %>
-                                                <td>
-                                                    <button type="button" disabled class="btn btn-primaryb btn-xs">Edit</button>
-                                                    <button type="button" disabled class="btn btn-primaryb btn-xs">Delete </button>
-                                                </td>
-
-                                                </tr>
-                                                <%
-                                                            }
-                                                        }
-                                                    }
-
-                                                %>
                                                 <div class="md-overlay"></div>
                                                 </tbody>
                                             </table>
@@ -292,7 +234,7 @@
     <script>
         var user = "<%=userType%>";
         if (user === "Workshop") {
-            intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=wsName%>", "<%=categories%>", "<%=brands_carried%>");
+            intercom("<%=user_name%>", "<%=user_email%>",<%=staffId%>, "<%=phone_number%>", "<%=wsName%>", "", "");
         }
     </script>
 </html>
