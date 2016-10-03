@@ -23,6 +23,9 @@ public class WebUser {
     private int staffType;
     private String chatToken;
     private ValetStaff valetStaff;
+    private ValetRequest valetRequest;
+    private Customer customer;
+    private Vehicle vehicle;
     
     public WebUser(int staffId, String email, int userType, int refStaffId, String token, int shopId, String name, String handphone, int staffType) {
         this.staffId = staffId;
@@ -62,6 +65,21 @@ public class WebUser {
         this.valetStaff = valetStaff;
     }
 
+    public WebUser(int staffId, String email, int shopId, String name, String handphone, int staffType, ValetStaff valetStaff, ValetRequest valetRequest, Customer customer, Vehicle vehicle) {
+        this.staffId = staffId;
+        this.email = email;
+        //this.userType = userType;
+        //this.refStaffId = refStaffId;
+        //this.token = token;
+        this.shopId = shopId;
+        this.handphone = handphone;
+        this.name = name;
+        this.staffType = staffType;
+        this.valetStaff = valetStaff;
+        this.valetRequest = valetRequest;
+        this.customer = customer;
+        this.vehicle = vehicle;
+    }
     //getter methods
     /**
      * Returns the email.

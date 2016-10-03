@@ -31,6 +31,15 @@ public class Vehicle {
         this.control = control;
     }
     
+    public Vehicle(int id, String make, String model, int year, String plateNumber, String colour, String control) {
+        this.id = id;
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.plateNumber = plateNumber;
+        this.colour = colour;
+        this.control = control;
+    }
     public int getId() {
         return id;
     }
