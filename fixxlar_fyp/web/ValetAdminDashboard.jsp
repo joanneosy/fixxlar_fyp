@@ -4,6 +4,7 @@
     Author     : joanne.ong.2014
 --%>
 
+<%@page import="entity.ValetRequest"%>
 <%@page import="entity.ValetStaff"%>
 <%@page import="dao.ValetRequestDAO"%>
 <%@page import="dao.ValetShopDAO"%>
@@ -201,12 +202,12 @@
                                                                     <th class="sortable">Status</th>
                                                                     <th class="sortable">Contact</th>
                                                                     <th>More Info</th>
-                                                                    <th>Chat</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody class="contents">
                                                                 <!--Loop per new request-->
                                                                 <%
+                                                                    int i = 1;
                                                                     Iterator it = dList.entrySet().iterator();
                                                                     while (it.hasNext()) {
                                                                         Map.Entry pair = (Map.Entry) it.next();
@@ -224,15 +225,43 @@
                                                                             status = "Available";
                                                                         } else {
                                                                             status = "In Progress";
-                                                                            
+
                                                                         }
+                                                                        Customer customer = driver.getCustomer();
+                                                                        String customerName = "";
+                                                                        String carControl = "";
+                                                                        String carPlate = "";
+                                                                        String carColor = "";
+                                                                        int serviceType = 0;
+                                                                        String pickUpAddress = "";
+                                                                        String dropOffAddress = "";
+                                                                        String dateTime = "";
+                                                                        if (statusNumber != 1) {
+                                                                            customerName = customer.getName();
+
+                                                                            Vehicle vehicle = driver.getVehicle();
+                                                                            carControl = vehicle.getControl();
+                                                                            carPlate = vehicle.getPlateNumber();
+                                                                            carColor = vehicle.getColour();
+
+                                                                            ValetRequest vr = driver.getValetRequest();
+                                                                            serviceType = vr.getServiceType();
+                                                                            pickUpAddress = vr.getPickUpAddress();
+                                                                            dropOffAddress = vr.getDropOffAddress();
+                                                                            dateTime = vr.getScheduledPickUpTime() + "";
+                                                                        }
+
                                                                 %>
                                                                 <tr>
                                                                     <td><% out.print(name);%></td>
                                                                     <td><% out.print(status);%></td>
                                                                     <td><% out.print(handphone);%></td>
                                                                     <!--Quote-->
+                                                                    <% if (statusNumber != 1) {%>
                                                                     <td class="text-center"><a data-modal="<% out.print("myModal" + i);%>" class="md-trigger"><img src="images/file.png"/></a></td>
+                                                                            <% } else { %>
+                                                                    <td></td>
+                                                                    <%}%>
                                                                     <!-- Modal -->
                                                             <div class="md-modal md-effect-13 md-slategray colorize-overlay " id="<% out.print("myModal" + i);%>">
 
@@ -262,7 +291,7 @@
                                                                                 <h3>Valet Details - Next Trip</h3>
                                                                             </div>
                                                                             <div class="col-xs-12">
-                                                                                <p><b>Service Type: </b><% out.print(serviceType);%></p>
+                                                                                <p><b>Service Type: </b><% out.print(serviceType + " way");%></p>
                                                                             </div>
                                                                             <div class="col-xs-12">
                                                                                 <p><b>Pick Up Address: </b><% out.print(pickUpAddress);%></p>
@@ -272,7 +301,7 @@
                                                                                 <p><b>Drop Off Address: </b><% out.print(dropOffAddress);%></p>
                                                                             </div>
                                                                             <div class="col-xs-12">
-                                                                                <p><b>Scheduled Date: </b>><% out.print(dateTime);%></p>
+                                                                                <p><b>Scheduled Date: </b><% out.print(dateTime);%></p>
                                                                             </div> 
                                                                             <!--                                                                    <div class="col-xs-12">
                                                                                                                                                     <p><b>Scheduled Time: </b><% out.print(carColor);%></p>
@@ -288,8 +317,7 @@
                                                             </tr>
 
                                                             <%
-                                                                        i++;
-                                                                    }
+                                                                    i++;
                                                                 }
                                                             %>
 
@@ -429,6 +457,8 @@
     <script type="text/javascript" src="js/jquery.blockUI.js"></script>
     <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
     <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
+    <script type="text/javascript" src="js/classie.js"></script> 
+    <script type="text/javascript" src="js/modalEffects.js"></script> 
     <script type="text/javascript" src="js/moment.js"></script> 
     <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
 

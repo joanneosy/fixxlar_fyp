@@ -62,11 +62,11 @@
                 </ul>
             </li>
             
-            <li>
+<!--            <li>
                 <a href="Manage_Valet.jsp">
                     <i class="fa fa-map-marker"></i> Valet
                 </a>
-            </li>
+            </li>-->
             
             <li>
                 <a href="ViewEmployees.jsp">

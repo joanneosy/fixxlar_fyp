@@ -140,4 +140,36 @@ public class WebUser {
     public ValetStaff getValetStaff() {
         return valetStaff;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public ValetRequest getValetRequest() {
+        return valetRequest;
+    }
+
+    public void setValetRequest(ValetRequest valetRequest) {
+        this.valetRequest = valetRequest;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
 }

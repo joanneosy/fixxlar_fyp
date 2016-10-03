@@ -14,6 +14,7 @@
 <%@page import="dao.WorkshopDAO"%>
 <%@page import="dao.WebUserDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="ProtectValetAdmin.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,36 +24,7 @@
     </head>
     <body class="bg-3">
 
-        <%            WebUserDAO webUserDAO = new WebUserDAO();
-            HashMap<Integer, WebUser> webUserMap = new HashMap<Integer, WebUser>();
-            HashMap<Integer, WebUser> adminUserMap = new HashMap<Integer, WebUser>();
 
-            WebUser user = (WebUser) session.getAttribute("loggedInUser");
-            String userType = (String) session.getAttribute("loggedInUserType");
-            int workshopStaffType = user.getStaffType();
-            int staffID = user.getStaffId();
-            String phone_number = user.getHandphone();
-            String user_name = user.getName();
-            String user_email = user.getEmail();
-
-            if (userType.equals("Admin")) {
-                // Retrieve the master work shop staffs + Fixir staff
-                int staffType = user.getStaffType();
-                //only super user and master user can view admin and master staff
-                if (staffType == 1 || staffType == 2) {
-                    webUserMap = webUserDAO.retrieveAllMasterWorkshopStaff(user.getStaffId(), user.getToken());
-                    adminUserMap = webUserDAO.retrieveAllAdmin(user.getStaffId(), user.getToken());
-                } else {
-                    //normal fixir admin can only view master worshop
-                    webUserMap = webUserDAO.retrieveAllMasterWorkshopStaff(user.getStaffId(), user.getToken());
-                }
-
-            } else {//workshop 
-
-                webUserMap = webUserDAO.retrieveNormalWorkshopStaff(user.getStaffId(), user.getToken(), user.getShopId());
-            }
-
-        %>
         <!-- Wrap all page content here -->
         <div id="wrap">
             <!-- Make page fluid -->
@@ -98,23 +70,17 @@
                                     <!-- tile header -->
                                     <div class="tile-header">
                                         <div class="col-md-12" style="z-index: 2;">
-                                            <% if (workshopStaffType == 1) { %>
                                             <div class="col-md-offset-11">
                                                 <!--<a href ="AddEmployee.jsp" type="button" class="btn btn-primary">Add Employee</a>-->
                                                 <a href="Add_Valet_Employee.jsp" class="btn btn-primary btn-xs" role="button">Add Employee</a>
                                             </div>
-                                            <% } %>
                                         </div>
                                     </div>
                                     <!-- /tile header -->
                                     <%
-                                        String categories = "";
-                                        String brands_carried = "";
-                                        if (userType.equals("Workshop")) {
-                                            Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
-                                            categories = ws.getCategory();
-                                            brands_carried = ws.getBrandsCarried();
-                                        }
+                                        Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
+                                       Valet
+
                                     %>
                                     <!-- tile body -->
                                     <div class="tile-body no-vpadding">
@@ -122,16 +88,17 @@
                                             <table id="example" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="sortable">Employee ID</th>
+                                                        <th class="sortable">ID</th>
                                                         <th class="sortable">Name</th>
                                                         <th class="sortable">Phone Number</th>
+                                                        <th class="sortable">Email</th>
                                                         <th class="sortable">License Number</th>
-                                                        <th>Issue Date</th>
+                                                        <th class="sortable">Issue Date</th>
+                                                        <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <%
-                                                        Iterator it = webUserMap.entrySet().iterator();
+                                                    <%                                                        Iterator it = webUserMap.entrySet().iterator();
                                                         //counter for delete id
                                                         int deleteCounter = 0;
                                                         while (it.hasNext()) {
@@ -141,7 +108,7 @@
                                                             int idToDelete = staff.getStaffId();
                                                             String name = staff.getName();
                                                             String hp = staff.getHandphone();
-                                                            
+
 
                                                     %>
                                                     <tr>
@@ -158,7 +125,7 @@
 
                                                                 if (user.getStaffId() != idToDelete && workshopStaffType == 1) {
                                                                     //if (userType.equals("Admin")) { 
-%>
+                                                            %>
 
                                                             <a href="EditEmployee.jsp?id=<%=idToDelete%>" name="idToDelete" class="btn btn-xs btn-primary" role="button">Edit</a>
                                                             <button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + idToDelete);%>" type="button">Delete</button>
