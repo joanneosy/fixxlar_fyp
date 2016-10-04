@@ -4,6 +4,7 @@
     Author     : Joshymantou
 --%>
 
+<%@page import="entity.ValetStaff"%>
 <%@page import="dao.ValetShopDAO"%>
 <%@page import="dao.WebUserDAO"%>
 <%@page import="entity.WebUser"%>
@@ -29,13 +30,13 @@
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
                     <%--<jsp:include page="include/topbar.jsp"/>--%>
-                    <%
-                        String userType = (String) session.getAttribute("loggedInUserType");
+                    <%                        String userType = (String) session.getAttribute("loggedInUserType");
 
                         int id = Integer.parseInt(request.getParameter("id"));
                         WebUserDAO uDAO = new WebUserDAO();
                         WebUser userToEdit = uDAO.retrieveUser(user.getStaffId(), user.getToken(), id);
-
+                        int editUserStaffType = userToEdit.getStaffType();
+                        int editUserType = userToEdit.getUserType();
                         String email = userToEdit.getEmail();
                         if (email.equals("null")) {
                             email = "";
@@ -49,6 +50,13 @@
                         String handphone = userToEdit.getHandphone();
                         if (handphone.equals("null")) {
                             handphone = "";
+                        }
+                        String licenseNo = "";
+                        String licenseIssue = "";
+                        ValetStaff valet = userToEdit.getValetStaff();
+                        if (valet != null) {
+                            licenseNo = valet.getLicenseNumber();
+                            licenseIssue = valet.getLicenseIssueDate() + "";
                         }
                     %>
                     <%@include file="include/topbar.jsp"%>
@@ -70,18 +78,19 @@
                     %>
                     <div class="alert alert-danger">
                         <ul>
-                        <%
-                            for (String error : errMsgArr) {
-                        %>
-                        <li><%=error%></li>
-                        <%
-                            }
-                        %>
+                            <%
+                                for (String error : errMsgArr) {
+                            %>
+                            <li><%=error%></li>
+                                <%
+                                    }
+                                %>
                         </ul>
                     </div>
                     <%
                         }
                     %>
+
                     <!-- content main container -->
                     <div class="main">
                         <div class="row">
@@ -103,7 +112,7 @@
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-4 control-label">Name</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input01" name="name" value="<%=name%>">
+                                                        <input type="text" class="form-control" id="input01" name="name" value="<%=name%>" required>
                                                     </div>
                                                 </div>
 
@@ -111,16 +120,40 @@
                                                 <div class="form-group">
                                                     <label for="input02" class="col-sm-4 control-label">Email</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input02" name="email" value="<%=email%>">
+                                                        <input type="text" class="form-control" id="input02" name="email" value="<%=email%>" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-4 control-label">Handphone</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input03" name="handphone" value="<%=handphone%>">
+                                                        <input type="text" class="form-control" id="input03" name="handphone" value="<%=handphone%>" required>
                                                     </div>
                                                 </div>
+                                                <%if (editUserType == 4) {%>
+                                                <div class="form-group">
+                                                    <label for="input04" class="col-sm-4 control-label">License Number</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="input04" name="licenseNo" value="<%=licenseNo%>" required>
+                                                    </div>
+                                                </div> 
+
+                                                <div class="form-group">
+                                                    <label for="input05" class="col-sm-4 control-label">License Issue Date</label>
+                                                    <div class="col-sm-8">
+                                                        <div class='input-group date' id='date'>
+                                                            <input type='text' name="licenseIssue" class="form-control" value="<%=licenseIssue%>" required/>
+                                                            <span class="input-group-addon">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%
+                                                    }
+                                                %>
+
+
 
                                                 <!--form footer for submit-->
                                                 <div class="form-group form-footer">
@@ -155,17 +188,29 @@
         <%-- scripts --%>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="js/jquery.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
         <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
         <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
         <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
         <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
+        <script type="text/javascript" src="js/moment.js"></script> 
+        <script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script> 
+        <script type="text/javascript" src="js/jquery.jgrowl.min.js"></script> 
         <script src="js/minimal.min.js"></script>
 
-
+        <script type="text/javascript">
+            $(".date").each(function () {
+                $(this).datetimepicker({
+                    format: 'YYYY-MM-DD',
+                    maxDate: new Date(),
+                    ignoreReadonly: true
+                });
+            });
+        </script>
         <script>
             function remove(staffId) {
                 $.post("url", function (data, status) {
@@ -198,6 +243,7 @@
                 });
             });
         </script>
+
     </body>
     <!--end body-->
 </html>

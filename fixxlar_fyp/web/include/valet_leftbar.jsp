@@ -24,11 +24,11 @@
                 </a>
             </li>
 
-            <li>
+<!--            <li>
                 <a href="PageOffline.jsp">
                     <i class="fa fa-comments"></i> Contact Admin
                 </a>
-            </li>
+            </li>-->
         </ul>
 
     </li>

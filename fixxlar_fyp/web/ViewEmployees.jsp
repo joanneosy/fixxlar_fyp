@@ -159,7 +159,7 @@
 
                                                                 if (user.getStaffId() != idToDelete && workshopStaffType == 1) {
                                                                     //if (userType.equals("Admin")) { 
-%>
+                                                            %>
 
                                                             <a href="EditEmployee.jsp?id=<%=idToDelete%>" name="idToDelete" class="btn btn-xs btn-primary" role="button">Edit</a>
                                                             <button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + idToDelete);%>" type="button">Delete</button>

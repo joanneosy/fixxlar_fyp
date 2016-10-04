@@ -81,18 +81,25 @@
 
 
 
-                                            <form class="form-horizontal" role="form" action="" method="POST">
+                                            <form class="form-horizontal" role="form" action="AddEmployee" method="POST">
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-4 control-label">Name</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input01" name="staffName">
+                                                        <input type="text" class="form-control" id="input01" name="staffName" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="input08" class="col-sm-4 control-label">Email</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="input08" name="staffEmail" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="input02" class="col-sm-4 control-label">License Number</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input02" name="licenseNo">
+                                                        <input type="text" class="form-control" id="input02" name="licenseNo" required>
                                                     </div>
                                                 </div>
 
@@ -114,21 +121,29 @@
                                                 <div class="form-group">
                                                     <label for="input04" class="col-sm-4 control-label">Phone Number</label>
                                                     <div class="col-sm-8">
-                                                        <input type="number" class="form-control" id="input04" name="phoneNo">
+                                                        <input type="number" class="form-control" id="input04" name="staffHpNo" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="input05" class="col-sm-4 control-label">Password</label>
                                                     <div class="col-sm-8">
-                                                        <input type="password" class="form-control" id="input05" name="password">
+                                                        <input type="password" class="form-control" id="input05" name="password" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="input06" class="col-sm-4 control-label">Confirm Password</label>
                                                     <div class="col-sm-8">
-                                                        <input type="password" class="form-control" id="input06" name="confirmPassword">
+                                                        <input type="password" class="form-control" id="input06" name="confirmPassword" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="input07" class="col-sm-4 control-label">Type of Employee</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="radio" name="type" value="2"> Master 
+                                                        <input type="radio" name="type" value="3" checked> Normal
                                                     </div>
                                                 </div>
 
@@ -164,7 +179,7 @@
         <!--End page wrap-->
         <%-- scripts --%>
 
-         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
@@ -183,7 +198,7 @@
             $(".date").each(function () {
                 $(this).datetimepicker({
                     format: 'YYYY-MM-DD',
-                    minDate: new Date(),
+                    maxDate: new Date(),
                     ignoreReadonly: true
                 });
             });

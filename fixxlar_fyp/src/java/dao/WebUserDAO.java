@@ -608,8 +608,8 @@ public class WebUserDAO {
         return errMsg;
     }
 
-    public String addNormalValet(int staffId, String token, String name, String email, String hpNo, String password, int shopId, Date issueDate, String licenseNumber) throws UnsupportedEncodingException, IOException {
-        String url = "http://119.81.43.85/erp/user/add_master_valet_staff";
+    public String addNormalValet(int staffId, String token, String name, String email, String hpNo, String password, int shopId, String issueDate, String licenseNumber) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/erp/user/add_normal_valet_staff";
 
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
@@ -892,7 +892,7 @@ public class WebUserDAO {
         return errMsg;
     }
 
-    public String updateNormalValet(int staffId, String token, String name, String email, String handphone, int id, String licenseNumber, Date issueDate) throws UnsupportedEncodingException, IOException {
+    public String updateNormalValet(int staffId, String token, String name, String email, String handphone, int id, String licenseNumber, String issueDate) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/erp/user/update_normal_valet_staff";
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);

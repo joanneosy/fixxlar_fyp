@@ -72,7 +72,7 @@ public class AuthenticateServlet extends HttpServlet {
             } else if (userType == 4 && staffType == 1) {
                 session.setAttribute("loggedInUserType", "Valet");
                 session.setAttribute("staffType", "Admin");
-                response.sendRedirect("ValetAdminRequest.jsp");
+                response.sendRedirect("ValetAdminDashboard.jsp");
             }
 
         } else {

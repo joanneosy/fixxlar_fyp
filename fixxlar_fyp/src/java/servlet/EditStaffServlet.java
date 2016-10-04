@@ -46,6 +46,8 @@ public class EditStaffServlet extends HttpServlet {
         String name = request.getParameter("name").trim();
         String email = request.getParameter("email").trim();
         String handphone = request.getParameter("handphone").trim();
+        String licenseNo = request.getParameter("licenseNo");
+        String licenseIssue = request.getParameter("licenseIssue");
 
         WebUserDAO uDAO = new WebUserDAO();
 
@@ -53,18 +55,19 @@ public class EditStaffServlet extends HttpServlet {
         WebUser loggedInUser = (WebUser) session.getAttribute("loggedInUser");
         int staffId = loggedInUser.getStaffId();
         String token = loggedInUser.getToken();
+        int staffType = loggedInUser.getStaffType();
 
         WebUser editUser = uDAO.retrieveUser(staffId, token, id);
         int editUserType = editUser.getUserType();
         int editUserStaffType = editUser.getStaffType();
         Validation validation = new Validation();
         ArrayList<String> errMsgArr = validation.validateExistingEmployee(handphone);
+        String errMsg = "";
         if (errMsgArr.size() != 0) {
             request.setAttribute("errMsgArr", errMsgArr);
             RequestDispatcher view = request.getRequestDispatcher("EditEmployee.jsp?id=" + id);
             view.forward(request, response);
         } else {
-            String errMsg = "";
             //Workshop Staff
             if (editUserType == 1) {
                 //Master Workshop Staff
@@ -87,33 +90,48 @@ public class EditStaffServlet extends HttpServlet {
                 } else if (editUserStaffType == 3) {
                     errMsg = uDAO.updateNormalAdmin(staffId, token, name, email, handphone, id);
                 }
+                //Valet Staff
+            } else if (editUserType == 4) {
+                //Master Valet Staff
+                if (editUserStaffType == 1) {
+                    errMsg = uDAO.updateMasterValet(staffId, token, name, email, handphone, id);
+                    //Normal Valet Staff
+                } else if (editUserStaffType == 2) {
+                    errMsg = uDAO.updateNormalValet(staffId, token, name, email, handphone, id, licenseNo, licenseIssue);
+                }
             }
+        }
 
-            if (errMsg.equals("")) {
-                session.setAttribute("success", "Employee successfully edited! (ID:" + id + ")");
+        if (errMsg.equals("")) {
+            session.setAttribute("success", "Employee successfully edited! (ID:" + id + ")");
 //                request.setAttribute("errMsg", "Employee successfully edited!");
 //                RequestDispatcher view = request.getRequestDispatcher("ViewEmployees.jsp?id=" + id);
-                response.sendRedirect("ViewEmployees.jsp");
-//                view.forward(request, response);
+            String url = "";
+            if (editUserType == 4) {
+                url = "Valet_Employees.jsp";
             } else {
-                request.setAttribute("errMsg", errMsg);
-                RequestDispatcher view = request.getRequestDispatcher("EditEmployee.jsp?id=" + id);
-                view.forward(request, response);
+                url = "ViewEmployees.jsp";
             }
+            response.sendRedirect(url);
+//                view.forward(request, response);
+        } else {
+            request.setAttribute("errMsg", errMsg);
+            RequestDispatcher view = request.getRequestDispatcher("EditEmployee.jsp?id=" + id);
+            view.forward(request, response);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+/**
+ * Handles the HTTP <code>GET</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             processRequest(request, response);
@@ -131,7 +149,7 @@ public class EditStaffServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             processRequest(request, response);
@@ -146,7 +164,7 @@ public class EditStaffServlet extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+        public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

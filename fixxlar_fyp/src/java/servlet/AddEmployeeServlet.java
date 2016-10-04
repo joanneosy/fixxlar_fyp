@@ -9,7 +9,10 @@ import dao.WebUserDAO;
 import entity.WebUser;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,25 +44,36 @@ public class AddEmployeeServlet extends HttpServlet {
         String staffName = request.getParameter("staffName");
         String staffHpNo = request.getParameter("staffHpNo");
         String staffEmail = request.getParameter("staffEmail");
+        String licenseNo = request.getParameter("licenseNo");
+        String licenseIssue = request.getParameter("licenseIssue");
+
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
         //Type of employee to be added
         String typeStr = request.getParameter("type");
 
+        //Logged in user details
+        HttpSession session = request.getSession(true);
+        WebUser user = (WebUser) session.getAttribute("loggedInUser");
+        int staffId = user.getStaffId();
+        String token = user.getToken();
+        int wsId = user.getShopId();
+        String userType = (String) session.getAttribute("loggedInUserType");
+
         Validation validation = new Validation();
         ArrayList<String> errMsg = validation.validateNewEmployee(staffHpNo, password, confirmPassword);
         if (errMsg.size() != 0) {
             request.setAttribute("errMsgArr", errMsg);
-            RequestDispatcher view = request.getRequestDispatcher("AddEmployee.jsp");
+            String url = "";
+            if (userType.equals("Valet")) {
+                url = "Add_Valet_Employee.jsp";
+
+            } else {
+                url = "AddEmployee.jsp";
+            }
+            RequestDispatcher view = request.getRequestDispatcher(url);
             view.forward(request, response);
         } else {
-            //Logged in user details
-            HttpSession session = request.getSession(true);
-            WebUser user = (WebUser) session.getAttribute("loggedInUser");
-            int staffId = user.getStaffId();
-            String token = user.getToken();
-            int wsId = user.getShopId();
-            String userType = (String) session.getAttribute("loggedInUserType");
             int staffType = user.getStaffType();
             WebUserDAO uDAO = new WebUserDAO();
             String errorMsg = "";
@@ -89,13 +103,42 @@ public class AddEmployeeServlet extends HttpServlet {
                     errorMsg = uDAO.addNormalAdmin(staffId, token, staffName, staffEmail, staffHpNo, password);
                 }
             }
+            if (userType.equals("Valet")) {
+                if (staffType == 1) {
+                    if (typeStr == null || typeStr.length() == 0) {
+                        errorMsg = "Please select employee type.";
+                    } else {
+                        int type = Integer.parseInt(typeStr);
+                        if (type == 2) {
+                            errorMsg = uDAO.addMasterValet(staffId, token, staffName, staffEmail, staffHpNo, password, wsId);
+                        } else if (type == 3) {
+                            errorMsg = uDAO.addNormalValet(staffId, token, staffName, staffEmail, staffHpNo, password, wsId, licenseIssue, licenseNo);
+                        }
+                    }
+                }
+            }
+
             if (errorMsg.isEmpty()) {
                 session.setAttribute("success", staffName + " added!");
-                response.sendRedirect("ViewEmployees.jsp");
+                String url = "";
+                if (userType.equals("Valet")) {
+                    url = "Valet_Employees.jsp";
+
+                } else {
+                    url = "ViewEmployees.jsp";
+                }
+                response.sendRedirect(url);
             } else {
+                String url = "";
+                if (userType.equals("Valet")) {
+                    url = "Add_Valet_Employee.jsp";
+
+                } else {
+                    url = "AddEmployee.jsp";
+                }
                 request.setAttribute("workshopId", wsId);
                 request.setAttribute("errMsg", errorMsg);
-                RequestDispatcher view = request.getRequestDispatcher("AddEmployee.jsp");
+                RequestDispatcher view = request.getRequestDispatcher(url);
                 view.forward(request, response);
             }
         }

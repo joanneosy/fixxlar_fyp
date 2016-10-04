@@ -251,7 +251,7 @@
                                                                                 <p><b>Drop Off Address: </b><% out.print(dropOffAddress);%></p>
                                                                             </div>
                                                                             <div class="col-xs-12">
-                                                                                <p><b>Scheduled Date: </b>><% out.print(dateTime);%></p>
+                                                                                <p><b>Scheduled Date: </b><% out.print(dateTime);%></p>
                                                                             </div> 
                                                                             <!--                                                                    <div class="col-xs-12">
                                                                                                                                                     <p><b>Scheduled Time: </b><% out.print(carColor);%></p>
