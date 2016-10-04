@@ -4,7 +4,7 @@
     WorkshopDAO wsDAO = new WorkshopDAO();
     if (userType.equals("Workshop")) {
         Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
-        wsName = ws.getName();
+        wsName = user.getName();
     } else if (userType.equals("Valet")) {
         if (staffType == 1) {
 //            ValetShop vs = vsDAO.retrieveValetShop(user.getStaffId(), user.getToken(), user.getShopId());

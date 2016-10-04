@@ -94,11 +94,7 @@
 
     <body class="bg-3">
         <!--<h1>Welcome</h1>-->
-        <%            String successChangePasswordMsg = (String) request.getAttribute("successChangePasswordMsg");
-            if (successChangePasswordMsg != null) {
-                out.println(successChangePasswordMsg + "<br/><br/>");
-            }
-            QuotationRequestDAO qDAO = new QuotationRequestDAO();
+        <%            QuotationRequestDAO qDAO = new QuotationRequestDAO();
 //            HashMap<Integer, Integer> statusSize = qDAO.retrieveStatusSize(user.getStaffId(), user.getToken(), 0, 0, "", "requested_datetime", "desc");
 //            int newSize = statusSize.get(0);
 //            int sendFinalSize = statusSize.get(1);
@@ -124,7 +120,13 @@
 
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
-
+                    <%            String successChangePasswordMsg = (String) session.getAttribute("successChangePasswordMsg");
+    if (successChangePasswordMsg != null && successChangePasswordMsg.length() > 0) {%>
+                    <div class="alert alert-success"><%=successChangePasswordMsg%></div>
+                    <%
+                            session.setAttribute("successChangePasswordMsg", "");
+                        }
+                    %>
                     <!-- page header -->
                     <div class="pageheader">
 

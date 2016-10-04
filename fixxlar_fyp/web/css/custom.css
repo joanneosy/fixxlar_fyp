@@ -374,4 +374,13 @@ textarea.form-control{
         display: initial;
     }
 }*/
+/*Settings drop down*/
+.navbar-nav.side-nav > li.collapsed-content > ul > li.user > .settings{
+    left: auto;
+    top: auto;
+}
+body .navbar.navbar-default .navbar-collapse .nav .open .dropdown-menu.arrow:before{
+    right: auto;
+}
+/*Settings drop down*/
 

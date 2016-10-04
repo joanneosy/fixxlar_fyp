@@ -67,9 +67,9 @@
                             if (email.equals("null")) {
                                 email = "";
                             }
-                            String name = ws.getName();
-                            if (name.equals("null")) {
-                                name = "";
+                            String workshop_name = ws.getName();
+                            if (workshop_name.equals("null")) {
+                                workshop_name = "";
                             }
 
                             String address = ws.getAddress();
@@ -160,7 +160,7 @@
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-2 control-label">Workshop Name</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" value="<%=name%>" name="name">
+                                                        <input type="text" class="form-control" value="<%=workshop_name%>" name="name">
                                                     </div>
 
                                                     <label for="input03" class="col-sm-2 control-label">Contact Number</label>
