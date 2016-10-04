@@ -119,7 +119,7 @@
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
                     <%            String successChangePasswordMsg = (String) session.getAttribute("successChangePasswordMsg");
-    if (successChangePasswordMsg != null) {%>
+    if (successChangePasswordMsg != null && successChangePasswordMsg.length() > 0) {%>
                     <div class="alert alert-success"><%=successChangePasswordMsg%></div>
                     <%
                             session.setAttribute("successChangePasswordMsg", "");
