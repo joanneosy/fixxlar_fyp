@@ -83,28 +83,28 @@
 
                                             <form class="form-horizontal" role="form" action="AddEmployee" method="POST">
                                                 <div class="form-group">
-                                                    <label for="input01" class="col-sm-4 control-label">Name</label>
+                                                    <label for="input01" class="col-sm-4 control-label">Name *</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control" id="input01" name="staffName" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input08" class="col-sm-4 control-label">Email</label>
+                                                    <label for="input08" class="col-sm-4 control-label">Email *</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input08" name="staffEmail" required>
+                                                        <input type="email" class="form-control" id="input08" name="staffEmail" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input02" class="col-sm-4 control-label">License Number</label>
+                                                    <label for="input02" class="col-sm-4 control-label">Driver License No *</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control" id="input02" name="licenseNo" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input03" class="col-sm-4 control-label">License Issue Date</label>
+                                                    <label for="input03" class="col-sm-4 control-label">License Issue Date *</label>
                                                     <div class="col-sm-8">
                                                         <div class='input-group date' id='date'>
                                                             <!--<form id='' action="" role="form">-->
@@ -119,33 +119,33 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input04" class="col-sm-4 control-label">Phone Number</label>
+                                                    <label for="input04" class="col-sm-4 control-label">Phone Number *</label>
                                                     <div class="col-sm-8">
                                                         <input type="number" class="form-control" id="input04" name="staffHpNo" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input05" class="col-sm-4 control-label">Password</label>
+                                                    <label for="input05" class="col-sm-4 control-label">Password *</label>
                                                     <div class="col-sm-8">
                                                         <input type="password" class="form-control" id="input05" name="password" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input06" class="col-sm-4 control-label">Confirm Password</label>
+                                                    <label for="input06" class="col-sm-4 control-label">Confirm Password *</label>
                                                     <div class="col-sm-8">
                                                         <input type="password" class="form-control" id="input06" name="confirmPassword" required>
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
+<!--                                                <div class="form-group">
                                                     <label for="input07" class="col-sm-4 control-label">Type of Employee</label>
                                                     <div class="col-sm-8">
                                                         <input type="radio" name="type" value="2"> Master 
                                                         <input type="radio" name="type" value="3" checked> Normal
                                                     </div>
-                                                </div>
+                                                </div>-->
 
                                                 <!--form footer for submit-->
                                                 <div class="form-group form-footer">

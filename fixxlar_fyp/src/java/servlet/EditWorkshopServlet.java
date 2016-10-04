@@ -165,7 +165,6 @@ public class EditWorkshopServlet extends HttpServlet {
         }
         openingHourFull = openingHourFull.replace("Closed - Closed", "Closed");
         openingHourFull = openingHourFull.replace(" - )", ")");
-        System.out.println(openingHourFull);
         
         
 

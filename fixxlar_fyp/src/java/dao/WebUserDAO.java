@@ -626,7 +626,7 @@ public class WebUserDAO {
         urlParameters.add(new BasicNameValuePair("password", password));
         urlParameters.add(new BasicNameValuePair("shop_id", shopId + ""));
         urlParameters.add(new BasicNameValuePair("license_number", licenseNumber));
-        urlParameters.add(new BasicNameValuePair("license_issuse_date", issueDate + ""));
+        urlParameters.add(new BasicNameValuePair("license_issue_date", issueDate + ""));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 

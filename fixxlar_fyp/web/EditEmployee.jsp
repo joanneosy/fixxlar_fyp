@@ -110,7 +110,7 @@
                                         <div class="tile-body">
                                             <form class="form-horizontal" role="form" action="EditStaff" method="POST">
                                                 <div class="form-group">
-                                                    <label for="input01" class="col-sm-4 control-label">Name</label>
+                                                    <label for="input01" class="col-sm-4 control-label">Name *</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control" id="input01" name="name" value="<%=name%>" required>
                                                     </div>
@@ -118,28 +118,28 @@
 
 
                                                 <div class="form-group">
-                                                    <label for="input02" class="col-sm-4 control-label">Email</label>
+                                                    <label for="input02" class="col-sm-4 control-label">Email *</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input02" name="email" value="<%=email%>" required>
+                                                        <input type="email" class="form-control" id="input02" name="email" value="<%=email%>" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="input03" class="col-sm-4 control-label">Handphone</label>
+                                                    <label for="input03" class="col-sm-4 control-label">Handphone *</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control" id="input03" name="handphone" value="<%=handphone%>" required>
                                                     </div>
                                                 </div>
-                                                <%if (editUserType == 4) {%>
+                                                <%if (editUserType == 4 && editUserStaffType == 2) {%>
                                                 <div class="form-group">
-                                                    <label for="input04" class="col-sm-4 control-label">License Number</label>
+                                                    <label for="input04" class="col-sm-4 control-label">Driver License No *</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control" id="input04" name="licenseNo" value="<%=licenseNo%>" required>
                                                     </div>
                                                 </div> 
 
                                                 <div class="form-group">
-                                                    <label for="input05" class="col-sm-4 control-label">License Issue Date</label>
+                                                    <label for="input05" class="col-sm-4 control-label">License Issue Date *</label>
                                                     <div class="col-sm-8">
                                                         <div class='input-group date' id='date'>
                                                             <input type='text' name="licenseIssue" class="form-control" value="<%=licenseIssue%>" required/>

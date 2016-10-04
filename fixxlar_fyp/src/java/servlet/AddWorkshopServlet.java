@@ -143,7 +143,6 @@ public class AddWorkshopServlet extends HttpServlet {
             endOpen = open.get(i);
             endClose = close.get(i);
             if (i == days.size() - 1) {
-                System.out.println("IN");
                 endDay = days.get(i);
                 if (startOpen.equals(endOpen) && startClose.equals(endClose)) {
                     toAppend = startOpen + " - " + startClose + " (" + startDay + " - " + endDay + ") ";

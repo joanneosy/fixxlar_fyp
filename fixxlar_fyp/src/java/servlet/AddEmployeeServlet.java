@@ -104,18 +104,7 @@ public class AddEmployeeServlet extends HttpServlet {
                 }
             }
             if (userType.equals("Valet")) {
-                if (staffType == 1) {
-                    if (typeStr == null || typeStr.length() == 0) {
-                        errorMsg = "Please select employee type.";
-                    } else {
-                        int type = Integer.parseInt(typeStr);
-                        if (type == 2) {
-                            errorMsg = uDAO.addMasterValet(staffId, token, staffName, staffEmail, staffHpNo, password, wsId);
-                        } else if (type == 3) {
-                            errorMsg = uDAO.addNormalValet(staffId, token, staffName, staffEmail, staffHpNo, password, wsId, licenseIssue, licenseNo);
-                        }
-                    }
-                }
+                errorMsg = uDAO.addNormalValet(staffId, token, staffName, staffEmail, staffHpNo, password, wsId, licenseIssue, licenseNo);
             }
 
             if (errorMsg.isEmpty()) {
