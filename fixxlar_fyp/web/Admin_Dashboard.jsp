@@ -219,16 +219,20 @@
                                                                             int low = 0;
                                                                             for (Map.Entry<String, JsonElement> entry : entrySet) {
                                                                                 String s = entry.getKey();
-                                                                                if (s.equals("high")) {
+                                                                                
+                                                                                if (s.equals("High")) {
                                                                                     urgent = entry.getValue().getAsInt();
+                                                                                   
                                                                                 }
-                                                                                if (s.equals("medium")) {
+                                                                                if (s.equals("Medium")) {
                                                                                     moderate = entry.getValue().getAsInt();
+                                                                                    
                                                                                 }
-                                                                                if (s.equals("low")) {
+                                                                                if (s.equals("Low")) {
                                                                                     low = entry.getValue().getAsInt();
+                                                                                    
                                                                                 }
-
+                                                                                
                                                                             }
 
                                                                 %>
