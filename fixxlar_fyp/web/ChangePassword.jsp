@@ -41,7 +41,9 @@
                                 out.println(errMsg);
                             }
                             WebUser user = (WebUser) session.getAttribute("loggedInUser");
-                            String userType = (String) session.getAttribute("loggedInUserType");
+//                            String userType = (String) session.getAttribute("loggedInUserType");
+                            int userType = user.getUserType();
+                            int staffType = user.getStaffType();
                         %>
                         <!--<a href = "ForgotPassword.jsp">Forgot Password</a><br/><br/>
                         <form action = "Authenticate.jsp" method= "post">
@@ -51,7 +53,7 @@
                         </form><br/>-->
 
 
-                        <form id="form-signin" class="form-signin" action = "ChangePassword" method= "post">
+                        <form id="form-signin" class="form-signin" action="ChangePassword" method="post">
                             <section>
                                 <div class="input-group">
                                     <input type="password" class="form-control" name="oldPassword" placeholder="Old Password">
@@ -67,14 +69,28 @@
                                 </div>
                             </section>
                             <section class="log-in">
-
-                                <% if (userType.equals("Admin")) { %>
-                                <a href="Admin_New_Request.jsp" class="btn btn-greensea">Home</a>
-                                </a>
-                                <% } else { %>
-                                <a href="New_Request.jsp" class="btn btn-greensea">Home</a>
-                                </a>
-                                <% }%>
+                                <%
+                                    String url = "";
+                                    //Workshop
+                                    if (userType == 1) {
+                                        url = "New_Request.jsp";
+                                    }
+                                    //Admin
+                                    if (userType == 2) {
+                                        url = "Admin_Dashboard.jsp";
+                                    }
+                                    //Valet
+                                    if (userType == 4) {
+                                        //Master
+                                        if (staffType == 1) {
+                                            url = "ValetAdminDashboard.jsp";
+                                            //Normal
+                                        } else {
+                                            url = "Valet.jsp";
+                                        }
+                                    }
+                                %>
+                                <a href="<%=url%>" class="btn btn-greensea">Home</a>
                                 <input type="submit" class="btn btn-greensea" value="Reset Password"/>
                             </section>
                         </form>

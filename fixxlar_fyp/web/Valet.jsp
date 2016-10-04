@@ -40,11 +40,7 @@
 
     <body class="bg-3">
         <!--<h1>Welcome</h1>-->
-        <%            String successChangePasswordMsg = (String) request.getAttribute("successChangePasswordMsg");
-            if (successChangePasswordMsg != null) {
-                out.println(successChangePasswordMsg + "<br/><br/>");
-            }
-            ValetRequestDAO vrDAO = new ValetRequestDAO();
+        <%            ValetRequestDAO vrDAO = new ValetRequestDAO();
             int shopID = user.getShopId();
             String token = user.getToken();
             int staffID = user.getStaffId();
@@ -71,7 +67,13 @@
 
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
-
+                    <%            String successChangePasswordMsg = (String) session.getAttribute("successChangePasswordMsg");
+    if (successChangePasswordMsg != null) {%>
+                    <div class="alert alert-success"><%=successChangePasswordMsg%></div>
+                    <%
+                            session.setAttribute("successChangePasswordMsg", "");
+                        }
+                    %>
                     <!-- page header -->
                     <div class="pageheader">
 

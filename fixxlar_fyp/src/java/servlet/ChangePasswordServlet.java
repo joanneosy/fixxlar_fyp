@@ -44,6 +44,8 @@ public class ChangePasswordServlet extends HttpServlet {
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmNewPassword");
         WebUser user = (WebUser)session.getAttribute("loggedInUser");
+        int userType = user.getStaffType();
+        int staffType = user.getStaffType();
         String email = user.getEmail();
         WebUserDAO uDAO = new WebUserDAO();
         if (!newPassword.equals(confirmPassword)) {
@@ -56,10 +58,30 @@ public class ChangePasswordServlet extends HttpServlet {
         
         if (isSuccess) {
             try {
-                request.setAttribute("successChangePasswordMsg", "Your password has been changed!");
-                String redirectTo = session.getAttribute("loggedInUserType") + ".jsp";
-                RequestDispatcher view = request.getRequestDispatcher(redirectTo);
-                view.forward(request, response);
+                session.setAttribute("successChangePasswordMsg", "Your password has been changed!");
+                String url = "";
+                //Workshop
+                if (userType == 1) {
+                    url = "New_Request.jsp";
+                }
+                //Admin
+                if (userType == 2) {
+                    url = "Admin_Dashboard.jsp";
+                }
+                //Valet
+                if (userType == 4) {
+                    //Master
+                    if(staffType == 1) {
+                        url = "ValetAdminDashboard.jsp";
+                        //Normal
+                    } else {
+                        url = "Valet.jsp";
+                    }
+                }
+                
+//                RequestDispatcher view = request.getRequestDispatcher(url);
+                response.sendRedirect(url);
+//                view.forward(request, response);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

@@ -90,17 +90,7 @@
 
     <body class="bg-3">
         <!--<h1>Welcome</h1>-->
-        <%            String successChangePasswordMsg = (String) request.getAttribute("successChangePasswordMsg");
-            if (successChangePasswordMsg != null) {
-                out.println(successChangePasswordMsg + "<br/><br/>");
-            }
-            QuotationRequestDAO qDAO = new QuotationRequestDAO();
-//            HashMap<Integer, Integer> statusSize = qDAO.retrieveStatusSize(user.getStaffId(), user.getToken(), 0, 0, "", "requested_datetime", "desc");
-//            int newSize = statusSize.get(0);
-//            int sendFinalSize = statusSize.get(1);
-//            int finalAcceptSize = statusSize.get(2);
-//            int newService = statusSize.get(2);
-//            int completedService = statusSize.get(3);
+        <%                QuotationRequestDAO qDAO = new QuotationRequestDAO();
             int shopID = user.getShopId();
             String token = user.getToken();
             int staffID = user.getStaffId();
@@ -128,7 +118,13 @@
 
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
-
+                    <%            String successChangePasswordMsg = (String) session.getAttribute("successChangePasswordMsg");
+    if (successChangePasswordMsg != null) {%>
+                    <div class="alert alert-success"><%=successChangePasswordMsg%></div>
+                    <%
+                            session.setAttribute("successChangePasswordMsg", "");
+                        }
+                    %>
                     <!-- page header -->
                     <div class="pageheader">
 
@@ -873,22 +869,22 @@
         <script type="text/javascript" src="js/css-filters-polyfill.js"></script> -->
 
 
-    
+
     <script>
-        $(function () {
-            // Initialize card flip
-            $('.card.hover').hover(function () {
-                $(this).addClass('flip');
-            }, function () {
-                $(this).removeClass('flip');
-            });
-            //         sortable table
-            $('.table.table-sortable th.sortable').click(function () {
-                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                $(this).addClass(o);
-            });
-        });</script>
+                                                                                        $(function () {
+                                                                                            // Initialize card flip
+                                                                                            $('.card.hover').hover(function () {
+                                                                                                $(this).addClass('flip');
+                                                                                            }, function () {
+                                                                                                $(this).removeClass('flip');
+                                                                                            });
+                                                                                            //         sortable table
+                                                                                            $('.table.table-sortable th.sortable').click(function () {
+                                                                                                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                                                                                                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                                                                                                $(this).addClass(o);
+                                                                                            });
+                                                                                        });</script>
     <script>
         $('.dropdown-menu li').on('click', function () {
             $(this).siblings().removeClass('active');
