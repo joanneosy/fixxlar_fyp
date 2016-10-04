@@ -35,9 +35,11 @@
                         <!--<div class="col-md-6">-->
                         <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Workshop Profile Page</h2>
                         <!--</div>-->
-                        
+
                         <!--<div class="col-md-6">-->
+                        <%if (user.getStaffType() == 1) {%>
                         <a href="EditProfile.jsp" type="button" class="btn btn-primary">Edit Profile</a>
+                        <%}%>
                         <!--</div>-->
                     </div>
                     <!-- /page header -->
