@@ -32,7 +32,7 @@
                     <%@include file="include/topbar.jsp"%> 
                     <!-- page header -->
                     <div class="pageheader">
-                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Edit Profile</h2>
+                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i> Edit Workshop Profile</h2>
                         <!--<a href="AddWorshop.jsp" class="btn btn-primary btn-lg pull-right margin-top-15"  role="button">Submit</a>-->
                     </div>
                     <!-- /page header -->
@@ -65,7 +65,6 @@
                                     <section class="tile color transparent-black">
                                         <!-- tile header -->
                                         <div class="tile-header">
-                                            <h1><strong>Edit</strong> Workshop Profile</h1>
                                         </div>
                                         <%
                                             Workshop ws = wsDAO.retrieveWorkshop(user.getShopId(), user.getStaffId(), user.getToken());
@@ -104,7 +103,7 @@
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-2 control-label">Workshop Name</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" value="<%=wsName%>" name="name">
+                                                        <input type="text" class="form-control" value="<%=workshop_name%>" name="name">
                                                     </div>
 
                                                     <label for="input03" class="col-sm-2 control-label">Contact Number</label>

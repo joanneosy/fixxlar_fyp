@@ -32,8 +32,13 @@
                     <%@include file="include/topbar.jsp"%>
                     <!-- page header -->
                     <div class="pageheader">
-                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Profile Page</h2>
-                        <a href="EditProfile.jsp" type="button" class="btn btn-primary margin-bottom-20 col-md-offset-8">Edit Profile</a>
+                        <!--<div class="col-md-6">-->
+                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Workshop Profile Page</h2>
+                        <!--</div>-->
+                        
+                        <!--<div class="col-md-6">-->
+                        <a href="EditProfile.jsp" type="button" class="btn btn-primary">Edit Profile</a>
+                        <!--</div>-->
                     </div>
                     <!-- /page header -->
                     <%
@@ -89,7 +94,7 @@
 
                                                 <div class="form-group col-sm-offset-1 col-sm-10">
                                                     <label for="name">Name</label>
-                                                    <input type="text" class="form-control" id="username" value="<%=wsName%>" readonly>
+                                                    <input type="text" class="form-control" id="username" value="<%=workshop_name%>" readonly>
                                                 </div>
                                             </div>
 
@@ -180,7 +185,7 @@
 
                                         <div class="row">
                                             <div class="col-sm-offset-5">
-                                                <a href="RegisterStripe.jsp" type="button" class="btn btn-primary btn-sm">Register</a>
+                                                <!--<a href="RegisterStripe.jsp" type="button" class="btn btn-primary btn-sm">Register</a>-->
 
                                             </div>
                                         </div>
