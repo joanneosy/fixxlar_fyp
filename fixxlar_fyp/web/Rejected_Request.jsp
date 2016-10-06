@@ -311,11 +311,8 @@
                                                                             <h3>Service Details</h3>
                                                                         </div>
                                                                         <div>
-                                                                            <div class="col-xs-6">
+                                                                            <div class="col-xs-12">
                                                                                 <p><b>Service Request: </b><br><% out.print(serviceName);%></p>
-                                                                            </div>
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Urgency: </b><br><% out.print(serviceUrgency);%></p>
                                                                             </div>
                                                                             <div class="col-xs-12">
                                                                                 <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>

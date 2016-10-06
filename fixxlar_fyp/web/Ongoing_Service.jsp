@@ -303,7 +303,7 @@
 
 
                                                             <!-- Modal -->
-                                                            <div class="md-modal md-effect-13 md-slategray colorize-overlay md-chat" id="<% out.print("myModal" + i);%>">
+                                                            <div class="md-modal md-effect-13 md-slategray colorize-overlay" id="<% out.print("myModal" + i);%>">
 
                                                                 <div class="md-content">
                                                                     <!--<div>-->
@@ -315,17 +315,14 @@
                                                                     </div>
                                                                     <!--</div>-->
                                                                     <!--<div>-->
-                                                                    <div class='col-xs-6'>
+                                                                    <div class='col-xs-12'>
 
                                                                         <div class="col-xs-12">
                                                                             <h3>Service Details</h3>
                                                                         </div>
                                                                         <div>
-                                                                            <div class="col-xs-6">
+                                                                            <div class="col-xs-12">
                                                                                 <p><b>Service Request: </b><br><% out.print(serviceName);%></p>
-                                                                            </div>
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Urgency: </b><br><% out.print(serviceUrgency);%></p>
                                                                             </div>
                                                                             <div class="col-xs-12">
                                                                                 <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
@@ -362,52 +359,6 @@
                                                                                 <input type="submit" class="btn btn-primary" value="Complete Service"></button>
                                                                             </form>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-xs-6">
-                                                                        <section class="tile transparent">
-                                                                            <!-- tile header -->
-                                                                            <div class="tile-header color bg-transparent-black-5 rounded-corners">
-                                                                                <h5>Chat</h5>
-                                                                                <div class="hidden ct" id=""><div class="hidden chatTopic" id="<%=topicId%>"></div>
-                                                                                </div>
-                                                                                <!-- /tile header -->
-                                                                                <!-- tile body -->
-                                                                                <div class="tile-body transparent nopadding">
-
-                                                                                    <div class="chat-content" id="chat-content">
-
-                                                                                        <ul class="chat-list" id="log<%=serviceId%>"></ul><!-- Chat Message Enters Here-->
-
-
-                                                                                    </div>
-                                                                                </div>
-                                                                                <!-- /tile body -->
-
-
-
-
-                                                                                <!-- tile footer -->
-                                                                                <div class="tile-footer transparent nopadding">
-
-                                                                                    <div class="chat-reply" id="chat-reply">
-                                                                                        <!--<textarea placeholder="Post a reply..." class="form-control"></textarea>-->
-                                                                                        <textarea placeholder="Write a message..." class="form-control msgInput" id="msgInput<%=i%>" onfocus="clearElement('#msgInput')"></textarea>
-                                                                                        <div class="btn-group btn-group-sm">
-                                                                                            <!--<button type="button" class="btn btn-transparent-white"><i class="fa fa-paperclip"></i> Add Files</button>-->
-                                                                                            <!--<button type="button" class="btn btn-transparent-white last-in-group"><i class="fa fa-camera"></i> Add Photos</button>-->
-                                                                                            <button type="button" class="btn btn-transparent-white last pull-right sendMsg" id="<%=serviceId%>-<%=wsName%>-<%=shopID%>-<%=staffID%>-<%=token%>" onclick='prepareMsg()'>Send message</button>
-                                                                                            <!--                                                <div class="checkbox check-transparent pull-right">
-                                                                                                                                                <input type="checkbox" value="1" id="send-by-enter">
-                                                                                                                                                <label for="send-by-enter">Press Enter to send</label>
-                                                                                                                                            </div>-->
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                                <!-- /tile footer -->
-
-
-                                                                        </section>
                                                                     </div>
                                                                     <div class="col-xs-12">
                                                                         <button class="md-close btn btn-default">Close</button>
@@ -536,11 +487,8 @@
                                                                             <h3>Service Details</h3>
                                                                         </div>
                                                                         <div>
-                                                                            <div class="col-xs-6">
+                                                                            <div class="col-xs-12">
                                                                                 <p><b>Service Request: </b><br><% out.print(serviceName);%></p>
-                                                                            </div>
-                                                                            <div class="col-xs-6">
-                                                                                <p><b>Urgency: </b><br><% out.print(serviceUrgency);%></p>
                                                                             </div>
                                                                             <div class="col-xs-12">
                                                                                 <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>

@@ -6,7 +6,7 @@
     int finalAcceptSize = statusSize.get(2);
     int newServiceSize = statusSize.get(2) - statusSize.get(3);
     int ongoingServiceSize = statusSize.get(4);
-    int rejectedSize = statusSize.get(4);
+    int rejectedSize = statusSize.get(5);
     String a="";
 %>
 <div class="row">
