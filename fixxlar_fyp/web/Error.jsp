@@ -31,26 +31,29 @@
                                 WebUser user = (WebUser) session.getAttribute("loggedInUser");
                                 int userType = user.getUserType();
                                 int staffType = user.getStaffType();
-                                String url = "";
+                                String url = "Login.jsp";
                                 //Workshop
-                                if (userType == 1) {
-                                    url = "New_Request.jsp";
-                                }
-                                //Admin
-                                if (userType == 2) {
-                                    url = "Admin_Dashboard.jsp";
-                                }
-                                //Valet
-                                if (userType == 4) {
-                                    //Master
-                                    if (staffType == 1) {
-                                        url = "ValetAdminDashboard.jsp";
-                                        //Normal
-                                    } else {
-                                        url = "Valet.jsp";
+                                if (user != null) {
+                                    if (userType == 1) {
+                                        url = "New_Request.jsp";
+                                    }
+                                    //Admin
+                                    if (userType == 2) {
+                                        url = "Admin_Dashboard.jsp";
+                                    }
+                                    //Valet
+                                    if (userType == 4) {
+                                        //Master
+                                        if (staffType == 1) {
+                                            url = "ValetAdminDashboard.jsp";
+                                            //Normal
+                                        } else {
+                                            url = "Valet.jsp";
+                                        }
                                     }
                                 }
                             %>
+                            <a href="#" class="btn btn-cyan"><i class="fa fa-refresh"></i> Try Again</a>
                             <a href="<%=url%>" class="btn btn-greensea"><i class="fa fa-home"></i> Return to home</a>
                             <!--<button class="btn btn-greensea"><i class="fa fa-home"></i> Return to home</button>-->
                             <a href="mailto:Admin@fixir.co?Subject=Fixir%20Support" target="_top" class="btn btn-red"><i class="fa fa-envelope"></i> Contact Support</a>
