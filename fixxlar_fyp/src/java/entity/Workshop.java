@@ -21,6 +21,7 @@ public class Workshop {
     private String address;
     private String openingHour;
     private String openingHourFormat;
+    private String openingHourFormat2;
     private double latitude;
     private double longitude;
     private String contact;
@@ -33,7 +34,7 @@ public class Workshop {
     private int status;
 
     public Workshop(int id, String email, String name, String description, String website, String address, String openingHour,
-            String openingHourFormat, double latitude, double longitude, String contact, String contact2, String location,
+            String openingHourFormat, String openingHourFormat2, double latitude, double longitude, String contact, String contact2, String location,
             String specialize, String category, String brandsCarried, String remark, int status) {
         this.email = email;
         this.name = name;
@@ -44,6 +45,7 @@ public class Workshop {
         this.website = website;
         this.openingHour = openingHour;
         this.openingHourFormat = openingHourFormat;
+        this.openingHourFormat2 = openingHourFormat2;
         this.latitude = latitude;
         this.longitude = longitude;
         this.contact = contact;
@@ -85,6 +87,10 @@ public class Workshop {
 
     public String getOpeningHourFormat() {
         return openingHourFormat;
+    }
+    
+    public String getOpeningHourFormat2() {
+        return openingHourFormat2;
     }
 
     public String getContact() {

@@ -15,16 +15,19 @@ public class Validation {
 
     public ArrayList<String> validateWorkshop(String contact, String contact2, String postalCode, String openingHours) {
         ArrayList<String> errMsg = new ArrayList<String>();
-        String err = isValidHomeContact(contact);
-        if (err != null) {
-            errMsg.add(err);
+        String err = "";
+        if (contact != null && contact.length() != 0) {
+            err = isValidHomeContact(contact);
+            if (err != null) {
+                errMsg.add(err);
+            }
         }
-
-        err = isValidMobileContact(contact2);
-        if (err != null && !errMsg.contains(err)) {
-            errMsg.add(err);
+        if (contact2 != null && contact2.length() != 0) {
+            err = isValidMobileContact(contact2);
+            if (err != null && !errMsg.contains(err)) {
+                errMsg.add(err);
+            }
         }
-
         err = isValidPostalCode(postalCode);
         if (err != null) {
             errMsg.add(err);
@@ -36,7 +39,7 @@ public class Validation {
         }
         return errMsg;
     }
-    
+
     public ArrayList<String> validateValet(String postalCode, String openingHours) {
         ArrayList<String> errMsg = new ArrayList<String>();
         String err = isValidPostalCode(postalCode);
@@ -57,22 +60,22 @@ public class Validation {
         if (err != null) {
             errMsg.add(err);
         }
-        
+
         err = isValidPassword(password, confirmPassword);
         if (err != null) {
             errMsg.add(err);
         }
-        
+
         return errMsg;
     }
-    
+
     public ArrayList<String> validateExistingEmployee(String contact) {
         ArrayList<String> errMsg = new ArrayList<String>();
         String err = isValidMobileContact(contact);
         if (err != null) {
             errMsg.add(err);
         }
-        
+
         return errMsg;
     }
 

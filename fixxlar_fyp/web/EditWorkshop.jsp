@@ -90,7 +90,7 @@
                             if (description.equals("null")) {
                                 description = "";
                             }
-                            String openingHour = ws.getOpeningHourFormat();
+                            String openingHour = ws.getOpeningHourFormat2();
                             String[] daysAndTime = null;
 
                             if (openingHour.equals("null")) {
@@ -367,7 +367,7 @@
 
                                                                 if (Arrays.asList(categories)
                                                                         .contains("Car Grooming")) {
-                                                                    out.println("<option selected>Car Grooming1</option>");
+                                                                    out.println("<option selected>Car Grooming</option>");
                                                                 } else {
                                                                     out.println("<option>Car Grooming</option>");
                                                                 }

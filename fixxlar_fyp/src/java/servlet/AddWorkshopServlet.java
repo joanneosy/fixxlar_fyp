@@ -168,7 +168,6 @@ public class AddWorkshopServlet extends HttpServlet {
         }
         openingHourFull = openingHourFull.replace("Closed - Closed", "Closed");
         openingHourFull = openingHourFull.replace(" - )", ")");
-        System.out.println(openingHourFull);
 
 //        String openingHourFormat = request.getParameter("openingHourFormat");
         double latitude = 0.0;
@@ -181,7 +180,110 @@ public class AddWorkshopServlet extends HttpServlet {
         String remark = request.getParameter("remark").trim();
 
         String openingHourFormat = "";
-        openingHourFormat = "Monday-" + mondayOpen + "-" + mondayClose + ","
+        openingHourFormat = "Mon-" + amondayOpen + "-" + amondayClose + ","
+                + "Tues-" + atuesdayOpen + "-" + atuesdayClose + ","
+                + "Wed-" + awednesdayOpen + "-" + awednesdayClose + ","
+                + "Thurs-" + athursdayOpen + "-" + athursdayClose + ","
+                + "Fri-" + afridayOpen + "-" + afridayClose + ","
+                + "Sat-" + asaturdayOpen + "-" + asaturdayClose + ","
+                + "Sun-" + asundayOpen + "-" + asundayClose + ","
+                + "Ph-" + aphOpen + "-" + aphClose + ","
+                + "PhEve-" + aphEveOpen + "-" + aphEveClose;
+
+        ArrayList<String> compiled = new ArrayList<String>();
+        //Monday-0900-1800
+        String[] daysAndTime = openingHourFormat.split(",");
+        //openCloseTimings[0] = Monday, openCloseTimings[1] = 0900, openCloseTimings[2] = 1800
+        String[] openCloseTimings = daysAndTime[0].split("-");
+        String dayToCompare = openCloseTimings[0];
+        String openToCompare = openCloseTimings[1];
+        String closeToCompare = openCloseTimings[2];
+        String toAdd = dayToCompare + "-" + dayToCompare + "-" + openToCompare + "-" + closeToCompare;
+        String closeDays = "";
+
+        for (int i = 1; i < daysAndTime.length - 2; i++) {
+            openCloseTimings = daysAndTime[i].split("-");
+            if (openCloseTimings[1].equals(openToCompare) && openCloseTimings[2].equals(closeToCompare)) {
+                String[] toAddArr = toAdd.split("-");
+                toAdd = toAddArr[0] + "-" + openCloseTimings[0] + "-" + openToCompare + "-" + closeToCompare;
+            } else {
+                String[] toAddArr = toAdd.split("-");
+                //Closed-Closed
+                if (toAddArr[2].equals("Closed")) {
+                    closeDays += "," + toAddArr[0];
+                } else //Saturday-Saturday
+                {
+                    if (toAddArr[0].equals(toAddArr[1])) {
+                        toAdd = toAddArr[0] + ":" + toAddArr[2] + "-" + toAddArr[3];
+                    } else {
+                        toAdd = toAddArr[0] + "-" + toAddArr[1] + ":" + toAddArr[2] + "-" + toAddArr[3];
+                    }
+
+                    System.out.println(toAdd);
+                    compiled.add(toAdd);
+                }
+                dayToCompare = openCloseTimings[0];
+                openToCompare = openCloseTimings[1];
+                closeToCompare = openCloseTimings[2];
+                toAdd = dayToCompare + "-" + dayToCompare + "-" + openToCompare + "-" + closeToCompare;
+            }
+
+            if (i == daysAndTime.length - 3) {
+                String[] toAddArr = toAdd.split("-");
+                //Closed-Closed
+                if (toAddArr[2].equals("Closed")) {
+                    //Saturday-Saturday
+                    closeDays += "," + toAddArr[0];
+                } else //Saturday-Saturday
+                 if (toAddArr[0].equals(toAddArr[1])) {
+                        toAdd = toAddArr[0] + ":" + toAddArr[2] + "-" + toAddArr[3];
+                    } else {
+                        toAdd = toAddArr[0] + "-" + toAddArr[1] + ":" + toAddArr[2] + "-" + toAddArr[3];
+                    }
+                //compiled.add(toAdd);
+            }
+        }
+
+        for (int i = 7; i < 9; i++) {
+            toAdd = "";
+            openCloseTimings = daysAndTime[i].split("-");
+            //Closed-Closed
+            if (openCloseTimings[2].equals("Closed")) {
+                closeDays += "," + openCloseTimings[0];
+            } else {
+                toAdd = openCloseTimings[0] + ":" + openCloseTimings[1] + "-" + openCloseTimings[2];
+                compiled.add(toAdd);
+            }
+        }
+        if (closeDays.length() != 0) {
+            compiled.add(";" + closeDays.substring(1));
+        }
+
+        String openingHour2 = "";
+        for (int i = 0; i < compiled.size(); i++) {
+            String add = compiled.get(i);
+            String addCheck = "";
+            if (i == compiled.size() - 1) {
+                addCheck = compiled.get(i);
+            } else {
+                addCheck = compiled.get(i + 1);
+            }
+            if (String.valueOf(addCheck.charAt(0)).equals(";")) {
+                openingHour2 += add;
+            } else {
+                openingHour2 += add + ",";
+            }
+        }
+
+        String lastChar = String.valueOf(openingHour2.charAt(openingHour2.length() - 1));
+        if (lastChar.equals(",")) {
+            openingHour2 = openingHour2.substring(0, openingHour2.length() - 1);
+        }
+
+        openingHourFormat = openingHour2;
+
+        String openingHourFormat2 = "";
+        openingHourFormat2 = "Monday-" + mondayOpen + "-" + mondayClose + ","
                 + "Tuesday-" + tuesdayOpen + "-" + tuesdayClose + ","
                 + "Wednesday-" + wednesdayOpen + "-" + wednesdayClose + ","
                 + "Thursday-" + thursdayOpen + "-" + thursdayClose + ","
@@ -192,7 +294,7 @@ public class AddWorkshopServlet extends HttpServlet {
                 + "PhEve-" + phEveOpen + "-" + phEveClose;
 
         Validation validation = new Validation();
-        ArrayList<String> errMsg = validation.validateWorkshop(contact, contact2, postalCode, openingHourFormat);
+        ArrayList<String> errMsg = validation.validateWorkshop(contact, contact2, postalCode, openingHourFormat2);
 
         String hpValid = validation.isValidMobileContact(wsStaffHpNo);
         String pwValid = validation.isValidPassword(password, confirmPassword);
@@ -242,7 +344,7 @@ public class AddWorkshopServlet extends HttpServlet {
             WebUser user = (WebUser) session.getAttribute("loggedInUser");
             int staffId = user.getStaffId();
             String token = user.getToken();
-            ArrayList<String> addErrMsg = wDAO.addWorkshop(email, name, description, website, address + " " + postalCode, openingHour, openingHourFormat,
+            ArrayList<String> addErrMsg = wDAO.addWorkshop(email, name, description, website, address + " " + postalCode, openingHour, openingHourFormat, openingHourFormat2,
                     latitude, longitude, contact, contact2, location, specialize, category, brandsCarried, remark, staffId, token,
                     wsStaffName, wsStaffEmail, wsStaffHpNo, password);
 

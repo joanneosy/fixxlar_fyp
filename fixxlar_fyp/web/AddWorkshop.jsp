@@ -436,7 +436,7 @@
                                                                 }
 
                                                                 if (Arrays.asList(categoryArr).contains("Car Grooming")) {
-                                                                    out.println("<option selected>Car Grooming1</option>");
+                                                                    out.println("<option selected>Car Grooming</option>");
                                                                 } else {
                                                                     out.println("<option>Car Grooming</option>");
                                                                 }

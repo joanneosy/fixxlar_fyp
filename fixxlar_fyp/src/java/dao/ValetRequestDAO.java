@@ -1017,7 +1017,7 @@ public class ValetRequestDAO {
         String check = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=North%Bridge%Road%Singapore&destinations=202%Choa%Chu%Kang%Ave%1&key=AIzaSyCpdZ3c3twyc93Rv1PL_E6eOvsnUlP3lqg";
         
         Timestamp startTime = null;
-        String dateTimeString = "2016-01-01 10:10:00";
+        String dateTimeString = "2016-01-01 10:03:00";
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date parsedDate = dateFormat.parse(dateTimeString);
         startTime = new java.sql.Timestamp(parsedDate.getTime());
@@ -1025,6 +1025,17 @@ public class ValetRequestDAO {
         String pickUpPoint = "Bedok MRT Singapore";
         String dropOffPoint = "Jurong East MRT Singapore";
         
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(startTime.getTime());
+
+        //Subtract the time taken to reach the drop off point from the appointment time
+        cal.add(Calendar.HOUR, 2);
+
+        //Round down the time to the nearest 15 minute
+
+
+        Timestamp later = new Timestamp(cal.getTime().getTime());
+        System.out.println(later);
         //System.out.println(calculatePickUpTime(pickUpPoint, dropOffPoint, startTime));
         
     }
