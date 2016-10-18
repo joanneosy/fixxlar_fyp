@@ -7,10 +7,17 @@ package servlet;
 
 import dao.QuotationRequestDAO;
 import dao.WorkshopDAO;
+import entity.Customer;
+import entity.QuotationRequest;
 import entity.WebUser;
 import entity.Workshop;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +25,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.SmsNotification;
 
 /**
  *
@@ -36,7 +44,7 @@ public class AddFinalQuotationServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession(true);
@@ -47,13 +55,27 @@ public class AddFinalQuotationServlet extends HttpServlet {
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();
+        int workshopId = user.getShopId();
         QuotationRequestDAO qrDAO = new QuotationRequestDAO();
+        
+        //to retrieve request details + customer details + workshop details for sms
+        HashMap<Integer, QuotationRequest> qrMap = qrDAO.retrieveQuotationRequest(staffId, token, quotationRequestId);
+        Customer cust = qrMap.get(0).getCustomer();
+        String handphone = cust.getHandphone();
+        String custName = cust.getName();
+        
+        WorkshopDAO wsDAO = new WorkshopDAO();
+        Workshop ws = wsDAO.retrieveWorkshop(workshopId, staffId, token);
+        String workshopName = ws.getName();
+        
         String isSuccess = qrDAO.addFinalQuotation(staffId, token, offerId, price);
         //Error message? success message?
         if (isSuccess.length()==0) {
             session.setAttribute("isSuccess", "$" + price + "0 quoted as the final amount for ID: " + quotationRequestId);
 //            RequestDispatcher view = request.getRequestDispatcher("ViewRequest.jsp?id=" + quotationRequestId);
 //            view.forward(request, response);
+            SmsNotification smsNotification = new SmsNotification();
+            smsNotification.smsForFinalQuotation(custName, handphone, workshopName, price);
             response.sendRedirect("Send_Final_Quote.jsp");
         } else {
             session.setAttribute("fail", isSuccess + "(ID: " + offerId + ")");
@@ -75,7 +97,13 @@ public class AddFinalQuotationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddFinalQuotationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AddFinalQuotationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -89,7 +117,13 @@ public class AddFinalQuotationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddFinalQuotationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AddFinalQuotationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

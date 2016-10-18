@@ -62,7 +62,7 @@ public class ValetOnTheWayServlet extends HttpServlet {
 //            RequestDispatcher view = request.getRequestDispatcher("ViewRequest.jsp");
 //            view.forward(request, response);
             SmsNotification smsNotification = new SmsNotification();
-            smsNotification.smsForStart(custName, handphone);
+            smsNotification.smsForLeavingToWorkshop(custName, handphone);
             response.sendRedirect("Valet.jsp");
         } else {
             session.setAttribute("fail", isSuccess + "(ID: " + request_id + ")");

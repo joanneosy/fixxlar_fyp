@@ -52,11 +52,12 @@ public class AcceptValetRequestServlet extends HttpServlet {
         String isSuccess = vrDAO.acceptRequest(staffId, token, request_id);
        
         //to retrieve valet request details + customer details for sms
+       
         ValetRequest vr = vrDAO.retrieveValetRequest(staffId, token, request_id);
         Customer cust = vr.getCustomer();
         String handphone = cust.getHandphone();
         String custName = cust.getName();
-            
+          
                 
         if (isSuccess.length() == 0) {
             session.setAttribute("isSuccess", "Accepted request for ID: " + request_id);
@@ -64,7 +65,7 @@ public class AcceptValetRequestServlet extends HttpServlet {
 //            view.forward(request, response);
             //put send sms method here
             SmsNotification smsNotification = new SmsNotification();
-            smsNotification.smsForLeavingToWorkshop(custName, handphone);
+            smsNotification.smsForAccept(custName, handphone);
             response.sendRedirect("Valet.jsp");
         } else {
             session.setAttribute("fail", isSuccess + "(ID: " + request_id + ")");
