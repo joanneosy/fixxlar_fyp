@@ -17,8 +17,8 @@ public class SmsNotification { //for customers to receive
     String username = "Fixir"; //bulksms username
     String password = "fixir2016"; //bulksms password
     String senderId = "FIXIR"; //sender's name appearing on customer's mobile phone
-    String mobileTest = ""; //REMEMBER TO CHANGE ALL MOBILETEST TO MOBILE NO IN THE CODES BELOW 
-    //mobile number must all add "65" in front!!!
+    String mobileTest = "90054906"; //REMEMBER TO CHANGE ALL MOBILETEST TO MOBILE NO IN THE CODES BELOW 
+    //this is desmond's number^
     
     //user:Fixir  
     //pass:fixir2016
@@ -37,7 +37,7 @@ public class SmsNotification { //for customers to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65"+mobileNo, "ISO-8859-1");
             data += "&msg=" + URLEncoder.encode("Dear " + custName + ", a valet driver has been assigned to you.%0a%0aPlease login to view the valet request. Thank you.", "ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
@@ -80,7 +80,7 @@ public class SmsNotification { //for customers to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65"+mobileNo, "ISO-8859-1");
             data += "&msg=" + URLEncoder.encode("Dear " + custName + ", your valet driver is now on his way to pick up your vehicle at your designated location.%0a%0aYou may proceed to login to track your valet progress.", "ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
@@ -123,7 +123,7 @@ public class SmsNotification { //for customers to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65"+mobileNo, "ISO-8859-1");
             data += "&msg=" + URLEncoder.encode("Dear " + custName + ", your valet driver has just arrived at the designated pick-up location.%0a%0aPlease proceed to meet up with your valet driver.", "ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
@@ -166,7 +166,7 @@ public class SmsNotification { //for customers to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65"+mobileNo, "ISO-8859-1");
             data += "&msg=" + URLEncoder.encode("Dear " + custName + ", your valet driver is now on his way to the workshop of your choice.", "ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
@@ -209,8 +209,8 @@ public class SmsNotification { //for customers to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
-            data += "&msg=" + URLEncoder.encode("Dear " + custName + ", your vehicle has arrived at the workshop. Thank you for opting for our valet services. Please wait while our workshops diagnose the problem.", "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65"+mobileNo, "ISO-8859-1");
+            data += "&msg=" + URLEncoder.encode("Dear " + custName + ", your vehicle has arrived at the workshop. Thank you for opting for our valet services. Please hold while our workshop diagnose the problem.", "ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
             data += "&sendid="+senderId;
@@ -252,7 +252,7 @@ public class SmsNotification { //for customers to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65"+mobileNo, "ISO-8859-1");
             data += "&msg=" + URLEncoder.encode("Dear " + custName + ", " + workshopName + " has replied to your quotation request:%0aMinimum: $" + minPrice + "%0aMaximum: $" + maxPrice,"ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
@@ -295,7 +295,7 @@ public class SmsNotification { //for customers to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65"+mobileNo, "ISO-8859-1");
             data += "&msg=" + URLEncoder.encode("Dear " + custName + ", " + workshopName + " has replied to your quotation request:%0aDiagnostic Price: $" + diagnosticPrice,"ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
@@ -338,7 +338,7 @@ public class SmsNotification { //for customers to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65"+mobileNo, "ISO-8859-1");
             data += "&msg=" + URLEncoder.encode("Dear " + custName + ", " + workshopName + " has replied with a final quotation of $" + finalPrice + "%0aPlease login to your account to accept. Thank you.","ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
@@ -381,7 +381,7 @@ public class SmsNotification { //for customers to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65"+mobileNo, "ISO-8859-1");
             data += "&msg=" + URLEncoder.encode("Dear " + custName + ", " + workshopName + " has replied with an estimated date and time of completion:%0a" + estDateTime,"ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
@@ -424,7 +424,7 @@ public class SmsNotification { //for customers to receive
              */
             data += "un=" + URLEncoder.encode(username, "ISO-8859-1");   //add username here
             data += "&pwd=" + URLEncoder.encode(password, "ISO-8859-1"); //add pw here
-            data += "&dstno=" + URLEncoder.encode(mobileTest, "ISO-8859-1");
+            data += "&dstno=" + URLEncoder.encode("65"+mobileNo, "ISO-8859-1");
             data += "&msg=" + URLEncoder.encode("Dear " + custName + ", your car servicing/repair with " + workshopName + " is completed.%0aPlease proceed to collect your vehicle from the workshop.","ISO-8859-1");
             data += uniqueLink;
             data += "&type=1";
