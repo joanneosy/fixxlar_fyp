@@ -297,27 +297,29 @@
                                                             <tbody>
                                                                 <!--Loop per new request-->
                                                                 <%
-                                                                    vList = vList = vrDAO.retrieveAllValetRequest(user.getStaffId(), user.getToken(), 2);
-                                                                    it = vList.entrySet().iterator();
-                                                                    while (it.hasNext()) {
-                                                                        Map.Entry pair = (Map.Entry) it.next();
-                                                                        ValetRequest vr = (ValetRequest) pair.getValue();
-                                                                        int id = vr.getId();
-                                                                        Timestamp timeStamp = vr.getScheduledPickUpTime();
-                                                                        String dateTime = "-";
-                                                                        if (timeStamp != null) {
-                                                                            dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
-                                                                        }
-                                                                        int serviceType = vr.getServiceType();
-                                                                        String pickUpAddress = vr.getPickUpAddress();
-                                                                        String dropOffAddress = vr.getDropOffAddress();
-                                                                        Vehicle vehicle = vr.getVehicle();
-                                                                        String carControl = vehicle.getControl();
-                                                                        String carColor = vehicle.getColour();
-                                                                        String carPlate = vehicle.getPlateNumber();
+                                                                    int[] statusArr = {2, 3, 4, 5, 6};
+                                                                    for (int stat : statusArr) {
+                                                                        vList = vList = vrDAO.retrieveAllValetRequest(user.getStaffId(), user.getToken(), stat);
+                                                                        it = vList.entrySet().iterator();
+                                                                        while (it.hasNext()) {
+                                                                            Map.Entry pair = (Map.Entry) it.next();
+                                                                            ValetRequest vr = (ValetRequest) pair.getValue();
+                                                                            int id = vr.getId();
+                                                                            Timestamp timeStamp = vr.getScheduledPickUpTime();
+                                                                            String dateTime = "-";
+                                                                            if (timeStamp != null) {
+                                                                                dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
+                                                                            }
+                                                                            int serviceType = vr.getServiceType();
+                                                                            String pickUpAddress = vr.getPickUpAddress();
+                                                                            String dropOffAddress = vr.getDropOffAddress();
+                                                                            Vehicle vehicle = vr.getVehicle();
+                                                                            String carControl = vehicle.getControl();
+                                                                            String carColor = vehicle.getColour();
+                                                                            String carPlate = vehicle.getPlateNumber();
 
-                                                                        Customer customer = vr.getCustomer();
-                                                                        String customerName = customer.getName();
+                                                                            Customer customer = vr.getCustomer();
+                                                                            String customerName = customer.getName();
 
                                                                 %>
                                                                 <tr>
@@ -384,7 +386,8 @@
                                                             </tr>
 
                                                             <%
-                                                                    i++;
+                                                                        i++;
+                                                                    }
                                                                 }
                                                             %>
                                                             <div class="md-overlay1"></div>
@@ -413,7 +416,7 @@
                                                             <tbody>
                                                                 <!--Loop per new request-->
                                                                 <%
-                                                                    vList = vrDAO.retrieveAllValetRequest(user.getStaffId(), user.getToken(), 3);
+                                                                    vList = vrDAO.retrieveAllValetRequest(user.getStaffId(), user.getToken(), 7);
                                                                     it = vList.entrySet().iterator();
                                                                     while (it.hasNext()) {
                                                                         Map.Entry pair = (Map.Entry) it.next();
@@ -690,5 +693,5 @@
             $('#example4').DataTable();
             $('#example5').DataTable();
         });</script>
-    
+
 </html>

@@ -27,9 +27,9 @@
                         <%
                             WebUser user = (WebUser) session.getAttribute("loggedInUser");
                             String url = "Login.jsp";
-                                                        //Workshop
+                            //Workshop
                             if (user != null) {
-                            int userType = user.getUserType();
+                                int userType = user.getUserType();
                                 int staffType = user.getStaffType();
                                 if (userType == 1) {
                                     url = "New_Request.jsp";

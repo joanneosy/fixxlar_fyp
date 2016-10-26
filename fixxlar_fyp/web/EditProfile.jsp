@@ -87,7 +87,7 @@
                                             String wsBrands = ws.getBrandsCarried();
                                             String wsDescription = ws.getDescription();
                                             String wsSpecialize = ws.getSpecialize();
-                                            String wsOpenHr = ws.getOpeningHourFormat();
+                                            String wsOpenHr = ws.getOpeningHourFormat2();
                                             String[] daysAndTime = wsOpenHr.split(",");
                                             String wsCategory = ws.getCategory();
                                             String wsRemark = ws.getRemark();

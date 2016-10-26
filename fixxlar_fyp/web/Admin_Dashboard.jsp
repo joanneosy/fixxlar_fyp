@@ -121,7 +121,7 @@
                 <!-- Page content -->
                 <div id="content" class="col-md-12">
                     <%            String successChangePasswordMsg = (String) session.getAttribute("successChangePasswordMsg");
-    if (successChangePasswordMsg != null && successChangePasswordMsg.length() > 0) {%>
+                        if (successChangePasswordMsg != null && successChangePasswordMsg.length() > 0) {%>
                     <div class="alert alert-success"><%=successChangePasswordMsg%></div>
                     <%
                             session.setAttribute("successChangePasswordMsg", "");
@@ -221,20 +221,20 @@
                                                                             int low = 0;
                                                                             for (Map.Entry<String, JsonElement> entry : entrySet) {
                                                                                 String s = entry.getKey();
-                                                                                
+
                                                                                 if (s.equals("High")) {
                                                                                     urgent = entry.getValue().getAsInt();
-                                                                                   
+
                                                                                 }
                                                                                 if (s.equals("Medium")) {
                                                                                     moderate = entry.getValue().getAsInt();
-                                                                                    
+
                                                                                 }
                                                                                 if (s.equals("Low")) {
                                                                                     low = entry.getValue().getAsInt();
-                                                                                    
+
                                                                                 }
-                                                                                
+
                                                                             }
 
                                                                 %>
@@ -438,7 +438,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
         <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
-
+        
         <script src="js/minimal.min.js"></script>
 
 
@@ -509,7 +509,6 @@
                 });
             });
         </script>
-
     </body>
 
 </html>

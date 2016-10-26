@@ -29,11 +29,11 @@
                         <div class="controls">
                             <%
                                 WebUser user = (WebUser) session.getAttribute("loggedInUser");
-                                int userType = user.getUserType();
-                                int staffType = user.getStaffType();
                                 String url = "Login.jsp";
                                 //Workshop
                                 if (user != null) {
+                                    int userType = user.getUserType();
+                                    int staffType = user.getStaffType();
                                     if (userType == 1) {
                                         url = "New_Request.jsp";
                                     }

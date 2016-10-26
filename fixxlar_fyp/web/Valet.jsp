@@ -195,7 +195,7 @@
                                                                 <tr>
                                                                     <th class="sortable">ID</th>
                                                                     <th class="sortable">Scheduled DateTime</th>
-                                                                    <th class="sortable">Service Type</th>
+                                                                    <!--<th class="sortable">Service Type</th>-->
                                                                     <th class="sortable">Pickup Location</th>
                                                                     <th class="sortable">Dropoff Location</th>
                                                                     <th class="sortable">Vehicle Transmission</th>
@@ -230,7 +230,7 @@
                                                                 <tr>
                                                                     <td><% out.print(id);%></td>
                                                                     <td><% out.print(dateTime);%></td>
-                                                                    <td><% out.print(serviceType + " way");%></td>
+                                                                    <!--<td><% out.print(serviceType + " way");%></td>-->
                                                                     <td><% out.print(pickUpAddress);%></td>
                                                                     <td><% out.print(dropOffAddress);%></td>
                                                                     <td><% out.print(carControl);%></td>
@@ -276,7 +276,7 @@
                                                                                 <p><b>Drop Off Address: </b><% out.print(dropOffAddress);%></p>
                                                                             </div>
                                                                             <div class="col-xs-12">
-                                                                                <p><b>Scheduled Date: </b>><% out.print(dateTime);%></p>
+                                                                                <p><b>Scheduled Date: </b><% out.print(dateTime);%></p>
                                                                             </div> 
                                                                             <!--                                                                    <div class="col-xs-12">
                                                                                                                                                     <p><b>Scheduled Time: </b><% out.print(carColor);%></p>
@@ -314,7 +314,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th class="sortable">ID</th>
-                                                                    <th class="sortable">Service Type</th>
+                                                                    <!--<th class="sortable">Service Type</th>-->
                                                                     <th class="sortable">Current Pickup Location</th>
                                                                     <th class="sortable">Current Dropoff Location</th>
                                                                     <th class="sortable">Next Pickup Time</th>
@@ -325,7 +325,7 @@
                                                             <tbody>
                                                                 <!--Loop per new request-->
                                                                 <%
-                                                                    int[] statusArr = {2, 3, 4, 5};
+                                                                    int[] statusArr = {2, 3, 4, 5, 6};
                                                                     for (int stat : statusArr) {
                                                                         vList = vrDAO.retrieveValetRequestsForDriver(user.getStaffId(), user.getToken(), stat);
                                                                         it = vList.entrySet().iterator();
@@ -352,7 +352,6 @@
                                                                 %>
                                                                 <tr>
                                                                     <td><% out.print(id);%></td>
-                                                                    <td><% out.print(serviceType + " way");%></td>
                                                                     <td><% out.print(pickUpAddress);%></td>
                                                                     <td><% out.print(dropOffAddress);%></td>
                                                                     <td><% out.print(dateTime);%></td>
@@ -410,19 +409,19 @@
                                                             </div> <!--/.modal -->
 
                                                             <td>
-                                                                <% if (stat == 2) {%>
+                                                                <% if (stat == 3) {%>
                                                                 <form action="StartValetServlet" method="POST">
                                                                     <button type="submit" name="id" value="<%=id%>" class="btn btn-default btn-xs">Start</button>
                                                                 </form>
-                                                                <%} else if (stat == 3) {%>
+                                                                <%} else if (stat == 4) {%>
                                                                 <form action="ValetPickupServlet" method="POST">
                                                                     <button type="submit" name="id" value="<%=id%>" class="btn btn-default btn-xs">Reached Pickup Point</button>
                                                                 </form>
-                                                                <%} else if (stat == 4) {%>
+                                                                <%} else if (stat == 5) {%>
                                                                 <form action="ValetOnTheWayServlet" method="POST">
                                                                     <button type="submit" name="id" value="<%=id%>" class="btn btn-default btn-xs">To Destination</button>
                                                                 </form>
-                                                                <%} else if (stat == 5) {%>
+                                                                <%} else if (stat == 6) {%>
                                                                 <form action="ValetDropoffServlet" method="POST">
                                                                     <button type="submit" name="id" value="<%=id%>" class="btn btn-default btn-xs">Destination Reached</button>
                                                                 </form>
@@ -452,7 +451,7 @@
                                                                 <tr>
                                                                     <th class="sortable">ID</th>
                                                                     <th class="sortable">Scheduled DateTime</th>
-                                                                    <th class="sortable">Service Type</th>
+                                                                    <!--<th class="sortable">Service Type</th>-->
                                                                     <th class="sortable">Pickup Location</th>
                                                                     <th class="sortable">Dropoff Location</th>
                                                                     <th>More Info</th>
@@ -462,7 +461,7 @@
                                                             <tbody>
                                                                 <!--Loop per new request-->
                                                                 <%
-                                                                    vList = vrDAO.retrieveValetRequestsForDriver(user.getStaffId(), user.getToken(), 6);
+                                                                    vList = vrDAO.retrieveValetRequestsForDriver(user.getStaffId(), user.getToken(), 7);
                                                                     it = vList.entrySet().iterator();
 
                                                                     while (it.hasNext()) {
@@ -493,7 +492,6 @@
                                                                 <tr>
                                                                     <td><% out.print(id);%></td>
                                                                     <td><% out.print(dateTime);%></td>
-                                                                    <td><% out.print(serviceType);%></td>
                                                                     <td><% out.print(pickUpAddress);%></td>
                                                                     <td><% out.print(dropOffAddress);%></td>
                                                                     <td class="text-center"><a data-modal="<% out.print("myModal" + i);%>" class="md-trigger"><img src="images/file.png"/></a></td>
@@ -538,7 +536,7 @@
                                                                                 <p><b>Drop Off Address: </b><% out.print(dropOffAddress);%></p>
                                                                             </div>
                                                                             <div class="col-xs-12">
-                                                                                <p><b>Scheduled Date: </b>><% out.print(dateTime);%></p>
+                                                                                <p><b>Scheduled Date: </b><% out.print(dateTime);%></p>
                                                                             </div> 
                                                                             <!--                                                                    <div class="col-xs-12">
                                                                                                                                                     <p><b>Scheduled Time: </b><% out.print(carColor);%></p>

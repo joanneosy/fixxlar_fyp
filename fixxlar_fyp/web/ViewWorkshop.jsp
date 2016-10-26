@@ -16,9 +16,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View Workshops</title>
         <jsp:include page="include/head.jsp"/>
-        <link rel="stylesheet" href="js/dataTables.bootstrap.css">
-        <link rel="stylesheet" href="js/ColVis.css">
-        <link rel="stylesheet" href="js/TableTools.css">
     </head>
     <body class="bg-3">
         <!-- Wrap all page content here -->

@@ -353,12 +353,12 @@
                                                                                 <p><b>Mileage: </b><br><% out.print(serviceMileage);%></p>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-xs-6">
-                                                                            <form action="CompleteService">
-                                                                                <input type="hidden" name="id" value="<%=offerId%>"/>
-                                                                                <input type="submit" class="btn btn-primary" value="Complete Service"></button>
-                                                                            </form>
-                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xs-12">
+                                                                        <form action="CompleteService">
+                                                                            <input type="hidden" name="id" value="<%=offerId%>"/>
+                                                                            <input type="submit" class="btn btn-primary" value="Complete Service"></button>
+                                                                        </form>
                                                                     </div>
                                                                     <div class="col-xs-12">
                                                                         <button class="md-close btn btn-default">Close</button>
@@ -826,27 +826,27 @@
         intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=categories%>", "<%=brands_carried%>");
     </script>
     <script>
-            $(window).load(function () {
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
-                    crossDomain: true,
-                    data: {
-                        "token": "<%=user.getToken()%>",
-                        "staff_id": "<%=user.getStaffId()%>",
-                        "shop_id": "<%=user.getShopId()%>"
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        $.each(data.payload.notifications, function () {
-                            var notification = $(this).attr('actual_message');
-                            $.jGrowl(notification, {sticky: true});
-                        });
-                    },
-                    error: function () {
-                    }
-                });
+        $(window).load(function () {
+            $.ajax({
+                type: 'POST',
+                url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
+                crossDomain: true,
+                data: {
+                    "token": "<%=user.getToken()%>",
+                    "staff_id": "<%=user.getStaffId()%>",
+                    "shop_id": "<%=user.getShopId()%>"
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $.each(data.payload.notifications, function () {
+                        var notification = $(this).attr('actual_message');
+                        $.jGrowl(notification, {sticky: true});
+                    });
+                },
+                error: function () {
+                }
             });
-        </script>
+        });
+    </script>
 </html>

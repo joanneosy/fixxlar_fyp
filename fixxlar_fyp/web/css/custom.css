@@ -1,3 +1,16 @@
+/*Fonts*/
+body{
+    font-family: "Ebrima REGULAR", "Roboto", "Arial", sans-serif;
+}
+h1{
+    font-family: "Ebrima BOLD", "Roboto", "Arial", sans-serif;
+}
+h2,h3,h4,h5,h6{
+    font-family: "Ebrima REGULAR", "Roboto", "Arial", sans-serif;
+}
+/*Fonts*/
+
+
 /*Dashboard Card(Ave rating)*/
 .card-container { position: relative; min-height: 80px; margin-bottom: 20px; }
 .card-container .card1 { height: 100%; position: relative; -webkit-perspective: 600px; -moz-perspective: 600px; perspective: 600px; width: 100%; -cursor: pointer; z-index: 9; }
