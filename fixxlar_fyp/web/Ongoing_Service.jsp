@@ -299,7 +299,7 @@
                                                             <% i++;%>
 
                                                             <!--Quote-->
-                                                            <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>More Info</span></button></td>
+                                                            <td class="text-center"><button class="btn btn-default btn-xs md-trigger" data-modal="<% out.print("myModal" + i);%>" id="quoteBtn" type="button" onclick="subscribe(<%=serviceId%>, <%=wsID%>, <%=userID%>, '<%=custName%>', '<%=chatToken%>', 'log<%=serviceId%>');"><span>Complete</span></button></td>
 
 
                                                             <!-- Modal -->
@@ -357,7 +357,7 @@
                                                                     <div class="col-xs-12">
                                                                         <form action="CompleteService">
                                                                             <input type="hidden" name="id" value="<%=offerId%>"/>
-                                                                            <input type="submit" class="btn btn-primary" value="Complete Service"></button>
+                                                                            <button type="submit" class="btn btn-primary" value="Complete Service">Complete Service</button>
                                                                         </form>
                                                                     </div>
                                                                     <div class="col-xs-12">
