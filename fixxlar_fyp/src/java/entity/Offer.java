@@ -22,8 +22,11 @@ public class Offer {
     private double initialMinPrice;
     private double initialMaxPrice;
     private double diagnosticPrice;
+    private String wsInitialComment;
+    private String wsFinalComment;
+    private String driverInitialComment;
 
-    public Offer(int id, int serviceId, int workshopId, int status, double initialMinPrice, double initialMaxPrice, double diagnosticPrice, double finalPrice, Timestamp estCompletionTime) {
+    public Offer(int id, int serviceId, int workshopId, int status, double initialMinPrice, double initialMaxPrice, double diagnosticPrice, double finalPrice, Timestamp estCompletionTime, String wsInitialComment, String wsFinalComment, String driverInitialComment) {
         this.id = id;
         this.serviceId = serviceId;
         this.estCompletionTime = estCompletionTime;
@@ -33,6 +36,9 @@ public class Offer {
         this.initialMinPrice = initialMinPrice; 
         this.initialMaxPrice = initialMaxPrice;
         this.diagnosticPrice = diagnosticPrice;
+        this.wsInitialComment = wsInitialComment;
+        this.wsFinalComment = wsFinalComment;
+        this.driverInitialComment = driverInitialComment;
     }
     
     public int getId() {
@@ -70,4 +76,29 @@ public class Offer {
     public double getDiagnosticPrice() {
         return diagnosticPrice;
     }
+
+    public String getDriverInitialComment() {
+        return driverInitialComment;
+    }
+
+    public void setDriverInitialComment(String driverInitialComment) {
+        this.driverInitialComment = driverInitialComment;
+    }
+
+    public String getWsInitialComment() {
+        return wsInitialComment;
+    }
+
+    public void setWsInitialComment(String wsInitialComment) {
+        this.wsInitialComment = wsInitialComment;
+    }
+
+    public String getWsFinalComment() {
+        return wsFinalComment;
+    }
+
+    public void setWsFinalComment(String wsFinalComment) {
+        this.wsFinalComment = wsFinalComment;
+    }
+    
 }

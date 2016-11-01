@@ -225,6 +225,22 @@ public class QuotationRequestDAO {
                 finalQuotationPrice = attElement.getAsDouble();
             }
 
+            attElement = qrObj.get("driver_initial_comment");
+            String driverInitialComment = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                driverInitialComment = attElement.getAsString();
+            }
+            attElement = qrObj.get("ws_initial_comment");
+            String wsInitialComment = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                wsInitialComment = attElement.getAsString();
+            }
+            attElement = qrObj.get("ws_final_comment");
+            String wsFinalComment = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                wsFinalComment = attElement.getAsString();
+            }
+
             attElement = qrObj.get("offer_est_complete_time");
             Timestamp estCompletionDateTime = null;
             String dateTimeString = "1990-01-01 00:00:00";
@@ -334,7 +350,7 @@ public class QuotationRequestDAO {
             if (!attElement.isJsonNull()) {
                 noOfRejections = attElement.getAsInt();
             }
-            
+
             attElement = qrObj.get("chat_topic_id");
             int chatTopicId = 0;
             if (attElement != null && !attElement.isJsonNull()) {
@@ -342,7 +358,7 @@ public class QuotationRequestDAO {
             }
             Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, customerId, carColor, carControl);
             Customer customer = new Customer(customerId, customerEmail, customerName, customerHpNo);
-            Offer offer = new Offer(offerId, id, wsId, offerStatus, initialMinPrice, initialMaxPrice, diagnosticPrice, finalQuotationPrice, estCompletionDateTime);
+            Offer offer = new Offer(offerId, id, wsId, offerStatus, initialMinPrice, initialMaxPrice, diagnosticPrice, finalQuotationPrice, estCompletionDateTime, wsInitialComment, wsFinalComment, driverInitialComment);
 
             QuotationRequest qr = new QuotationRequest(id, name, details, description, vehicle, mileage, urgency, amenities, latitude, longitude, address, photos,
                     requestDateTime, category, noOfRejections, wsId, customer, offer, chatTopicId);
@@ -496,6 +512,22 @@ public class QuotationRequestDAO {
                 finalQuotationPrice = attElement.getAsDouble();
             }
 
+            attElement = qrObj.get("driver_initial_comment");
+            String driverInitialComment = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                driverInitialComment = attElement.getAsString();
+            }
+            attElement = qrObj.get("ws_initial_comment");
+            String wsInitialComment = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                wsInitialComment = attElement.getAsString();
+            }
+            attElement = qrObj.get("ws_final_comment");
+            String wsFinalComment = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                wsFinalComment = attElement.getAsString();
+            }
+
             attElement = qrObj.get("offer_est_complete_time");
             Timestamp estCompletionDateTime = null;
             String dateTimeString = "1990-01-01 00:00:00";
@@ -605,7 +637,7 @@ public class QuotationRequestDAO {
             if (!attElement.isJsonNull()) {
                 noOfRejections = attElement.getAsInt();
             }
-            
+
             attElement = qrObj.get("chat_topic_id");
             int chatTopicId = 0;
             if (attElement != null && !attElement.isJsonNull()) {
@@ -614,7 +646,7 @@ public class QuotationRequestDAO {
 
             Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, customerId, carColor, carControl);
             Customer customer = new Customer(customerId, customerEmail, customerName, customerHpNo);
-            Offer offer = new Offer(offerId, id, wsId, offerStatus, initialMinPrice, initialMaxPrice, diagnosticPrice, finalQuotationPrice, estCompletionDateTime);
+            Offer offer = new Offer(offerId, id, wsId, offerStatus, initialMinPrice, initialMaxPrice, diagnosticPrice, finalQuotationPrice, estCompletionDateTime, wsInitialComment, wsFinalComment, driverInitialComment);
 
             QuotationRequest qr = new QuotationRequest(id, name, details, description, vehicle, mileage, urgency, amenities, latitude, longitude, address, photos,
                     requestDateTime, category, noOfRejections, wsId, customer, offer, chatTopicId);
@@ -857,14 +889,14 @@ public class QuotationRequestDAO {
         if (oElement.isJsonNull()) {
             return offer;
         }
-        
+
         oObj = oElement.getAsJsonObject();
         JsonElement attElement = oObj.get("service_id");
         int serviceId = 0;
         if (!attElement.isJsonNull()) {
             serviceId = attElement.getAsInt();
         }
-        
+
         attElement = oObj.get("est_complete_time");
         Timestamp estCompletionDateTime = null;
         String dateTimeString = "1990-01-01 00:00:00";
@@ -877,19 +909,19 @@ public class QuotationRequestDAO {
             parsedDate = dateFormat.parse(dateTimeString);
             estCompletionDateTime = new java.sql.Timestamp(parsedDate.getTime());
         }
-        
+
         attElement = oObj.get("final_price");
         double finalPrice = 0.0;
         if (!attElement.isJsonNull()) {
             finalPrice = attElement.getAsDouble();
         }
-        
+
         attElement = oObj.get("offer_status");
         int status = 0;
         if (!attElement.isJsonNull()) {
             status = attElement.getAsInt();
         }
-        
+
         attElement = oObj.get("shop_id");
         int wsId = 0;
         if (!attElement.isJsonNull()) {
@@ -901,24 +933,39 @@ public class QuotationRequestDAO {
         if (attElement != null && !attElement.isJsonNull()) {
             initialMinPrice = attElement.getAsDouble();
         }
-        
+
         attElement = oObj.get("max_price");
         double initialMaxPrice = 0.0;
         if (attElement != null && !attElement.isJsonNull()) {
             initialMaxPrice = attElement.getAsDouble();
         }
-        
+
         attElement = oObj.get("diagnostic_price");
         double diagnosticPrice = 0.0;
         if (attElement != null && !attElement.isJsonNull()) {
             diagnosticPrice = attElement.getAsDouble();
         }
+        attElement = oObj.get("driver_initial_comment");
+        String driverInitialComment = "";
+        if (attElement != null && !attElement.isJsonNull()) {
+            driverInitialComment = attElement.getAsString();
+        }
+        attElement = oObj.get("ws_initial_comment");
+        String wsInitialComment = "";
+        if (attElement != null && !attElement.isJsonNull()) {
+            wsInitialComment = attElement.getAsString();
+        }
+        attElement = oObj.get("ws_final_comment");
+        String wsFinalComment = "";
+        if (attElement != null && !attElement.isJsonNull()) {
+            wsFinalComment = attElement.getAsString();
+        }
 
-        offer = new Offer(offerId, serviceId, wsId, status, initialMinPrice, initialMaxPrice, diagnosticPrice, finalPrice, estCompletionDateTime);
+        offer = new Offer(offerId, serviceId, wsId, status, initialMinPrice, initialMaxPrice, diagnosticPrice, finalPrice, estCompletionDateTime, wsInitialComment, wsFinalComment, driverInitialComment);
         return offer;
-        
+
     }
-    
+
     public HashMap<Integer, QuotationRequest> retrieveQuotationRequestsWithoutOffer(int staffId, String token) throws SQLException, UnsupportedEncodingException, IOException, ParseException {
 
         HashMap<Integer, QuotationRequest> allQuotationRequests = new HashMap<Integer, QuotationRequest>();
@@ -1166,15 +1213,31 @@ public class QuotationRequestDAO {
             if (!attElement.isJsonNull()) {
                 noOfRejections = attElement.getAsInt();
             }
-            
+
             attElement = qrObj.get("chat_topic_id");
             int chatTopicId = 0;
             if (attElement != null && !attElement.isJsonNull()) {
                 chatTopicId = attElement.getAsInt();
             }
+            attElement = qrObj.get("driver_initial_comment");
+            String driverInitialComment = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                driverInitialComment = attElement.getAsString();
+            }
+            attElement = qrObj.get("ws_initial_comment");
+            String wsInitialComment = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                wsInitialComment = attElement.getAsString();
+            }
+            attElement = qrObj.get("ws_final_comment");
+            String wsFinalComment = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                wsFinalComment = attElement.getAsString();
+            }
+
             Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, customerId, carColor, carControl);
             Customer customer = new Customer(customerId, customerEmail, customerName, customerHpNo);
-            Offer offer = new Offer(offerId, id, wsId, offerStatus, initialMinPrice, initialMaxPrice, diagnosticPrice, finalQuotationPrice, estCompletionDateTime);
+            Offer offer = new Offer(offerId, id, wsId, offerStatus, initialMinPrice, initialMaxPrice, diagnosticPrice, finalQuotationPrice, estCompletionDateTime, wsInitialComment,wsFinalComment, driverInitialComment);
 
             QuotationRequest qr = new QuotationRequest(id, name, details, description, vehicle, mileage, urgency, amenities, latitude, longitude, address, photos,
                     requestDateTime, category, noOfRejections, wsId, customer, offer, chatTopicId);
@@ -1182,7 +1245,7 @@ public class QuotationRequestDAO {
         }
         return allQuotationRequests;
     }
-    
+
     public HashMap<Integer, QuotationRequest> retrieveCompletedQuotationRequests(int staffId, String token) throws SQLException, UnsupportedEncodingException, IOException, ParseException {
 
         HashMap<Integer, QuotationRequest> allQuotationRequests = new HashMap<Integer, QuotationRequest>();
@@ -1429,15 +1492,30 @@ public class QuotationRequestDAO {
             if (!attElement.isJsonNull()) {
                 noOfRejections = attElement.getAsInt();
             }
-            
+
             attElement = qrObj.get("chat_topic_id");
             int chatTopicId = 0;
             if (attElement != null && !attElement.isJsonNull()) {
                 chatTopicId = attElement.getAsInt();
             }
+            attElement = qrObj.get("driver_initial_comment");
+            String driverInitialComment = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                driverInitialComment = attElement.getAsString();
+            }
+            attElement = qrObj.get("ws_initial_comment");
+            String wsInitialComment = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                wsInitialComment = attElement.getAsString();
+            }
+            attElement = qrObj.get("ws_final_comment");
+            String wsFinalComment = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                wsFinalComment = attElement.getAsString();
+            }
             Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, customerId, carColor, carControl);
             Customer customer = new Customer(customerId, customerEmail, customerName, customerHpNo);
-            Offer offer = new Offer(offerId, id, wsId, offerStatus, initialMinPrice, initialMaxPrice, diagnosticPrice, finalQuotationPrice, estCompletionDateTime);
+            Offer offer = new Offer(offerId, id, wsId, offerStatus, initialMinPrice, initialMaxPrice, diagnosticPrice, finalQuotationPrice, estCompletionDateTime, wsInitialComment, wsFinalComment, driverInitialComment);
 
             QuotationRequest qr = new QuotationRequest(id, name, details, description, vehicle, mileage, urgency, amenities, latitude, longitude, address, photos,
                     requestDateTime, category, noOfRejections, wsId, customer, offer, chatTopicId);
@@ -1445,7 +1523,7 @@ public class QuotationRequestDAO {
         }
         return allQuotationRequests;
     }
-    
+
     public HashMap<Integer, Integer> retrieveNumberOfNewRequests(int staffId, String token) throws SQLException, UnsupportedEncodingException, IOException, ParseException {
 
         //Key = Shop Id
@@ -1500,7 +1578,7 @@ public class QuotationRequestDAO {
         }
         return numberOfNewRequests;
     }
-    
+
     public HashMap<Integer, Integer> retrieveNumberOfCompletedRequests(int staffId, String token) throws SQLException, UnsupportedEncodingException, IOException, ParseException {
 
         //Key = Shop Id
@@ -1535,8 +1613,8 @@ public class QuotationRequestDAO {
         JsonElement element = jsonParser.parse(str);
         JsonObject jobj = element.getAsJsonObject();
         JsonArray arr = jobj.getAsJsonObject("payload").getAsJsonArray("number_of_quotation_request");
-        
-         for (int i = 0; i < arr.size(); i++) {
+
+        for (int i = 0; i < arr.size(); i++) {
             JsonElement qrElement = arr.get(i);
             JsonObject qrObj = qrElement.getAsJsonObject();
             JsonElement attElement = qrObj.get("shop_id");
@@ -1556,7 +1634,6 @@ public class QuotationRequestDAO {
         return numberOfNewRequests;
     }
 
-    
     public static void main(String[] args) throws Exception {
         //HashMap<Integer, QuotationRequest> qList = retrieveAllQuotationRequests(3, "57cd00bbfaf886f8fe9fc98e15ee3bb0b31663a18f752de76cd998d71fe983be2b2f2a3de0f41ab8f69f3d19ab29b78c1b957578f5e7679e112de86fd1841da08c48d0a674fa001c3a2fe1e161c76edc6ce950b080c9a876034b3dfeabf826efacc3fde2d5542e8d4ccb90fd0163cb76371b7159546fd7d652d31abd73c235b290d4d62e2c31a8a00704432fae9a60e9f04eb4338698e0b2d5183d8cd4a4671ac1bc1d0ae79792bc21c8a1cd902d841a8fb6e8d0197cbccb3fd6f92456d9a361b940c0ff1affe7149e458fac8d7b0783e095d0dc4c82b86930e9fa378b4ffe1f15ce963d80291a7bc1c69ee0d63fb8b1d613d5feb3820b6c1a86cf7ab95d1340d8974f4acdf8e6ce9b426565d4f14b348c80787b4f24e95f9cd625f2a50e28d5118b364c362ae096623208881a9cc9f2161a422bac6d4d8e968f7b26093837d95b17352f417d0a061138438242a2cf6dd32e736bad691912e3d2701fc17a84a855a3aeb57969ad875a656e80206f10677818967ecd6942ea5463d1e3f188b84bc54c781ca85a3dceb76da8a17d9728fb0eb94b51ecd96787f11abefc7fb0e6f80307402b8d8e00920d8a48b566dbf1ad84b0487bb67863a31d122c86084ae08b891252fad4fe7df17c76cf419f33e2fb760968ac9e112567188c0b163961ef708e1fbb9059de5d7fa1f7f20da40123d5311fd308fcee95f36a3a4991b814ef3b", 0, 0, null, "requested_datetime", "desc");
         //retrieveOffer(20, "bfa5334a57318d381e35ca9cd6c41f12cf504f6458e0f6799f62a946459def5f73f3490ba6577c61b4ea9bb69cc020ef8d37bc98ca12c57b757babf71b1d1b337729275e333b20f19a8738eca93bef992c49912d1943e599b5b5a1f33ad2d31dc6daa4f706d44760abd86764701d46b8c0e09ed0929977e41e41c62223c3267db510a9d8ff69994474d438dbee3d13d52bad3f65272b802f3cd54b9ef6da8d6c6d24a00cb263aa58e50fac2479d95f9664b1c31bfe1b0f640d3621f84f7642fefc28c0fe0c5069cbf37bf73e7e1a970a01374d3412cce1668e060af58fa02081a3ec9ba1bfe50d5a87ce82c5b30848b6c5026ba4839ab00e7fdd7e350691b323603ce4b511b5f4e7657361287d1a208ee8bf169b26db5a8419c54ca22428416ab28b95074192be54d4685b6acdaba8d1d8ceffff8c3afd565c929424faaca62f27d0e00acbd46cba910f274facfd511ed7acab33a5bb81dc622e10f43ce64f6394549535d58fb40271558f07c5b0e054121fa2382dafa2993ee393e6a2cc2693f5d11c88890bab3020f11a3e20c49fe040173b948d07cc0b76439a4a2966a59962268fb556a8deb4009333b4b0c327751430463097ca0d5231b0803c950bfb534291c57688306e4fc891b060b0a81bebc7261cf6618108f807a6685a785d72f13b086373d412218e4468bab6078c998d5f6ec3867330934c39e497d58850c5ec", 59);

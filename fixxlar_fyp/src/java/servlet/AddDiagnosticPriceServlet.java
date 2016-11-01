@@ -50,7 +50,7 @@ public class AddDiagnosticPriceServlet extends HttpServlet {
 
         int quotationRequestId = Integer.parseInt(request.getParameter("id"));
         double price = Double.parseDouble(request.getParameter("price"));
-        String description = "";
+        String description = request.getParameter("remarks");
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();

@@ -54,7 +54,7 @@ public class AddInitialQuotationServlet extends HttpServlet {
         int quotationRequestId = Integer.parseInt(request.getParameter("id"));
         double minPrice = Double.parseDouble(request.getParameter("minPrice"));
         double maxPrice = Double.parseDouble(request.getParameter("maxPrice"));
-        String description = "";
+        String description = request.getParameter("remarks");
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();

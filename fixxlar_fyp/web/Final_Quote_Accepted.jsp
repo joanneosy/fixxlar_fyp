@@ -260,6 +260,8 @@
                                                                         String carControl = vehicle.getControl();
 
                                                                         Offer offer = qr.getOffer();
+                                                                        String driverInitialComment = offer.getDriverInitialComment();
+                                                                        String wsFinalComment = offer.getWsFinalComment();
                                                                         double afinalPrice = offer.getFinalPrice();
                                                                         String finalPrice = afinalPrice + "0";
                                                                 %>
@@ -317,6 +319,12 @@
                                                                             </div>
                                                                             <div class="col-xs-12">
                                                                                 <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
+                                                                            </div>      
+                                                                            <div class="col-xs-12">
+                                                                                <p><b>Driver Comment: </b><br><% out.print(driverInitialComment);%></p>
+                                                                            </div>      
+                                                                            <div class="col-xs-12">
+                                                                                <p><b>Workshop Comment: </b><br><% out.print(wsFinalComment);%></p>
                                                                             </div>      
                                                                         </div>
                                                                         <!--</div>-->
@@ -493,7 +501,6 @@
     <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
     <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
     <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
-    <script type="text/javascript" src="js/jquery.videobackground.js"></script>
     <script type="text/javascript" src="js/jquery.blockUI.js"></script>
     <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
     <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
@@ -508,26 +515,22 @@
 
 
     <script>
-                                                                                                $(function () {
-                                                                                                    // Initialize card flip
-                                                                                                    $('.card.hover').hover(function () {
-                                                                                                        $(this).addClass('flip');
-                                                                                                    }, function () {
-                                                                                                        $(this).removeClass('flip');
-                                                                                                    });
+                                                                $(function () {
+                                                                    // Initialize card flip
+                                                                    $('.card.hover').hover(function () {
+                                                                        $(this).addClass('flip');
+                                                                    }, function () {
+                                                                        $(this).removeClass('flip');
+                                                                    });
 
-                                                                                                    sortable
-                                                                                                    table
-                                                                                                    $('.table.table-sortable th.sortable').click(function () {
-                                                                                                        var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                                                                                                        $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                                                                                                        $(this).addClass(o);
-                                                                                                    });
-
-
-
-
-                                                                                                });
+                                                                    //sortable table
+                                                                    $('.table.table-sortable th.sortable').click(function () {
+                                                                        var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                                                                        $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                                                                        $(this).addClass(o);
+                                                                    });
+                                                                    
+                                                                });
 
 
     </script>
@@ -540,19 +543,8 @@
         window.onload = start;
     </script>
     <script>
-        $("#accordion > li > span").click(function () {
-            $(this).toggleClass("active").next('div').slideToggle(250)
-                    .closest('li').siblings().find('span').removeClass('active').next('div').slideUp(250);
-        });
-
-    </script>
-    <script>
         $(document).ready(function () {
             $('#example').DataTable();
-            $('#example2').DataTable();
-            $('#example3').DataTable();
-            $('#example4').DataTable();
-            $('#example5').DataTable();
         });
     </script>
     <script>
@@ -629,11 +621,6 @@
 
     </script>
     <script>
-//        $(".sendMsg").click(function () {
-//            prepareMsg();
-//        });
-    </script>
-    <script>
         function prepareMsg() {
             var ele = $(".md-show").find(".sendMsg");
             var msgDetails = ele[0].id;
@@ -665,27 +652,27 @@
         intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=categories%>", "<%=brands_carried%>");
     </script>
     <script>
-            $(window).load(function () {
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
-                    crossDomain: true,
-                    data: {
-                        "token": "<%=user.getToken()%>",
-                        "staff_id": "<%=user.getStaffId()%>",
-                        "shop_id": "<%=user.getShopId()%>"
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data);
-                        $.each(data.payload.notifications, function () {
-                            var notification = $(this).attr('actual_message');
-                            $.jGrowl(notification, {sticky: true});
-                        });
-                    },
-                    error: function () {
-                    }
-                });
+        $(window).load(function () {
+            $.ajax({
+                type: 'POST',
+                url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
+                crossDomain: true,
+                data: {
+                    "token": "<%=user.getToken()%>",
+                    "staff_id": "<%=user.getStaffId()%>",
+                    "shop_id": "<%=user.getShopId()%>"
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $.each(data.payload.notifications, function () {
+                        var notification = $(this).attr('actual_message');
+                        $.jGrowl(notification, {sticky: true});
+                    });
+                },
+                error: function () {
+                }
             });
-        </script>
+        });
+    </script>
 </html>

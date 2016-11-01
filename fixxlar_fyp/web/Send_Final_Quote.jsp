@@ -325,6 +325,8 @@
                                                                         String carControl = vehicle.getControl();
 
                                                                         Offer offer = qr.getOffer();
+                                                                        String driverInitialComment = offer.getDriverInitialComment();
+                                                                        String wsInitialComment = offer.getWsInitialComment();
                                                                         double minPrice = offer.getInitialMinPrice();
                                                                         String min = minPrice + "0";
                                                                         double maxPrice = offer.getInitialMaxPrice();
@@ -389,6 +391,12 @@
                                                                     <div class="col-xs-12">
                                                                         <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
                                                                     </div>      
+                                                                    <div class="col-xs-12">
+                                                                        <p><b>Workshop Comment: </b><br><% out.print(wsInitialComment);%></p>
+                                                                    </div>      
+                                                                    <div class="col-xs-12">
+                                                                        <p><b>Driver Comment: </b><br><% out.print(driverInitialComment);%></p>
+                                                                    </div>      
                                                                 </div>
                                                                 <!--</div>-->
                                                                 <div>
@@ -430,6 +438,9 @@
                                                                             </div>
                                                                         </li>
                                                                     </ul>
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <b>Remarks: </b><textarea class="form-control" id="comment" rows="5" name="comment"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-xs-12">
@@ -507,6 +518,8 @@
                                                                     String carControl = vehicle.getControl();
 
                                                                     Offer offer = qr.getOffer();
+                                                                    String driverInitialComment = offer.getDriverInitialComment();
+                                                                    String wsFinalComment = offer.getWsFinalComment();
                                                                     double afinalPrice = offer.getFinalPrice();
                                                                     String finalPrice = afinalPrice + "0";
                                                             %>
@@ -565,6 +578,12 @@
                                                                         </div>
                                                                         <div class="col-xs-12">
                                                                             <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
+                                                                        </div>      
+                                                                        <div class="col-xs-12">
+                                                                            <p><b>Driver Comment: </b><br><% out.print(driverInitialComment);%></p>
+                                                                        </div>      
+                                                                        <div class="col-xs-12">
+                                                                            <p><b>Workshop Comment: </b><br><% out.print(wsFinalComment);%></p>
                                                                         </div>      
                                                                     </div>
                                                                     <!--</div>-->
@@ -751,22 +770,22 @@
 
 
     <script>
-                                                                                            $(function () {
-                                                                                                // Initialize card flip
-                                                                                                $('.card.hover').hover(function () {
-                                                                                                    $(this).addClass('flip');
-                                                                                                }, function () {
-                                                                                                    $(this).removeClass('flip');
-                                                                                                });
+                                                            $(function () {
+                                                                // Initialize card flip
+                                                                $('.card.hover').hover(function () {
+                                                                    $(this).addClass('flip');
+                                                                }, function () {
+                                                                    $(this).removeClass('flip');
+                                                                });
 
-                                                                                                //         sortable table
-                                                                                                $('.table.table-sortable th.sortable').click(function () {
-                                                                                                    var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                                                                                                    $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                                                                                                    $(this).addClass(o);
-                                                                                                });
+                                                                //         sortable table
+                                                                $('.table.table-sortable th.sortable').click(function () {
+                                                                    var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                                                                    $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                                                                    $(this).addClass(o);
+                                                                });
 
-                                                                                            });
+                                                            });
 
 
     </script>    

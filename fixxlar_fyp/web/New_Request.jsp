@@ -399,7 +399,9 @@
                                                                                             $<input type="number" name="maxPrice" required/><p>
                                                                                         </div>
                                                                                     </div>
-
+                                                                                    <div class="col-xs-12">
+                                                                                        <b>Quotation Remarks: </b><textarea class="form-control remarks" id="quotationRemark" rows="5" name="remarks"></textarea>
+                                                                                    </div>
                                                                                     <input type="hidden" name="id" value="<%=id%>">
                                                                                     <button type="submit" class="btn btn-primary">Submit Quote</button>
                                                                                 </form>
@@ -409,6 +411,9 @@
                                                                             <div class="panel">
                                                                                 <form action = "AddDiagnosticPrice" method= "post">
                                                                                     <div class="col-xs-12">Price: $<input type="number" name="price" required/><p></div>
+                                                                                    <div class="col-xs-12">
+                                                                                        <b>Diagnostic Remarks: </b><textarea class="form-control" id="diagnosticRemark" rows="5" name="remarks"></textarea>
+                                                                                    </div>
                                                                                     <input type="hidden" name="id" value="<%=id%>">
                                                                                     <button type="submit" class="btn btn-primary">Add Diagnostic Price</button>
                                                                                 </form>
@@ -504,6 +509,7 @@
                                                                     int offerId = offer.getId();
                                                                     double diagnosticPrice = offer.getDiagnosticPrice();
                                                                     String diagnostic = diagnosticPrice + "0";
+                                                                    String wsInitialComment = offer.getWsInitialComment();
 
                                                             %>
                                                             <tr>
@@ -561,9 +567,12 @@
                                                                         <div class="col-xs-12">
                                                                             <p><b>Service Request: </b><br><% out.print(serviceName);%></p>
                                                                         </div>
-                                                                        
+
                                                                         <div class="col-xs-12">
                                                                             <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
+                                                                        </div>      
+                                                                        <div class="col-xs-12">
+                                                                            <p><b>Workshop Comment: </b><br><% out.print(wsInitialComment);%></p>
                                                                         </div>      
                                                                     </div>
                                                                     <!--</div>-->
@@ -605,7 +614,7 @@
                                                                         %>
                                                                     </div>
                                                                 </div>
-                                                               
+
                                                                 <div class="col-xs-12">
                                                                     <button class="md-close btn btn-default">Close</button>
                                                                 </div>
@@ -640,17 +649,6 @@
                                     <div class="row">  
 
                                         <div class="col-sm-4">
-                                            <!--                                                <div class="input-group table-options">
-                                                                                                <select class="chosen-select form-control">
-                                                                                                    <option>Bulk Action</option>
-                                                                                                    <option>Delete Selected</option>
-                                                                                                    <option>Copy Selected</option>
-                                                                                                    <option>Archive Selected</option>
-                                                                                                </select>
-                                                                                                <span class="input-group-btn">
-                                                                                                    <button class="btn btn-default" type="button">Apply</button>
-                                                                                                </span>
-                                                                                            </div>-->
                                         </div>
 
                                         <div class="col-sm-4 text-center">
@@ -760,27 +758,23 @@
 
     <script src="js/minimal.min.js"></script>
 
-    <!--<script type="text/javascript" src="js/modalEffects.js"></script>--> 
-    <!--    <script type="text/javascript" src="js/cssParser.js"></script> 
-        <script type="text/javascript" src="js/css-filters-polyfill.js"></script> -->
-
 
 
     <script>
-                                                                                        $(function () {
-                                                                                            // Initialize card flip
-                                                                                            $('.card.hover').hover(function () {
-                                                                                                $(this).addClass('flip');
-                                                                                            }, function () {
-                                                                                                $(this).removeClass('flip');
-                                                                                            });
-                                                                                            //         sortable table
-                                                                                            $('.table.table-sortable th.sortable').click(function () {
-                                                                                                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                                                                                                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                                                                                                $(this).addClass(o);
-                                                                                            });
-                                                                                        });</script>
+                                                            $(function () {
+                                                                // Initialize card flip
+                                                                $('.card.hover').hover(function () {
+                                                                    $(this).addClass('flip');
+                                                                }, function () {
+                                                                    $(this).removeClass('flip');
+                                                                });
+                                                                //         sortable table
+                                                                $('.table.table-sortable th.sortable').click(function () {
+                                                                    var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+                                                                    $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+                                                                    $(this).addClass(o);
+                                                                });
+                                                            });</script>
     <script>
         $('.dropdown-menu li').on('click', function () {
             $(this).siblings().removeClass('active');
@@ -808,8 +802,8 @@
         });</script>
     <script>
         $(window).load(function () {
-//            if (<%//=justLoggedIn%> == true) {
-//                console.log("first");
+            //            if (<%//=justLoggedIn%> == true) {
+            //                console.log("first");
             //get all request to subscribe
         <%//session.setAttribute("justLoggedIn", false);%>
             $.ajax({
@@ -823,17 +817,17 @@
                 },
                 dataType: 'json',
                 success: function (data) {
-//                        $.each(data.items, function(i,item)){
-//                            console.log(i + ": " + item);
-//                        }
-//                    console.log(data.payload.quotation_requests);
+                    //                        $.each(data.items, function(i,item)){
+                    //                            console.log(i + ": " + item);
+                    //                        }
+                    //                    console.log(data.payload.quotation_requests);
                     $.each(data.payload.quotation_requests, function () {
                         var requestID = $(this).attr('service_id');
                         var customer_name = $(this).attr('customer_name');
                         var driverID = $(this).attr('customer_id');
                         var log = "log" + requestID;
                         subscribe(requestID, <%=shopID%>, driverID, customer_name, "<%=chatToken%>", log);
-//                            subscribeChat(requestID, <%=shopID%>, customer_name, "<%=chatToken%>", log);
+                        //                            subscribeChat(requestID, <%=shopID%>, customer_name, "<%=chatToken%>", log);
                     });
                 },
                 error: function () {
@@ -841,10 +835,10 @@
                 }
             });
 
-//            } else {
-//                console.log("second");
+            //            } else {
+            //                console.log("second");
             //get only new request to subscribe
-//            }
+            //            }
         });
     </script>
     <script>
@@ -888,14 +882,14 @@
                 },
                 dataType: 'json',
                 success: function (data) {
-//                        $.each(data.items, function(i,item)){
-//                            console.log(i + ": " + item);
-//                        }
-//                    console.log(data);
+                    //                        $.each(data.items, function(i,item)){
+                    //                            console.log(i + ": " + item);
+                    //                        }
+                    //                    console.log(data);
                     if (data.is_success == true) {
                         var msg = data.payload.chat_message;
                         for (i = msg.length - 1; i >= 0; i--) {
-//                            console.log(msg[i].message);
+                            //                            console.log(msg[i].message);
                             if (msg[i].type == "0") {
                                 var time = msg[i].modified.substring(0, msg[i].modified.lastIndexOf(":"));
                                 $("#" + log).html($("#" + log).html() + '<li class="message sent" id="' + msg[i].topic_id + '"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">You</a> <span class="time">' + time + '</span></p>' + msg[i].message + '</div></div></li>');
@@ -903,11 +897,11 @@
                                 $("#" + log).html($("#" + log).html() + '<li class="message receive" id="' + msg[i].topic_id + '"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">' + custName + '</a> <span class="time">' + time + '</span></p>' + msg[i].message + '</div></div></li>');
                             }
                         }
-//                        if (msg.length > 0 && msg[0].topic_id != 0) {
-//                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="' + msg[0].topic_id + '"></div>');
-//                        } else {
-//                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="0"></div>');
-//                        }
+                        //                        if (msg.length > 0 && msg[0].topic_id != 0) {
+                        //                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="' + msg[0].topic_id + '"></div>');
+                        //                        } else {
+                        //                            $(".md-show").find(".ct").html('<div class="hidden chatTopic" id="0"></div>');
+                        //                        }
                     }
                     subscribeChat(requestID, wsID, custName, chatToken, log);
                 },
@@ -916,12 +910,12 @@
                 }
             });
         }
-//            if (sender != "Web") {
-//                $("#log").html('<li class="message sent"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
-//            } else {
-//                $("#log").html('<li class="message receive"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
-//
-//            }
+        //            if (sender != "Web") {
+        //                $("#log").html('<li class="message sent"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
+        //            } else {
+        //                $("#log").html('<li class="message receive"><div class="media"><div class="pull-left user-avatar"><img class="media-object img-circle" src="assets/images/profile-photo.jpg"></div><div class="media-body"><p class="media-heading"><a href="#">John Douey</a> <span class="time">' + time + '</span></p>' + message + '</div></div></li>' + $("#log").html());
+        //
+        //            }
     </script>
     <script>
         $(function () {
@@ -933,16 +927,16 @@
             });
         });</script>
     <script>
-//        $(".sendMsg").click(function () {
-//            prepareMsg();
-//        });
+        //        $(".sendMsg").click(function () {
+        //            prepareMsg();
+        //        });
     </script>
     <script>
         function prepareMsg() {
             var ele = $(".md-show").find(".sendMsg");
             var msgDetails = ele[0].id;
-//            var elem = ele.prevObject[0].context;
-//            var msgDetails = ele[0].id;
+            //            var elem = ele.prevObject[0].context;
+            //            var msgDetails = ele[0].id;
             var detailsArr = msgDetails.split("-");
             var serviceId = detailsArr[0];
             var wsName = detailsArr[1];
@@ -953,19 +947,42 @@
             var topicID = 0;
             var chatTopic = $(".md-show").find(".chatTopic");
             topicID = chatTopic[0].id;
-//            console.log(topicID);
+            //            console.log(topicID);
             var chat = $(".md-show").find(".chat-list > li");
             var msg = $(".md-show").find(".msgInput");
             var msgInput = msg[0].id;
             if (chat.length > 0) {
                 firstMsg = false;
-//                var topic = chat[0];
-//                topicID = topic.id;
+                //                var topic = chat[0];
+                //                topicID = topic.id;
             }
             sendMsg(serviceId, wsName, wsId, staffId, token, topicID, firstMsg, msgInput);
         }
     </script>
-
+    <script>
+        $(document).ready(function () {
+            $("input[name$='quoteType']").click(function () {
+                var type = $(this).val();
+                if (type === "initialQuote") {
+                    $(".quote").removeClass("hide");
+                    $(".diagnostic").addClass("hide");
+                } else {
+                    $(".diagnostic").removeClass("hide");
+                    $(".quote").addClass("hide");
+                }
+            });
+        });
+    </script>
+    <script>
+        $("#quotationRemark").keyup(function () {
+            var value = $(this).val();
+            $("#diagnosticRemark").val(value);
+        }).keyup();
+        $("#diagnosticRemark").keyup(function () {
+            var value = $(this).val();
+            $("#quotationRemark").val(value);
+        }).keyup();
+    </script>
     <script>
         intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=categories%>", "<%=brands_carried%>");
     </script>

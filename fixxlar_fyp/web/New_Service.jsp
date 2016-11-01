@@ -288,6 +288,8 @@
                                                                         String carControl = vehicle.getControl();
 
                                                                         Offer offer = qr.getOffer();
+                                                                        String driverInitialComment = offer.getDriverInitialComment();
+                                                                        String wsFinalComment = offer.getWsFinalComment();
                                                                         double afinalPrice = offer.getFinalPrice();
                                                                         String finalPrice = afinalPrice + "0";
                                                                         int serviceStatus = offer.getStatus();
@@ -327,6 +329,12 @@
                                                                             </div>
                                                                             <div class="col-xs-12">
                                                                                 <p><b>Service Description: </b><br><% out.print(serviceDescription);%></p>
+                                                                            </div>      
+                                                                            <div class="col-xs-12">
+                                                                                <p><b>Driver Comment: </b><br><% out.print(driverInitialComment);%></p>
+                                                                            </div>      
+                                                                            <div class="col-xs-12">
+                                                                                <p><b>Workshop Comment: </b><br><% out.print(wsFinalComment);%></p>
                                                                             </div>      
                                                                         </div>
                                                                         <!--</div>-->
