@@ -258,6 +258,7 @@
                                                                         int carYear = vehicle.getYear();
                                                                         String carColor = vehicle.getColour();
                                                                         String carControl = vehicle.getControl();
+                                                                        String ownerNric = vehicle.getOwnerNric();
 
                                                                         Offer offer = qr.getOffer();
                                                                         String driverInitialComment = offer.getDriverInitialComment();
@@ -331,6 +332,9 @@
                                                                         <div>
                                                                             <div class="col-xs-12">
                                                                                 <h3>Car Details</h3>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Owner NRIC: </b><br><% out.print(ownerNric);%></p>
                                                                             </div>
                                                                             <div class="col-xs-6">
                                                                                 <p><b>License Plate: </b><br><% out.print(carPlate);%></p>

@@ -19,6 +19,19 @@ public class Vehicle {
     private int customerID;
     private String colour;
     private String control;
+    private String ownerNric;
+    
+    public Vehicle(int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control, String ownerNric) {
+        this.id = id;
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.plateNumber = plateNumber;
+        this.customerID = customerID;
+        this.colour = colour;
+        this.control = control;
+        this.ownerNric = ownerNric;
+    }
     
     public Vehicle(int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control) {
         this.id = id;
@@ -70,5 +83,13 @@ public class Vehicle {
     
     public String getControl() {
         return control;
+    }
+
+    public String getOwnerNric() {
+        return ownerNric;
+    }
+
+    public void setOwnerNric(String ownerNric) {
+        this.ownerNric = ownerNric;
     }
 }

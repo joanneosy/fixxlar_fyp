@@ -15,6 +15,7 @@ public class Customer {
     private String name;
     private String handphone;
     
+    
     public Customer (int id, String email, String name, String handphone) {
         this.id = id;
         this.email = email;
@@ -37,4 +38,6 @@ public class Customer {
     public String getHandphone() {
         return handphone;
     }
+
+    
 }

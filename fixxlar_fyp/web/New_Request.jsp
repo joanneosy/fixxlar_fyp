@@ -292,6 +292,7 @@
                                                                         int carYear = vehicle.getYear();
                                                                         String carColor = vehicle.getColour();
                                                                         String carControl = vehicle.getControl();
+                                                                        String ownerNric = vehicle.getOwnerNric();
 
 
                                                                 %>
@@ -359,12 +360,14 @@
                                                                         <h3>Car Details</h3>
                                                                     </div>
                                                                     <div class="col-xs-6">
+                                                                        <p><b>Owner NRIC: </b><br><% out.print(ownerNric);%></p>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
                                                                         <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
                                                                     </div>
                                                                     <div class="col-xs-6">
                                                                         <p><b>Vehicle Model: </b><br><% out.print(carMake + " " + carModel);%></p>
                                                                     </div>
-                                                                    <p></p>
                                                                     <div class="col-xs-6">
                                                                         <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
                                                                     </div>
@@ -500,6 +503,7 @@
                                                                     int carYear = vehicle.getYear();
                                                                     String carColor = vehicle.getColour();
                                                                     String carControl = vehicle.getControl();
+                                                                    String ownerNric = vehicle.getOwnerNric();
 
                                                                     Offer offer = qr.getOffer();
                                                                     double minPrice = offer.getInitialMinPrice();
@@ -564,6 +568,9 @@
                                                                         <h3>Service Details</h3>
                                                                     </div>
                                                                     <div>
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Owner NRIC: </b><br><% out.print(ownerNric);%></p>
+                                                                        </div>
                                                                         <div class="col-xs-12">
                                                                             <p><b>Service Request: </b><br><% out.print(serviceName);%></p>
                                                                         </div>

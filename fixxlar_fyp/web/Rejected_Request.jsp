@@ -253,10 +253,12 @@
                                                                             int carYear = vehicle.getYear();
                                                                             String carColor = vehicle.getColour();
                                                                             String carControl = vehicle.getControl();
+                                                                            String ownerNric = vehicle.getOwnerNric();
 
                                                                             Offer offer = qr.getOffer();
                                                                             double min = offer.getInitialMinPrice();
                                                                             double max = offer.getInitialMaxPrice();
+                                                                            double diagnosticPrice = offer.getDiagnosticPrice();
                                                                             int offerId = offer.getId();
                                                                             double finalPrice = offer.getFinalPrice();
 
@@ -300,7 +302,7 @@
                                                                     <div class="md-content">
                                                                         <!--<div>-->
                                                                         <div class="col-xs-6">
-                                                                            <h4 class="modal-title">Send Final Quote - <% out.print(custName);%></h4>
+                                                                            <h4 class="modal-title">Rejected - <% out.print(custName);%></h4>
                                                                         </div>
                                                                         <div class="col-xs-6 text-right">
                                                                             <h4 class="modal-title"><%=dateTime%></h4>
@@ -322,6 +324,9 @@
                                                                         <div>
                                                                             <div class="col-xs-12">
                                                                                 <h3>Car Details</h3>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Owner NRIC: </b><br><% out.print(ownerNric);%></p>
                                                                             </div>
                                                                             <div class="col-xs-6">
                                                                                 <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
@@ -349,15 +354,18 @@
                                                                             %>
                                                                             Rejected Final Amount: $<%=finalPrice%>
                                                                             <%
-                                                                            } else {
+                                                                            } else if (min > 0 && max > 0) {
                                                                             %>
                                                                             Rejected Initial Amount: $<%=min%> - $<%=max%>
+                                                                            <%
+                                                                            } else {
+                                                                            %>
+                                                                            Rejected Diagnostic Amount: $<%=diagnosticPrice%>
                                                                             <%
                                                                                 }
                                                                             %>
                                                                         </div>
                                                                         <div class="col-xs-12">
-                                                                            <button type="button" class="btn btn-default">Chat</button>
                                                                             <button class="md-close btn btn-default">Close</button>
                                                                         </div>
                                                                     </div>
@@ -383,191 +391,6 @@
                                                 </table>
                                             </div>
                                         </div><!--Send Final Quote-->
-
-                                        <div class="tab-pane fade " id="Awaiting_Final_Confirmation" >
-                                            <div class="table-responsive">
-                                                <table id="example2" class="table table-custom1 table-sortable" cellspacing="0" width="100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="sortable">ID</th>
-                                                            <th class="sortable">DateTime</th>
-                                                            <th class="sortable">Name</th>
-                                                            <th class="sortable">No. Plate</th>
-                                                            <th class="sortable">Car Model</th>
-                                                            <th class="sortable">Services</th>
-                                                            <!--<th>Attachment</th>-->
-                                                            <th>Details</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="contents">
-                                                        <!--Loop per new request-->
-                                                        <%
-                                                            qList = qDAO.retrieveAllQuotationRequests(user.getStaffId(), user.getToken(), 0, 4, "requested_datetime", "desc");
-                                                            it = qList.entrySet().iterator();
-
-                                                            while (it.hasNext()) {
-                                                                Map.Entry pair = (Map.Entry) it.next();
-                                                                QuotationRequest qr = (QuotationRequest) pair.getValue();
-                                                                int id = qr.getId();
-                                                                Timestamp timeStamp = qr.getRequestedDate();
-                                                                String dateTime = "01-01-1990 00:00:00";
-                                                                if (timeStamp != null) {
-                                                                    dateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(timeStamp);
-                                                                }
-                                                                String serviceName = qr.getName();
-                                                                String address = qr.getAddress();
-                                                                String serviceAmenities = qr.getAmenities();
-                                                                String serviceDescription = qr.getDescription();
-                                                                String serviceDetails = qr.getDetails();
-                                                                int serviceId = qr.getId();
-                                                                String serviceMileage = qr.getMileage();
-                                                                String carPhoto = qr.getPhotos();
-                                                                int serviceStatus = qr.getOffer().getStatus();
-                                                                String serviceUrgency = qr.getUrgency();
-
-                                                                Customer cust = qr.getCustomer();
-                                                                String custName = cust.getName();
-                                                                String custEmail = cust.getEmail();
-                                                                String custPhone = cust.getHandphone();
-
-                                                                Vehicle vehicle = qr.getVehicle();
-                                                                String carPlate = vehicle.getPlateNumber();
-                                                                String carModel = vehicle.getModel();
-                                                                String carMake = vehicle.getMake();
-                                                                int carYear = vehicle.getYear();
-                                                                String carColor = vehicle.getColour();
-                                                                String carControl = vehicle.getControl();
-
-                                                                Offer offer = qr.getOffer();
-                                                                double finalPrice = offer.getFinalPrice();
-                                                        %>
-                                                        <tr>
-                                                            <td><% out.print(serviceId);%></td>
-                                                            <td><% out.print(dateTime);%></td>
-                                                            <td><% out.print(custName);%></td>
-                                                            <td><% out.print(carPlate);%></td>
-                                                            <td><% out.print(carModel);%></td>
-                                                            <td><% out.print(serviceName);%></td>
-                                                            <!--Picture Attachment-->
-                                                            <!--<td class="text-center"><a href="<%// out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>-->
-
-                                                            <!-- Modal -->
-                                                    <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog-img">
-                                                            <div class="modal-content">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title"><% out.print(carMake + " " + carModel + " - " + carYear);%></h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <img class="img-responsive"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-                                                                </div>
-                                                            </div> <!--/.modal-content--> 
-                                                        </div><!-- /.modal-dialog -->
-                                                    </div><!-- /.modal -->
-                                                    <% i++; %>
-                                                    <!--Quote-->
-                                                    <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>More Info</span></button></td>
-
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                                    <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                            <h4 class="modal-title">Awaiting Confirmation - <% out.print(custName);%></h4>
-                                                                        </div>
-                                                                        <div class="col-xs-6 text-right">
-                                                                            <h4 class="modal-title"><%=dateTime%></h4>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <!--                                                                    <div class="text-center">
-                                                                                                                                            <img class="img-thumbnail-small"src="<%//="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                                                                                        </div>-->
-                                                                    <div class="line-across"></div>
-                                                                    <div class="row">
-                                                                        <h4>Service Details</h4>
-                                                                    </div>
-                                                                    <div class="line-across"></div> 
-                                                                    <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                            <b>Service Request: </b><br><% out.print(serviceName);%>
-                                                                        </div>
-
-                                                                        <div class="col-xs-6">
-                                                                            <b>Urgency: </b><br><% out.print(serviceUrgency);%>
-                                                                        </div>
-                                                                    </div>
-                                                                    <p></p>
-                                                                    <div class="row">
-                                                                        <div class="col-xs-12">
-                                                                            <b>Service Description: </b><br><% out.print(serviceDescription);%>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="line-across"></div>
-                                                                    <div class="row">
-                                                                        <h4>Car Details</h4>
-                                                                    </div>
-                                                                    <div class="line-across"></div> 
-                                                                    <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                            <p><b>License Plate: </b><br><% out.print(carPlate);%></p>
-                                                                        </div>
-                                                                        <div class="col-xs-6">
-                                                                            <p><b>Vehicle Model: </b><% out.print(carMake + " " + carModel);%></p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                            <p><b>Vehicle Year: </b><% out.print(carYear);%></p>
-                                                                        </div>
-                                                                        <div class="col-xs-6">
-                                                                            <p><b>Vehicle Type: </b><% out.print(carControl);%></p>
-                                                                        </div> 
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-xs-6">
-                                                                            <p><b>Vehicle Color: </b><% out.print(carColor);%></p>
-                                                                        </div>
-                                                                        <div class="col-xs-6">
-                                                                            <p><b>Mileage: </b><% out.print(serviceMileage);%></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <div>
-                                                                        <div class="quotation text-left">
-                                                                            Agreed Amount: $<%=finalPrice%>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div>
-                                                                        <button type="button" class="btn btn-default">Chat</button>
-                                                                    </div>
-                                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                                                </div>
-                                                            </div><!-- /.modal-content -->
-                                                        </div><!-- /.modal-dialog -->
-                                                    </div><!-- /.modal -->
-                                                    </tr>
-
-                                                    <%
-                                                            i++;
-                                                        }
-                                                    %>
-
-                                                    </tbody>
-
-                                                </table>
-                                            </div>
-                                        </div><!--Awaiting Final Confirmation-->
 
                                 </div>
                                 <!--tab-content-->
@@ -680,84 +503,84 @@
 
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-dropdown-multilevel.js"></script>
-    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
-    <script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
-    <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
-    <script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
-    <script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
-    <script type="text/javascript" src="js/jquery.videobackground.js"></script>
-    <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-    <!--<script type="text/javascript" src="js/sorttable.js"></script>-->
-    <script src="js/minimal.min.js"></script>
-    <!--<script type="text/javascript" src="js/jquery-latest.js"></script>--> 
-    <script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
-    <script type="text/javascript" src="js/jquery.tabpager.min.js"></script> 
-    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
-    <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
-    <script type="text/javascript" src="js/classie.js"></script> 
-    <script type="text/javascript" src="js/modalEffects.js"></script> 
-    <script type="text/javascript" src="js/intercom.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-dropdown-multilevel.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&amp;skin=sons-of-obsidian"></script>
+<script type="text/javascript" src="js/jquery.mmenu.min.js"></script>
+<script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
+<script type="text/javascript" src="js/jquery.nicescroll.min.js"></script>
+<script type="text/javascript" src="js/jquery.animateNumbers.js"></script>
+<script type="text/javascript" src="js/jquery.videobackground.js"></script>
+<script type="text/javascript" src="js/jquery.blockUI.js"></script>
+<!--<script type="text/javascript" src="js/sorttable.js"></script>-->
+<script src="js/minimal.min.js"></script>
+<!--<script type="text/javascript" src="js/jquery-latest.js"></script>--> 
+<script type="text/javascript" src="js/jquery.tablesorter.js"></script> 
+<script type="text/javascript" src="js/jquery.tabpager.min.js"></script> 
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
+<script type="text/javascript" src="js/classie.js"></script> 
+<script type="text/javascript" src="js/modalEffects.js"></script> 
+<script type="text/javascript" src="js/intercom.js"></script>
 
 
-    <script>
-        $(function () {
-            // Initialize card flip
-            $('.card.hover').hover(function () {
-                $(this).addClass('flip');
-            }, function () {
-                $(this).removeClass('flip');
-            });
-
-            //         sortable table
-            $('.table.table-sortable th.sortable').click(function () {
-                var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
-                $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
-                $(this).addClass(o);
-            });
+<script>
+    $(function () {
+        // Initialize card flip
+        $('.card.hover').hover(function () {
+            $(this).addClass('flip');
+        }, function () {
+            $(this).removeClass('flip');
         });
 
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('#example').DataTable();
-            $('#example2').DataTable();
-            $('#example3').DataTable();
-            $('#example4').DataTable();
-            $('#example5').DataTable();
+        //         sortable table
+        $('.table.table-sortable th.sortable').click(function () {
+            var o = $(this).hasClass('sort-asc') ? 'sort-desc' : 'sort-asc';
+            $('th.sortable').removeClass('sort-asc').removeClass('sort-desc');
+            $(this).addClass(o);
         });
-    </script>
-    <script>
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+        $('#example2').DataTable();
+        $('#example3').DataTable();
+        $('#example4').DataTable();
+        $('#example5').DataTable();
+    });
+</script>
+<script>
         intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=categories%>", "<%=brands_carried%>");
-    </script>
-    <script>
-        $(window).load(function () {
-            $.ajax({
-                type: 'POST',
-                url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
-                crossDomain: true,
-                data: {
-                    "token": "<%=user.getToken()%>",
-                    "staff_id": "<%=user.getStaffId()%>",
-                    "shop_id": "<%=user.getShopId()%>"
-                },
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                    $.each(data.payload.notifications, function () {
-                        var notification = $(this).attr('actual_message');
-                        $.jGrowl(notification, {sticky: true});
-                    });
-                },
-                error: function () {
-                }
-            });
+</script>
+<script>
+    $(window).load(function () {
+        $.ajax({
+            type: 'POST',
+            url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
+            crossDomain: true,
+            data: {
+                "token": "<%=user.getToken()%>",
+                "staff_id": "<%=user.getStaffId()%>",
+                "shop_id": "<%=user.getShopId()%>"
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                $.each(data.payload.notifications, function () {
+                    var notification = $(this).attr('actual_message');
+                    $.jGrowl(notification, {sticky: true});
+                });
+            },
+            error: function () {
+            }
         });
-    </script>
+    });
+</script>
 </html>
