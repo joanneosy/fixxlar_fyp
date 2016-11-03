@@ -162,36 +162,6 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <section class="tile">
-                                        <div class="tile-header">
-                                            <h1><strong>Stripe Account</strong></h1>
-                                        </div>
-
-                                        <div class="tile-widget">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group col-sm-6">
-                                                        <label for="postalCode">Stripe Username</label>
-                                                        <input type="text" class="form-control" value="ABC@stripe" readonly>
-                                                    </div>
-
-                                                    <div class="form-group col-sm-6">
-                                                        <label for="postalCode">Password</label>
-                                                        <input type="password" class="form-control" value="ABC@stripe" readonly>
-                                                    </div>
-                                                </div>
-                                                <!--end inner col 12-->
-                                            </div>
-                                            <!--end row-->
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-offset-5">
-                                                <!--<a href="RegisterStripe.jsp" type="button" class="btn btn-primary btn-sm">Register</a>-->
-
-                                            </div>
-                                        </div>
-                                    </section>
 
                                     <section class="tile">
                                         <div class="tile-header">

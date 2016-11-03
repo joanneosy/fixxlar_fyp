@@ -73,7 +73,7 @@
                     <i class="fa fa-users"></i> Employees
                 </a>
             </li>
-            
+            <!--
             <li>
                 <a href="RegisterStripe.jsp">
                     <i class="fa fa-pencil"></i> Register Stripe Account
@@ -90,6 +90,7 @@
                     <i class="fa fa-bar-chart-o"></i> Analytics
                 </a>
             </li>
+            -->
             <li>
                 <a href="Schedule.jsp">
                     <i class="fa fa-calendar"></i> Schedule
