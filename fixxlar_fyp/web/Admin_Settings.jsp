@@ -4,6 +4,7 @@
     Author     : Joshymantou
 --%>
 
+<%@page import="entity.Setting"%>
 <%@page import="dao.ValetShopDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Set"%>
@@ -14,7 +15,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="com.google.gson.JsonObject"%>
 <%@page import="com.google.gson.JsonObject"%>
-<%@page import="util.Settings"%>
+<%@page import="dao.SettingDAO"%>
 <%@page import="dao.WebUserDAO"%>
 <%@page import="entity.WebUser"%>
 <%@page import="entity.Workshop"%>
@@ -40,7 +41,7 @@
                     <%@include file="include/topbar.jsp"%>
                     <!-- page header -->
                     <div class="pageheader">
-                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Urgency Settings</h2>
+                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Settings</h2>
                         <!--<a href="AddWorshop.jsp" class="btn btn-primary btn-lg pull-right margin-top-15"  role="button">Submit</a>-->
                     </div>
                     <!-- /page header -->
@@ -81,35 +82,32 @@
                                                 <%
                                                     String token = user.getToken();
                                                     int staffId = user.getStaffId();
-                                                    Settings settings = new Settings();
-                                                    HashMap<String, JsonObject> messages = settings.retrieveAllSettings(staffId, token);
-                                                    Iterator it = messages.entrySet().iterator();
-                                                    while (it.hasNext()) {
-                                                        Map.Entry pair = (Map.Entry) it.next();
-                                                        String setting = (String) pair.getKey();
-                                                        String[] arr = setting.split(",");
-                                                        int settingId = Integer.parseInt(arr[0]);
-                                                        String settingName = arr[1];
-                                                        JsonObject value = (JsonObject) pair.getValue();
-                                                        //out.println(settingName + "<br>");
-                                                        Set<Entry<String, JsonElement>> entrySet = value.entrySet();
-                                                        for (Map.Entry<String, JsonElement> entry : entrySet) {
-                                                           String status = entry.getKey();
-                                                           status = status.substring(0, 1).toUpperCase() + status.substring(1);
+                                                    SettingDAO sDAO = new SettingDAO();
+                                                    ArrayList<Setting> settings = sDAO.retrieveAllSettings(staffId, token);
+                                                    for (Setting s: settings) {
+                                                        int settingId = s.getId();
+                                                        String category = s.getCategory();
+                                                        String name = s.getName();
+                                                        String label = "";
+                                                        if (category.equals(name)) {
+                                                            label = category;
+                                                        } else {
+                                                            label = category + " (" + name + ")"; 
+                                                        }
+                                                        String value = s.getValue();
 
                                                 %>
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-4 control-label" 
-                                                           title="Urgency count" ><%=status%></label>         
+                                                           title="Urgency count" ><%=label%></label>         
 
                                                     <div class="col-sm-8">
-                                                        <input type="text" min="1" class="form-control" id="input01" name="<%=settingName + "," + entry.getKey() %>" value="<%=entry.getValue().getAsString()%>">
+                                                        <input type="text" min="1" class="form-control" id="input01" name="<%=settingId%>" value="<%=value%>">
                                                     </div>                                       
                                                 </div>
                                                 
                                                <% 
                                                     }//for
-                                                    }//while
                                                         
                                                %>
 

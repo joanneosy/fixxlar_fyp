@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import util.Settings;
+import dao.SettingDAO;
 
 /**
  *
@@ -53,8 +53,8 @@ public class EditServiceCapacity extends HttpServlet {
         int wsId = Integer.parseInt(workshopId);
         String token = user.getToken();
         int staffId = user.getStaffId();
-        Settings settings = new Settings();
-        String isSuccess = settings.editServiceCapacity(staffId, token, wsId, wsCapacity);
+        SettingDAO sDAO = new SettingDAO();
+        String isSuccess = sDAO.editServiceCapacity(staffId, token, wsId, wsCapacity);
 
         if (isSuccess.length() == 0) {
             session.setAttribute("success", "Service Capacity Updated!");

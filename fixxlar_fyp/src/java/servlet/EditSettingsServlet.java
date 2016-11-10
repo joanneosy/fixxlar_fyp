@@ -25,7 +25,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import util.Settings;
+import dao.SettingDAO;
+import entity.Setting;
+import util.Validation;
 
 /**
  *
@@ -53,26 +55,28 @@ public class EditSettingsServlet extends HttpServlet {
         int staffId = user.getStaffId();
         ArrayList<String> errorMessages = new ArrayList<String>();
 
-        Settings settings = new Settings();
-        HashMap<String, JsonObject> messages = settings.retrieveAllSettings(staffId, token);
-        Iterator it = messages.entrySet().iterator();
-        //To loop through all the settings available, and getParameter for the setting
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            String setting = (String) pair.getKey();
-            String[] arr = setting.split(",");
-            int settingId = Integer.parseInt(arr[0]);
-            String settingName = arr[1];
-            JsonObject value = (JsonObject) pair.getValue();
-            Set<Entry<String, JsonElement>> entrySet = value.entrySet();
-            //JsonObject to update the database
-            JsonObject obj = new JsonObject();
-            for (Map.Entry<String, JsonElement> entry : entrySet) {
-                String subCategory = entry.getKey();
-                String subValue = request.getParameter(settingName + "," + subCategory);
-                obj.addProperty(subCategory, subValue);
+        SettingDAO sDAO = new SettingDAO();
+        ArrayList<Setting> settings = sDAO.retrieveAllSettings(staffId, token);
+
+        for (Setting s : settings) {
+            int settingId = s.getId();
+            String value = request.getParameter(settingId + "");
+            String errMsg = "";
+            Validation validation = new Validation();
+            String isNum = validation.isValidNumber(value);
+            if (isNum == null) {
+                int valueInt = Integer.parseInt(value);
+                errMsg = sDAO.editSetting(staffId, token, settingId, value);
+            } else {
+                String category = s.getCategory();
+                String name = s.getName();
+                if (name.equals(category)) {
+                    errMsg = "(" + s.getCategory() + ") " + isNum;
+                } else {
+                    errMsg = "(" + s.getCategory() + ": " + s.getName() + ") " + isNum;
+                }
             }
-            String errMsg = settings.editSetting(staffId, token, settingId, obj);
+            
             if (errMsg.length() != 0) {
                 errorMessages.add(errMsg);
             }

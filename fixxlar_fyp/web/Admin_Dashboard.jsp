@@ -4,12 +4,13 @@
     Author     : joshua
 --%>
 
+<%@page import="entity.Setting"%>
 <%@page import="dao.ValetShopDAO"%>
 <%@page import="java.util.Map.Entry"%>
 <%@page import="java.util.Set"%>
 <%@page import="com.google.gson.JsonElement"%>
 <%@page import="com.google.gson.JsonObject"%>
-<%@page import="util.Settings"%>
+<%@page import="dao.SettingDAO"%>
 <%@page import="dao.NotificationDAO"%>
 <%@page import="entity.Offer"%>
 <%@page import="java.util.Map"%>
@@ -205,6 +206,27 @@
                                                                     NotificationDAO nDAO = new NotificationDAO();
                                                                     HashMap<Integer, String> messages = nDAO.retrieveNotificationMessages(staffId, token);
                                                                     Iterator it = messages.entrySet().iterator();
+                                                                    SettingDAO sDAO = new SettingDAO();
+                                                                    int urgent = 0;
+                                                                    int moderate = 0;
+                                                                    int low = 0;
+                                                                    for (int j = 1; j < 4; j++) {
+                                                                        Setting setting = sDAO.retrieveSettingById(staffId, token, j);
+                                                                        String s = setting.getName();
+                                                                        if (s.equals("High")) {
+                                                                            urgent = Integer.parseInt(setting.getValue());
+
+                                                                        }
+                                                                        if (s.equals("Medium")) {
+                                                                            moderate = Integer.parseInt(setting.getValue());
+
+                                                                        }
+                                                                        if (s.equals("Low")) {
+                                                                            low = Integer.parseInt(setting.getValue());
+
+                                                                        }
+                                                                    }
+                                                                    
                                                                     for (Workshop workshop : wsList) {
                                                                         //get workshop user
                                                                         int wsId = workshop.getId();
@@ -212,30 +234,6 @@
                                                                         String workshopName = workshop.getName();
                                                                         if (newRequests > 0) {
 
-                                                                            //get JSON Object to retrieve the urgency settings value 
-                                                                            Settings settings = new Settings();
-                                                                            JsonObject urgencySettings = settings.retrieveSettingById(staffId, token, 1);
-                                                                            Set<Entry<String, JsonElement>> entrySet = urgencySettings.entrySet();
-                                                                            int urgent = 0;
-                                                                            int moderate = 0;
-                                                                            int low = 0;
-                                                                            for (Map.Entry<String, JsonElement> entry : entrySet) {
-                                                                                String s = entry.getKey();
-
-                                                                                if (s.equals("High")) {
-                                                                                    urgent = entry.getValue().getAsInt();
-
-                                                                                }
-                                                                                if (s.equals("Medium")) {
-                                                                                    moderate = entry.getValue().getAsInt();
-
-                                                                                }
-                                                                                if (s.equals("Low")) {
-                                                                                    low = entry.getValue().getAsInt();
-
-                                                                                }
-
-                                                                            }
 
                                                                 %>
                                                                 <tr>
@@ -438,7 +436,7 @@
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="js/jquery.dataTables.min.js"></script> 
         <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script> 
-        
+
         <script src="js/minimal.min.js"></script>
 
 

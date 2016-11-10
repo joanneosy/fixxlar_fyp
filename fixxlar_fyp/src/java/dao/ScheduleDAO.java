@@ -122,6 +122,7 @@ public class ScheduleDAO {
         return errMsg;
     }
     
+    //Cant be used due to different parameters
     public HashMap<Integer, Schedule> retrieveSchedule(int staffId, String token, int shopId, int month, int year) throws UnsupportedEncodingException, IOException, ParseException {
         HashMap<Integer, Schedule> monthlySchedule = new HashMap<Integer, Schedule>();
         String url = "http://119.81.43.85/erp/schedule/retrieve_schedule";

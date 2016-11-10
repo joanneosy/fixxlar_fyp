@@ -148,4 +148,12 @@ public class Validation {
         return null;
     }
 
+    public String isValidNumber(String numStr) {
+        try {
+            int num = Integer.parseInt(numStr);
+        } catch (NumberFormatException e) {
+            return "Please enter a valid number.";
+        }
+        return null;
+    }
 }
