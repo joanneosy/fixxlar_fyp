@@ -338,6 +338,12 @@ public class QuotationRequestDAO {
             if (attElement != null && !attElement.isJsonNull()) {
                 ownerNric = attElement.getAsString();
             }
+            
+            attElement = qrObj.get("chassis_num");
+            String chassisNum = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                chassisNum = attElement.getAsString();
+            }
 
             attElement = qrObj.get("customer_mobile_number");
             String customerHpNo = "";
@@ -362,7 +368,7 @@ public class QuotationRequestDAO {
             if (attElement != null && !attElement.isJsonNull()) {
                 chatTopicId = attElement.getAsInt();
             }
-            Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, customerId, carColor, carControl, ownerNric);
+            Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, customerId, carColor, carControl, ownerNric,chassisNum);
             Customer customer = new Customer(customerId, customerEmail, customerName, customerHpNo);
             Offer offer = new Offer(offerId, id, wsId, offerStatus, initialMinPrice, initialMaxPrice, diagnosticPrice, finalQuotationPrice, estCompletionDateTime, wsInitialComment, wsFinalComment, driverInitialComment);
 
@@ -632,6 +638,12 @@ public class QuotationRequestDAO {
                 ownerNric = attElement.getAsString();
             }
 
+            attElement = qrObj.get("chassis_num");
+            String chassisNum = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                chassisNum = attElement.getAsString();
+            }
+
             attElement = qrObj.get("customer_mobile_number");
             String customerHpNo = "";
             if (!attElement.isJsonNull()) {
@@ -656,7 +668,7 @@ public class QuotationRequestDAO {
                 chatTopicId = attElement.getAsInt();
             }
 
-            Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, customerId, carColor, carControl, ownerNric);
+            Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, customerId, carColor, carControl, ownerNric, chassisNum);
             Customer customer = new Customer(customerId, customerEmail, customerName, customerHpNo);
             Offer offer = new Offer(offerId, id, wsId, offerStatus, initialMinPrice, initialMaxPrice, diagnosticPrice, finalQuotationPrice, estCompletionDateTime, wsInitialComment, wsFinalComment, driverInitialComment);
 
@@ -1213,6 +1225,12 @@ public class QuotationRequestDAO {
             if (attElement != null && !attElement.isJsonNull()) {
                 ownerNric = attElement.getAsString();
             }
+            
+            attElement = qrObj.get("chassis_num");
+            String chassisNum = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                chassisNum = attElement.getAsString();
+            }
 
             attElement = qrObj.get("customer_mobile_number");
             String customerHpNo = "";
@@ -1253,7 +1271,7 @@ public class QuotationRequestDAO {
                 wsFinalComment = attElement.getAsString();
             }
 
-            Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, customerId, carColor, carControl, ownerNric);
+            Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, customerId, carColor, carControl, ownerNric, chassisNum);
             Customer customer = new Customer(customerId, customerEmail, customerName, customerHpNo);
             Offer offer = new Offer(offerId, id, wsId, offerStatus, initialMinPrice, initialMaxPrice, diagnosticPrice, finalQuotationPrice, estCompletionDateTime, wsInitialComment, wsFinalComment, driverInitialComment);
 
@@ -1499,6 +1517,12 @@ public class QuotationRequestDAO {
                 ownerNric = attElement.getAsString();
             }
 
+            attElement = qrObj.get("chassis_num");
+            String chassisNum = "";
+            if (attElement != null && !attElement.isJsonNull()) {
+                chassisNum = attElement.getAsString();
+            }
+            
             attElement = qrObj.get("customer_mobile_number");
             String customerHpNo = "";
             if (!attElement.isJsonNull()) {
@@ -1537,7 +1561,7 @@ public class QuotationRequestDAO {
             if (attElement != null && !attElement.isJsonNull()) {
                 wsFinalComment = attElement.getAsString();
             }
-            Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, customerId, carColor, carControl, ownerNric);
+            Vehicle vehicle = new Vehicle(vehicleId, carMake, carModel, carYear, carPlate, customerId, carColor, carControl, ownerNric,chassisNum);
             Customer customer = new Customer(customerId, customerEmail, customerName, customerHpNo);
             Offer offer = new Offer(offerId, id, wsId, offerStatus, initialMinPrice, initialMaxPrice, diagnosticPrice, finalQuotationPrice, estCompletionDateTime, wsInitialComment, wsFinalComment, driverInitialComment);
 

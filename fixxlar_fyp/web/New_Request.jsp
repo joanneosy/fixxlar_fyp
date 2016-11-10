@@ -293,6 +293,7 @@
                                                                         String carColor = vehicle.getColour();
                                                                         String carControl = vehicle.getControl();
                                                                         String ownerNric = vehicle.getOwnerNric();
+                                                                        String chassisNum = vehicle.getChassisNum();
 
 
                                                                 %>
@@ -369,6 +370,9 @@
                                                                         <p><b>Vehicle Model: </b><br><% out.print(carMake + " " + carModel);%></p>
                                                                     </div>
                                                                     <div class="col-xs-6">
+                                                                        <p><b>Chassis Number: </b><br><% out.print(chassisNum);%></p>
+                                                                    </div>
+                                                                    <div class="col-xs-6">
                                                                         <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
                                                                     </div>
                                                                     <div class="col-xs-6">
@@ -403,7 +407,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-xs-12">
-                                                                                        <b>Quotation Remarks: </b><textarea class="form-control remarks" id="quotationRemark" rows="5" name="remarks"></textarea>
+                                                                                        <b>Quotation Remarks: </b><textarea class="form-control remarks customTextArea" id="quotationRemark" rows="5" name="remarks"></textarea>
                                                                                     </div>
                                                                                     <input type="hidden" name="id" value="<%=id%>">
                                                                                     <button type="submit" class="btn btn-primary">Submit Quote</button>
@@ -415,7 +419,7 @@
                                                                                 <form action = "AddDiagnosticPrice" method= "post">
                                                                                     <div class="col-xs-12">Price: $<input type="number" name="price" required/><p></div>
                                                                                     <div class="col-xs-12">
-                                                                                        <b>Diagnostic Remarks: </b><textarea class="form-control" id="diagnosticRemark" rows="5" name="remarks"></textarea>
+                                                                                        <b>Diagnostic Remarks: </b><textarea class="form-control customTextArea" id="diagnosticRemark" rows="5" name="remarks"></textarea>
                                                                                     </div>
                                                                                     <input type="hidden" name="id" value="<%=id%>">
                                                                                     <button type="submit" class="btn btn-primary">Add Diagnostic Price</button>
@@ -504,6 +508,7 @@
                                                                     String carColor = vehicle.getColour();
                                                                     String carControl = vehicle.getControl();
                                                                     String ownerNric = vehicle.getOwnerNric();
+                                                                    String chassisNum = vehicle.getChassisNum();
 
                                                                     Offer offer = qr.getOffer();
                                                                     double minPrice = offer.getInitialMinPrice();
@@ -596,6 +601,9 @@
                                                                         <p></p>
                                                                         <div class="col-xs-6">
                                                                             <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
+                                                                        </div>
+                                                                        <div class="col-xs-6">
+                                                                            <p><b>Chassis Number: </b><br><% out.print(chassisNum);%></p>
                                                                         </div>
                                                                         <div class="col-xs-6">
                                                                             <p><b>Vehicle Type: </b><br><% out.print(carControl);%></p>

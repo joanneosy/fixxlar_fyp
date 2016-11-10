@@ -257,6 +257,7 @@
                                                                         String carColor = vehicle.getColour();
                                                                         String carControl = vehicle.getControl();
                                                                         String ownerNric = vehicle.getOwnerNric();
+                                                                        String chassisNum = vehicle.getChassisNum();
 
                                                                         Offer offer = qr.getOffer();
                                                                         double afinalPrice = offer.getFinalPrice();
@@ -348,6 +349,9 @@
                                                                                 <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
                                                                             </div>
                                                                             <div class="col-xs-6">
+                                                                                <p><b>Chassis Number: </b><br><% out.print(chassisNum);%></p>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
                                                                                 <p><b>Vehicle Type: </b><br><% out.print(carControl);%></p>
                                                                             </div> 
                                                                             <div class="col-xs-6">
@@ -436,6 +440,7 @@
                                                                         String carColor = vehicle.getColour();
                                                                         String carControl = vehicle.getControl();
                                                                         String ownerNric = vehicle.getOwnerNric();
+                                                                        String chassisNum = vehicle.getChassisNum();
 
                                                                         Offer offer = qr.getOffer();
                                                                         double finalPrice = offer.getFinalPrice();
@@ -516,6 +521,9 @@
                                                                             <p></p>
                                                                             <div class="col-xs-6">
                                                                                 <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Chassis Number: </b><br><% out.print(chassisNum);%></p>
                                                                             </div>
                                                                             <div class="col-xs-6">
                                                                                 <p><b>Vehicle Type: </b><br><% out.print(carControl);%></p>

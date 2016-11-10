@@ -254,6 +254,7 @@
                                                                             String carColor = vehicle.getColour();
                                                                             String carControl = vehicle.getControl();
                                                                             String ownerNric = vehicle.getOwnerNric();
+                                                                            String chassisNum = vehicle.getChassisNum();
 
                                                                             Offer offer = qr.getOffer();
                                                                             double min = offer.getInitialMinPrice();
@@ -337,6 +338,9 @@
                                                                             <p></p>
                                                                             <div class="col-xs-6">
                                                                                 <p><b>Vehicle Year: </b><br><% out.print(carYear);%></p>
+                                                                            </div>
+                                                                            <div class="col-xs-6">
+                                                                                <p><b>Chassis Number: </b><br><% out.print(chassisNum);%></p>
                                                                             </div>
                                                                             <div class="col-xs-6">
                                                                                 <p><b>Vehicle Type: </b><br><% out.print(carControl);%></p>
@@ -557,7 +561,7 @@
     });
 </script>
 <script>
-        intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=categories%>", "<%=brands_carried%>");
+    intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=categories%>", "<%=brands_carried%>");
 </script>
 <script>
     $(window).load(function () {

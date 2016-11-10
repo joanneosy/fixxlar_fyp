@@ -20,8 +20,9 @@ public class Vehicle {
     private String colour;
     private String control;
     private String ownerNric;
+    private String chassisNum;
     
-    public Vehicle(int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control, String ownerNric) {
+    public Vehicle(int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control, String ownerNric, String chassisNum) {
         this.id = id;
         this.make = make;
         this.model = model;
@@ -31,6 +32,7 @@ public class Vehicle {
         this.colour = colour;
         this.control = control;
         this.ownerNric = ownerNric;
+        this.chassisNum = chassisNum;
     }
     
     public Vehicle(int id, String make, String model, int year, String plateNumber, int customerID, String colour, String control) {
@@ -92,4 +94,13 @@ public class Vehicle {
     public void setOwnerNric(String ownerNric) {
         this.ownerNric = ownerNric;
     }
+
+    public String getChassisNum() {
+        return chassisNum;
+    }
+
+    public void setChassisNum(String chassisNum) {
+        this.chassisNum = chassisNum;
+    }
+    
 }

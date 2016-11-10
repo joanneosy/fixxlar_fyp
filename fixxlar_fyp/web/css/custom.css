@@ -13,7 +13,12 @@ h2,h3,h4,h5,h6{
 input, button, select, textarea{
     color: black;
 }
-[class^="tile"][class*="transparent-"] .form-control {
+/*[class^="tile"][class*="transparent-"] .form-control {
+    background-color: #fff;
+    color: black;
+    border: 1px solid #e2e2e2;
+}*/
+[class^="tile"][class*="transparent-"] .customTextArea {
     background-color: #fff;
     color: black;
     border: 1px solid #e2e2e2;
@@ -132,14 +137,14 @@ body {
 }
 
 ul.inbox {
-     -webkit-border-radius: 0; 
+    -webkit-border-radius: 0; 
     -moz-border-radius: 0;
     -ms-border-radius: 0;
     -o-border-radius: 0;
-     border-radius: 0; 
-     -webkit-box-shadow: 0; 
-     box-shadow: 0; 
-     border: none; 
+    border-radius: 0; 
+    -webkit-box-shadow: 0; 
+    box-shadow: 0; 
+    border: none; 
 }
 
 .navbar-nav.side-nav > li.navigation .menu > li > a {
