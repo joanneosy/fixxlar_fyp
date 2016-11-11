@@ -10,6 +10,7 @@ import entity.ValetStaff;
 import entity.Vehicle;
 import entity.WebUser;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -28,6 +29,10 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 
 public class WebUserDAO {
 
@@ -1557,14 +1562,51 @@ public class WebUserDAO {
         return errMsg;
     }
 
+    public String uploadProfilePic(int staffId, String token, File file) throws UnsupportedEncodingException, IOException {
+        String url = "http://119.81.43.85/erp/user/upload_profile_picture";
+        HttpClient client = new DefaultHttpClient();
+        HttpPost post = new HttpPost(url);
+
+        // add header
+        post.setHeader("User-Agent", USER_AGENT);
+        
+        MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+        
+        entity.addPart("staff_id", new StringBody(staffId + ""));
+        entity.addPart("token", new StringBody(token + ""));
+        entity.addPart("profile_picture", new FileBody(file));
+
+        post.setEntity(entity);
+
+        HttpResponse response = client.execute(post);
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+        
+        String str = result.toString();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement element = jsonParser.parse(str);
+        JsonObject jobj = element.getAsJsonObject();
+        JsonElement errMsgEle = jobj.get("error_message");
+        String errMsg = "";
+        if (errMsgEle != null && !errMsgEle.isJsonNull()) {
+            errMsg = errMsgEle.getAsString();
+        }
+        return errMsg;
+    }
     public static void main(String[] args) throws IOException, ParseException {
         //retrieveNormalWorkshopStaff(31,"24a76c100537f25a2c92788297c7d836e9dc09712b20d36c5e7db5c36d35b26178ed27855177f7aa965daaf02bf178a2333a5fbde5707e9a1df80e899ea88f7b648ec3c645970583d2a7614232d75cd1211542eccf9f3ad0aeea39514e6a694392cb377ba32bab68d43b23f19f25db128fdab9b1d3e49a69c55e6e6104aca06de73540466cc37d48e001c56819f38fa974fe199f1a1a2d66460d9977a9508c96035c3302796e0e213aaaa0a9adae6a6b4a6cf5da71f51bda275358ae930c94a3587b57acecc88b555b94cc12434055e3a417e6385a09f00983e0529f0f7089d56286cb0aa33d81b30b58df85f367a4ccc2d9521478f609d054aebdaf2359545b7013de846ff37ff98ee1e55f14bcb089d02ce4b13f8686d8c0cefbfccb0c63340b4689e086891bb0f33747ad35810b52cddefb3b73b8de82d7db1cce0bbcb251e1fc1f12ba761a43602569cfedd5faf7d53994cb278201a7c37a9ea37dfdf3c3664ebe57320cb307ce662b2a037682dd2c6d8f5ff3591b29443ea669fb54001155ad21964573413d448a0da93ae410aeac029aca93fca1b877fc84a0e51732e564ea25d194ef5a2eb9723781780daa3e0b1d8e91616496650d87ff6877f7e031b1b6bb69c32733137bbc0841c5080efff7d47f7fcd7b0c6b2aa2c3aeff2ed7ff0baa38c954243f51e8a2d17f84530174ca74e8d78c1fb17e926e038e5ba0a5d8",1);
         //retrieveAllAdmin(1, "6c8c6a53d657b54e3cd6305805ef5edd3b2117910c8e0e1dd12518aaa92b549e50352e1c79d95c5bc9ad31ff06fa2ae7ccad106834ebf95ccf2b3ebcc25ac7194018b0d66f35338df5726d37b3403caed2f78e7f6ac41ccf3081248b0ac9cd2d2f6fc43fabb5d70f4517909ffaf60252bc088942028237598940788857e2e2d0d9c62fbe91a4002fd3a72643f04cf5b0b83f7ae95a4d7fbb44f456eca32e49b7dbe7b21bd50a385fb7ddef297ff2c8d508d8b86d05f614272675c53a1e098a6c2e8adefde60b339d7902e08ab20a048cf40a5bb232fd197bba5ec32cb2f9dcd056e740200577f3c375845f52c0879cf1b3358bf663e409e97e9404d782f9554dd54f23fda5d8c254cf97cac553478c461148d1114bca5ed2631239481b6c38a4cb44a1f9936942fe1fffc73c3f6fd27b747f3ba671dee533d099d253b39baf56c8309025277b9e12ac1edf1d1c36dc73b0eba5a51c5d8090a374f76ea8b040c4a389d68d2332e523c848099d570c0bbbd7cbfdccdf59136126ea468a99b0640b9d6fac31bb3e07489fac9ee3e48ed30486462c3819ef877b370e4502f68a7bd5b95502869cd54898e61c066db904379d1e848f6cb7dcd16e1e51e92da123075eef785ce033137473d469ee40371574389ac06f966b6ea3c2c0638f6260bdc15db2eb403301ea6cdfe41ac222d10bfc9b137474cc9dbabe50a18408f0f21c247c");
 //        addMasterValet(1, "58522896deaae56427ffce72ee56daea708a4b892c1481952a7feb493b72af26970f09a97c91b07058ceba3362b818e2a197ab08d76acbd8eee6477e76f2ac7495e27e095537e681268689dd2bc71732dddd693faaf5f45f4b8b10b1d9a54f46e7002eb8afaca543f64b80c1ad914ab1958f44ae841ea2827aae4f549580c02d6a2b5c7cb0877d529ae326cbebcbe41319cec7de01a2ed3647ddeaab5cf712c412907d1504d3c7df354c476566dfd18b7b6f3ba5f7ae58ebaf0c14d586bbd0568b02853214adc5cb6f46c241c492ac87518582160b9341992445c3ef592e535883f9e410d1ba588f4af387905f6ef72bd6f8af3c21e562d660d232261f02e24595deb1aa98d59865babc3e1e3dae954ef59c02f734500917d37c39951ca3bc99a9c7d3fd22ce787700edefc25ee30ccc06eb99f8d32f131a232a2e6d519d26e40ded6f2d60de4913b25ac7fabc1b1123ef400cb7ee9440a34048ca4a5ae13e22b5f9598de348c250acd2000d0b3d927485dacdeea3f0d576ad222aac05fb5cda4178ef7501d09363f3ab70fdb28f2b14a5d5ff6bf5514422ac69f57b14d76129c9f70f238932bf2092b419e62661686ee49218482bab0bbd9dd0b09b0fb1e1030ebfdb307217d89d43e96118877dbd939a4570cdbe1ad3df73abb9680487b06a8f6c701515304529455a6aced9630d496dedda3857d62798f21189961d0806c8", "Hello", "valet5@valet.com", "98765432", "12345678", 1);
-        String dateString = "1990-01-01";
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date parsed = dateFormat.parse(dateString);
-        Date issueDate = new java.sql.Date(parsed.getTime());
+//        String dateString = "1990-01-01";
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        Date parsed = dateFormat.parse(dateString);
+//        Date issueDate = new java.sql.Date(parsed.getTime());
 //        addNormalValet(1, "58522896deaae56427ffce72ee56daea708a4b892c1481952a7feb493b72af26970f09a97c91b07058ceba3362b818e2a197ab08d76acbd8eee6477e76f2ac7495e27e095537e681268689dd2bc71732dddd693faaf5f45f4b8b10b1d9a54f46e7002eb8afaca543f64b80c1ad914ab1958f44ae841ea2827aae4f549580c02d6a2b5c7cb0877d529ae326cbebcbe41319cec7de01a2ed3647ddeaab5cf712c412907d1504d3c7df354c476566dfd18b7b6f3ba5f7ae58ebaf0c14d586bbd0568b02853214adc5cb6f46c241c492ac87518582160b9341992445c3ef592e535883f9e410d1ba588f4af387905f6ef72bd6f8af3c21e562d660d232261f02e24595deb1aa98d59865babc3e1e3dae954ef59c02f734500917d37c39951ca3bc99a9c7d3fd22ce787700edefc25ee30ccc06eb99f8d32f131a232a2e6d519d26e40ded6f2d60de4913b25ac7fabc1b1123ef400cb7ee9440a34048ca4a5ae13e22b5f9598de348c250acd2000d0b3d927485dacdeea3f0d576ad222aac05fb5cda4178ef7501d09363f3ab70fdb28f2b14a5d5ff6bf5514422ac69f57b14d76129c9f70f238932bf2092b419e62661686ee49218482bab0bbd9dd0b09b0fb1e1030ebfdb307217d89d43e96118877dbd939a4570cdbe1ad3df73abb9680487b06a8f6c701515304529455a6aced9630d496dedda3857d62798f21189961d0806c8", "Hello", "valet6@valet.com", "98765432", "12345678", 1, issueDate, "123456789");
 //        updateMasterValet(1, "58522896deaae56427ffce72ee56daea708a4b892c1481952a7feb493b72af26970f09a97c91b07058ceba3362b818e2a197ab08d76acbd8eee6477e76f2ac7495e27e095537e681268689dd2bc71732dddd693faaf5f45f4b8b10b1d9a54f46e7002eb8afaca543f64b80c1ad914ab1958f44ae841ea2827aae4f549580c02d6a2b5c7cb0877d529ae326cbebcbe41319cec7de01a2ed3647ddeaab5cf712c412907d1504d3c7df354c476566dfd18b7b6f3ba5f7ae58ebaf0c14d586bbd0568b02853214adc5cb6f46c241c492ac87518582160b9341992445c3ef592e535883f9e410d1ba588f4af387905f6ef72bd6f8af3c21e562d660d232261f02e24595deb1aa98d59865babc3e1e3dae954ef59c02f734500917d37c39951ca3bc99a9c7d3fd22ce787700edefc25ee30ccc06eb99f8d32f131a232a2e6d519d26e40ded6f2d60de4913b25ac7fabc1b1123ef400cb7ee9440a34048ca4a5ae13e22b5f9598de348c250acd2000d0b3d927485dacdeea3f0d576ad222aac05fb5cda4178ef7501d09363f3ab70fdb28f2b14a5d5ff6bf5514422ac69f57b14d76129c9f70f238932bf2092b419e62661686ee49218482bab0bbd9dd0b09b0fb1e1030ebfdb307217d89d43e96118877dbd939a4570cdbe1ad3df73abb9680487b06a8f6c701515304529455a6aced9630d496dedda3857d62798f21189961d0806c8", "Hello", "valet5@valet.com", "98765432", 53);
 //        updateNormalValet(50, "64b5fdeaa30365d3ae9106f70d8468a0e06bb4a60765163f3e0960c703ef7a17b1133ce36265062463edd39538c7ee8355559be04f1f6adbf94827d91bb0d375dc5d230cb6149d452c4054ed84a14edcf557e5adc7d6d4a12f0c61008423987b8e766c121e0030dbd4f6f4336659272c31a84d5b0aba9a821aafba185c641f818c37760be01259daf536d9c164ce2e198a3b20ab4a88335eb62e49e5d47f9a78456d6f755fde70d6fd333b3fec4b66d38c7b5291aa74d71e563986888ed698d36f209e74be1a040e1c1d1b6294aa571e0f6e55923a9cb58c9ad4e331086a94ac40b42e7bf8724f48c1dfc5530e78fefe5b7bcd581097a7c50bebc6382b1c4293e6815b2ffa1634e473cb8c64f54b247245f5ba41af1f02eba674e35c234331af82e6a554e2b986dcfe347aa2d41e79f485284929f6b55bbc1feac57f1fbf269b61bdf5a08561ac632d570bf9e1416063467836102310b2a51fd88b451f64d8614465272311535db4f525e91f4f03f2d03c11e61e4e7e1c1b3632641e14c1b03d3f7eee84768a0edb8aad7a37791b0620f38b7ead6f7bbbb335694ff89ece3158119e769481a43534271ca74197c767719afd2746407dfc466f18acb09a5efb8359b8555f5b02cfd5e6d7cdd4dd972b85efd8fea73e5ff5abdcdc86561be9f70be493f7d9274822a6300cdf0237a392adf344955b4bf81bc15e128b99901801e4", "Hello", "valet6@valett.com", "98765432", 54, "12345678", issueDate);
