@@ -35,24 +35,6 @@
                 </a>
             </li>
             
-            <li>
-                <a href="ViewCustomers.jsp">
-                    <i class="fa fa-users"></i> Fixir App Customers
-                </a>
-            </li>
-            
-            <li>
-                <a href="PageOffline.jsp">
-                    <i class="fa fa-shopping-cart"></i> Payment
-                </a>
-            </li>
-            
-            <li>
-                <a href="PageOffline.jsp">
-                    <i class="fa fa-bar-chart-o"></i> Analytics
-                </a>
-            </li>
-            
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-gear"></i> Admin Settings <b class="fa fa-plus dropdown-plus"></b>
@@ -63,16 +45,6 @@
                     <li>
                         <a href="Admin_Settings.jsp">
                             <i class="fa fa-caret-right"></i> Urgency Settings
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-caret-right"></i> Setting #2
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-caret-right"></i> Setting #3
                         </a>
                     </li>
                 </ul>

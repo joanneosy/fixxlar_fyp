@@ -1,5 +1,5 @@
 <%@page import="dao.ValetShopDAO"%>
-<%@page import="util.Settings"%>
+<%@page import="dao.SettingDAO"%>
 <%@page import="entity.Offer"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
@@ -94,7 +94,7 @@
                         session.setAttribute("fail", "");
                     %>
                     <%
-                        Settings setting = new Settings();
+                        SettingDAO setting = new SettingDAO();
                         int capacity = setting.retrieveServiceCapacity(user.getStaffId(), user.getToken(), user.getShopId());
 
                     %>
