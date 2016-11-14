@@ -163,6 +163,7 @@
                                             <input type='text' class='form-control' value='<%=capacity%>' readonly/>
                                             <a href='Settings.jsp'><span>Edit</span></a>
 
+
                                         </div>
 
                                     </div>
@@ -334,33 +335,33 @@
         <script>
             $(function () {
 
-            // Initialize external events
+                // Initialize external events
 
-            $('#external-events div.external-event').each(function () {
+                $('#external-events div.external-event').each(function () {
 
-            // Make events draggable using jQuery UI
-            $(this).draggable({
-            zIndex: 999,
-                    revert: true,
-                    revertDuration: 0,
-                    drag: function () {
-                    $('.cal-options .date-info').addClass('out')
+                    // Make events draggable using jQuery UI
+                    $(this).draggable({
+                        zIndex: 999,
+                        revert: true,
+                        revertDuration: 0,
+                        drag: function () {
+                            $('.cal-options .date-info').addClass('out')
                             $('.cal-options #event-delete').addClass('in')
-                    },
-                    stop: function () {
-                    $('.cal-options .date-info').removeClass('out')
+                        },
+                        stop: function () {
+                            $('.cal-options .date-info').removeClass('out')
                             $('.cal-options #event-delete').removeClass('in')
-                    }
-            });
-            });
-                    // Initialize the calendar 
+                        }
+                    });
+                });
+                // Initialize the calendar 
 
-                    $('#calendar').fullCalendar({
-            header: {
-            left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-            },
+                $('#calendar').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
 //                    editable: true,
 //                    droppable: true,
 //                    drop: function (date, allDay) {
@@ -378,34 +379,31 @@
 ////                        }
 //                    },
                     eventClick: function (calEvent, jsEvent, view) {
-                    console.log(calEvent);
-                            var editModal = $('#edit-event'),
-                            eventTitle = calEvent.title;
-                            start = calEvent._start;
-                            end = calEvent._end;
-                            startT = start + "";
-                            endT = start + "";
-                            var start_time = start,
-                            start = [start_time.getFullYear(), start_time.getMonth() + 1, start_time.getDate()].join('-') + " " +
-                            startT.substring(startT.indexOf(":") - 2, startT.lastIndexOf(":") + 3);
-                            var end_time = end,
-                            end = [end_time.getFullYear(), end_time.getMonth() + 1, end_time.getDate()].join('-') + " " +
-                            endT.substring(endT.indexOf(":") - 2, endT.lastIndexOf(":") + 3);
+                        var editModal = $('#edit-event'),
+                                eventTitle = calEvent.title;
+                        start = calEvent._start;
+                        end = calEvent._end;
+                        startT = start + "";
+                        endT = start + "";
+                        var start_time = start,
+                                start = [start_time.getFullYear(), start_time.getMonth() + 1, start_time.getDate()].join('-') + " " +
+                                startT.substring(startT.indexOf(":") - 2, startT.lastIndexOf(":") + 3);
+                        var end_time = end,
+                                end = [end_time.getFullYear(), end_time.getMonth() + 1, end_time.getDate()].join('-') + " " +
+                                endT.substring(endT.indexOf(":") - 2, endT.lastIndexOf(":") + 3);
 ////                                eventColor = calEvent.color;
-                            var status = calEvent.className[0];
-                            console.log(start_time);
-                            console.log(end_time);
-                            if (status != 0) {
-                    $("#remove-event").hide();
-                    }
-                    editModal.find('.modal-title small').text(eventTitle);
-                            editModal.find('#edit-event-title').val(eventTitle);
-                            editModal.find('#edit-event-start').val(start);
-                            editModal.find('#edit-event-end').val(end);
+                        var status = calEvent.className[0];
+                        if (status !== 0) {
+                            $("#remove-event").hide();
+                        }
+                        editModal.find('.modal-title small').text(eventTitle);
+                        editModal.find('#edit-event-title').val(eventTitle);
+                        editModal.find('#edit-event-start').val(start);
+                        editModal.find('#edit-event-end').val(end);
 //                        editModal.find('#edit-event-color').css("border-bottom", '2px solid' + ' ' + eventColor).val(eventColor);
-                            editModal.modal('show')
+                        editModal.modal('show')
 
-                            // Submitting save event form
+                        // Submitting save event form
 
 //                        $('#save-event').off('click')
 //                                .on('click', function (e) {
@@ -423,26 +421,26 @@
 //                                        return false;
 //                                    }
 //                                });
-                            // Remove event
-                            $('#remove-event').off('click')
-                            .on('click', function (e) {
-                            e.preventDefault();
+                        // Remove event
+                        $('#remove-event').off('click')
+                                .on('click', function (e) {
+                                    e.preventDefault();
                                     $.ajax({
-                                    url: 'http://119.81.43.85/erp/schedule/delete_schedule',
-                                            type: 'POST',
-                                            crossDomain: true,
-                                            data: {
+                                        url: 'http://119.81.43.85/erp/schedule/delete_schedule',
+                                        type: 'POST',
+                                        crossDomain: true,
+                                        data: {
                                             "token": "<%=token%>",
-                                                    "staff_id": "<%=staffID%>",
-                                                    "schedule_id": calEvent._id
-                                            },
-                                            dataType: 'json',
-                                            success: function (response) {
-                                            }
+                                            "staff_id": "<%=staffID%>",
+                                            "schedule_id": calEvent._id
+                                        },
+                                        dataType: 'json',
+                                        success: function (response) {
+                                        }
                                     });
                                     $('#calendar').fullCalendar('removeEvents', calEvent._id);
                                     $('#edit-event').modal('hide');
-                            });
+                                });
                     },
 //                    eventRender: function (event, element) {
 ////                        element.attr('href', 'javascript:void(0);');
@@ -453,221 +451,221 @@
 //                        });
 //                    },
                     events: function (start, end, callback) {
-                    var start_time = start,
-                            start = [start_time.getFullYear(), start_time.getMonth() + 1, start_time.getDate()].join('-') +
-                            " 00:00:00";
-                            var end_time = end,
-                            end = [end_time.getFullYear(), end_time.getMonth() + 1, end_time.getDate()].join('-') +
-                            " 00:00:00";
-                            console.log(start);
+                        var start_time = start,
+                                start = [start_time.getFullYear(), start_time.getMonth() + 1, start_time.getDate()].join('-') +
+                                " 00:00:00";
+                        var end_time = end,
+                                end = [end_time.getFullYear(), end_time.getMonth() + 1, end_time.getDate()].join('-') +
+                                " 00:00:00";
+                        console.log(start);
 //                        console.log(start_time);
-                            console.log(end);
+                        console.log(end);
 //                        console.log(end_time);
-                            $.ajax({
+                        $.ajax({
                             url: 'http://119.81.43.85/erp/schedule/retrieve_schedule',
-                                    type: 'POST',
-                                    crossDomain: true,
-                                    data: {
-                                    "token": "<%=token%>",
-                                            "staff_id": "<%=staffID%>",
-                                            "shop_id": "<%=shopID%>",
-                                            "start_time": start,
-                                            "end_time": end
-                                    },
-                                    dataType: 'json',
-                                    success: function (response) {
-                                    console.log(response);
-                                            var events = [];
-                                            $.each(response.events, function () {
-                                            var fullday = $(this).attr('all_day');
-                                                    var allDay = false;
-                                                    if (fullday == "1") {
-                                            allDay = true;
-                                            }
-                                            var service_id = $(this).attr('service_id');
-                                                    if (service_id == null) {
-                                            service_id = "0";
-                                            }
-                                            var bg_color = $(this).attr('bg_color');
-                                                    if (bg_color == null) {
-                                            bg_color = "#3a87ad";
-                                            }
-                                            var font_color = $(this).attr('font_color');
-                                                    if (font_color == null) {
-                                            font_color = "white";
-                                            }
-                                            events.push({
+                            type: 'POST',
+                            crossDomain: true,
+                            data: {
+                                "token": "<%=token%>",
+                                "staff_id": "<%=staffID%>",
+                                "shop_id": "<%=shopID%>",
+                                "start_time": start,
+                                "end_time": end
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                console.log(response);
+                                var events = [];
+                                $.each(response.events, function () {
+                                    var fullday = $(this).attr('all_day');
+                                    var allDay = false;
+                                    if (fullday == "1") {
+                                        allDay = true;
+                                    }
+                                    var service_id = $(this).attr('service_id');
+                                    if (service_id == null) {
+                                        service_id = "0";
+                                    }
+                                    var bg_color = $(this).attr('bg_color');
+                                    if (bg_color == null) {
+                                        bg_color = "#3a87ad";
+                                    }
+                                    var font_color = $(this).attr('font_color');
+                                    if (font_color == null) {
+                                        font_color = "white";
+                                    }
+                                    events.push({
 //                                        title: "Blocked",
-                                            id: $(this).attr('id'),
-                                                    title: $(this).attr('title'),
-                                                    start: $(this).attr('start_time'), // will be parsed
-                                                    end: $(this).attr('end_time'), // will be parsed
-                                                    allDay: allDay,
-                                                    className: service_id,
-                                                    color: bg_color, // an option!
-                                                    textColor: font_color  // an option!
+                                        id: $(this).attr('id'),
+                                        title: $(this).attr('title'),
+                                        start: $(this).attr('start_time'), // will be parsed
+                                        end: $(this).attr('end_time'), // will be parsed
+                                        allDay: allDay,
+                                        className: service_id,
+                                        color: bg_color, // an option!
+                                        textColor: font_color  // an option!
 
-                                            });
-                                            });
-                                            callback(events);
-                                    }});
+                                    });
+                                });
+                                callback(events);
+                            }});
                     }
-            });
-                    // Hide default header
-                    $('.fc-header').hide();
-                    // Show current date
-                    var currentDate = $('#calendar').fullCalendar('getDate');
-                    $('#cal-current-day').html($.fullCalendar.formatDate(currentDate, "dddd"));
-                    $('#cal-current-date').html($.fullCalendar.formatDate(currentDate, "MMM yyyy"));
-                    // Previous month action
-                    $('#cal-prev').click(function () {
-            $('#calendar').fullCalendar('prev');
+                });
+                // Hide default header
+                $('.fc-header').hide();
+                // Show current date
+                var currentDate = $('#calendar').fullCalendar('getDate');
+                $('#cal-current-day').html($.fullCalendar.formatDate(currentDate, "dddd"));
+                $('#cal-current-date').html($.fullCalendar.formatDate(currentDate, "MMM yyyy"));
+                // Previous month action
+                $('#cal-prev').click(function () {
+                    $('#calendar').fullCalendar('prev');
                     currentDate = $('#calendar').fullCalendar('getDate');
                     $('#cal-current-day').html($.fullCalendar.formatDate(currentDate, "dddd"));
                     $('#cal-current-date').html($.fullCalendar.formatDate(currentDate, "MMM yyyy"));
-            });
-                    // Next month action
-                    $('#cal-next').click(function () {
-            $('#calendar').fullCalendar('next');
+                });
+                // Next month action
+                $('#cal-next').click(function () {
+                    $('#calendar').fullCalendar('next');
                     currentDate = $('#calendar').fullCalendar('getDate');
                     $('#cal-current-day').html($.fullCalendar.formatDate(currentDate, "dddd"));
                     $('#cal-current-date').html($.fullCalendar.formatDate(currentDate, "MMM yyyy"));
-            });
-                    // Change to month view
-                    $('#change-view-month').click(function () {
-            $('#calendar').fullCalendar('changeView', 'month');
+                });
+                // Change to month view
+                $('#change-view-month').click(function () {
+                    $('#calendar').fullCalendar('changeView', 'month');
                     // safari fix 
                     $('#content .main').fadeOut(0, function () {
-            setTimeout(function () {
-            $('#content .main').css({'display': 'table'});
-            }, 0);
-            });
-            });
-                    // Change to week view
-                    $('#change-view-week').click(function () {
-            $('#calendar').fullCalendar('changeView', 'agendaWeek');
+                        setTimeout(function () {
+                            $('#content .main').css({'display': 'table'});
+                        }, 0);
+                    });
+                });
+                // Change to week view
+                $('#change-view-week').click(function () {
+                    $('#calendar').fullCalendar('changeView', 'agendaWeek');
                     // safari fix 
                     $('#content .main').fadeOut(0, function () {
-            setTimeout(function () {
-            $('#content .main').css({'display': 'table'});
-            }, 0);
-            });
-            });
-                    // Change to day view
-                    $('#change-view-day').click(function () {
-            $('#calendar').fullCalendar('changeView', 'agendaDay');
+                        setTimeout(function () {
+                            $('#content .main').css({'display': 'table'});
+                        }, 0);
+                    });
+                });
+                // Change to day view
+                $('#change-view-day').click(function () {
+                    $('#calendar').fullCalendar('changeView', 'agendaDay');
                     // safari fix 
                     $('#content .main').fadeOut(0, function () {
-            setTimeout(function () {
-            $('#content .main').css({'display': 'table'});
-            }, 0);
-            });
-            });
-                    // Change to today view
-                    $('#change-view-today').click(function () {
-            $('#calendar').fullCalendar('today');
+                        setTimeout(function () {
+                            $('#content .main').css({'display': 'table'});
+                        }, 0);
+                    });
+                });
+                // Change to today view
+                $('#change-view-today').click(function () {
+                    $('#calendar').fullCalendar('today');
                     currentDate = $('#calendar').fullCalendar('getDate');
                     $('#cal-current-day').html($.fullCalendar.formatDate(currentDate, "dddd"));
                     $('#cal-current-date').html($.fullCalendar.formatDate(currentDate, "MMM yyyy"));
-            });
-                    // Initialize colorpalette
-                    $('#event-colorpalette, #edit-event-colorpalette').colorPalette({
-            colors: [['#428bca', '#5cb85c', '#5bc0de', '#f0ad4e', '#d9534f', '#ff4a43', '#22beef', '#a2d200', '#ffc100', '#cd97eb', '#16a085', '#FF0066', '#A40778', '#1693A5', '#418bca', '#d9544f', '#3f4e62']]
-            }).on('selectColor', function (e) {
-            var data = $(this).data();
+                });
+                // Initialize colorpalette
+                $('#event-colorpalette, #edit-event-colorpalette').colorPalette({
+                    colors: [['#428bca', '#5cb85c', '#5bc0de', '#f0ad4e', '#d9534f', '#ff4a43', '#22beef', '#a2d200', '#ffc100', '#cd97eb', '#16a085', '#FF0066', '#A40778', '#1693A5', '#418bca', '#d9544f', '#3f4e62']]
+                }).on('selectColor', function (e) {
+                    var data = $(this).data();
                     $(data.returnColor).val(e.color);
                     $(this).parents(".input-group").find('input').css("border-bottom", '2px solid' + ' ' + e.color);
-            }); // Submitting new event form
-                    $('#add-event').submit(function (e) {
-            e.preventDefault();
+                }); // Submitting new event form
+                $('#add-event').submit(function (e) {
+                    e.preventDefault();
                     var form = $(this);
                     if (form.parsley('isValid')) {
 
-            var newEvent = $('<div class="external-event" data-color="' + $("#event-color").val() + '">' + $('#event-title').val() + '</div>');
-                    newEvent.css({'border-left-color': $("#event-color").val() || "#717171"});
-                    if ($('#external-events .external-event').length > 0) {
-            $('#external-events .external-event:last').after(newEvent);
-            } else {
-            $('#external-events .events').after(newEvent);
-            }
-            ;
-                    $('#external-events .external-event:last').after(newEvent);
-                    $('#external-events .external-event').draggable({
-            zIndex: 999,
-                    revert: true,
-                    revertDuration: 0,
-                    drag: function () {
-                    $('.cal-options .date-info').addClass('out')
-                            $('.cal-options #event-delete').addClass('in')
-                    },
-                    stop: function () {
-                    $('.cal-options .date-info').removeClass('out')
-                            $('.cal-options #event-delete').removeClass('in')
+                        var newEvent = $('<div class="external-event" data-color="' + $("#event-color").val() + '">' + $('#event-title').val() + '</div>');
+                        newEvent.css({'border-left-color': $("#event-color").val() || "#717171"});
+                        if ($('#external-events .external-event').length > 0) {
+                            $('#external-events .external-event:last').after(newEvent);
+                        } else {
+                            $('#external-events .events').after(newEvent);
+                        }
+                        ;
+                        $('#external-events .external-event:last').after(newEvent);
+                        $('#external-events .external-event').draggable({
+                            zIndex: 999,
+                            revert: true,
+                            revertDuration: 0,
+                            drag: function () {
+                                $('.cal-options .date-info').addClass('out')
+                                $('.cal-options #event-delete').addClass('in')
+                            },
+                            stop: function () {
+                                $('.cal-options .date-info').removeClass('out')
+                                $('.cal-options #event-delete').removeClass('in')
+                            }
+                        });
+                        form[0].reset();
+                        $('#cal-new-event').modal('hide');
+                    } else {
+
+                        $('#event-title').focus();
+                        return false;
                     }
-            });
-                    form[0].reset();
-                    $('#cal-new-event').modal('hide');
-            } else {
 
-            $('#event-title').focus();
-                    return false;
-            }
-
-            });
-                    // Event deleting function
-                    $('.cal-options #event-delete').droppable({
-            accept: "#external-events .external-event",
+                });
+                // Event deleting function
+                $('.cal-options #event-delete').droppable({
+                    accept: "#external-events .external-event",
                     hoverClass: "active",
                     drop: function (event, ui) {
-                    ui.draggable.remove();
-                            $(this).removeClass("active in");
-                            $('.cal-options .date-info').removeClass('out');
-                            //remove ajax
+                        ui.draggable.remove();
+                        $(this).removeClass("active in");
+                        $('.cal-options .date-info').removeClass('out');
+                        //remove ajax
                     }
-            });
+                });
             })
 
         </script>
         <script>
-                    //check toggling
-                    $('#check').on('click', function () {
-            $(this).toggleClass('checked');
+            //check toggling
+            $('#check').on('click', function () {
+                $(this).toggleClass('checked');
             })
         </script>
         <!--DATETIME-->
         <script type="text/javascript">
-                    $(".date").each(function () {
-            $(this).datetimepicker({
-            format: 'YYYY-MM-DD HH:mm',
+            $(".date").each(function () {
+                $(this).datetimepicker({
+                    format: 'YYYY-MM-DD HH:mm',
                     minDate: new Date(),
                     sideBySide: true,
                     ignoreReadonly: true
-            });
+                });
             });</script>
         <script>
-                    function submitdt(btnId, offerId) {
+            function submitdt(btnId, offerId) {
 
-                    var formId = btnId.substring(6);
-                            var hidden = "hidden" + offerId;
-                            document.getElementById(hidden).value = offerId;
-                            document.getElementById(formId).submit();
-                            console.log(formId);
-                            //        $(id).submit();
-                    }
+                var formId = btnId.substring(6);
+                var hidden = "hidden" + offerId;
+                document.getElementById(hidden).value = offerId;
+                document.getElementById(formId).submit();
+                console.log(formId);
+                //        $(id).submit();
+            }
         </script>
         <!--DATETIME-->
         <script>
             intercom("<%=user_name%>", "<%=user_email%>",<%=staffID%>, "<%=phone_number%>", "<%=workshop_name%>", "<%=categories%>", "<%=brands_carried%>");</script>
         <script>
-                    $(window).load(function () {
+            $(window).load(function () {
 //                var monthYear = $("#cal-current-date").html();
-            //                var month = monthYear.substring(0, monthYear.indexOf(" "));
+                //                var month = monthYear.substring(0, monthYear.indexOf(" "));
 //                var year = monthYear.substring(monthYear.indexOf(" ") + 1);
-            //                var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            //                var index = monthNames.indexOf(month);
-            //                month = index + 1;
-            //                retrieveSchedule(month, year);
-            //                
+                //                var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                //                var index = monthNames.indexOf(month);
+                //                month = index + 1;
+                //                retrieveSchedule(month, year);
+                //                
 //                
 //                $('.fc-button-prev span').click(function () {
 //                    alert('prev is clicked, do something');
@@ -678,69 +676,63 @@
 //                });
             });</script>
         <script>
-                    function retrieveSchedule(month, year) {
+            function retrieveSchedule(month, year) {
 
-                    $.ajax({
+                $.ajax({
                     type: 'POST',
-                            url: 'http://119.81.43.85/erp/schedule/retrieve_schedule',
-                            crossDomain: true,
-                            data: {
-                            "token": "<%=token%>",
-                                    "staff_id": "<%=staffID%>",
-                                    "shop_id": "<%=shopID%>",
-                                    "month": month,
-                                    "year": year
-                            },
-                            dataType: 'json',
-                            success: function (data) {
-                            console.log("Y");
-                                    console.log(data);
-                                    if (data.is_success == true) {
-                            var schedule = data.payload.schedule;
-                                    for (i = schedule.length - 1; i >= 0; i--) {
-                            console.log(schedule[i].start_time);
-                                    console.log(schedule[i].end_time);
-                                    var start_dateTime = schedule[i].start_time;
-                                    var startDate = start_dateTime.substring(0, start_dateTime.indexOf(" "));
-                                    var startTime = start_dateTime.substring(start_dateTime.indexOf(" ") + 1);
-                                    startTime = startTime.substring(0, startTime.lastIndexOf(":"));
-                                    var end_dateTime = schedule[i].end_time;
-                                    var endDate = end_dateTime.substring(0, end_dateTime.indexOf(" "));
-                                    var endTime = end_dateTime.substring(end_dateTime.indexOf(" ") + 1);
-                                    var theDate = ".fc-day[data-date='" + startDate + "']";
-                                    var day = $(theDate).find(".fc-day-content").html('<span class="fc-time">' + startTime + '</span><span class="fc-title">Car Service</span>');
-                            }
-                            }
-                            },
-                            error: function () {
-                            console.log("N");
-                                    console.log(data);
-                            }
-                    });
-                    }
-        </script>
-        <script>
-            $(window).load(function () {
-            $.ajax({
-            type: 'POST',
-                    url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
+                    url: 'http://119.81.43.85/erp/schedule/retrieve_schedule',
                     crossDomain: true,
                     data: {
-                    "token": "<%=user.getToken()%>",
-                            "staff_id": "<%=user.getStaffId()%>",
-                            "shop_id": "<%=user.getShopId()%>"
+                        "token": "<%=token%>",
+                        "staff_id": "<%=staffID%>",
+                        "shop_id": "<%=shopID%>",
+                        "month": month,
+                        "year": year
                     },
                     dataType: 'json',
                     success: function (data) {
-                    console.log(data);
-                            $.each(data.payload.notifications, function () {
+                        if (data.is_success == true) {
+                            var schedule = data.payload.schedule;
+                            for (i = schedule.length - 1; i >= 0; i--) {
+                                var start_dateTime = schedule[i].start_time;
+                                var startDate = start_dateTime.substring(0, start_dateTime.indexOf(" "));
+                                var startTime = start_dateTime.substring(start_dateTime.indexOf(" ") + 1);
+                                startTime = startTime.substring(0, startTime.lastIndexOf(":"));
+                                var end_dateTime = schedule[i].end_time;
+                                var endDate = end_dateTime.substring(0, end_dateTime.indexOf(" "));
+                                var endTime = end_dateTime.substring(end_dateTime.indexOf(" ") + 1);
+                                var theDate = ".fc-day[data-date='" + startDate + "']";
+                                var day = $(theDate).find(".fc-day-content").html('<span class="fc-time">' + startTime + '</span><span class="fc-title">Car Service</span>');
+                            }
+                        }
+                    },
+                    error: function () {
+                        console.log(data);
+                    }
+                });
+            }
+        </script>
+        <script>
+            $(window).load(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://119.81.43.85/erp/ws_notification/retrieve_notifications_by_shop',
+                    crossDomain: true,
+                    data: {
+                        "token": "<%=user.getToken()%>",
+                        "staff_id": "<%=user.getStaffId()%>",
+                        "shop_id": "<%=user.getShopId()%>"
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data.payload.notifications, function () {
                             var notification = $(this).attr('actual_message');
-                                    $.jGrowl(notification, {sticky: true});
-                            });
+                            $.jGrowl(notification, {sticky: true});
+                        });
                     },
                     error: function () {
                     }
-            });
+                });
             });
         </script>
     </body>

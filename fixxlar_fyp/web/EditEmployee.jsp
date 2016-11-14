@@ -160,7 +160,6 @@
                                                     <div class="col-sm-offset-4 col-sm-8">
                                                         <input type="hidden" name="id" value="<%=id%>"><br/>
                                                         <button type="submit" class="btn btn-primary"  value="Edit Employee">Submit</button>
-                                                        <button type="reset" class="btn btn-default">Reset</button>
                                                     </div>
                                                 </div>
                                                 <!--end form footer-->

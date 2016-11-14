@@ -226,7 +226,7 @@ public class EditValetServlet extends HttpServlet {
             } else {
                 request.setAttribute("fail", addErrMsg);
                 if (userType.equals("Admin")) {
-                    RequestDispatcher view = request.getRequestDispatcher("EditValet.jsp?id=" + id);
+                    RequestDispatcher view = request.getRequestDispatcher("EditValetShop.jsp?id=" + id);
                     view.forward(request, response);
                 } else if (userType.equals("Workshop")) {
                     RequestDispatcher view = request.getRequestDispatcher("ViewValet.jsp");
@@ -237,7 +237,7 @@ public class EditValetServlet extends HttpServlet {
         } else {
             request.setAttribute("fail", errMsg);
             if (userType.equals("Admin")) {
-                RequestDispatcher view = request.getRequestDispatcher("EditValet.jsp?id=" + id);
+                RequestDispatcher view = request.getRequestDispatcher("EditValetShop.jsp?id=" + id);
                 view.forward(request, response);
             } else if (userType.equals("Workshop")) {
                 RequestDispatcher view = request.getRequestDispatcher("ViewValet.jsp");

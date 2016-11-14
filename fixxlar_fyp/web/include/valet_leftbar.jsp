@@ -24,11 +24,11 @@
                 </a>
             </li>
 
-<!--            <li>
-                <a href="PageOffline.jsp">
-                    <i class="fa fa-comments"></i> Contact Admin
+            <li>
+                <a href="ValetProfile.jsp">
+                    <i class="fa fa-user"></i> Valet Profile
                 </a>
-            </li>-->
+            </li>
         </ul>
 
     </li>

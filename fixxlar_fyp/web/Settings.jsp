@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="dao.ValetShopDAO"%>
-<%@page import="util.Settings"%>
+<%@page import="dao.SettingDAO"%>
 <%@page import="dao.WebUserDAO"%>
 <%@page import="entity.WebUser"%>
 <%@page import="entity.Workshop"%>
@@ -66,7 +66,7 @@
                                         <!--end tile header-->
 
                                         <%
-                                            Settings setting = new Settings();
+                                            SettingDAO setting = new SettingDAO();
                                             int capacity = setting.retrieveServiceCapacity(user.getStaffId(), user.getToken(), user.getShopId());
 
                                         %>
@@ -86,7 +86,6 @@
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-4 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                                        <button type="reset" class="btn btn-default">Reset</button>
                                                     </div>
                                                 </div>
                                                 <!--end form footer-->

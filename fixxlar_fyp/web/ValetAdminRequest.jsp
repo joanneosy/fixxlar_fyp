@@ -167,7 +167,6 @@
                                                                 <tr>
                                                                     <th class="sortable">ID</th>
                                                                     <th class="sortable">Scheduled DateTime</th>
-                                                                    <th class="sortable">Service Type</th>
                                                                     <th class="sortable">Pickup Location</th>
                                                                     <th class="sortable">Dropoff Location</th>
                                                                     <th class="sortable">Vehicle Transmission</th>
@@ -204,7 +203,6 @@
                                                                 <tr>
                                                                     <td><% out.print(id);%></td>
                                                                     <td><% out.print(dateTime);%></td>
-                                                                    <td><% out.print(serviceType + " way");%></td>
                                                                     <td><% out.print(pickUpAddress);%></td>
                                                                     <td><% out.print(dropOffAddress);%></td>
                                                                     <td><% out.print(carControl);%></td>
@@ -240,9 +238,9 @@
                                                                             <div class="col-xs-12">
                                                                                 <h3>Valet Details - Next Trip</h3>
                                                                             </div>
-                                                                            <div class="col-xs-12">
+<!--                                                                            <div class="col-xs-12">
                                                                                 <p><b>Service Type: </b><% out.print(serviceType);%></p>
-                                                                            </div>
+                                                                            </div>-->
                                                                             <div class="col-xs-12">
                                                                                 <p><b>Pick Up Address: </b><% out.print(pickUpAddress);%></p>
                                                                             </div>

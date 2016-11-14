@@ -409,7 +409,7 @@
                                                                     <th class="sortable">Services</th>
                                                                     <!--<th class="sortable">Email</th>-->
                                                                     <th class="sortable">Phone</th>
-                                                                    <th>Attachment</th>
+                                                                    <!--<th>Attachment</th>-->
                                                                     <th>More Info</th>
                                                                 </tr>
                                                             </thead>
@@ -463,7 +463,7 @@
                                                                     <td><% out.print(serviceName);%></td>
                                                                     <td><% out.print(custPhone);%></td>
                                                                     <!--Picture Attachment-->
-                                                                    <td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>
+                                                                    <!--<td class="text-center"><a href="<% out.print("#myModal" + i);%>" id="myBtn" data-toggle="modal"><img src="images/file.png"/></a></td>-->
 
                                                                     <!-- Modal -->
                                                             <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -495,7 +495,7 @@
                                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                                             <div class="row">
                                                                                 <div class="col-xs-6">
-                                                                                    <h4 class="modal-title">Completed Service - <% out.print(custName);%></h4>
+                                                                                    <h4 class="modal-title">Completed Valet - <% out.print(custName);%></h4>
                                                                                 </div>
                                                                                 <div class="col-xs-6 text-right">
                                                                                     <h4 class="modal-title"><%=dateTime%></h4>
@@ -503,10 +503,10 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <div class="text-center">
+<!--                                                                            <div class="text-center">
                                                                                 <img class="img-thumbnail-small"src="<%="http://119.81.43.85/uploads/" + carPhoto%>"/>
-                                                                            </div>
-                                                                            <div class="line-across"></div>
+                                                                            </div>-->
+                                                                            <!--<div class="line-across"></div>-->
                                                                             <div class="row">
                                                                                 <h4>Service Details</h4>
                                                                             </div>
@@ -563,7 +563,8 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div>
-                                                                                <button type="button" class="btn btn-default">Chat</button>
+                                                                                <!--<button type="button" class="btn btn-default">Chat</button>-->
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                                             </div>
                                                                         </div>
                                                                     </div><!-- /.modal-content -->

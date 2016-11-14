@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -70,7 +71,7 @@ public class UploadProfilePictureServlet extends HttpServlet {
             FileItem item = (FileItem) iterator.next();
             if (!item.isFormField()) {
                 String fileName = item.getName();
-                System.out.println(fileName);
+//                System.out.println(fileName);
                 file = new File(filePath + "/" + fileName);
                 item.write(file);
             }
@@ -83,11 +84,12 @@ public class UploadProfilePictureServlet extends HttpServlet {
         errMsg = wDAO.uploadProfilePic(staffId, token, file);
 
         if (errMsg.length() == 0) {
-            session.setAttribute("isSuccess", "Profile Picture Updated!");
-            response.sendRedirect("UploadProfilePicture_Form.jsp");
+            session.setAttribute("success", "Profile Picture Updated");
+            response.sendRedirect("ValetProfile.jsp");
         } else {
-            session.setAttribute("isSuccess", errMsg);
-            response.sendRedirect("UploadProfilePicture_Form.jsp");
+            request.setAttribute("fail", errMsg);
+            RequestDispatcher view = request.getRequestDispatcher("EditValetProfile.jsp");
+            view.forward(request, response);
         }
     }
 

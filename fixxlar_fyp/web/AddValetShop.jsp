@@ -179,7 +179,7 @@
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-2 control-label">Valet Name</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" name="name" value="<%=name%>" />
+                                                        <input type="text" class="form-control" name="name" value="<%=name%>"/>
                                                     </div>
 
                                                     <label for="input02" class="col-sm-2 control-label">Address</label>

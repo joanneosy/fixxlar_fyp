@@ -168,10 +168,11 @@ ul.inbox {
     width: 100%;
 }
 .img-thumbnail-small{
-    display: inline-block;
+    display: block;
     width: 60%;
     height: auto;
     padding: 4px;
+    margin: 0 auto;
     background-color: #fff;
     -border: 1px solid #ddd;
     border-radius: 4px;

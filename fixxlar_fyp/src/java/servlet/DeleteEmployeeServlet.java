@@ -47,7 +47,7 @@ public class DeleteEmployeeServlet extends HttpServlet {
         int staffId = loggedInUser.getStaffId();
         
         String token = loggedInUser.getToken();
-        
+        String url = "ViewEmployees.jsp";
 //        WebUser editUser = uDAO.retrieveUser(staffId, token, idToDelete);
         int editUserType = loggedInUser.getUserType();
         int editUserStaffType = loggedInUser.getStaffType();
@@ -68,15 +68,26 @@ public class DeleteEmployeeServlet extends HttpServlet {
             errMsg = uDAO.deleteStaff(staffId, token, idToDelete);
           
         } 
+            
+        //Valet 
+         else if (editUserType == 4) {
+            if (editUserStaffType == 1) {
+                errMsg = uDAO.deleteStaff(staffId, token, idToDelete);
+                url = "Valet_Employees.jsp";
+            //Normal Valet Staff
+            } else if (editUserStaffType == 2) {
+                errMsg = "Normal valet staff has no rights to delete other staff!";
+            }
+        } 
         
         if (errMsg.equals("")) {
                 session.setAttribute("success", "Employee successfully deleted!");
-                response.sendRedirect("ViewEmployees.jsp");
+                response.sendRedirect(url);
 //                RequestDispatcher view = request.getRequestDispatcher("ViewEmployees.jsp?id=" + idToDelete);
 //                view.forward(request, response);
             } else {
                 request.setAttribute("fail", errMsg);
-                RequestDispatcher view = request.getRequestDispatcher("ViewEmployees.jsp?id=" + idToDelete);
+                RequestDispatcher view = request.getRequestDispatcher(url + "?id=" + idToDelete);
                 view.forward(request, response);
             }
         }

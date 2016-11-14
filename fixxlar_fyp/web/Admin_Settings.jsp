@@ -84,7 +84,8 @@
                                                     int staffId = user.getStaffId();
                                                     SettingDAO sDAO = new SettingDAO();
                                                     ArrayList<Setting> settings = sDAO.retrieveAllSettings(staffId, token);
-                                                    for (Setting s: settings) {
+                                                    int i = 0;
+                                                    for (Setting s : settings) {
                                                         int settingId = s.getId();
                                                         String category = s.getCategory();
                                                         String name = s.getName();
@@ -92,44 +93,50 @@
                                                         if (category.equals(name)) {
                                                             label = category;
                                                         } else {
-                                                            label = category + " (" + name + ")"; 
+                                                            label = category + " (" + name + ")";
                                                         }
                                                         String value = s.getValue();
 
                                                 %>
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-4 control-label" 
-                                                           title="Urgency count" ><%=label%></label>         
+                                                           title="Urgency count" ><%=label%>
+                                                        <%
+                                                            if (i < 3) {
+                                                                out.print(" up to");
+                                                        }
+                                                        %>
+                                                    </label>         
 
                                                     <div class="col-sm-8">
                                                         <input type="text" min="1" class="form-control" id="input01" name="<%=settingId%>" value="<%=value%>">
                                                     </div>                                       
                                                 </div>
-                                                
-                                               <% 
+
+                                                <%
+                                                        i++;
                                                     }//for
-                                                        
-                                               %>
 
-<!--                                                <div class="form-group">
-                                                    <label for="input02" class="col-sm-4 control-label">Moderate Count</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="number" min="1" class="form-control" id="input02">
-                                                    </div>
-                                                </div>
+                                                %>
 
-                                                <div class="form-group">
-                                                    <label for="input03" class="col-sm-4 control-label">Low Count</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="number" min="1" class="form-control" id="input02">
-                                                    </div>
-                                                </div>-->
+                                                <!--                                                <div class="form-group">
+                                                                                                    <label for="input02" class="col-sm-4 control-label">Moderate Count</label>
+                                                                                                    <div class="col-sm-8">
+                                                                                                        <input type="number" min="1" class="form-control" id="input02">
+                                                                                                    </div>
+                                                                                                </div>
+                                                
+                                                                                                <div class="form-group">
+                                                                                                    <label for="input03" class="col-sm-4 control-label">Low Count</label>
+                                                                                                    <div class="col-sm-8">
+                                                                                                        <input type="number" min="1" class="form-control" id="input02">
+                                                                                                    </div>
+                                                                                                </div>-->
 
                                                 <!--form footer for submit-->
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-4 col-sm-8">
                                                         <button type="submit" class="btn btn-primary" value="Edit">Submit</button>
-                                                        <button type="reset" class="btn btn-default">Reset</button>
                                                     </div>
                                                 </div>
                                                 <!--end form footer-->
@@ -169,6 +176,6 @@
         <script src="js/minimal.min.js"></script>
 
 
-        
+
     </body>
 </html>

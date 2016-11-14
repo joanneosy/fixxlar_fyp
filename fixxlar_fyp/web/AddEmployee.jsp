@@ -133,7 +133,6 @@
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-4 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                                        <button type="reset" class="btn btn-default">Reset</button>
                                                     </div>
                                                 </div>
                                                 <!--end form footer-->

@@ -243,31 +243,31 @@
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-2 control-label">Workshop Name</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" name="name" value="<%=name%>" />
+                                                        <input type="text" class="form-control" name="name" value="<%=name%>" required/>
                                                     </div>
 
                                                     <label for="input02" class="col-sm-2 control-label">Contact Number</label>
                                                     <div class="col-sm-4">
-                                                        <input type="number" class="form-control" id="input02" name="contact" value="<%=contact%>">
+                                                        <input type="number" class="form-control" id="input02" name="contact" value="<%=contact%>" required/>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-2 control-label">Alt. Contact</label>
                                                     <div class="col-sm-4">
-                                                        <input type="number" class="form-control" id="input03" name="contact2" value="<%=contact2%>">
+                                                        <input type="number" class="form-control" id="input03" name="contact2" value="<%=contact2%>" required/>
                                                     </div>
 
                                                     <label for="input04" class="col-sm-2 control-label">Address</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" id="input04" name="address" value="<%=address%>">
+                                                        <input type="text" class="form-control" id="input04" name="address" value="<%=address%>" required/>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="input05" class="col-sm-2 control-label">Postal Code</label>
                                                     <div class="col-sm-4">
-                                                        <input type="number" class="form-control" id="input05" name="postalCode" value="<%=postalCode%>">
+                                                        <input type="number" class="form-control" id="input05" name="postalCode" value="<%=postalCode%>" required/>
                                                     </div>
 
                                                     <label for="input06" class="col-sm-2 control-label">Website</label>
@@ -279,7 +279,7 @@
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-2 control-label">Brands Carried</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" value="<%=brandsCarried%>" name="brandsCarried" value="<%=brandsCarried%>">
+                                                        <input type="text" class="form-control" value="<%=brandsCarried%>" name="brandsCarried" value="<%=brandsCarried%>" required/>
                                                     </div>
 
                                                     <label for="input03" class="col-sm-2 control-label">Remarks</label>
@@ -291,7 +291,7 @@
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-2 control-label">Location</label>
                                                     <div class="col-sm-4">
-                                                        <select class="chosen-select chosen-transparent form-control" id="input07" name="location">
+                                                        <select class="chosen-select chosen-transparent form-control" id="input07" name="location" required/>
                                                             <%
                                                                 if (location.equals("West")) {
                                                                     out.println("<option value=\"West\" selected>West</option>");
@@ -328,7 +328,7 @@
                                                     </div> 
                                                     <label for="input03" class="col-sm-2 control-label">Email</label>
                                                     <div class="col-sm-4">
-                                                        <input type="text" class="form-control" value="<%=email%>" name="email" value="<%=email%>">
+                                                        <input type="text" class="form-control" value="<%=email%>" name="email" value="<%=email%>" required/>
                                                     </div>
                                                 </div>
 
@@ -427,7 +427,7 @@
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <select multiple class="chosen-select chosen-transparent form-control" id="" name="category">
+                                                        <select multiple class="chosen-select chosen-transparent form-control" id="" name="category" required/>
                                                             <%                                                                //categoryArr = category.split(",");
                                                                 if (Arrays.asList(categoryArr).contains("Maintenance")) {
                                                                     out.println("<option selected>Maintenance</option>");
@@ -557,14 +557,14 @@
                                                 <div class="form-group">
                                                     <label for="input01" class="col-sm-2 control-label">Name</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input01" name="staffName" value="<%=wsStaffName%>" required>
+                                                        <input type="text" class="form-control" id="input01" name="staffName" value="<%=wsStaffName%>" required/>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="input02" class="col-sm-2 control-label">Email</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input02" name="staffEmail" value="<%=wsStaffEmail%>" required>
+                                                        <input type="text" class="form-control" id="input02" name="staffEmail" value="<%=wsStaffEmail%>" required/>
                                                     </div>
                                                 </div>
 
@@ -572,21 +572,21 @@
                                                 <div class="form-group">
                                                     <label for="input03" class="col-sm-2 control-label">Password</label>
                                                     <div class="col-sm-8">
-                                                        <input type="password" class="form-control" id="input03" name="password" value="<%=password%>" required>
+                                                        <input type="password" class="form-control" id="input03" name="password" value="<%=password%>" required/>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="input04" class="col-sm-2 control-label">Confirm Password</label>
                                                     <div class="col-sm-8">
-                                                        <input type="password" class="form-control" id="input04" name="confirmPassword" value="<%=confirmPassword%>" required>
+                                                        <input type="password" class="form-control" id="input04" name="confirmPassword" value="<%=confirmPassword%>" required/>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="input05" class="col-sm-2 control-label">Handphone Number</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="input05" name="staffHpNo" value="<%=wsStaffHpNo%>" required>
+                                                        <input type="text" class="form-control" id="input05" name="staffHpNo" value="<%=wsStaffHpNo%>" required/>
                                                     </div>
                                                 </div>
 

@@ -221,7 +221,7 @@
                                                                     <th class="sortable">Car Model</th>
                                                                     <th class="sortable">Services</th>
                                                                     <th>More Info</th>
-                                                                    <th>Start Service</th>
+                                                                    <!--<th>Start Service</th>-->
                                                                 </tr>
                                                             </thead>
                                                             <tbody class="contents">
@@ -347,17 +347,17 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <div class="text-left">Agreed Amount: $<%=finalPrice%></div>
-                                                                            <div>
+<!--                                                                            <div>
                                                                                 <button type="button" class="btn btn-default">Chat</button>
-                                                                            </div>
-                                                                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                                                            </div>-->
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                                         </div>
                                                                     </div>
                                                                 </div><!-- /.modal-content -->
                                                             </div><!-- /.modal -->
                                                             <% i++; %>
                                                             <!--Quote-->
-                                                            <td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Start</span></button></td>
+                                                            <!--<td class="text-center"><button href="<% out.print("#myModal" + i);%>" class="btn btn-default btn-xs" data-toggle="modal" id="quoteBtn" type="button"><span>Start</span></button></td>-->
 
                                                             <!-- Modal -->
                                                             <div class="modal fade" id="<% out.print("myModal" + i);%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

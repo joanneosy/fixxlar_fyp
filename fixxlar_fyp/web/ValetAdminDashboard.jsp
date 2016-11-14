@@ -75,7 +75,7 @@
                     <!-- page header -->
                     <div class="pageheader">
 
-                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>View Valet Requests</h2>
+                        <h2><i class="fa fa-file-o" style="line-height: 48px;padding-left: 2px;"></i>Dashboard</h2>
                     </div>
                     <!-- /page header -->
 
@@ -88,25 +88,6 @@
                             <div class="col-md-12">
 
                                 <section class="tile transparent">
-                                    <%--
-                                    <!-- tile header -->
-                                    <div class="tile-header transparent">
-                                        <h1><strong>Today</strong> at a glance</h1>
-                                        <div class="controls">
-                                            <a href="#" class="minimize"><i class="fa fa-chevron-down"></i></a>
-                                            <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- /tile header -->
-                                    --%>
-                                    <!-- tile body -->
-                                    <!--<div class="tile-body color transparent-black rounded-corners">-->
-
-                                    <!--cards--> 
-                                    <%--<%@include file="include/admin_flipcard.jsp"%>--%>
-                                    <!--/cards--> 
-                                    <!--</div>-->
-                                    <!-- /tile body -->
                                 </section>
                                 <!-- /tile -->
                             </div>
@@ -137,7 +118,7 @@
 
                                         <!-- tile header -->
                                         <div class="tile-header">
-                                            <h1><strong>Dashboard</strong></h1>
+                                            <h1><strong>View Valet Driver's Job</strong></h1>
                                         </div>
                                         <!-- /tile header -->
 
@@ -262,7 +243,7 @@
                                                                     <% if (statusNumber != 1) {%>
                                                                     <td class="text-center"><a data-modal="<% out.print("myModal" + i);%>" class="md-trigger"><img src="images/file.png"/></a></td>
                                                                             <% } else { %>
-                                                                    <td></td>
+                                                                    <td>None</td>
                                                                     <%}%>
                                                                     <!-- Modal -->
                                                             <div class="md-modal md-effect-13 md-slategray colorize-overlay " id="<% out.print("myModal" + i);%>">
