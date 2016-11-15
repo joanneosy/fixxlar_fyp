@@ -407,7 +407,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-xs-12">
-                                                                                        <b>Quotation Remarks: </b><textarea class="form-control remarks customTextArea" id="quotationRemark" rows="5" name="remarks"></textarea>
+                                                                                        <b>Quotation Remarks: </b><textarea class="form-control remarks customTextArea" id="quotationRemark" rows="5" name="remarks" style="background-color: white;"></textarea>
                                                                                     </div>
                                                                                     <input type="hidden" name="id" value="<%=id%>">
                                                                                     <button type="submit" class="btn btn-primary">Submit Quote</button>
@@ -419,7 +419,7 @@
                                                                                 <form action = "AddDiagnosticPrice" method= "post">
                                                                                     <div class="col-xs-12">Price: $<input type="number" name="price" required/><p></div>
                                                                                     <div class="col-xs-12">
-                                                                                        <b>Diagnostic Remarks: </b><textarea class="form-control customTextArea" id="diagnosticRemark" rows="5" name="remarks"></textarea>
+                                                                                        <b>Diagnostic Remarks: </b><textarea class="form-control customTextArea" id="diagnosticRemark" rows="5" name="remarks" style="background-color: white;"></textarea>
                                                                                     </div>
                                                                                     <input type="hidden" name="id" value="<%=id%>">
                                                                                     <button type="submit" class="btn btn-primary">Add Diagnostic Price</button>
