@@ -529,7 +529,7 @@ public class QuotationRequestDAO {
             if (attElement != null && !attElement.isJsonNull()) {
                 driverInitialComment = attElement.getAsString();
             }
-            attElement = qrObj.get("ws_initial_comment");
+            attElement = qrObj.get("description");
             String wsInitialComment = "";
             if (attElement != null && !attElement.isJsonNull()) {
                 wsInitialComment = attElement.getAsString();
@@ -800,7 +800,7 @@ public class QuotationRequestDAO {
         return errMsg;
     }
 
-    public String addFinalQuotation(int staffId, String token, int offerId, double price) throws UnsupportedEncodingException, IOException {
+    public String addFinalQuotation(int staffId, String token, int offerId, double price, String ws_comment) throws UnsupportedEncodingException, IOException {
         String url = "http://119.81.43.85/erp/quotation_request/add_final_quotation";
 
         HttpClient client = new DefaultHttpClient();
@@ -814,6 +814,7 @@ public class QuotationRequestDAO {
         urlParameters.add(new BasicNameValuePair("token", token));
         urlParameters.add(new BasicNameValuePair("final_quotation", price + ""));
         urlParameters.add(new BasicNameValuePair("offer_id", offerId + ""));
+        urlParameters.add(new BasicNameValuePair("ws_comment", ws_comment));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 

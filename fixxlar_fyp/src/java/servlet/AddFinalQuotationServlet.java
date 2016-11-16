@@ -52,6 +52,7 @@ public class AddFinalQuotationServlet extends HttpServlet {
         int offerId = Integer.parseInt(request.getParameter("id"));
         int quotationRequestId = Integer.parseInt(request.getParameter("serviceId"));
         double price = Double.parseDouble(request.getParameter("price"));
+        String comment = request.getParameter("comment");
         WebUser user = (WebUser) session.getAttribute("loggedInUser");
         int staffId = user.getStaffId();
         String token = user.getToken();
@@ -68,7 +69,7 @@ public class AddFinalQuotationServlet extends HttpServlet {
         Workshop ws = wsDAO.retrieveWorkshop(workshopId, staffId, token);
         String workshopName = ws.getName();
         
-        String isSuccess = qrDAO.addFinalQuotation(staffId, token, offerId, price);
+        String isSuccess = qrDAO.addFinalQuotation(staffId, token, offerId, price, comment);
         //Error message? success message?
         if (isSuccess.length()==0) {
             session.setAttribute("isSuccess", "$" + price + "0 quoted as the final amount for ID: " + quotationRequestId);

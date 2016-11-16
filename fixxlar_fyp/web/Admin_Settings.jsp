@@ -26,7 +26,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Urgency Settings</title>
+        <title>Settings</title>
         <jsp:include page="include/head.jsp"/>
     </head>
     <body class="bg-3">
@@ -45,7 +45,21 @@
                         <!--<a href="AddWorshop.jsp" class="btn btn-primary btn-lg pull-right margin-top-15"  role="button">Submit</a>-->
                     </div>
                     <!-- /page header -->
-
+                    <%
+                        String success = (String) session.getAttribute("success");
+                        String fail = (String) session.getAttribute("fail");
+                        if (success != null && !(success.equals("null")) && success.length() > 0) {
+                    %>
+                    <div class="alert alert-success"><%=success%></div>
+                    <%
+                        session.setAttribute("success", "");
+                    } else if (fail != null && !(fail.equals("null")) && fail.length() > 0) {
+                    %>
+                    <div class="alert alert-danger"><%=fail%></div>
+                    <%
+                            session.setAttribute("fail", "");
+                        }
+                    %>
                     <!-- content main container -->
                     <div class="main">
                         <div class="row">
@@ -57,27 +71,13 @@
                                     <!-- tile -->
                                     <section class="tile color transparent-black">
                                         <div class="tile-header">
-                                            <h1><strong>Edit</strong> Urgency </h1>
+                                            <h1><strong>Edit</strong> Settings </h1>
                                         </div>
                                         <!--end tile header-->
 
                                         <!-- /tile body -->
                                         <div class="tile-body">
-                                            <%
-                                                ArrayList<String> msg = (ArrayList<String>) session.getAttribute("fail");
-                                                if (msg != null && msg.size() > 0) {
-                                                    for (String s : msg) {
-                                                        out.println(s + "<br>");
-                                                    }
-                                                    session.removeAttribute("fail");
-                                                }
 
-                                                String success = (String) session.getAttribute("success");
-                                                if (success != null && success.length() != 0) {
-                                                    out.println(success);
-                                                    session.removeAttribute("success");
-                                                }
-                                            %>
                                             <form class="form-horizontal" role="form" action="EditSettings" method="post">
                                                 <%
                                                     String token = user.getToken();
@@ -104,7 +104,7 @@
                                                         <%
                                                             if (i < 3) {
                                                                 out.print(" up to");
-                                                        }
+                                                            }
                                                         %>
                                                     </label>         
 
@@ -136,7 +136,7 @@
                                                 <!--form footer for submit-->
                                                 <div class="form-group form-footer">
                                                     <div class="col-sm-offset-4 col-sm-8">
-                                                        <button type="submit" class="btn btn-primary" value="Edit">Submit</button>
+                                                        <button type="submit" class="btn btn-primary" value="Edit">Change Setting</button>
                                                     </div>
                                                 </div>
                                                 <!--end form footer-->

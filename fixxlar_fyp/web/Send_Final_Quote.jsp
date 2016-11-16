@@ -439,6 +439,9 @@
                                                                                     <div class="col-xs-12">
                                                                                         Final Price: $ <input type="number" name="price" placeholder="<%=min%> - <%=max%>" required/>
                                                                                     </div>
+                                                                                    <div class="col-xs-12">
+                                                                                        <b>Remarks: </b><textarea class="form-control remarks customTextArea" id="comment" rows="5" name="comment" style="background-color: white"></textarea>
+                                                                                    </div>
                                                                                     <input type="hidden" name="id" value="<%=offerId%>">
                                                                                     <input type="hidden" name="serviceId" value="<%=id%>">
                                                                                     <button type="submit" class="btn btn-primary">Submit Quote</button>
@@ -446,9 +449,6 @@
                                                                             </div>
                                                                         </li>
                                                                     </ul>
-                                                                </div>
-                                                                <div class="col-xs-12">
-                                                                    <b>Remarks: </b><textarea class="form-control" id="comment" rows="5" name="comment"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-xs-12">
